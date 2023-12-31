@@ -3,11 +3,18 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "wndo": {
+    "Wndo": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
-          "style": "scss"
+          "style": "scss",
+          "standalone": false
+        },
+        "@schematics/angular:directive": {
+          "standalone": false
+        },
+        "@schematics/angular:pipe": {
+          "standalone": false
         }
       },
       "root": "",
@@ -67,10 +74,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "wndo:build:production"
+              "buildTarget": "Wndo:build:production"
             },
             "development": {
-              "buildTarget": "wndo:build:development"
+              "buildTarget": "Wndo:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -78,7 +85,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "buildTarget": "wndo:build"
+            "buildTarget": "Wndo:build"
           }
         },
         "test": {
@@ -104,6 +111,6 @@
     }
   },
   "cli": {
-    "analytics": "37a9da6f-74fc-46bf-b3d4-505b291c5d1d"
+    "analytics": "0cb206ca-0bc4-4e59-be71-205f454b20a9"
   }
 }

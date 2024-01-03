@@ -3,17 +3,13 @@ import { Observable } from 'rxjs';
 
 import { Component, Input, OnInit } from '@angular/core';
 import { IconService } from '../../../shared/services/icon/icon.service';
-
-
-// import { IconService } from '../../../shared/services/icon/icon.service';
-
+import { HttpErrorResponse } from '@angular/common/http';
 @Component({
   selector: 'app-icon',
-  templateUrl: '<ng-container *ngIf="svgContent; else fallbackTemplate" [innerHTML]="svgContent"></ng-container>',
+  templateUrl: './icon.component.html',
   styleUrls: ['./icon.component.scss']
 })
-
-export class IconComponent implements OnInit {
+export class IconComponent {
   @Input() iconName: string= "";
   @Input() className: string = '';
   @Input() iconSize: number = 24;
@@ -33,16 +29,21 @@ export class IconComponent implements OnInit {
   private loadIcons() {
     const iconPaths = this.iconService.getIcon(this.iconName);
 
-
     const iconObservable: Observable<string> = iconPaths.coloringIcon;
 
     iconObservable.subscribe(
       (data: string) => {
+        console.log('Received SVG content:', data);
         this.svgContent = data;
       },
       (error: any) => {
         console.error('Error fetching icon:', error);
+        if (error instanceof HttpErrorResponse) {
+          console.error('Status:', error.status);
+          console.error('Status Text:', error.statusText);
+        }
       }
     );
   }
+
 }

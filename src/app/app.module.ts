@@ -7,30 +7,27 @@ import { AuthLayoutComponent } from './layout/auth-layout/auth-layout.component'
 import { ContentLayoutComponent } from './layout/content-layout/content-layout.component';
 import { FooterComponent } from './layout/footer/footer.component';
 import { NavComponent } from './layout/nav/nav.component';
-import { IconComponent } from './component/shared/icon/icon.component';
+import { SharedModule } from "./shared/shared.module";
 
 
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    AuthLayoutComponent,
-    ContentLayoutComponent,
-    FooterComponent,
-    NavComponent,
-    IconComponent
-
-  ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-  ],
-  exports: [
-    IconComponent,
-  ],
-  providers: [
-    provideClientHydration()
-  ],
-  bootstrap: [AppComponent]
+    declarations: [
+        AppComponent,
+        AuthLayoutComponent,
+        ContentLayoutComponent,
+        FooterComponent,
+        NavComponent,
+    ],
+    exports: [],
+    providers: [
+        provideClientHydration()
+    ],
+    bootstrap: [AppComponent],
+    imports: [
+        BrowserModule,
+        AppRoutingModule,
+        SharedModule
+    ]
 })
 export class AppModule { }

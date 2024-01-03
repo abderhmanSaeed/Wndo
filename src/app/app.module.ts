@@ -14,7 +14,7 @@ import { NavComponent } from './layout/nav/nav.component';
     AuthLayoutComponent,
     ContentLayoutComponent,
     FooterComponent,
-    NavComponent
+    NavComponent,
   ],
   imports: [
     BrowserModule,

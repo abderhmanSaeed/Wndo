@@ -1,10 +1,46 @@
-<p>footer works!</p>
-<p>footer works!</p>
-<p>footer works!</p>
-<p>footer works!</p>
-<p>footer works!</p>
-<p>footer works!</p>
-<p>footer works!</p>
-<p>footer works!</p>
-<p>footer works!</p>
-<p>footer works!</p>
+<footer class="p-8 divide-y divide-y-1">
+  <div class="flex justify-between items-center">
+    <span
+      ><img
+        src="../../../assets/images/logo.svg"
+        alt="Wndo-logo"
+        width="126"
+        height="25"
+    /></span>
+    <ul role="list" class="flex gap-4 items-center">
+      <li
+        role="listitem"
+        *ngFor="let link of links"
+        class="text-xs font-medium"
+      >
+        <a [href]="link.href">{{ link.title }}</a>
+      </li>
+    </ul>
+    <div>
+      <h6 class="text-xxs font-medium">Download Now</h6>
+      <ul class="flex gap-2 items-center">
+        <li>
+          <a
+            ><img src="../../../assets/images/google-play.svg" alt="app-store"
+          /></a>
+        </li>
+        <li>
+          <a
+            ><img src="../../../assets/images/app-store.svg" alt="app-store"
+          /></a>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <div>
+    <p class="text-xs">© 2021 Wndo Business Solutions All Rights Reserved.</p>
+
+    <ul>
+      <li *ngFor="let socialMedia of socialMedia" class="text-base text-gray-400">
+        <a><i class="fa-brands {{ socialMedia.icon }}"></i></a>
+      </li>
+    </ul>
+    <app-icon iconName="visa-color"></app-icon>
+  </div>
+</footer>

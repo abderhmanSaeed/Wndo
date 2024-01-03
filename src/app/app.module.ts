@@ -7,6 +7,9 @@ import { AuthLayoutComponent } from './layout/auth-layout/auth-layout.component'
 import { ContentLayoutComponent } from './layout/content-layout/content-layout.component';
 import { FooterComponent } from './layout/footer/footer.component';
 import { NavComponent } from './layout/nav/nav.component';
+import { IconComponent } from './component/shared/icon/icon.component';
+
+
 
 @NgModule({
   declarations: [
@@ -15,10 +18,15 @@ import { NavComponent } from './layout/nav/nav.component';
     ContentLayoutComponent,
     FooterComponent,
     NavComponent,
+    IconComponent
+
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+  ],
+  exports: [
+    IconComponent,
   ],
   providers: [
     provideClientHydration()

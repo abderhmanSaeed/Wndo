@@ -1,12 +1,16 @@
+import { SharedModule } from './../../../shared/shared.module';
 import { ProductResponse, ProductApiAlsoResponse, ProductColorAndSizesResponse } from '../../../shared/models';
 import { ProductService } from './../../../data/service/product/product.service';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
+  standalone: true,
+  imports: [SharedModule],
   selector: 'app-product-details',
   templateUrl: './product-details.component.html',
   styleUrl: './product-details.component.scss'
 })
+
 export class ProductDetailsComponent implements OnInit {
   productDetails: ProductResponse | null = null; // Initialize to null or default value
   responseData: ProductApiAlsoResponse | null = null; // Initialize to null or default value

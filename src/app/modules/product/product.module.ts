@@ -1,5 +1,6 @@
+import { SharedModule } from './../../shared/shared.module';
 import { NgModule } from '@angular/core';
-import { SharedModule } from '../../shared/shared.module';
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 
 import { ProductRoutingModule } from './product-routing.module';
 import { ProductDetailsComponent } from './product-details/product-details.component';
@@ -13,5 +14,6 @@ import { ProductDetailsComponent } from './product-details/product-details.compo
     SharedModule,
     ProductRoutingModule,
   ],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class ProductModule { }

@@ -99,7 +99,13 @@
             "inlineStyleLanguage": "scss",
             "assets": [
               "src/favicon.ico",
-              "src/assets"
+              "src/assets",
+              "src/icons",
+              {
+                "glob": "**/*.svg",
+                "input": "src/assets/icons/",
+                "output": "/assets/icons/"
+              }
             ],
             "styles": [
               "src/styles.scss"
@@ -109,5 +115,8 @@
         }
       }
     }
+  },
+  "cli": {
+    "analytics": "0cb206ca-0bc4-4e59-be71-205f454b20a9"
   }
 }

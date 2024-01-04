@@ -1,0 +1,59 @@
+
+
+<footer class="px-8 py-4 divide-y divide-y-1 space-y-4 border-t border-gray-200 border-solid bg-white">
+  <div class="grid grid-cols-3 justify-between items-center">
+    <span class="flex-auto"
+      ><img
+        src="../../../assets/images/logo.svg"
+        alt="Wndo-logo"
+        width="126"
+        height="25"
+    /></span>
+    <ul role="list" class="flex gap-4 items-center">
+      <li
+        role="listitem"
+        *ngFor="let link of links"
+        class="text-xs font-medium"
+      >
+        <a [href]="link.href">{{ link.title }}</a>
+      </li>
+    </ul>
+    <div class="flex-auto space-y-2">
+      <h6 class="text-xxs font-medium text-end">Download Now</h6>
+      <ul class="flex gap-2 items-center justify-end">
+        <li>
+          <a
+            ><img src="../../../assets/images/google-play.svg" alt="app-store"
+          /></a>
+        </li>
+        <li>
+          <a
+            ><img src="../../../assets/images/app-store.svg" alt="app-store"
+          /></a>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="grid grid-cols-3 items-center justify-between pt-3">
+    <p class="text-xs text-gray-300">© 2021 Wndo Business Solutions All Rights Reserved.</p>
+
+    <ul class="flex items-center justify-center gap-8">
+      <li *ngFor="let socialMedia of socialMedia" class="text-base text-gray-400">
+        <a><i class="fa-brands text-base {{ socialMedia.icon }}"></i></a>
+      </li>
+    </ul>
+
+    <ul class="flex items-center gap-4 justify-end">
+      <li *ngFor="let payment of payments">
+        <img [src]="'../../../assets/icons/'+payment.icon+'.svg'" class="object-cover" alt="{{payment.title}}" />
+      </li>
+    </ul>
+
+    <!-- <app-icon iconName="visa-color"></app-icon>
+    <app-icon iconName="masterCard"></app-icon>
+    <app-icon iconName="american-express"></app-icon>
+    <app-icon iconName="american-express" class="custom-icon" [iconSize]="32" [fillOpacity]="0.8" iconColor="#ff0000"></app-icon> -->
+
+  </div>
+</footer>

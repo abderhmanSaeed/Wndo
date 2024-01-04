@@ -5,4 +5,5 @@ export const CONFIG = {
   }},
   about: { name: 'About', route: '/about', },
   contact: { name: 'contact', route: '/contact', },
+  product: { name: 'product', route: '/contact', },
 };

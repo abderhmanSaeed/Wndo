@@ -9,22 +9,19 @@ const routes: Routes = [
   {
     path: '',
     component: ContentLayoutComponent,
-    // canActivate: [NoAuthGuard], // Should be replaced with actual auth guard
     children: [
-      // Add your DashboardModule route
-      { path: 'home', loadChildren: () => import('./modules/home/home-routing.module').then(m => m.HomeRoutingModule) },
-      { path: 'product', loadChildren: () => import('./modules/product/product-routing.module').then(m => m.ProductRoutingModule) },
-
+      { path: CONFIG.dashboard.children.home.name.toLowerCase(), loadChildren: () => import('./modules/home/home-routing.module').then(m => m.HomeRoutingModule) },
+      { path: CONFIG.product.name.toLowerCase(), loadChildren: () => import('./modules/product/product-routing.module').then(m => m.ProductRoutingModule) },
       {
         path: CONFIG.contact.name,
-        loadChildren: () =>
-          import('./modules/contact/contact-routing.module').then(m => m.ContactRoutingModule)
+        loadChildren: () => import('./modules/contact/contact-routing.module').then(m => m.ContactRoutingModule)
       },
       {
         path: CONFIG.about.name.toLowerCase(),
-        loadChildren: () =>
-          import('./modules/about/about-routing.module').then(m => m.AboutRoutingModule)
+        loadChildren: () => import('./modules/about/about-routing.module').then(m => m.AboutRoutingModule)
       },
+      // Wildcard route for handling unknown routes
+      { path: '**', redirectTo: '/product' } // Redirect to a 404 page or any other route
     ]
   }
 ];

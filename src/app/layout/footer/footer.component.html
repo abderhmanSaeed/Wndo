@@ -1,6 +1,6 @@
-
-
-<footer class="px-8 py-4 divide-y divide-y-1 space-y-4 border-t border-gray-200 border-solid bg-white">
+<footer
+  class="px-8 py-4 divide-y divide-y-1 space-y-4 border-t border-gray-200 border-solid bg-white mt-5"
+>
   <div class="grid grid-cols-3 justify-between items-center">
     <span class="flex-auto"
       ><img
@@ -36,17 +36,26 @@
   </div>
 
   <div class="grid grid-cols-3 items-center justify-between pt-3">
-    <p class="text-xs text-gray-300">© 2021 Wndo Business Solutions All Rights Reserved.</p>
+    <p class="text-xs text-gray-300">
+      © 2021 Wndo Business Solutions All Rights Reserved.
+    </p>
 
     <ul class="flex items-center justify-center gap-8">
-      <li *ngFor="let socialMedia of socialMedia" class="text-base text-gray-400">
+      <li
+        *ngFor="let socialMedia of socialMedia"
+        class="text-base text-gray-400"
+      >
         <a><i class="fa-brands text-base {{ socialMedia.icon }}"></i></a>
       </li>
     </ul>
 
     <ul class="flex items-center gap-4 justify-end">
       <li *ngFor="let payment of payments">
-        <img [src]="'../../../assets/icons/'+payment.icon+'.svg'" class="object-cover" alt="{{payment.title}}" />
+        <img
+          [src]="'../../../assets/icons/' + payment.icon + '.svg'"
+          class="object-cover"
+          alt="{{ payment.title }}"
+        />
       </li>
     </ul>
 
@@ -54,6 +63,5 @@
     <app-icon iconName="masterCard"></app-icon>
     <app-icon iconName="american-express"></app-icon>
     <app-icon iconName="american-express" class="custom-icon" [iconSize]="32" [fillOpacity]="0.8" iconColor="#ff0000"></app-icon> -->
-
   </div>
 </footer>

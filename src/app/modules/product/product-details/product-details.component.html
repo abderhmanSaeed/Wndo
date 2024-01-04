@@ -1,0 +1,75 @@
+<!-- <button (click)="getProductDetails('d9c4bc36-2eac-486b-b3cf-89d6b797ced9')">Get Product Details</button> -->
+
+<section class="header-page mb-24">
+  <div class="content-page flex justify-between items-center">
+    <img
+      class="w-32 h-32 rounded-full mt-12"
+      src="https://play-lh.googleusercontent.com/C9CAt9tZr8SSi4zKCxhQc9v4I6AOTqRmnLchsu1wVDQL0gsQ3fmbCVgQmOVM1zPru8UH=w240-h480-rw"
+      alt="Rounded avatar"
+    />
+
+    <ul class="flex gap-5">
+      <li>
+        <app-switch-language></app-switch-language>
+      </li>
+      <li> cart </li>
+    </ul>
+  </div>
+</section>
+
+<section class="content-page">
+
+  <app-product-details-card></app-product-details-card>
+</section>
+
+
+@if(productDetails){
+<div>
+  <h2>Product Details</h2>
+  <p>Name: {{ productDetails.responseData.name }}</p>
+  <p>Description: {{ productDetails.responseData.description }}</p>
+  <!-- Add more HTML elements to display other properties as needed -->
+</div>
+}
+@if(responseData){
+<div>
+  <h2>Total Count: {{ responseData.responseData.totalCount }}</h2>
+  @for (item of responseData.responseData.items; track item.id) {
+  <div>
+    <img [src]="item.image.urlThumbnail" alt="{{ item.name }}" />
+    <h3>{{ item.name }}</h3>
+    <p>{{ item.description }}</p>
+    <p>Price: ${{ item.price }}</p>
+  </div>
+  } @empty {
+  Empty list of users
+  }
+</div>
+}
+
+@if(productColorAndSizesResponse){
+<div>
+  <h2>Product Color and Sizes Information</h2>
+  <p>ID: {{ productColorAndSizesResponse.responseData.id }}</p>
+
+  @for (colorWithSizes of productColorAndSizesResponse.responseData.colorWithSizes; track colorWithSizes) {
+    <div>
+      <h3>Color: {{ colorWithSizes.color.name }}</h3>
+      <p>HexaCode: {{ colorWithSizes.color.hexaCode }}</p>
+      <p>Quantity: {{ colorWithSizes.color.quantity }}</p>
+
+      <ul>
+        @for(size of colorWithSizes.sizes; track size ){
+          <li>
+            Size: {{ size.name }}, Quantity: {{ size.quantity }}
+          </li>
+        }
+      </ul>
+    </div>
+  } @empty {
+  <p>Error: {{ productColorAndSizesResponse.errorMessage || 'Unknown error occurred.' }}</p>
+  }
+</div>
+
+}
+

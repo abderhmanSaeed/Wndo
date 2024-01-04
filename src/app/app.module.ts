@@ -7,9 +7,10 @@ import { AuthLayoutComponent } from './layout/auth-layout/auth-layout.component'
 import { ContentLayoutComponent } from './layout/content-layout/content-layout.component';
 import { FooterComponent } from './layout/footer/footer.component';
 import { NavComponent } from './layout/nav/nav.component';
-import { IconComponent } from './component/shared/icon/icon.component';
 
-
+import { CommonModule } from '@angular/common';
+import { HttpClientModule } from '@angular/common/http';
+import { IconComponent } from './shared/component/shared/icon/icon.component';
 
 @NgModule({
   declarations: [
@@ -19,11 +20,12 @@ import { IconComponent } from './component/shared/icon/icon.component';
     FooterComponent,
     NavComponent,
     IconComponent
-
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
+    CommonModule,
+    HttpClientModule
   ],
   exports: [
     IconComponent,

@@ -11,7 +11,7 @@ describe('IconComponent', () => {
       declarations: [IconComponent]
     })
     .compileComponents();
-    
+
     fixture = TestBed.createComponent(IconComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();

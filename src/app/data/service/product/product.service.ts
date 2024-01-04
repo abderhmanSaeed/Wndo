@@ -3,7 +3,7 @@ import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http
 import { Observable, throwError } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
 import { environment } from '../../../../environments/environment';
-import { ProductResponse } from '../../../shared/models/product';
+import { ProductApiAlsoResponse, ProductColorAndSizesResponse, ProductResponse } from '../../../shared/models/index';
 
 @Injectable({
   providedIn: 'root'
@@ -24,7 +24,27 @@ export class ProductService {
       );
   }
 
-  private handleSuccess(response: ProductResponse): ProductResponse {
+  getProductAlsoLikeDetails(productId: string): Observable<ProductApiAlsoResponse> {
+    const url = `${this.apiEndPoint}/may-also-like/${productId}`;
+
+    return this.http.get<ProductApiAlsoResponse>(url)
+      .pipe(
+        map(response => this.handleSuccess(response)),
+        catchError(error => this.handleError(error))
+      );
+  }
+
+  getProductColorAndSizes(productId: string): Observable<ProductColorAndSizesResponse> {
+    const url = `${this.apiEndPoint}/product-color-and-sizes-when-add-to-cart-clicked/${productId}`;
+
+    return this.http.get<ProductColorAndSizesResponse>(url)
+      .pipe(
+        map(response => this.handleSuccess(response)),
+        catchError(error => this.handleError(error))
+      );
+  }
+
+  private handleSuccess(response: any): any {
     if (response.isSuccess && response.statusCode === 200) {
       return response;
     } else {

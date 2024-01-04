@@ -1,18 +1,26 @@
+import { ProductResponse, ProductApiAlsoResponse, ProductColorAndSizesResponse } from '../../../shared/models';
 import { ProductService } from './../../../data/service/product/product.service';
-import { ProductResponse } from '../../../shared/models/product';
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-product-details',
   templateUrl: './product-details.component.html',
   styleUrl: './product-details.component.scss'
 })
-export class ProductDetailsComponent {
+export class ProductDetailsComponent implements OnInit {
   productDetails: ProductResponse | null = null; // Initialize to null or default value
+  responseData: ProductApiAlsoResponse | null = null; // Initialize to null or default value
+  productColorAndSizesResponse: ProductColorAndSizesResponse | undefined;
 
-  constructor(private productService: ProductService) {}
-  getProductDetails(productId: string): void {
-    this.productService.getProductDetails(productId)
+  productId: any = '7a734dd3-3cf8-4ec1-b7ad-7a8912d0a03b';
+  constructor(private productService: ProductService) { }
+  ngOnInit(): void {
+    this.getProductDetails();
+    this.getProductAlsoDetails();
+    this.getProductColorAndSizes();
+  }
+  getProductDetails(): void {
+    this.productService.getProductDetails(this.productId)
       .subscribe(
         (data: ProductResponse) => {
           console.log('Product Details:', data);
@@ -24,4 +32,32 @@ export class ProductDetailsComponent {
         }
       );
   }
+  getProductAlsoDetails() {
+    this.productService.getProductAlsoLikeDetails(this.productId).subscribe(
+      (response: ProductApiAlsoResponse) => {
+        if (response.isSuccess && response.statusCode === 200) {
+          // Handle the successful response here
+          console.log('May Also Like Products:', response.responseData);
+          this.responseData = response;
+        } else {
+          // Handle the error or other status codes
+          console.error('Error:', response.errorMessage);
+        }
+      },
+      (error) => {
+        console.error('Error:', error);
+      }
+    );
+  }
+  getProductColorAndSizes(){
+    this.productService.getProductColorAndSizes(this.productId)
+    .subscribe(
+      (data: ProductColorAndSizesResponse) => {
+        this.productColorAndSizesResponse = data;
+        console.log('Product Color and Sizes Response:', data);
+      },
+      error => console.error('Error:', error)
+    );
+  }
 }
+

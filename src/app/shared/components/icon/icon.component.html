@@ -1,0 +1,40 @@
+
+<ng-container *ngIf="svgContent; else fallbackTemplate">
+  <div [innerHTML]="svgContent"></div>
+</ng-container>
+
+
+<ng-template #fallbackTemplate>
+  <i></i>
+</ng-template>
+
+<ng-container *ngIf="svgContent">
+  <svg
+    class="icon"
+    [class]="'icon-' + iconName + ' ' + className"
+    [attr.width]="iconSize"
+    [attr.height]="height ? height : iconSize"
+    xmlns="http://www.w3.org/2000/svg"
+    [attr.style]="style"
+  >
+    <ng-container *ngIf="iconName.includes('Stroke'); else filledIconTemplate">
+      <ng-container *ngIf="fillOpacity !== null">
+        <path [attr.fill]="'none'" [attr.stroke]="iconColor" [attr.fill-opacity]="fillOpacity" [attr.d]="svgContent">
+        </path>
+      </ng-container>
+      <ng-container *ngIf="fillOpacity === null">
+        <path [attr.fill]="'none'" [attr.stroke]="iconColor" [attr.d]="svgContent"></path>
+      </ng-container>
+    </ng-container>
+    <ng-template #filledIconTemplate>
+      <ng-container *ngIf="fillOpacity !== null">
+        <path [attr.fill]="iconColor" [attr.stroke]="'none'" [attr.fill-opacity]="fillOpacity" [attr.d]="svgContent">
+        </path>
+      </ng-container>
+      <ng-container *ngIf="fillOpacity === null">
+        <path [attr.fill]="iconColor" [attr.stroke]="'none'" [attr.d]="svgContent"></path>
+      </ng-container>
+    </ng-template>
+  </svg>
+</ng-container>
+

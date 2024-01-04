@@ -13,6 +13,8 @@ const routes: Routes = [
     children: [
       // Add your DashboardModule route
       { path: 'home', loadChildren: () => import('./modules/home/home-routing.module').then(m => m.HomeRoutingModule) },
+      { path: 'product', loadChildren: () => import('./modules/product/product-routing.module').then(m => m.ProductRoutingModule) },
+
       {
         path: CONFIG.contact.name,
         loadChildren: () =>

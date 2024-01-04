@@ -1,5 +1,5 @@
-import { ProductResponse } from '../../../shared/models/product';
 import { ProductService } from './../../../data/service/product/product.service';
+import { ProductResponse } from '../../../shared/models/product';
 import { Component } from '@angular/core';
 
 @Component({

@@ -3,22 +3,17 @@ import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { IconComponent } from './components/icon/icon.component';
-import { SwitchLanguageComponent } from './components/switch-language/switch-language.component';
-import { FlowbiteModule } from 'flowbite-angular';
-
 
 
 @NgModule({
   declarations: [
-    IconComponent,
-    SwitchLanguageComponent,
+    IconComponent
   ],
   imports: [
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
     RouterModule,
-    FlowbiteModule
   ],
   exports: [
     CommonModule,
@@ -26,7 +21,6 @@ import { FlowbiteModule } from 'flowbite-angular';
     ReactiveFormsModule,
     RouterModule,
     IconComponent,
-    SwitchLanguageComponent
   ]
 })
 export class SharedModule { }

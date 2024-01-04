@@ -5,5 +5,4 @@ export const CONFIG = {
   }},
   about: { name: 'About', route: '/about', },
   contact: { name: 'contact', route: '/contact', },
-  productDetails: { name: 'product-details', route: '/product-details', },
 };

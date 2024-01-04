@@ -19,10 +19,5 @@ body {
   box-sizing: border-box;
   font-family: theme('fontFamily.rubik');
   height: 100%;
-}
 
-@layer components {
-  .content-page {
-    @apply px-10
-  }
 }

@@ -23,11 +23,6 @@ const routes: Routes = [
         loadChildren: () =>
           import('./modules/about/about-routing.module').then(m => m.AboutRoutingModule)
       },
-      {
-        path: CONFIG.productDetails.name,
-        loadChildren: () =>
-          import('./modules/product-details/product-details-routing.module').then(m => m.ProductDetailsRoutingModule)
-      },
     ]
   }
 ];

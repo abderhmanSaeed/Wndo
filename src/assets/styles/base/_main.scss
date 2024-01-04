@@ -14,10 +14,15 @@ html {
   height: 100%;
 }
 
-body {
-  @apply flex flex-col justify-between bg-gray-100;
-  box-sizing: border-box;
-  font-family: theme('fontFamily.rubik');
-  height: 100%;
+// styles.scss
 
+body {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background-color: #f0f0f0;
+  box-sizing: border-box;
+  font-family: 'Rubik', sans-serif;
+  height: 100%;
 }
+

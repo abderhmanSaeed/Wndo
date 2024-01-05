@@ -76,6 +76,7 @@
 <section class="content-page space-y-6" aria-label="you may also like">
   <h2>You may also like</h2>
   <div class="grid grid-cols-5 gap-4">
+    {{responseData?.responseData?.items}}
     @for (item of responseData?.responseData?.items; track item.id) {
     <app-product-snapshot-card [product]="item"></app-product-snapshot-card>
 

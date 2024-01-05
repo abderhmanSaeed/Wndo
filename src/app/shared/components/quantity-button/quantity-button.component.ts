@@ -10,19 +10,26 @@ export class QuantityButtonComponent {
   @Input() disabledAddQuantity: boolean = false;
   @Output() quantityChange: EventEmitter<number> = new EventEmitter<number>();
 
+  userSelectedQuantity: number = 1;
+
+  ngOnChanges() {
+    // Update user-selected quantity when the input quantity changes
+    this.userSelectedQuantity = this.quantity;
+  }
+
   increaseQuantity() {
-    this.quantity++;
+    this.userSelectedQuantity++;
     this.emitQuantityChange();
   }
 
   decreaseQuantity() {
-    if (this.quantity > 1) {
-      this.quantity--;
+    if (this.userSelectedQuantity > 1) {
+      this.userSelectedQuantity--;
       this.emitQuantityChange();
     }
   }
 
   private emitQuantityChange() {
-    this.quantityChange.emit(this.quantity);
+    this.quantityChange.emit(this.userSelectedQuantity);
   }
 }

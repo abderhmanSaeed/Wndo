@@ -17,7 +17,8 @@ export interface Card {
   templateUrl: './product-media-slider.component.html',
   styleUrl: './product-media-slider.component.scss',
 })
-export class ProductMediaSliderComponent    {
+export class ProductMediaSliderComponent {
+  @Input() mediaItems: any[] = [];
 
   // ngOnInit(): void {
 
@@ -107,12 +108,12 @@ export class ProductMediaSliderComponent    {
   //   console.log('Change:', this.index);
   // }
 
-//   settings = {
-//     counter: false,
-//     plugins: [lgZoom],
-// };
-// onBeforeSlide = (detail: BeforeSlideDetail): void => {
-//     const { index, prevIndex } = detail;
-//     console.log(index, prevIndex);
-// };
+  //   settings = {
+  //     counter: false,
+  //     plugins: [lgZoom],
+  // };
+  // onBeforeSlide = (detail: BeforeSlideDetail): void => {
+  //     const { index, prevIndex } = detail;
+  //     console.log(index, prevIndex);
+  // };
 }

@@ -11,6 +11,7 @@ module.exports = {
       colors: {
         primary: {
           DEFAULT: "#ff002a",
+          400: "#FF4B46",
           500: "#ff002a",
         },
         blueGray: {
@@ -23,6 +24,7 @@ module.exports = {
           950: "#04043F",
         },
         gray: {
+          40: "#FFF5F5",
           50: "#f7f7f7",
           100: "#F8F8F8",
           150: "#D9D9E0",
@@ -34,6 +36,7 @@ module.exports = {
         },
         orange: {
           500: "#FFA90A",
+
         },
         purple: {
           300: "#524C72",

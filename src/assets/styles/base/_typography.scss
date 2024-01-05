@@ -1,7 +1,7 @@
 @layer base {
   a {
     &:hover {
-      @apply underline;
+      @apply underline cursor-pointer;
     }
   }
 

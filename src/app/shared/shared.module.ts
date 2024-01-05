@@ -7,13 +7,15 @@ import { RouterModule } from '@angular/router';
 import { IconComponent } from './components/icon/icon.component';
 import { SwitchLanguageComponent } from './components/switch-language/switch-language.component';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { ProductSnapshotCardComponent } from './components/product/product-snapshot-card/product-snapshot-card.component';
 
 @NgModule({
   declarations: [
     IconComponent,
     ProductDetailsCardComponent,
     SwitchLanguageComponent,
-    QuantityButtonComponent
+    QuantityButtonComponent,
+    ProductSnapshotCardComponent,
   ],
   imports: [
     CommonModule,
@@ -29,7 +31,8 @@ import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
     IconComponent,
     ProductDetailsCardComponent,
     SwitchLanguageComponent,
-    QuantityButtonComponent
+    QuantityButtonComponent,
+    ProductSnapshotCardComponent
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })

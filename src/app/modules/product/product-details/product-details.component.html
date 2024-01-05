@@ -17,7 +17,7 @@
   </div>
 </section>
 
-<section class="content-page">
+<section aria-label="product-details" class="content-page">
   <app-product-details-card
     [product]="productDetails?.responseData"
     [productColorAndSizesResponse]="productColorAndSizesResponse"
@@ -72,3 +72,15 @@
   }
 </div>
 } -->
+
+<section class="content-page space-y-6" aria-label="you may also like">
+  <h2>You may also like</h2>
+  <div class="grid grid-cols-5 gap-4">
+    @for (item of responseData?.responseData?.items; track item.id) {
+    <app-product-snapshot-card [product]="item"></app-product-snapshot-card>
+
+    } @empty { Empty list of users }
+  </div>
+
+
+</section>

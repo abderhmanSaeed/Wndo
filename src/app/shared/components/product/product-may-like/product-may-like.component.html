@@ -1,0 +1,16 @@
+<div class="mt-8">
+  <h2>You may also like</h2>
+  <swiper-container
+    class="mySwiper"
+    appSwiper
+    [config]="swiperConfig"
+  >
+    @for (item of items; track item.id) {
+    <swiper-slide>
+      <app-product-snapshot-card [product]="item"></app-product-snapshot-card>
+    </swiper-slide>
+
+    } @empty { Empty list of users }
+  </swiper-container>
+
+</div>

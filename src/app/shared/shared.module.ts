@@ -10,7 +10,7 @@ import { SwitchLanguageComponent } from './components/switch-language/switch-lan
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { ProductSnapshotCardComponent } from './components/product/product-snapshot-card/product-snapshot-card.component';
 import { InputPasswordComponent } from './components/inputs/input-password/input-password.component';
-
+import { HeaderOfPageComponent } from './components/header-of-page/header-of-page.component';
 @NgModule({
   declarations: [
     IconComponent,
@@ -19,7 +19,8 @@ import { InputPasswordComponent } from './components/inputs/input-password/input
     QuantityButtonComponent,
     ProductSnapshotCardComponent,
     ModalComponent,
-    InputPasswordComponent
+    InputPasswordComponent,
+    HeaderOfPageComponent,
   ],
   imports: [
     CommonModule,
@@ -38,7 +39,8 @@ import { InputPasswordComponent } from './components/inputs/input-password/input
     QuantityButtonComponent,
     ProductSnapshotCardComponent,
     ModalComponent,
-    InputPasswordComponent
+    InputPasswordComponent,
+    HeaderOfPageComponent,
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })

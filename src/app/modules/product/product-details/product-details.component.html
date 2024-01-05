@@ -81,6 +81,41 @@
 
     } @empty { Empty list of users }
   </div>
+</section>
 
+<!-- Test -->
+<!-- LoginModal -->
+<section class="content-page" aria-label="you may also like">
+  <app-modal
+    [classes]="{
+      backdrop: 'bg-gradient-to-l from-black/10 via-gray-500/20 to-black/10',
+      subtitle: 'text-lg text-blue-700',
+      title: 'text-primary mb-3',
+      base: 'px-10 text-center'
+    }"
+    placement="center"
+    [isAction]="true"
+    actionLabel="Login"
+    title="Hello!"
+    subtitle="Welcome back, Login to Continue"
+    actionLabel="LOGIN"
+  >
+    <p class="text-blue-200 text-sm mb-4">
+      The mobile number you entered is already associated with an existing
+      account.
+    </p>
 
+    <p class="text-blue-700 mb-10">
+      Please use the existing account's password to
+      <a href="/login" class="text-primary"> log in</a>
+    </p>
+
+    <app-input-password placeholder="Password"></app-input-password>
+
+    <a
+      href="/forget-password"
+      class="underline hover:no-underline text-orange-600 block text-start"
+      >Forgot Password</a
+    >
+  </app-modal>
 </section>

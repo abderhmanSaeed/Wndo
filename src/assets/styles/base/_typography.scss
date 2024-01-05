@@ -4,7 +4,9 @@
       @apply underline cursor-pointer;
     }
   }
-
+  h1 {
+    @apply text-2.5xl font-medium;
+  }
   h2 {
     @apply text-2xl font-medium;
   }

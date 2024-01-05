@@ -12,26 +12,28 @@
       <li>
         <app-switch-language></app-switch-language>
       </li>
-      <li> cart </li>
+      <li>cart</li>
     </ul>
   </div>
 </section>
 
 <section class="content-page">
-
-  <app-product-details-card></app-product-details-card>
+  <app-product-details-card
+    [product]="productDetails?.responseData"
+    [productColorAndSizesResponse]="productColorAndSizesResponse"
+    [responseData]="responseData?.responseData"
+  ></app-product-details-card>
 </section>
 
-
-@if(productDetails){
+<!-- @if(productDetails){
 <div>
   <h2>Product Details</h2>
   <p>Name: {{ productDetails.responseData.name }}</p>
   <p>Description: {{ productDetails.responseData.description }}</p>
-  <!-- Add more HTML elements to display other properties as needed -->
+
+
 </div>
-}
-@if(responseData){
+} @if(responseData){
 <div>
   <h2>Total Count: {{ responseData.responseData.totalCount }}</h2>
   @for (item of responseData.responseData.items; track item.id) {
@@ -41,35 +43,32 @@
     <p>{{ item.description }}</p>
     <p>Price: ${{ item.price }}</p>
   </div>
-  } @empty {
-  Empty list of users
-  }
+  } @empty { Empty list of users }
 </div>
-}
-
-@if(productColorAndSizesResponse){
+} @if(productColorAndSizesResponse){
 <div>
   <h2>Product Color and Sizes Information</h2>
   <p>ID: {{ productColorAndSizesResponse.responseData.id }}</p>
 
-  @for (colorWithSizes of productColorAndSizesResponse.responseData.colorWithSizes; track colorWithSizes) {
-    <div>
-      <h3>Color: {{ colorWithSizes.color.name }}</h3>
-      <p>HexaCode: {{ colorWithSizes.color.hexaCode }}</p>
-      <p>Quantity: {{ colorWithSizes.color.quantity }}</p>
+  @for (colorWithSizes of
+  productColorAndSizesResponse.responseData.colorWithSizes; track
+  colorWithSizes) {
+  <div>
+    <h3>Color: {{ colorWithSizes.color.name }}</h3>
+    <p>HexaCode: {{ colorWithSizes.color.hexaCode }}</p>
+    <p>Quantity: {{ colorWithSizes.color.quantity }}</p>
 
-      <ul>
-        @for(size of colorWithSizes.sizes; track size ){
-          <li>
-            Size: {{ size.name }}, Quantity: {{ size.quantity }}
-          </li>
-        }
-      </ul>
-    </div>
+    <ul>
+      @for(size of colorWithSizes.sizes; track size ){
+      <li>Size: {{ size.name }}, Quantity: {{ size.quantity }}</li>
+      }
+    </ul>
+  </div>
   } @empty {
-  <p>Error: {{ productColorAndSizesResponse.errorMessage || 'Unknown error occurred.' }}</p>
+  <p>
+    Error:
+    {{ productColorAndSizesResponse.errorMessage || "Unknown error occurred." }}
+  </p>
   }
 </div>
-
-}
-
+} -->

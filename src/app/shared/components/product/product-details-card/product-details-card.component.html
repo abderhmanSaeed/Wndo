@@ -55,7 +55,39 @@
         </div>
       </div>
 
-      @for (colorWithSizes of product.colorWithSizes; track colorWithSizes) {
+      <ng-container>
+        <div>
+          <h6 class="mb-2">Choose Color</h6>
+          <ul class="flex flex-wrap gap-2">
+            <button *ngFor="let colorWithSizes of product.colorWithSizes"
+              type="button"
+              class="product-color-button capitalize border py-2 px-3 bg-white border-gray-150 rounded-[3px] text-xxs"
+              style="--hover-color: #{{ colorWithSizes.color.hexaCode }}"
+              (click)="logColor(colorWithSizes)"
+              [ngClass]="{ 'selected': colorWithSizes === selectedColor }">
+              {{ colorWithSizes.color.name }}
+            </button>
+          </ul>
+
+        </div>
+
+        <div>
+          <h6 class="mb-2">Choose Size</h6>
+          <ul  class="flex flex-wrap gap-2">
+            <li *ngFor="let size of colorWithSizesSelected?.sizes">
+              <button type="button"
+                class="capitalize hover:bg-primary hover:text-white border h-6 px-3 bg-white border-gray-150 rounded-[3px] text-xxs"
+                (click)="logSize(size)"
+                [ngClass]="{ 'selected': size.id === selectedSize }">
+                {{ size.name }}
+              </button>
+            </li>
+          </ul>
+        </div>
+      </ng-container>
+
+
+      <!-- @for (colorWithSizes of product.colorWithSizes; track colorWithSizes) {
       <ng-container>
         <div>
           <h6 class="mb-2">Choose Color</h6>
@@ -90,24 +122,28 @@
         productColorAndSizesResponse.errorMessage || "Unknown error occurred."
         }}
       </p>
-      }
+      } -->
 
       <div *ngIf="sizeQuantities" class="mb-8 flex flex-wrap gap-8 items-center">
         <h6>Quantity:</h6>
-        <app-quantity-button [(quantity)]="productQuantity"
-          [disabledAddQuantity]="productQuantity === sizeQuantities"></app-quantity-button>
+        <app-quantity-button [(quantity)]="productQuantity" [disabledAddQuantity]="productQuantity === sizeQuantities"
+          [maxQuantity]="sizeQuantities" (quantityChange)="onQuantityChange($event)">
+        </app-quantity-button>
+
       </div>
 
       <p class="text-base text-purple-300 mb-10">{{ product.description }}</p>
 
       <div class="card-footer">
         <div class="flex flex-wrap gap-5">
-          <button type="button" class="button button--primary w-[250px] button--bordered button--rounded-bill">
+          <button type="button" class="button button--primary w-[250px] button--bordered button--rounded-bill"
+            [disabled]="!sizeQuantities">
             BUY NOW
           </button>
           <button type="button" class="button button--primary w-[250px] button--rounded-bill">
             ADD TO CART
           </button>
+
         </div>
         <p class="text-xs text-bluegray-900 flex gap-2 items-center mt-6 justify-center w-[500px]">
           <i class="fa-solid fa-dolly text-lg"></i> Delivered By Carrier

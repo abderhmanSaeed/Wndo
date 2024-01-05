@@ -4,11 +4,17 @@ import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 
 import { ProductRoutingModule } from './product-routing.module';
 import { ProductDetailsComponent } from './product-details/product-details.component';
+import { ProductOrdersComponent } from './product-orders/product-orders.component';
+import { OrderProcessComponent } from './order-process/order-process.component';
+import { ProductOffersComponent } from './product-offers/product-offers.component';
 
 
 @NgModule({
   declarations: [
-    ProductDetailsComponent
+    ProductDetailsComponent,
+    ProductOrdersComponent,
+    OrderProcessComponent,
+    ProductOffersComponent
   ],
   imports: [
     SharedModule,

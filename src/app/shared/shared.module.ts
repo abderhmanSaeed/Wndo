@@ -1,17 +1,25 @@
+import { ModalComponent } from './components/modal/modal.component';
+import { QuantityButtonComponent } from './components/quantity-button/quantity-button.component';
+import { ProductDetailsCardComponent } from './components/product/product-details-card/product-details-card.component';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { IconComponent } from './components/icon/icon.component';
-import { ProductDetailsCardComponent } from './components/product-details-card/product-details-card.component';
 import { SwitchLanguageComponent } from './components/switch-language/switch-language.component';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { ProductSnapshotCardComponent } from './components/product/product-snapshot-card/product-snapshot-card.component';
+import { InputPasswordComponent } from './components/inputs/input-password/input-password.component';
 
 @NgModule({
   declarations: [
     IconComponent,
     ProductDetailsCardComponent,
-    SwitchLanguageComponent
+    SwitchLanguageComponent,
+    QuantityButtonComponent,
+    ProductSnapshotCardComponent,
+    ModalComponent,
+    InputPasswordComponent
   ],
   imports: [
     CommonModule,
@@ -26,7 +34,11 @@ import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
     RouterModule,
     IconComponent,
     ProductDetailsCardComponent,
-    SwitchLanguageComponent
+    SwitchLanguageComponent,
+    QuantityButtonComponent,
+    ProductSnapshotCardComponent,
+    ModalComponent,
+    InputPasswordComponent
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })

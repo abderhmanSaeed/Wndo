@@ -6,18 +6,8 @@
  // Font Family - Importing Google Fonts
  @import url('https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500;600;700;800;900&display=swap');
 
+   //Components
+   @import './assets/styles/components/_index';
+
  // Base Style - Custom base styles
  @import './assets/styles/base/index';
-
-// styles.scss
-
-
-body {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  background-color: #f0f0f0;
-  box-sizing: border-box;
-  font-family: 'Rubik', sans-serif;
-  height: 100%;
-}

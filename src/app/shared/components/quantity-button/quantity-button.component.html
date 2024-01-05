@@ -1,0 +1,19 @@
+<div class="quantity-button border-gray-200 border border-solid divide-x flex rounded">
+  <button
+    class="flex-auto py-1 px-2 disabled:bg-transparent disabled:text-gray-150 text-base text-primary font-bold"
+    type="button"
+    (click)="decreaseQuantity()"
+    [disabled]="quantity < 1"
+  >
+    -
+  </button>
+  <span class="flex-auto py-1 px-2 text-base font-bold">{{ quantity }}</span>
+  <button
+    type="button"
+    class="flex-auto py-1 px-2 disabled:bg-transparent disabled:text-gray-150 text-base text-primary font-bold"
+    (click)="increaseQuantity()"
+    [disabled]="disabledAddQuantity"
+  >
+    +
+  </button>
+</div>

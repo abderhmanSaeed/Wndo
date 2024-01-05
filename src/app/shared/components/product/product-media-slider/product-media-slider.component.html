@@ -1,0 +1,309 @@
+<!-- app.component.html -->
+
+<!-- <swiper-container class="swiper-container1"  >
+  <swiper-slide *ngFor="let item of contents">
+    <div class="slider__image">
+      <img [src]="item.url" alt="{{ item.title }}" />
+    </div>
+  </swiper-slide>
+
+</swiper-container>
+
+<swiper-container class="swiper-containe2"    >
+  <swiper-slide *ngFor="let item of contents">
+    <div class="slider__image">
+      <img [src]="item.url" alt="{{ item.title }}" />
+    </div>
+  </swiper-slide>
+
+</swiper-container> -->
+
+<!-- <section class="slider">
+  <div class="slider__flex">
+
+
+    <div class="slider__images">
+      <swiper-container
+        init="false"
+        appSwiper
+        #swiperThumbs
+        class="swiper-container2"
+        [config]="swiperThumbsConfig"
+        *ngIf="contents.length > 1"
+      >
+        <swiper-slide *ngFor="let item of contents">
+          <div class="slider__image">
+            <img [src]="item.url" alt="{{ item.title }}" />
+          </div>
+        </swiper-slide>
+      </swiper-container>
+    </div>
+
+    <div class="slider__col">
+      <div class="slider__prev">Prev</div>
+      <div class="slider__thumbs">
+        <swiper-container
+          init="false"
+          class="swiper-container1"
+          appSwiper
+          #swiper
+          thumbs-swiper=".mySwiper2"
+          [config]="swiperConfig"
+          (slidechange)="slideChange($event)"
+        >
+          <swiper-slide *ngFor="let item of contents">
+            <div class="slider__image">
+              <img [src]="item.url" alt="{{ item.title }}" />
+            </div>
+          </swiper-slide>
+        </swiper-container>
+      </div>
+
+      <div class="slider__next">Next</div>
+    </div>
+  </div>
+</section> -->
+
+<!-- @for (item of mediaItems; track item.id) {
+<div class="">
+  <img [src]="item.image.urlThumbnail" alt="{{ item.name }}" class="w-full h-[500px]" />
+
+</div>
+} @empty { Empty list of users } -->
+
+<!-- <swiper-container slides-per-view="1" speed="500" loop="true" css-mode="true" navigation="true">
+  <swiper-slide   class="bg-red-500 h-full">Slide 1</swiper-slide>
+  <swiper-slide class="bg-red-500 h-full">Slide 2</swiper-slide>
+  <swiper-slide class="bg-red-500 h-full">Slide 3</swiper-slide>
+</swiper-container> -->
+
+<!-- <div class="grid grid-cols-3">
+
+  <swiper-container
+    style="--swiper-navigation-color: #fff; --swiper-pagination-color: #fff"
+    class="mySwiper col-span-2"
+    thumbs-swiper=".mySwiper2"
+    space-between="10"
+    navigation="true"
+  >
+    <swiper-slide>
+      <img alt="" src="https://swiperjs.com/demos/images/nature-1.jpg" />
+    </swiper-slide>
+    <swiper-slide>
+      <img alt="" src="https://swiperjs.com/demos/images/nature-2.jpg" />
+    </swiper-slide>
+    <swiper-slide>
+      <img alt="" src="https://swiperjs.com/demos/images/nature-3.jpg" />
+    </swiper-slide>
+    <swiper-slide>
+      <img alt="" src="https://swiperjs.com/demos/images/nature-4.jpg" />
+    </swiper-slide>
+    <swiper-slide>
+      <img alt="" src="https://swiperjs.com/demos/images/nature-5.jpg" />
+    </swiper-slide>
+    <swiper-slide>
+      <img alt="" src="https://swiperjs.com/demos/images/nature-6.jpg" />
+    </swiper-slide>
+    <swiper-slide>
+      <img alt="" src="https://swiperjs.com/demos/images/nature-7.jpg" />
+    </swiper-slide>
+    <swiper-slide>
+      <img alt="" src="https://swiperjs.com/demos/images/nature-8.jpg" />
+    </swiper-slide>
+    <swiper-slide>
+      <img alt="" src="https://swiperjs.com/demos/images/nature-9.jpg" />
+    </swiper-slide>
+    <swiper-slide>
+      <img alt="" src="https://swiperjs.com/demos/images/nature-10.jpg" />
+    </swiper-slide>
+  </swiper-container>
+
+  <swiper-container
+    class="mySwiper2 flex flex-col"
+    space-between="10"
+    slides-per-view="4"
+    free-mode="true"
+    watch-slides-progress="true"
+  >
+    <swiper-slide class="w-[110px] h-[110px]">
+      <img alt ="" src="https://swiperjs.com/demos/images/nature-1.jpg" />
+    </swiper-slide>
+    <swiper-slide class="w-[110px] h-[110px]">
+      <img alt ="" src="https://swiperjs.com/demos/images/nature-2.jpg" />
+    </swiper-slide>
+    <swiper-slide class="w-[110px] h-[110px]">
+      <img alt ="" src="https://swiperjs.com/demos/images/nature-3.jpg" />
+    </swiper-slide>
+    <swiper-slide class="w-[110px] h-[110px]">
+      <img alt ="" src="https://swiperjs.com/demos/images/nature-4.jpg" />
+    </swiper-slide>
+    <swiper-slide class="w-[110px] h-[110px]">
+      <img alt ="" src="https://swiperjs.com/demos/images/nature-5.jpg" />
+    </swiper-slide>
+    <swiper-slide class="w-[110px] h-[110px]">
+      <img alt ="" src="https://swiperjs.com/demos/images/nature-6.jpg" />
+    </swiper-slide>
+    <swiper-slide class="w-[110px] h-[110px]">
+      <img alt ="" src="https://swiperjs.com/demos/images/nature-7.jpg" />
+    </swiper-slide>
+    <swiper-slide class="w-[110px] h-[110px]">
+      <img alt ="" src="https://swiperjs.com/demos/images/nature-8.jpg" />
+    </swiper-slide>
+    <swiper-slide class="w-[110px] h-[110px]">
+      <img alt ="" src="https://swiperjs.com/demos/images/nature-9.jpg" />
+    </swiper-slide>
+    <swiper-slide class="w-[110px] h-[110px]">
+      <img alt ="" src="https://swiperjs.com/demos/images/nature-10.jpg" />
+    </swiper-slide>
+  </swiper-container>
+</div> -->
+
+<!-- <section className="slider">
+  <div className="slider__flex">
+    <div className="slider__col">
+      <div className="slider__prev">Prev</div>
+
+      <div className="slider__thumbs">
+        <swiper-container>
+          <swiper-slide>
+            <div className="slider__image">
+              <img
+                alt=""
+                src="https://swiperjs.com/demos/images/nature-1.jpg"
+              />
+            </div>
+          </swiper-slide>
+          <swiper-slide>
+            <div className="slider__image">
+              <img
+                alt=""
+                src="https://swiperjs.com/demos/images/nature-2.jpg"
+              />
+            </div>
+          </swiper-slide>
+          <swiper-slide>
+            <div className="slider__image">
+              <img
+                alt=""
+                src="https://swiperjs.com/demos/images/nature-3.jpg"
+              />
+            </div>
+          </swiper-slide>
+          <swiper-slide>
+            <div className="slider__image">
+              <img
+                alt=""
+                src="https://swiperjs.com/demos/images/nature-4.jpg"
+              />
+            </div>
+          </swiper-slide>
+          <swiper-slide>
+            <div className="slider__image">
+              <img
+                alt=""
+                src="https://swiperjs.com/demos/images/nature-5.jpg"
+              />
+            </div>
+          </swiper-slide>
+          <swiper-slide>
+            <div className="slider__image">
+              <img
+                alt=""
+                src="https://swiperjs.com/demos/images/nature-6.jpg"
+              />
+            </div>
+          </swiper-slide>
+          <swiper-slide>
+            <div className="slider__image">
+              <img
+                alt=""
+                src="https://swiperjs.com/demos/images/nature-7.jpg"
+              />
+            </div>
+          </swiper-slide>
+          <swiper-slide>
+            <div className="slider__image">
+              <img
+                alt=""
+                src="https://swiperjs.com/demos/images/nature-8.jpg"
+              />
+            </div>
+          </swiper-slide>
+          <swiper-slide>
+            <div className="slider__image">
+              <img
+                alt=""
+                src="https://swiperjs.com/demos/images/nature-9.jpg"
+              />
+            </div>
+          </swiper-slide>
+          <swiper-slide>
+            <div className="slider__image">
+              <img
+                alt=""
+                src="https://swiperjs.com/demos/images/nature-10.jpg"
+              />
+            </div>
+          </swiper-slide>
+        </swiper-container>
+      </div>
+
+      <div className="slider__next">Next</div>
+    </div>
+
+    <div className="slider__images">
+      <swiper-container>
+        <swiper-slide class="w-[110px] h-[110px]">
+          <div className="slider__image">
+            <img alt="" src="https://swiperjs.com/demos/images/nature-1.jpg" />
+          </div>
+        </swiper-slide>
+        <swiper-slide class="w-[110px] h-[110px]">
+          <div className="slider__image">
+            <img alt="" src="https://swiperjs.com/demos/images/nature-2.jpg" />
+          </div>
+        </swiper-slide>
+        <swiper-slide class="w-[110px] h-[110px]">
+          <div className="slider__image">
+            <img alt="" src="https://swiperjs.com/demos/images/nature-3.jpg" />
+          </div>
+        </swiper-slide>
+        <swiper-slide class="w-[110px] h-[110px]">
+          <div className="slider__image">
+            <img alt="" src="https://swiperjs.com/demos/images/nature-4.jpg" />
+          </div>
+        </swiper-slide>
+        <swiper-slide class="w-[110px] h-[110px]">
+          <div className="slider__image">
+            <img alt="" src="https://swiperjs.com/demos/images/nature-5.jpg" />
+          </div>
+        </swiper-slide>
+        <swiper-slide class="w-[110px] h-[110px]">
+          <div className="slider__image">
+            <img alt="" src="https://swiperjs.com/demos/images/nature-6.jpg" />
+          </div>
+        </swiper-slide>
+        <swiper-slide class="w-[110px] h-[110px]">
+          <div className="slider__image">
+            <img alt="" src="https://swiperjs.com/demos/images/nature-7.jpg" />
+          </div>
+        </swiper-slide>
+        <swiper-slide class="w-[110px] h-[110px]">
+          <div className="slider__image">
+            <img alt="" src="https://swiperjs.com/demos/images/nature-8.jpg" />
+          </div>
+        </swiper-slide>
+        <swiper-slide class="w-[110px] h-[110px]">
+          <div className="slider__image">
+            <img alt="" src="https://swiperjs.com/demos/images/nature-9.jpg" />
+          </div>
+        </swiper-slide>
+        <swiper-slide class="w-[110px] h-[110px]">
+          <div className="slider__image">
+            <img alt="" src="https://swiperjs.com/demos/images/nature-10.jpg" />
+          </div>
+        </swiper-slide>
+      </swiper-container>
+    </div>
+  </div>
+</section> -->

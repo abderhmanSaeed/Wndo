@@ -12,26 +12,28 @@
       <li>
         <app-switch-language></app-switch-language>
       </li>
-      <li> cart </li>
+      <li>cart</li>
     </ul>
   </div>
 </section>
 
-<section class="content-page">
-
-  <app-product-details-card></app-product-details-card>
+<section aria-label="product-details" class="content-page">
+  <app-product-details-card
+    [product]="productDetails?.responseData"
+    [productColorAndSizesResponse]="productColorAndSizesResponse"
+    [responseData]="responseData?.responseData"
+  ></app-product-details-card>
 </section>
 
-
-@if(productDetails){
+<!-- @if(productDetails){
 <div>
   <h2>Product Details</h2>
   <p>Name: {{ productDetails.responseData.name }}</p>
   <p>Description: {{ productDetails.responseData.description }}</p>
-  <!-- Add more HTML elements to display other properties as needed -->
+
+
 </div>
-}
-@if(responseData){
+} @if(responseData){
 <div>
   <h2>Total Count: {{ responseData.responseData.totalCount }}</h2>
   @for (item of responseData.responseData.items; track item.id) {
@@ -41,35 +43,79 @@
     <p>{{ item.description }}</p>
     <p>Price: ${{ item.price }}</p>
   </div>
-  } @empty {
-  Empty list of users
-  }
+  } @empty { Empty list of users }
 </div>
-}
-
-@if(productColorAndSizesResponse){
+} @if(productColorAndSizesResponse){
 <div>
   <h2>Product Color and Sizes Information</h2>
   <p>ID: {{ productColorAndSizesResponse.responseData.id }}</p>
 
-  @for (colorWithSizes of productColorAndSizesResponse.responseData.colorWithSizes; track colorWithSizes) {
-    <div>
-      <h3>Color: {{ colorWithSizes.color.name }}</h3>
-      <p>HexaCode: {{ colorWithSizes.color.hexaCode }}</p>
-      <p>Quantity: {{ colorWithSizes.color.quantity }}</p>
+  @for (colorWithSizes of
+  productColorAndSizesResponse.responseData.colorWithSizes; track
+  colorWithSizes) {
+  <div>
+    <h3>Color: {{ colorWithSizes.color.name }}</h3>
+    <p>HexaCode: {{ colorWithSizes.color.hexaCode }}</p>
+    <p>Quantity: {{ colorWithSizes.color.quantity }}</p>
 
-      <ul>
-        @for(size of colorWithSizes.sizes; track size ){
-          <li>
-            Size: {{ size.name }}, Quantity: {{ size.quantity }}
-          </li>
-        }
-      </ul>
-    </div>
+    <ul>
+      @for(size of colorWithSizes.sizes; track size ){
+      <li>Size: {{ size.name }}, Quantity: {{ size.quantity }}</li>
+      }
+    </ul>
+  </div>
   } @empty {
-  <p>Error: {{ productColorAndSizesResponse.errorMessage || 'Unknown error occurred.' }}</p>
+  <p>
+    Error:
+    {{ productColorAndSizesResponse.errorMessage || "Unknown error occurred." }}
+  </p>
   }
 </div>
+} -->
 
-}
+<section class="content-page space-y-6" aria-label="you may also like">
+  <h2>You may also like</h2>
+  <div class="grid grid-cols-5 gap-4">
+    @for (item of responseData?.responseData?.items; track item.id) {
+    <app-product-snapshot-card [product]="item"></app-product-snapshot-card>
 
+    } @empty { Empty list of users }
+  </div>
+</section>
+
+<!-- Test -->
+<!-- LoginModal -->
+<section class="content-page" aria-label="you may also like">
+  <app-modal
+    [classes]="{
+      backdrop: 'bg-gradient-to-l from-black/10 via-gray-500/20 to-black/10',
+      subtitle: 'text-lg text-blue-700',
+      title: 'text-primary mb-3',
+      base: 'px-10 text-center'
+    }"
+    placement="center"
+    [isAction]="true"
+    actionLabel="Login"
+    title="Hello!"
+    subtitle="Welcome back, Login to Continue"
+    actionLabel="LOGIN"
+  >
+    <p class="text-blue-200 text-sm mb-4">
+      The mobile number you entered is already associated with an existing
+      account.
+    </p>
+
+    <p class="text-blue-700 mb-10">
+      Please use the existing account's password to
+      <a href="/login" class="text-primary"> log in</a>
+    </p>
+
+    <app-input-password placeholder="Password"></app-input-password>
+
+    <a
+      href="/forget-password"
+      class="underline hover:no-underline text-orange-600 block text-start"
+      >Forgot Password</a
+    >
+  </app-modal>
+</section>

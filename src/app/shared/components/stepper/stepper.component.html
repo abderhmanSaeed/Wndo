@@ -1,0 +1,93 @@
+<div class="stepper">
+  <div class="stepper__header w-[70%] mx-auto">
+    <ol class="flex items-center justify-between mb-4 sm:mb-5">
+      <li
+        [ngClass]="{
+          'divide-blue-900 after:bg-blue-900':
+            currentStep === i || currentStep > i,
+          'divide-dashed': currentStep !== i
+        }"
+        *ngFor="let step of steps; let i = index"
+        class="flex-auto relative items-center after:content[''] last:after:hidden after:absolute after:w-[calc(100%-(-20px))] after:h-[2px] after:start-[118px] after:top-[10px] after:bg-blueGray-300"
+        [class.divide-blueGray-300]="currentStep !== i"
+      >
+        <div
+          class="flex mx-auto relative z-10 items-center justify-center w-5 h-5 border rounded-full shrink-0 after:content[''] last:after:hidden after:absolute after:w-[1px] after:h-[20px] after:start-[8px] after:top-[20px] after:bg-transparent after:border after:border-blueGray-300"
+          [class.border-blueGray-300]="currentStep !== i"
+          [ngClass]="{
+            'border-blue-900 after:border-dashed after:border-blue-900':
+              currentStep === i
+          }"
+          [class.bg-blue-900]="currentStep > i"
+        >
+          <i
+            *ngIf="currentStep <= i"
+            class="w-3 h-3 rounded-full"
+            [class.bg-blueGray-300]="currentStep !== i"
+            [ngClass]="{ 'bg-blue-900': currentStep === i }"
+          ></i>
+
+          <i
+            *ngIf="currentStep > i"
+            class="fa-solid fa-check text-white text-xxs font-bold flex items-center justify-center leading-0"
+          >
+          </i>
+        </div>
+        <div
+          [class.shadow-sm]="currentStep > i"
+          class="bg-white mx-8 shadow-sm mt-6 p-4 py-6 gap-2 flex items-center justify-center"
+        >
+          <h3
+            [ngClass]="{
+              'opacity-100 text-blue-800': currentStep === i || currentStep > i,
+              'grayscale opacity-50 text-gray-900': currentStep < i
+            }"
+            class="text-lg font-medium leading-none dark:text-white"
+          >
+            <span [innerHTML]="step.icon"></span>
+            {{ step.label }}
+          </h3>
+        </div>
+      </li>
+    </ol>
+  </div>
+  <div action="#">
+    <div class="stepper__body mt-14 mb-14">
+      <ng-container *ngFor="let item of steps; let i = index">
+        <app-step
+          [template]="item.template"
+          [isActive]="currentStep === i"
+          [label]="item.label"
+          [icon]="item.icon"
+        ></app-step>
+      </ng-container>
+    </div>
+
+    <div class="stepper__footer flex gap-4 w-2/3 pe-4 justify-end">
+      <button
+        type="button"
+        *ngIf="currentStep >= 1"
+        (click)="backStep()"
+        class="button button--primary !py-0 button--bordered rounded-full px-24"
+      >
+        Back
+      </button>
+
+      <button
+        type="button"
+        class="button button--primary !py-0 rounded-full px-24"
+        (click)="nextStep()"
+        [disabled]="disabledNextButton"
+        *ngIf="steps !== undefined && currentStep < steps.length"
+      >
+        <!-- {{ steps![currentStep]?.nextButtonLabel || 'Next' }} -->
+        <ng-container *ngFor="let step of steps; let i = index">
+          <ng-container *ngIf="currentStep === i">
+            {{ step?.nextButtonLabel || "next" }}
+          </ng-container>
+        </ng-container>
+      </button>
+    </div>
+
+  </div>
+</div>

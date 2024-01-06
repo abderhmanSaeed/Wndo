@@ -1,20 +1,6 @@
-<!-- <button (click)="getProductDetails('d9c4bc36-2eac-486b-b3cf-89d6b797ced9')">Get Product Details</button> -->
-<section class="header-page mb-24">
-  <div class="content-page flex justify-between items-center">
-    <img
-      class="w-32 h-32 rounded-full mt-12"
-      src="https://play-lh.googleusercontent.com/C9CAt9tZr8SSi4zKCxhQc9v4I6AOTqRmnLchsu1wVDQL0gsQ3fmbCVgQmOVM1zPru8UH=w240-h480-rw"
-      alt="Rounded avatar"
-    />
+<button (click)="getProductDetails()">Get Product Details</button>
 
-    <ul class="flex gap-5">
-      <li>
-        <app-switch-language></app-switch-language>
-      </li>
-      <li>cart</li>
-    </ul>
-  </div>
-</section>
+<app-header-of-page></app-header-of-page>
 
 <section aria-label="product-details" class="content-page">
   <app-product-details-card
@@ -73,13 +59,9 @@
 } -->
 
 <section class="content-page space-y-6" aria-label="you may also like">
-  <h2>You may also like</h2>
-  <div class="grid grid-cols-5 gap-4">
-    @for (item of responseData?.responseData?.items; track item.id) {
-    <app-product-snapshot-card [product]="item"></app-product-snapshot-card>
-
-    } @empty { Empty list of users }
-  </div>
+  <app-product-may-like
+    [items]="responseData?.responseData?.items || []"
+  ></app-product-may-like>
 </section>
 
 <!-- Test -->

@@ -117,3 +117,4 @@ export class ProductMediaSliderComponent {
   //     console.log(index, prevIndex);
   // };
 }
+

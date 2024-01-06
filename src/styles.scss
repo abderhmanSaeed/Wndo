@@ -1,13 +1,14 @@
- // Importing Tailwind CSS
- @import 'tailwindcss/base';
- @import 'tailwindcss/components';
- @import 'tailwindcss/utilities';
+// Importing Tailwind CSS
+@import "tailwindcss/base";
+@import "tailwindcss/components";
+@import "tailwindcss/utilities";
 
- // Font Family - Importing Google Fonts
- @import url('https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500;600;700;800;900&display=swap');
+// Font Family - Importing Google Fonts
+@import url("https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500;600;700;800;900&display=swap");
+//Helpers
+@import './assets/styles/helpers/index';
+//Components
+@import "./assets/styles/components/_index";
 
-   //Components
-   @import './assets/styles/components/_index';
-
- // Base Style - Custom base styles
- @import './assets/styles/base/index';
+// Base Style - Custom base styles
+@import "./assets/styles/base/index";

@@ -1,5 +1,11 @@
 import { Component, Input } from '@angular/core';
 
+type ClassesProps = {
+  label?: string,
+  base?: string,
+  input?: string,
+  labelColor?: string
+}
 @Component({
   selector: 'app-input-password',
   templateUrl: './input-password.component.html',
@@ -8,11 +14,13 @@ import { Component, Input } from '@angular/core';
 export class InputPasswordComponent {
   @Input() placeholder: string = '';
   @Input() label: string = '';
-  @Input() disabled: string = '';
-  @Input() required: string = '';
+  @Input() disabled: boolean = false;
+  @Input() required: boolean = false;
   @Input() isFloating: boolean = false;
   @Input() name: string = "";
   @Input() value: string = "";
+  @Input() classes?: ClassesProps;
+  @Input() error: string = "";
 
   type: 'text' | 'password' = 'password'
   isShowPassword: boolean = false

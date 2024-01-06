@@ -83,7 +83,7 @@ export class ProductDetailsCardComponent implements OnInit {
   ngOnInit(): void {
     // throw new Error('Method not implemented.');
     // this.selectedColor = this.productColor[0]; // Assuming productColor is an array
-    this.selectedColor = this.product.colorWithSizes[0]; // Assuming productColor is an array
+    this.selectedColor = this.product?.colorWithSizes[0]; // Assuming productColor is an array
     if (this.selectedColor) {
       this.logColor(this.selectedColor);
     }

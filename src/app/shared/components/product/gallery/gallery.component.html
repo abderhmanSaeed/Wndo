@@ -7,38 +7,37 @@
         appSwiper
         #swiper
         [config]="swiperConfig"
-        controller-control=".swiper-2"
+        controller-control=".swiperThumbs"
       >
-        <swiper-slide *ngFor="let item of items" class="h-full">
+        <swiper-slide *ngFor="let item of imags" class="h-full">
           <div class="slider__image">
-            <img [src]="item.urlPreview" alt="{{ item.id }}" />
+            <!-- <img [src]="item.urlPreview" alt="{{ item.id }}" /> -->
+            <img [src]="urlPreview"  />
           </div>
         </swiper-slide>
       </swiper-container>
     </div>
 
-
     <div class="slider__col">
-      <button type="button" class="slider__prev" *ngIf="items.length > 3">Prev</button>
+      <button type="button" class="slider__prev" *ngIf="imags.length > 3">Prev</button>
       <div class="slider__thumbs">
         <swiper-container
           init="false"
-          class="swiper-container1"
+          class="swiper-container1 swiperThumbs"
           appSwiper
-          #swiper
-          thumbs-swiper=".mySwiper2"
+          #swiperThumbs
           [config]="swiperConfigThumbs"
           (slidechange)="slideChange($event)"
         >
-          <swiper-slide *ngFor="let item of items">
+          <swiper-slide *ngFor="let item of imags">
             <div class="slider__image">
-              <img [src]="item.urlPreview" alt="{{ item.id }}" />
+              <img (click)="slideChange(item)" [src]="item.urlPreview" alt="{{ item.id }}" />
             </div>
           </swiper-slide>
         </swiper-container>
       </div>
 
-      <button type="button" class="slider__next disabled:opacity-40 cursor-none" *ngIf="items.length > 3" [disabled]="items.length <= 3">Next</button>
+      <button type="button" class="slider__next disabled:opacity-40 cursor-none" *ngIf="imags.length > 3" [disabled]="imags.length <= 3">Next</button>
     </div>
   </div>
 </section>

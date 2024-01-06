@@ -3,26 +3,36 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 @Component({
   selector: 'app-quantity-button',
   templateUrl: './quantity-button.component.html',
-  styleUrl: './quantity-button.component.scss'
+  styleUrls: ['./quantity-button.component.scss']
 })
 export class QuantityButtonComponent {
   @Input() quantity: number = 1;
   @Input() disabledAddQuantity: boolean = false;
+  @Input() maxQuantity: number = Infinity; // Add this line
   @Output() quantityChange: EventEmitter<number> = new EventEmitter<number>();
 
+  userSelectedQuantity: number = 1;
+
+  ngOnChanges() {
+    // Update user-selected quantity when the input quantity changes
+    this.userSelectedQuantity = this.quantity;
+  }
+
   increaseQuantity() {
-    this.quantity++;
-    this.emitQuantityChange();
+    if (this.userSelectedQuantity < this.maxQuantity) {
+      this.userSelectedQuantity++;
+      this.emitQuantityChange();
+    }
   }
 
   decreaseQuantity() {
-    if (this.quantity > 1) {
-      this.quantity--;
+    if (this.userSelectedQuantity > 1) {
+      this.userSelectedQuantity--;
       this.emitQuantityChange();
     }
   }
 
   private emitQuantityChange() {
-    this.quantityChange.emit(this.quantity);
+    this.quantityChange.emit(this.userSelectedQuantity);
   }
 }

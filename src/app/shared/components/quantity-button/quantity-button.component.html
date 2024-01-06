@@ -3,11 +3,11 @@
     class="flex-auto py-1 px-2 disabled:bg-transparent disabled:text-gray-150 text-base text-primary font-bold"
     type="button"
     (click)="decreaseQuantity()"
-    [disabled]="quantity < 1"
+    [disabled]="userSelectedQuantity < 1"
   >
     -
   </button>
-  <span class="flex-auto py-1 px-2 text-base font-bold">{{ quantity }}</span>
+  <span class="flex-auto py-1 px-2 text-base font-bold">{{ userSelectedQuantity }}</span>
   <button
     type="button"
     class="flex-auto py-1 px-2 disabled:bg-transparent disabled:text-gray-150 text-base text-primary font-bold"

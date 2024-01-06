@@ -8,6 +8,10 @@ module.exports = {
       fontFamily: {
         rubik: ["Rubik", ...defaultTheme.fontFamily.sans],
       },
+      screens: {
+        "3xl": "1800px",
+        "4xl": "3000px",
+      },
       colors: {
         primary: {
           DEFAULT: "#ff002a",

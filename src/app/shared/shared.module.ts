@@ -14,6 +14,7 @@ import { InputPasswordComponent } from './components/inputs/input-password/input
 import { HeaderOfPageComponent } from './components/header-of-page/header-of-page.component';
 import { ProductMayLikeComponent } from './components/product/product-may-like/product-may-like.component';
 import { register } from 'swiper/element/bundle';
+import { GalleryComponent } from './components/product/gallery/gallery.component';
 
 
 register();
@@ -29,7 +30,8 @@ register();
     InputPasswordComponent,
     HeaderOfPageComponent,
     ProductMayLikeComponent,
-    SwiperDirective
+    SwiperDirective,
+    GalleryComponent
   ],
   imports: [
     CommonModule,
@@ -50,7 +52,8 @@ register();
     ModalComponent,
     InputPasswordComponent,
     HeaderOfPageComponent,
-    ProductMayLikeComponent
+    ProductMayLikeComponent,
+    GalleryComponent
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })

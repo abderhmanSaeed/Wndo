@@ -1,11 +1,14 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-
+type ClassesProps = {
+  base?: string
+}
 @Component({
   selector: 'app-quantity-button',
   templateUrl: './quantity-button.component.html',
   styleUrls: ['./quantity-button.component.scss']
 })
 export class QuantityButtonComponent {
+  @Input() classes?: ClassesProps;
   @Input() quantity: number = 1;
   @Input() disabledAddQuantity: boolean = false;
   @Input() maxQuantity: number = Infinity; // Add this line

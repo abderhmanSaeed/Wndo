@@ -1,0 +1,15 @@
+<div class="grid grid-cols-1 md:grid-cols-3 justify-between gap-10">
+  <div class="md:col-span-2">
+    <h6 class="text-blue-950 mb-6">Your Cart has ({{products.length}}) items</h6>
+    <ng-container *ngFor="let product of products">
+      <div class="mb-6">
+        <app-visual-product-summary
+          [product]="product"
+        ></app-visual-product-summary>
+      </div>
+    </ng-container>
+  </div>
+  <div>
+    <app-order-summary-card></app-order-summary-card>
+  </div>
+</div>

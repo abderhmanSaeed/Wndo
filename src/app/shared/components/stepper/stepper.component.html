@@ -1,14 +1,15 @@
 <div class="stepper">
-  <div class="stepper__header w-[70%] mx-auto">
-    <ol class="flex items-center justify-between gap-8 mb-4 sm:mb-5">
+  <div class="stepper__header xl:w-[70%] mx-auto">
+    <ol
+      class="flex flex-col md:flex-row smLitems-base xl:items-center justify-between gap-4 xl:gap-8 mb-4 md:mb-5"
+    >
       <li
         [ngClass]="{
-          'after:!bg-blue-900':
-            currentStep === i || currentStep > i,
+          'after:!bg-blue-900': currentStep === i || currentStep > i,
           'divide-dashed': currentStep !== i
         }"
         *ngFor="let step of steps; let i = index"
-        class="flex-auto relative items-center after:content[''] last:after:hidden after:absolute after:w-[calc(100%-(-12px))] after:h-[2px] after:start-[20px] after:top-[10px] after:bg-blueGray-300"
+        class="flex-auto relative items-center after:content[''] last:after:hidden after:absolute after:h-[2px] after:w-[calc(100%-4px)] after:start-[20px] after:top-[10px] after:bg-blueGray-300"
         [class.divide-blueGray-300]="currentStep !== i"
       >
         <div
@@ -63,7 +64,9 @@
       </ng-container>
     </div>
 
-    <div class="stepper__footer flex gap-4 w-2/3 pe-4 justify-end">
+    <div
+      class="stepper__footer flex-col xl:flex-row flex gap-4 xl:w-2/3 xl:pe-4 justify-end"
+    >
       <button
         type="button"
         *ngIf="currentStep >= 1"
@@ -72,6 +75,12 @@
       >
         Back
       </button>
+
+      <ng-container *ngFor="let step of steps; let i = index">
+        <ng-container *ngIf="currentStep === i">
+         <button title="action" type="button" [innerHTML]="step.additionalAction"></button>
+        </ng-container>
+      </ng-container>
 
       <button
         type="button"
@@ -88,6 +97,5 @@
         </ng-container>
       </button>
     </div>
-
   </div>
 </div>

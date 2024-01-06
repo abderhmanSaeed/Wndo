@@ -9,6 +9,7 @@ interface Step {
   icon: string;
   template: TemplateRef<any> | null;
   nextButtonLabel?: string;
+  additionalAction?: any;
 }
 
 @Component({
@@ -23,7 +24,6 @@ export class StepperComponent implements AfterContentInit {
   @ContentChildren(StepComponent) steps: QueryList<StepComponent> | undefined;
   currentStep: number = 0;
   currentStepTemplate: TemplateRef<any> | null = null;
-
 
   ngAfterContentInit(): void {
     // Ensure steps are initialized before updating the template
@@ -49,7 +49,6 @@ export class StepperComponent implements AfterContentInit {
   private updateCurrentStepTemplate() {
     if (this.steps) {
       this.currentStepTemplate = this.steps.toArray()[this.currentStep]?.template || null;
-      this.updateStepActivation();
     }
   }
 
@@ -60,5 +59,7 @@ export class StepperComponent implements AfterContentInit {
       });
     }
   }
+
+
 
 }

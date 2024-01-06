@@ -24,6 +24,7 @@ export class StepperComponent implements AfterContentInit {
   currentStep: number = 0;
   currentStepTemplate: TemplateRef<any> | null = null;
 
+
   ngAfterContentInit(): void {
     // Ensure steps are initialized before updating the template
     this.steps?.changes.subscribe(() => {

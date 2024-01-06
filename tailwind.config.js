@@ -24,6 +24,7 @@ module.exports = {
         },
 
         blueGray: {
+          200: "#9599B3",
           300: "#96A1AB",
           900: "#272833",
         },
@@ -49,6 +50,7 @@ module.exports = {
           950: "#1C1C1C",
         },
         orange: {
+          400: "#FFAD39",
           500: "#FFA90A",
           600: "#FFA800",
         },
@@ -60,6 +62,8 @@ module.exports = {
       },
       spacing: {
         4.5: "1.125rem",
+        5.5: "1.375rem",
+        6.5: "1.625rem",
       },
       height: {
         13: "3.125rem",

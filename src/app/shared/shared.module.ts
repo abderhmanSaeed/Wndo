@@ -22,6 +22,7 @@ import { StepComponent } from './components/stepper/step/step.component';
 import { ShippingPaymentComponent } from './components/order/shipping-payment/shipping-payment.component';
 import { InputPhoneComponent } from './components/inputs/input-phone/input-phone.component';
 import { DropdownComponent } from './components/dropdown/dropdown/dropdown.component';
+import { RadioComponent } from './components/radio/radio.component';
 
 
 register();
@@ -46,7 +47,8 @@ register();
     InputPhoneComponent,
     InputPhoneComponent,
     DropdownComponent,
-    SelectComponent
+    SelectComponent,
+    RadioComponent
   ],
   imports: [
     CommonModule,
@@ -75,7 +77,8 @@ register();
     InputFiledComponent,
     InputPhoneComponent,
     DropdownComponent,
-    SelectComponent
+    SelectComponent,
+    RadioComponent
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })

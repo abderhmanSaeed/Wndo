@@ -1,0 +1,1000 @@
+// @import "variables";
+
+@font-face {
+  font-family: '#{$icomoon-font-family}';
+  src:  url('../../../fonts/icomoon/#{$icomoon-font-family}.eot?uj1p95');
+  src:  url('../../../fonts/icomoon/#{$icomoon-font-family}.eot?uj1p95#iefix') format('embedded-opentype'),
+    url('../../../fonts/icomoon/#{$icomoon-font-family}.ttf?uj1p95') format('truetype'),
+    url('../../../fonts/icomoon/#{$icomoon-font-family}.woff?uj1p95') format('woff'),
+    url('../../../fonts/icomoon/#{$icomoon-font-family}.svg?uj1p95##{$icomoon-font-family}') format('svg');
+  font-weight: normal;
+  font-style: normal;
+  font-display: block;
+}
+
+[class^="icon-"], [class*=" icon-"] {
+  /* use !important to prevent issues with browser extensions that change fonts */
+  font-family: '#{$icomoon-font-family}' !important;
+  speak: never;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-car-shipping .path1 {
+  &:before {
+    content: $icon-car-shipping-path1;
+    color: rgb(180, 230, 110);
+  }
+}
+.icon-car-shipping .path2 {
+  &:before {
+    content: $icon-car-shipping-path2;
+    margin-left: -1.583984375em;
+    color: rgb(255, 220, 100);
+  }
+}
+.icon-car-shipping .path3 {
+  &:before {
+    content: $icon-car-shipping-path3;
+    margin-left: -1.583984375em;
+    color: rgb(255, 200, 80);
+  }
+}
+.icon-car-shipping .path4 {
+  &:before {
+    content: $icon-car-shipping-path4;
+    margin-left: -1.583984375em;
+    color: rgb(255, 220, 100);
+  }
+}
+.icon-car-shipping .path5 {
+  &:before {
+    content: $icon-car-shipping-path5;
+    margin-left: -1.583984375em;
+    color: rgb(180, 230, 255);
+  }
+}
+.icon-car-shipping .path6 {
+  &:before {
+    content: $icon-car-shipping-path6;
+    margin-left: -1.583984375em;
+    color: rgb(241, 244, 251);
+  }
+}
+.icon-car-shipping .path7 {
+  &:before {
+    content: $icon-car-shipping-path7;
+    margin-left: -1.583984375em;
+    color: rgb(225, 165, 70);
+  }
+}
+.icon-car-shipping .path8 {
+  &:before {
+    content: $icon-car-shipping-path8;
+    margin-left: -1.583984375em;
+    color: rgb(255, 200, 80);
+  }
+}
+.icon-car-shipping .path9 {
+  &:before {
+    content: $icon-car-shipping-path9;
+    margin-left: -1.583984375em;
+    color: rgb(91, 93, 110);
+  }
+}
+.icon-car-shipping .path10 {
+  &:before {
+    content: $icon-car-shipping-path10;
+    margin-left: -1.583984375em;
+    color: rgb(155, 214, 255);
+  }
+}
+.icon-car-shipping .path11 {
+  &:before {
+    content: $icon-car-shipping-path11;
+    margin-left: -1.583984375em;
+    color: rgb(160, 215, 85);
+  }
+}
+.icon-car-shipping .path12 {
+  &:before {
+    content: $icon-car-shipping-path12;
+    margin-left: -1.583984375em;
+    color: rgb(91, 93, 110);
+  }
+}
+.icon-car-shipping .path13 {
+  &:before {
+    content: $icon-car-shipping-path13;
+    margin-left: -1.583984375em;
+    color: rgb(0, 0, 0);
+  }
+}
+.icon-car-shipping .path14 {
+  &:before {
+    content: $icon-car-shipping-path14;
+    margin-left: -1.583984375em;
+    color: rgb(0, 0, 0);
+  }
+}
+.icon-car-shipping .path15 {
+  &:before {
+    content: $icon-car-shipping-path15;
+    margin-left: -1.583984375em;
+    color: rgb(0, 0, 0);
+  }
+}
+.icon-car-shipping .path16 {
+  &:before {
+    content: $icon-car-shipping-path16;
+    margin-left: -1.583984375em;
+    color: rgb(0, 0, 0);
+  }
+}
+.icon-car-shipping .path17 {
+  &:before {
+    content: $icon-car-shipping-path17;
+    margin-left: -1.583984375em;
+    color: rgb(0, 0, 0);
+  }
+}
+.icon-car-shipping .path18 {
+  &:before {
+    content: $icon-car-shipping-path18;
+    margin-left: -1.583984375em;
+    color: rgb(0, 0, 0);
+  }
+}
+.icon-bag-shopping .path1 {
+  &:before {
+    content: $icon-bag-shopping-path1;
+    color: rgb(255, 193, 39);
+  }
+}
+.icon-bag-shopping .path2 {
+  &:before {
+    content: $icon-bag-shopping-path2;
+    margin-left: -0.9853515625em;
+    color: rgb(35, 35, 35);
+  }
+}
+.icon-bag-shopping .path3 {
+  &:before {
+    content: $icon-bag-shopping-path3;
+    margin-left: -0.9853515625em;
+    color: rgb(35, 35, 35);
+  }
+}
+.icon-bag-shopping .path4 {
+  &:before {
+    content: $icon-bag-shopping-path4;
+    margin-left: -0.9853515625em;
+    color: rgb(35, 35, 35);
+  }
+}
+.icon-bag-shopping .path5 {
+  &:before {
+    content: $icon-bag-shopping-path5;
+    margin-left: -0.9853515625em;
+    color: rgb(238, 77, 45);
+  }
+}
+.icon-bag-shopping .path6 {
+  &:before {
+    content: $icon-bag-shopping-path6;
+    margin-left: -0.9853515625em;
+    color: rgb(255, 255, 255);
+  }
+}
+.icon-bag-shopping .path7 {
+  &:before {
+    content: $icon-bag-shopping-path7;
+    margin-left: -0.9853515625em;
+    color: rgb(35, 35, 35);
+  }
+}
+.icon-bag-shopping .path8 {
+  &:before {
+    content: $icon-bag-shopping-path8;
+    margin-left: -0.9853515625em;
+    color: rgb(35, 35, 35);
+  }
+}
+.icon-gift .path1 {
+  &:before {
+    content: $icon-gift-path1;
+    color: rgb(255, 173, 57);
+  }
+}
+.icon-gift .path2 {
+  &:before {
+    content: $icon-gift-path2;
+    margin-left: -1em;
+    color: rgb(254, 189, 85);
+  }
+}
+.icon-gift .path3 {
+  &:before {
+    content: $icon-gift-path3;
+    margin-left: -1em;
+    color: rgb(203, 53, 65);
+  }
+}
+.icon-gift .path4 {
+  &:before {
+    content: $icon-gift-path4;
+    margin-left: -1em;
+    color: rgb(168, 30, 41);
+  }
+}
+.icon-gift .path5 {
+  &:before {
+    content: $icon-gift-path5;
+    margin-left: -1em;
+    color: rgb(224, 62, 62);
+  }
+}
+.icon-gift .path6 {
+  &:before {
+    content: $icon-gift-path6;
+    margin-left: -1em;
+    color: rgb(203, 53, 65);
+  }
+}
+.icon-gift .path7 {
+  &:before {
+    content: $icon-gift-path7;
+    margin-left: -1em;
+    color: rgb(224, 62, 62);
+  }
+}
+.icon-gift .path8 {
+  &:before {
+    content: $icon-gift-path8;
+    margin-left: -1em;
+    color: rgb(203, 53, 65);
+  }
+}
+.icon-gift .path9 {
+  &:before {
+    content: $icon-gift-path9;
+    margin-left: -1em;
+    color: rgb(255, 97, 97);
+  }
+}
+.icon-gift .path10 {
+  &:before {
+    content: $icon-gift-path10;
+    margin-left: -1em;
+    color: rgb(203, 53, 65);
+  }
+}
+.icon-gift .path11 {
+  &:before {
+    content: $icon-gift-path11;
+    margin-left: -1em;
+    color: rgb(255, 97, 97);
+  }
+}
+.icon-gift .path12 {
+  &:before {
+    content: $icon-gift-path12;
+    margin-left: -1em;
+    color: rgb(230, 140, 21);
+  }
+}
+.icon-gift .path13 {
+  &:before {
+    content: $icon-gift-path13;
+    margin-left: -1em;
+    color: rgb(168, 30, 41);
+  }
+}
+.icon-gift .path14 {
+  &:before {
+    content: $icon-gift-path14;
+    margin-left: -1em;
+    color: rgb(255, 169, 48);
+  }
+}
+.icon-gift .path15 {
+  &:before {
+    content: $icon-gift-path15;
+    margin-left: -1em;
+    color: rgb(203, 53, 65);
+  }
+}
+.icon-gift .path16 {
+  &:before {
+    content: $icon-gift-path16;
+    margin-left: -1em;
+    color: rgb(168, 30, 41);
+  }
+}
+.icon-gift .path17 {
+  &:before {
+    content: $icon-gift-path17;
+    margin-left: -1em;
+    color: rgb(203, 53, 65);
+  }
+}
+.icon-gift .path18 {
+  &:before {
+    content: $icon-gift-path18;
+    margin-left: -1em;
+    color: rgb(150, 27, 37);
+  }
+}
+.icon-gift .path19 {
+  &:before {
+    content: $icon-gift-path19;
+    margin-left: -1em;
+    color: rgb(230, 140, 21);
+  }
+}
+.icon-gift .path20 {
+  &:before {
+    content: $icon-gift-path20;
+    margin-left: -1em;
+    color: rgb(150, 27, 37);
+  }
+}
+.icon-gift .path21 {
+  &:before {
+    content: $icon-gift-path21;
+    margin-left: -1em;
+    color: rgb(0, 0, 0);
+  }
+}
+.icon-gift .path22 {
+  &:before {
+    content: $icon-gift-path22;
+    margin-left: -1em;
+    color: rgb(0, 0, 0);
+  }
+}
+.icon-gift .path23 {
+  &:before {
+    content: $icon-gift-path23;
+    margin-left: -1em;
+    color: rgb(0, 0, 0);
+  }
+}
+.icon-cart .path1 {
+  &:before {
+    content: $icon-cart-path1;
+    color: rgb(252, 101, 126);
+  }
+}
+.icon-cart .path2 {
+  &:before {
+    content: $icon-cart-path2;
+    margin-left: -0.970703125em;
+    color: rgb(178, 226, 109);
+  }
+}
+.icon-cart .path3 {
+  &:before {
+    content: $icon-cart-path3;
+    margin-left: -0.970703125em;
+    color: rgb(193, 142, 107);
+  }
+}
+.icon-cart .path4 {
+  &:before {
+    content: $icon-cart-path4;
+    margin-left: -0.970703125em;
+    color: rgb(165, 116, 83);
+  }
+}
+.icon-cart .path5 {
+  &:before {
+    content: $icon-cart-path5;
+    margin-left: -0.970703125em;
+    color: rgb(218, 230, 241);
+  }
+}
+.icon-cart .path6 {
+  &:before {
+    content: $icon-cart-path6;
+    margin-left: -0.970703125em;
+    color: rgb(218, 230, 241);
+  }
+}
+.icon-cart .path7 {
+  &:before {
+    content: $icon-cart-path7;
+    margin-left: -0.970703125em;
+    color: rgb(218, 230, 241);
+  }
+}
+.icon-cart .path8 {
+  &:before {
+    content: $icon-cart-path8;
+    margin-left: -0.970703125em;
+    color: rgb(58, 112, 191);
+  }
+}
+.icon-cart .path9 {
+  &:before {
+    content: $icon-cart-path9;
+    margin-left: -0.970703125em;
+    color: rgb(58, 112, 191);
+  }
+}
+.icon-cart .path10 {
+  &:before {
+    content: $icon-cart-path10;
+    margin-left: -0.970703125em;
+    color: rgb(218, 230, 241);
+  }
+}
+.icon-cart .path11 {
+  &:before {
+    content: $icon-cart-path11;
+    margin-left: -0.970703125em;
+    color: rgb(218, 230, 241);
+  }
+}
+.icon-cart .path12 {
+  &:before {
+    content: $icon-cart-path12;
+    margin-left: -0.970703125em;
+    color: rgb(108, 173, 239);
+  }
+}
+.icon-cart .path13 {
+  &:before {
+    content: $icon-cart-path13;
+    margin-left: -0.970703125em;
+    color: rgb(108, 173, 239);
+  }
+}
+.icon-cart .path14 {
+  &:before {
+    content: $icon-cart-path14;
+    margin-left: -0.970703125em;
+    color: rgb(112, 214, 249);
+  }
+}
+.icon-cart .path15 {
+  &:before {
+    content: $icon-cart-path15;
+    margin-left: -0.970703125em;
+    color: rgb(135, 209, 71);
+  }
+}
+.icon-cart .path16 {
+  &:before {
+    content: $icon-cart-path16;
+    margin-left: -0.970703125em;
+    color: rgb(245, 200, 76);
+  }
+}
+.icon-cart .path17 {
+  &:before {
+    content: $icon-cart-path17;
+    margin-left: -0.970703125em;
+    color: rgb(252, 101, 126);
+  }
+}
+.icon-cart .path18 {
+  &:before {
+    content: $icon-cart-path18;
+    margin-left: -0.970703125em;
+    color: rgb(245, 200, 76);
+  }
+}
+.icon-cart .path19 {
+  &:before {
+    content: $icon-cart-path19;
+    margin-left: -0.970703125em;
+    color: rgb(0, 0, 0);
+  }
+}
+.icon-cart .path20 {
+  &:before {
+    content: $icon-cart-path20;
+    margin-left: -0.970703125em;
+    color: rgb(0, 0, 0);
+  }
+}
+.icon-cart .path21 {
+  &:before {
+    content: $icon-cart-path21;
+    margin-left: -0.970703125em;
+    color: rgb(0, 0, 0);
+  }
+}
+.icon-cart .path22 {
+  &:before {
+    content: $icon-cart-path22;
+    margin-left: -0.970703125em;
+    color: rgb(0, 0, 0);
+  }
+}
+.icon-cart .path23 {
+  &:before {
+    content: $icon-cart-path23;
+    margin-left: -0.970703125em;
+    color: rgb(0, 0, 0);
+  }
+}
+.icon-cart .path24 {
+  &:before {
+    content: $icon-cart-path24;
+    margin-left: -0.970703125em;
+    color: rgb(0, 0, 0);
+  }
+}
+.icon-cart .path25 {
+  &:before {
+    content: $icon-cart-path25;
+    margin-left: -0.970703125em;
+    color: rgb(0, 0, 0);
+  }
+}
+.icon-cart .path26 {
+  &:before {
+    content: $icon-cart-path26;
+    margin-left: -0.970703125em;
+    color: rgb(0, 0, 0);
+  }
+}
+.icon-cart .path27 {
+  &:before {
+    content: $icon-cart-path27;
+    margin-left: -0.970703125em;
+    color: rgb(0, 0, 0);
+  }
+}
+.icon-cart .path28 {
+  &:before {
+    content: $icon-cart-path28;
+    margin-left: -0.970703125em;
+    color: rgb(0, 0, 0);
+  }
+}
+.icon-cart .path29 {
+  &:before {
+    content: $icon-cart-path29;
+    margin-left: -0.970703125em;
+    color: rgb(0, 0, 0);
+  }
+}
+.icon-cart .path30 {
+  &:before {
+    content: $icon-cart-path30;
+    margin-left: -0.970703125em;
+    color: rgb(0, 0, 0);
+  }
+}
+.icon-cart .path31 {
+  &:before {
+    content: $icon-cart-path31;
+    margin-left: -0.970703125em;
+    color: rgb(0, 0, 0);
+  }
+}
+.icon-cart .path32 {
+  &:before {
+    content: $icon-cart-path32;
+    margin-left: -0.970703125em;
+    color: rgb(0, 0, 0);
+  }
+}
+.icon-cart .path33 {
+  &:before {
+    content: $icon-cart-path33;
+    margin-left: -0.970703125em;
+    color: rgb(0, 0, 0);
+  }
+}
+.icon-cart .path34 {
+  &:before {
+    content: $icon-cart-path34;
+    margin-left: -0.970703125em;
+    color: rgb(0, 0, 0);
+  }
+}
+.icon-cart .path35 {
+  &:before {
+    content: $icon-cart-path35;
+    margin-left: -0.970703125em;
+    color: rgb(0, 0, 0);
+  }
+}
+.icon-cart .path36 {
+  &:before {
+    content: $icon-cart-path36;
+    margin-left: -0.970703125em;
+    color: rgb(0, 0, 0);
+  }
+}
+.icon-cart .path37 {
+  &:before {
+    content: $icon-cart-path37;
+    margin-left: -0.970703125em;
+    color: rgb(0, 0, 0);
+  }
+}
+.icon-cart .path38 {
+  &:before {
+    content: $icon-cart-path38;
+    margin-left: -0.970703125em;
+    color: rgb(0, 0, 0);
+  }
+}
+.icon-cart .path39 {
+  &:before {
+    content: $icon-cart-path39;
+    margin-left: -0.970703125em;
+    color: rgb(0, 0, 0);
+  }
+}
+.icon-warning .path1 {
+  &:before {
+    content: $icon-warning-path1;
+    color: rgb(255, 235, 0);
+  }
+}
+.icon-warning .path2 {
+  &:before {
+    content: $icon-warning-path2;
+    margin-left: -1em;
+    color: rgb(0, 0, 0);
+  }
+}
+.icon-american-express-coloring .path1 {
+  &:before {
+    content: $icon-american-express-coloring-path1;
+    color: rgb(47, 171, 247);
+  }
+}
+.icon-american-express-coloring .path2 {
+  &:before {
+    content: $icon-american-express-coloring-path2;
+    margin-left: -2.8759765625em;
+    color: rgb(34, 143, 224);
+  }
+}
+.icon-american-express-coloring .path3 {
+  &:before {
+    content: $icon-american-express-coloring-path3;
+    margin-left: -2.8759765625em;
+    color: rgb(5, 113, 193);
+  }
+}
+.icon-american-express-coloring .path4 {
+  &:before {
+    content: $icon-american-express-coloring-path4;
+    margin-left: -2.8759765625em;
+    color: rgb(34, 143, 224);
+  }
+}
+.icon-american-express-coloring .path5 {
+  &:before {
+    content: $icon-american-express-coloring-path5;
+    margin-left: -2.8759765625em;
+    color: rgb(5, 113, 193);
+  }
+}
+.icon-american-express-coloring .path6 {
+  &:before {
+    content: $icon-american-express-coloring-path6;
+    margin-left: -2.8759765625em;
+    color: rgb(34, 143, 224);
+  }
+}
+.icon-american-express-coloring .path7 {
+  &:before {
+    content: $icon-american-express-coloring-path7;
+    margin-left: -2.8759765625em;
+    color: rgb(34, 143, 224);
+  }
+}
+.icon-american-express-coloring .path8 {
+  &:before {
+    content: $icon-american-express-coloring-path8;
+    margin-left: -2.8759765625em;
+    color: rgb(34, 143, 224);
+  }
+}
+.icon-american-express-coloring .path9 {
+  &:before {
+    content: $icon-american-express-coloring-path9;
+    margin-left: -2.8759765625em;
+    color: rgb(34, 143, 224);
+  }
+}
+.icon-american-express-coloring .path10 {
+  &:before {
+    content: $icon-american-express-coloring-path10;
+    margin-left: -2.8759765625em;
+    color: rgb(34, 143, 224);
+  }
+}
+.icon-american-express-coloring .path11 {
+  &:before {
+    content: $icon-american-express-coloring-path11;
+    margin-left: -2.8759765625em;
+    color: rgb(34, 143, 224);
+  }
+}
+.icon-american-express-coloring .path12 {
+  &:before {
+    content: $icon-american-express-coloring-path12;
+    margin-left: -2.8759765625em;
+    color: rgb(47, 171, 247);
+  }
+}
+.icon-american-express-coloring .path13 {
+  &:before {
+    content: $icon-american-express-coloring-path13;
+    margin-left: -2.8759765625em;
+    color: rgb(47, 171, 247);
+  }
+}
+.icon-american-express-coloring .path14 {
+  &:before {
+    content: $icon-american-express-coloring-path14;
+    margin-left: -2.8759765625em;
+    color: rgb(47, 171, 247);
+  }
+}
+.icon-american-express-coloring .path15 {
+  &:before {
+    content: $icon-american-express-coloring-path15;
+    margin-left: -2.8759765625em;
+    color: rgb(34, 143, 224);
+  }
+}
+.icon-american-express-coloring .path16 {
+  &:before {
+    content: $icon-american-express-coloring-path16;
+    margin-left: -2.8759765625em;
+    color: rgb(34, 143, 224);
+  }
+}
+.icon-american-express-coloring .path17 {
+  &:before {
+    content: $icon-american-express-coloring-path17;
+    margin-left: -2.8759765625em;
+    color: rgb(34, 143, 224);
+  }
+}
+.icon-american-express-coloring .path18 {
+  &:before {
+    content: $icon-american-express-coloring-path18;
+    margin-left: -2.8759765625em;
+    color: rgb(34, 143, 224);
+  }
+}
+.icon-american-express-coloring .path19 {
+  &:before {
+    content: $icon-american-express-coloring-path19;
+    margin-left: -2.8759765625em;
+    color: rgb(34, 143, 224);
+  }
+}
+.icon-car-coloring .path1 {
+  &:before {
+    content: $icon-car-coloring-path1;
+    color: rgb(0, 195, 255);
+  }
+}
+.icon-car-coloring .path2 {
+  &:before {
+    content: $icon-car-coloring-path2;
+    margin-left: -1.1767578125em;
+    color: rgb(0, 170, 240);
+  }
+}
+.icon-car-coloring .path3 {
+  &:before {
+    content: $icon-car-coloring-path3;
+    margin-left: -1.1767578125em;
+    color: rgb(0, 150, 220);
+  }
+}
+.icon-car-coloring .path4 {
+  &:before {
+    content: $icon-car-coloring-path4;
+    margin-left: -1.1767578125em;
+    color: rgb(0, 170, 240);
+  }
+}
+.icon-car-coloring .path5 {
+  &:before {
+    content: $icon-car-coloring-path5;
+    margin-left: -1.1767578125em;
+    color: rgb(180, 230, 255);
+  }
+}
+.icon-car-coloring .path6 {
+  &:before {
+    content: $icon-car-coloring-path6;
+    margin-left: -1.1767578125em;
+    color: rgb(241, 244, 251);
+  }
+}
+.icon-car-coloring .path7 {
+  &:before {
+    content: $icon-car-coloring-path7;
+    margin-left: -1.1767578125em;
+    color: rgb(0, 125, 200);
+  }
+}
+.icon-car-coloring .path8 {
+  &:before {
+    content: $icon-car-coloring-path8;
+    margin-left: -1.1767578125em;
+    color: rgb(0, 150, 220);
+  }
+}
+.icon-car-coloring .path9 {
+  &:before {
+    content: $icon-car-coloring-path9;
+    margin-left: -1.1767578125em;
+    color: rgb(91, 93, 110);
+  }
+}
+.icon-car-coloring .path10 {
+  &:before {
+    content: $icon-car-coloring-path10;
+    margin-left: -1.1767578125em;
+    color: rgb(155, 214, 255);
+  }
+}
+.icon-car-coloring .path11 {
+  &:before {
+    content: $icon-car-coloring-path11;
+    margin-left: -1.1767578125em;
+    color: rgb(0, 170, 240);
+  }
+}
+.icon-car-coloring .path12 {
+  &:before {
+    content: $icon-car-coloring-path12;
+    margin-left: -1.1767578125em;
+    color: rgb(91, 93, 110);
+  }
+}
+.icon-car-coloring .path13 {
+  &:before {
+    content: $icon-car-coloring-path13;
+    margin-left: -1.1767578125em;
+    color: rgb(0, 0, 0);
+  }
+}
+.icon-car-coloring .path14 {
+  &:before {
+    content: $icon-car-coloring-path14;
+    margin-left: -1.1767578125em;
+    color: rgb(0, 0, 0);
+  }
+}
+.icon-master-card-coloring .path1 {
+  &:before {
+    content: $icon-master-card-coloring-path1;
+    color: rgb(255, 193, 7);
+  }
+}
+.icon-master-card-coloring .path2 {
+  &:before {
+    content: $icon-master-card-coloring-path2;
+    margin-left: -1.650390625em;
+    color: rgb(255, 61, 0);
+  }
+}
+.icon-visa-coloring .path1 {
+  &:before {
+    content: $icon-visa-coloring-path1;
+    color: rgb(60, 88, 191);
+  }
+}
+.icon-visa-coloring .path2 {
+  &:before {
+    content: $icon-visa-coloring-path2;
+    margin-left: -3.294921875em;
+    color: rgb(41, 54, 136);
+  }
+}
+.icon-visa-coloring .path3 {
+  &:before {
+    content: $icon-visa-coloring-path3;
+    margin-left: -3.294921875em;
+    color: rgb(60, 88, 191);
+  }
+}
+.icon-visa-coloring .path4 {
+  &:before {
+    content: $icon-visa-coloring-path4;
+    margin-left: -3.294921875em;
+    color: rgb(41, 54, 136);
+  }
+}
+.icon-visa-coloring .path5 {
+  &:before {
+    content: $icon-visa-coloring-path5;
+    margin-left: -3.294921875em;
+    color: rgb(60, 88, 191);
+  }
+}
+.icon-visa-coloring .path6 {
+  &:before {
+    content: $icon-visa-coloring-path6;
+    margin-left: -3.294921875em;
+    color: rgb(41, 54, 136);
+  }
+}
+.icon-visa-coloring .path7 {
+  &:before {
+    content: $icon-visa-coloring-path7;
+    margin-left: -3.294921875em;
+    color: rgb(60, 88, 191);
+  }
+}
+.icon-visa-coloring .path8 {
+  &:before {
+    content: $icon-visa-coloring-path8;
+    margin-left: -3.294921875em;
+    color: rgb(41, 54, 136);
+  }
+}
+.icon-visa-coloring .path9 {
+  &:before {
+    content: $icon-visa-coloring-path9;
+    margin-left: -3.294921875em;
+    color: rgb(255, 188, 0);
+  }
+}
+.icon-visa-coloring .path10 {
+  &:before {
+    content: $icon-visa-coloring-path10;
+    margin-left: -3.294921875em;
+    color: rgb(247, 152, 29);
+  }
+}
+.icon-visa-coloring .path11 {
+  &:before {
+    content: $icon-visa-coloring-path11;
+    margin-left: -3.294921875em;
+    color: rgb(237, 124, 0);
+  }
+}
+.icon-visa-coloring .path12 {
+  &:before {
+    content: $icon-visa-coloring-path12;
+    margin-left: -3.294921875em;
+    color: rgb(5, 18, 68);
+  }
+}
+.icon-visa-coloring .path13 {
+  &:before {
+    content: $icon-visa-coloring-path13;
+    margin-left: -3.294921875em;
+    color: rgb(5, 18, 68);
+  }
+}
+.icon-visa-coloring .path14 {
+  &:before {
+    content: $icon-visa-coloring-path14;
+    margin-left: -3.294921875em;
+    color: rgb(5, 18, 68);
+  }
+}
+.icon-visa-coloring .path15 {
+  &:before {
+    content: $icon-visa-coloring-path15;
+    margin-left: -3.294921875em;
+    color: rgb(5, 18, 68);
+  }
+}

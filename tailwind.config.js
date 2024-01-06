@@ -18,6 +18,11 @@ module.exports = {
           400: "#FF4B46",
           500: "#ff002a",
         },
+
+        red: {
+          500: "#FF002A"
+        },
+
         blueGray: {
           300: "#96A1AB",
           900: "#272833",
@@ -30,6 +35,7 @@ module.exports = {
           950: "#04043F",
         },
         gray: {
+          20: "#E5E6E8",
           30: "#EAECEE",
           40: "#FFF5F5",
           50: "#f7f7f7",
@@ -65,6 +71,9 @@ module.exports = {
       lineHeight: {
         0: 0,
       },
+      boxShadow: {
+        sm: "0px 3px 6px #00000029"
+      }
     },
   },
   plugins: [],

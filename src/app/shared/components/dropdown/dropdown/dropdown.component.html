@@ -1,0 +1,60 @@
+<button
+  (click)="toggleDropdown()"
+  id="changeLangButton"
+  [class.active]="isDropdownVisible"
+  class="{{classes?.btn || 'dropdown__btn'}} h-13"
+  type="button"
+>
+<ng-content select="[startContent]"></ng-content>
+
+  <ng-container *ngIf="selectedValue; else elseTemplate">
+    {{ selectedValue }}
+  </ng-container>
+  <ng-template #elseTemplate>
+    {{ label }}
+  </ng-template>
+
+  <svg
+    class="w-2.5 h-2.5 ms-3"
+    aria-hidden="true"
+    xmlns="http://www.w3.org/2000/svg"
+    fill="none"
+    viewBox="0 0 10 6"
+  >
+    <path
+      stroke="currentColor"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+      stroke-width="2"
+      d="m1 1 4 4 4-4"
+    />
+  </svg>
+</button>
+
+<!-- Dropdown menu -->
+<div
+  id="dropdown"
+  [class.hidden]="!isDropdownVisible"
+  class="z-10 bg-white divide-y divide-gray-100 rounded-lg shadow w-44"
+>
+  <ul class="py-2 text-sm text-gray-700" aria-labelledby="changeLangButton">
+    <li *ngFor="let option of options" class="text-start">
+      <button
+        type="button"
+        class="text-start w-full px-4 py-2 hover:bg-gray-100 text-xxs"
+        [id]="option.value"
+        (click)="onSelectValue(option)"
+      >
+
+      <ng-container *ngIf="option.startContentMenu">
+        {{ option.startContentMenu }}
+      </ng-container>
+
+        {{ option.label }}
+        <ng-container *ngIf="option.endContentMenu">
+          {{ option.endContentMenu }}
+        </ng-container>
+      </button>
+    </li>
+  </ul>
+</div>

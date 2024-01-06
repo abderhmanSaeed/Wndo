@@ -7,11 +7,11 @@ type ClassesProps = {
   labelColor?: string
 }
 @Component({
-  selector: 'app-input-password',
-  templateUrl: './input-password.component.html',
-  styleUrl: './input-password.component.scss'
+  selector: 'app-input-filed',
+  templateUrl: './input-filed.component.html',
+  styleUrl: './input-filed.component.scss'
 })
-export class InputPasswordComponent {
+export class InputFiledComponent {
   @Input() placeholder: string = '';
   @Input() label: string = '';
   @Input() disabled: boolean = false;
@@ -22,18 +22,7 @@ export class InputPasswordComponent {
   @Input() classes?: ClassesProps;
   @Input() error: string = "";
 
-  type: 'text' | 'password' = 'password'
-  isShowPassword: boolean = false
+  @Input() type: 'text' | 'number' = 'text'
 
 
-  toggleShowPassword() {
-    this.isShowPassword = !this.isShowPassword
-
-    if (this.isShowPassword) {
-      this.type = 'password'
-    } else {
-      this.type = 'text'
-    }
-    console.log(this.isShowPassword)
-  }
 }

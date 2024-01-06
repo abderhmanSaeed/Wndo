@@ -1,3 +1,6 @@
+import { SelectComponent } from './components/inputs/Select/select.component';
+import { InputFiledComponent } from './components/inputs/input-filed/input-filed.component';
+import { StepperComponent } from './components/stepper/stepper.component';
 import { SwiperDirective } from './directives/swiper-directive';
 import { ModalComponent } from './components/modal/modal.component';
 import { QuantityButtonComponent } from './components/quantity-button/quantity-button.component';
@@ -15,6 +18,10 @@ import { HeaderOfPageComponent } from './components/header-of-page/header-of-pag
 import { ProductMayLikeComponent } from './components/product/product-may-like/product-may-like.component';
 import { register } from 'swiper/element/bundle';
 import { GalleryComponent } from './components/product/gallery/gallery.component';
+import { StepComponent } from './components/stepper/step/step.component';
+import { ShippingPaymentComponent } from './components/order/shipping-payment/shipping-payment.component';
+import { InputPhoneComponent } from './components/inputs/input-phone/input-phone.component';
+import { DropdownComponent } from './components/dropdown/dropdown/dropdown.component';
 
 
 register();
@@ -31,7 +38,15 @@ register();
     HeaderOfPageComponent,
     ProductMayLikeComponent,
     SwiperDirective,
-    GalleryComponent
+    GalleryComponent,
+    StepperComponent,
+    StepComponent,
+    ShippingPaymentComponent,
+    InputFiledComponent,
+    InputPhoneComponent,
+    InputPhoneComponent,
+    DropdownComponent,
+    SelectComponent
   ],
   imports: [
     CommonModule,
@@ -53,7 +68,14 @@ register();
     InputPasswordComponent,
     HeaderOfPageComponent,
     ProductMayLikeComponent,
-    GalleryComponent
+    GalleryComponent,
+    StepperComponent,
+    StepComponent,
+    ShippingPaymentComponent,
+    InputFiledComponent,
+    InputPhoneComponent,
+    DropdownComponent,
+    SelectComponent
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })

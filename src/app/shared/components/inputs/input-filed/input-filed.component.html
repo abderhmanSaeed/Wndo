@@ -1,18 +1,20 @@
 <div
-  class="mb-5 {{ classes?.base }} input-container"
+  class="mb-3 {{ classes?.base }} input-container"
   [class.floating-label]="isFloating"
 >
   <label
     *ngIf="!isFloating"
-    for="password"
-    class="block mb-2 text-sm font-medium text-blue-900 {{ classes?.label }}"
-    >{{ label }}
+    [for]="name"
+    [ngClass]="{ 'text-blue-900': !classes?.labelColor }"
+    class="block mb-2 text-sm font-medium  {{ classes?.label }}"
+  >
+    {{ label }}
     <span class="text-red-500" *ngIf="required"> * </span>
   </label>
 
-  <div class="relative" [class.floating-label]="isFloating">
+  <div class="relative">
     <input
-      title="password input"
+      title="{{name}}"
       [type]="type"
       [id]="name"
       required
@@ -21,10 +23,10 @@
       [required]="required"
       [name]="name"
       [value]="value"
-      class="{{ classes?.input }} w-full"
-      [ngClass]="{
-        'border-red-500': error,
-        'border-red-30': error !== '',
+      class="{{ classes?.input }} w-full placeholder:text-sm placeholder:my-10"
+      [ngClass]="{'peer': isFloating,
+          'border-red-500': error,
+          'border-red-30': error !== '',
       }"
     />
     <label
@@ -36,20 +38,7 @@
       {{ label }}
       <span class="text-red-500" *ngIf="required"> * </span>
     </label>
-    <button
-      type="button"
-      (click)="toggleShowPassword()"
-      title="toggle-password"
-      class="absolute end-6 inset-y-0"
-    >
-      <i
-        class="fa-solid text-gray-150"
-        [class.fa-eye]="isShowPassword"
-        [class.fa-eye-slash]="!isShowPassword"
-      ></i>
-    </button>
   </div>
-
   <p *ngIf="error" id="standard_error_help" class="mt-2 text-xs text-red-600">
     {{ error }}
   </p>

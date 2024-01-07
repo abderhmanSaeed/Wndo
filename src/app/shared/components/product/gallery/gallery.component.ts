@@ -62,6 +62,16 @@ export class GalleryComponent implements OnInit {
       urlThumbnail: "https://swiperjs.com/demos/images/nature-4.jpg"
     }
   ]
+  videos: any[] = [{
+    id: 17203,
+    videoId: "9e1097f7-111e-4cf3-b2ff-d4bcbf82c87d",
+    urlThumbnail: "https://wndoprobucket.s3.eu-west-3.amazonaws.com/a6ad2173-f649-4c7c-abc5-5f71d0b48e13.png",
+    urlPreview: "https://wndovodstack-source71e471f1-12o7ase9r16a7.s3.eu-west-3.amazonaws.com/assets01/9e1097f7-111e-4cf3-b2ff-d4bcbf82c87d.3gp",
+    isMain: true,
+    name: "Main",
+    description: "Main"
+  }
+  ]
   @ViewChild('swiper') swiper!: ElementRef<SwiperContainer>;
   @ViewChild('swiperThumbs') swiperThumbs!: ElementRef<SwiperContainer>;
   urlPreview: any;
@@ -131,4 +141,42 @@ export class GalleryComponent implements OnInit {
     this.urlPreview = swiperRef.urlPreview
     this.index = swiperRef.activeIndex;
   }
+
+  currentIframe: HTMLIFrameElement | null = null;
+
+  openVideoInIframe(videoUrl: string, containerId: string) {
+    // Close the existing iframe if one is open
+    if (this.currentIframe) {
+      this.closeIframe();
+    }
+
+    // Create and open the new iframe
+    const iframe = document.createElement('iframe');
+    iframe.src = videoUrl;
+    iframe.width = '640';
+    iframe.height = '360';
+    iframe.allowFullscreen = true;
+
+    // Store the reference to the current iframe
+    this.currentIframe = iframe;
+
+    // Append the iframe to the specified container
+    const container = document.getElementById(containerId);
+    if (container) {
+      container.appendChild(iframe);
+    } else {
+      // Handle the case where the container with the specified ID is not found
+      console.error(`Container with ID ${containerId} not found.`);
+    }
+  }
+
+  closeIframe() {
+    if (this.currentIframe) {
+      this.currentIframe.remove();
+      this.currentIframe = null;
+    }
+  }
+
+
+
 }

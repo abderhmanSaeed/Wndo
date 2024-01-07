@@ -30,6 +30,7 @@
       </div>
     </div>
   </div>
+
   <div action="#">
     <div class="stepper__body mt-14 mb-14">
       <ng-container *ngFor="let item of steps; let i = index">
@@ -47,7 +48,7 @@
         type="button"
         *ngIf="currentStep >= 1"
         (click)="backStep()"
-        class="button button--primary !py-0 button--bordered rounded-full px-24"
+        class="button button--primary !py-0 button--bordered rounded-full flex-auto xl:flex-initial xl:px-24"
       >
         Back
       </button>

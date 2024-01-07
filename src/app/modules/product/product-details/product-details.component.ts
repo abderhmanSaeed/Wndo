@@ -1,7 +1,8 @@
-import { SharedModule } from './../../../shared/shared.module';
+ import { SharedModule } from './../../../shared/shared.module';
 import { ProductResponse, ProductApiAlsoResponse, ProductColorAndSizesResponse } from '../../../shared/models';
 import { ProductService } from './../../../data/service/product/product.service';
 import { Component, OnInit } from '@angular/core';
+
 
 @Component({
   standalone: true,
@@ -64,4 +65,3 @@ export class ProductDetailsComponent implements OnInit {
     );
   }
 }
-

@@ -25,4 +25,8 @@ body {
   .content-page {
     @apply px-10 pb-10
   }
+
+  .info-circle {
+    @apply text-xs me-1 rounded-full w-5 h-5 border-2 border-blue-900 inline-flex items-center justify-center;
+  }
 }

@@ -60,7 +60,8 @@ register();
     TemporaryPasswordSetModalComponent,
     ModalComponent,
     LoginModalComponent,
-    ModalContentComponent
+    ModalContentComponent,
+    LoginModalComponent,
   ],
   imports: [
     CommonModule,
@@ -95,6 +96,8 @@ register();
     OrderSummaryCardComponent,
     TemporaryPasswordSetModalComponent,
     ModalComponent,
+    ModalContentComponent,
+    LoginModalComponent
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })

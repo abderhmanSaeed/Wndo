@@ -1,0 +1,60 @@
+<div class="radio {{classes?.base}}">
+  <ng-container *ngFor="let option of options">
+    <div class="flex justify-between mb-6.5 {{classes?.inputContainer}} last:mb-0">
+      <div class="flex">
+        <div class="flex items-center h-5">
+          <input
+            title="{{ name }}"
+            [id]="option.name"
+            [attr.aria-describedby]="option.label"
+            type="radio"
+            [value]="option.value"
+            [checked]="option.value === value"
+            [required]="required"
+            [disabled]="disabled"
+            (change)="onChange(option.value)"
+            [ngClass]="getRadioClassesColor(color)"
+            class="radio__input {{ classes?.input }} "
+          />
+        </div>
+        <div class="ms-2 text-sm">
+          <label
+            [for]="option.name"
+            class="font-medium text-sm mb-2"
+            [class.text-blueGray-300]="option.value !== value"
+            [class.text-blue-800]="option.value === value"
+          >
+            {{ option.label }}
+          </label>
+          <p
+            *ngIf="subtext || option.desc"
+            [id]="option.name + '' + '-text'"
+            class="text-xxs font-normal text-blueGray-300"
+          >
+            {{ option.desc }}
+          </p>
+        </div>
+      </div>
+
+
+      <div
+      class="text-blueGray-300 text-base"
+        [ngClass]="{
+          'text-primary': option.value === value && color === 'primary',
+          'text-yellow-500': option.value === value && color === 'warning',
+          'text-red-500': option.value === value && color === 'danger',
+        }"
+        [innerHTML]="option.children"
+      >
+      </div>
+
+    </div>
+    <p
+    *ngIf="error"
+    id="standard_error_help"
+    class="mt-2 text-xs text-red-600"
+  >
+    {{ error }}
+  </p>
+  </ng-container>
+</div>

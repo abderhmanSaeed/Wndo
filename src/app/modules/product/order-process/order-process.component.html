@@ -26,31 +26,45 @@
       ><span class="path37"></span><span class="path38"></span
       ><span class="path39"></span
     ></span>'
-      [template]="yourTemplate1"
-    >
+      [template]="checkout"
+      nextButtonLabel="CHECK OUT"
+      additionalAction='<a (click)="addMore" class="button button--primary button--bordered rounded-full px-24">ADD MORE PRODUCT</a>'
+     >
     </app-step>
     <app-step
       label="Shipping & Payment"
-      s
       icon='<span class="icon-car-shipping"><span class="path1"></span><span class="path2"></span><span class="path3"></span><span class="path4"></span><span class="path5"></span><span class="path6"></span><span class="path7"></span><span class="path8"></span><span class="path9"></span><span class="path10"></span><span class="path11"></span><span class="path12"></span><span class="path13"></span><span class="path14"></span><span class="path15"></span><span class="path16"></span><span class="path17"></span><span class="path18"></span></span>'
-      [template]="yourTemplate2"
+      [template]="shippingAndPayment"
       nextButtonLabel="CONTINUE"
     ></app-step>
     <app-step
       label="Confirmation"
       icon='<span class="icon-bag-shopping"><span class="path1"></span><span class="path2"></span><span class="path3"></span><span class="path4"></span><span class="path5"></span><span class="path6"></span><span class="path7"></span><span class="path8"></span></span>'
-      [template]="yourTemplate2"
+      [template]="shippingAndPayment"
     ></app-step>
   </app-stepper>
 </section>
+<section class="pb-12">
+  <p class="text-xs text-blue-900 flex items-center justify-center">
+    <span class="icon-car-coloring text-4xl"
+      ><span class="path1"></span><span class="path2"></span
+      ><span class="path3"></span><span class="path4"></span
+      ><span class="path5"></span><span class="path6"></span
+      ><span class="path7"></span><span class="path8"></span
+      ><span class="path9"></span><span class="path10"></span
+      ><span class="path11"></span><span class="path12"></span
+      ><span class="path13"></span><span class="path14"></span
+    ></span>
+    Get Free Shipping If You Buy The Product From Wndo Application
+    <a class="ms-1 underline hover:no-underline">Download Now</a>
+  </p>
+</section>
 
-<ng-template #yourTemplate1>
-  <app-dropdown
-    label="English"
-    [options]="[{ label: 'Ar', value: 'ar' }]"
-  ></app-dropdown>
+
+<ng-template #checkout>
+    <app-checkout></app-checkout>
 </ng-template>
 
-<ng-template #yourTemplate2>
+<ng-template #shippingAndPayment>
   <app-shipping-payment></app-shipping-payment>
 </ng-template>

@@ -22,6 +22,10 @@ import { StepComponent } from './components/stepper/step/step.component';
 import { ShippingPaymentComponent } from './components/order/shipping-payment/shipping-payment.component';
 import { InputPhoneComponent } from './components/inputs/input-phone/input-phone.component';
 import { DropdownComponent } from './components/dropdown/dropdown/dropdown.component';
+import { RadioComponent } from './components/radio/radio.component';
+import { VisualProductSummaryComponent } from './components/product/visual-product-summary/visual-product-summary.component';
+import { CheckoutComponent } from './components/order/checkout/checkout.component';
+import { OrderSummaryCardComponent } from './components/order/order-summary-card/order-summary-card.component';
 
 
 register();
@@ -46,7 +50,11 @@ register();
     InputPhoneComponent,
     InputPhoneComponent,
     DropdownComponent,
-    SelectComponent
+    SelectComponent,
+    RadioComponent,
+    VisualProductSummaryComponent,
+    CheckoutComponent,
+    OrderSummaryCardComponent
   ],
   imports: [
     CommonModule,
@@ -75,7 +83,11 @@ register();
     InputFiledComponent,
     InputPhoneComponent,
     DropdownComponent,
-    SelectComponent
+    SelectComponent,
+    RadioComponent,
+    VisualProductSummaryComponent,
+    CheckoutComponent,
+    OrderSummaryCardComponent
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })

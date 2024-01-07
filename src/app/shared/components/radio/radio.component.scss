@@ -1,0 +1,113 @@
+.radio {
+  &__input {
+    @apply appearance-none relative rounded-full w-5 h-5 border-2 border-solid border-blueGray-300;
+
+    &:focus {
+      @apply border-2 shadow-none outline-none ring-0;
+
+      &:before {
+        @apply scale-100;
+        opacity: 0.12;
+        box-shadow: 0px 0px 0px 13px rgba(0, 0, 0, 0.6);
+        transition-property: box-shadow, transform;
+        transition-duration: 0.2s;
+      }
+    }
+
+    &:hover {
+      @apply cursor-pointer;
+
+      &:before {
+        opacity: 0.04;
+        box-shadow: 0px 0px 0px 13px rgba(0, 0, 0, 0.6);
+      }
+    }
+
+    &::before {
+      @apply pointer-events-none absolute bg-transparent opacity-0 h-4 w-4 scale-0 rounded-full;
+      box-shadow: 0px 0px 0px 13px transparent;
+      content: "";
+    }
+
+    &::after {
+      @apply absolute block h-4 w-4 rounded-full;
+      content: "";
+      z-index: 1;
+    }
+
+    &:checked {
+      &:before {
+        @apply opacity-[0.16];
+      }
+
+      &::after {
+        @apply absolute left-1/2 top-1/2 rounded-full;
+        height: 0.625rem;
+        width: 0.625rem;
+        content: "";
+        transform: translate(-50%, -50%);
+      }
+
+      &:focus {
+        background-color: #fff;
+        &::before {
+          transform: scale(0.6);
+          box-shadow: 0px 0px 0px 13px theme("colors.primary.500");
+          transition-property: box-shadow, transform;
+          transition-duration: 0.2s;
+        }
+      }
+    }
+
+    &--primary {
+      &:checked {
+        @apply border-primary;
+
+        &:after {
+          @apply border-primary bg-primary;
+        }
+        &:focus {
+          @apply border-primary;
+
+          &::before {
+            box-shadow: 0px 0px 0px 13px theme("colors.primary.500");
+          }
+        }
+      }
+    }
+
+    &--warning {
+      &:checked {
+        @apply border-yellow-500;
+
+        &:after {
+          @apply border-yellow-500 bg-yellow-500;
+        }
+        &:focus {
+          @apply border-yellow-500;
+
+          &::before {
+            box-shadow: 0px 0px 0px 13px theme("colors.yellow.500");
+          }
+        }
+      }
+    }
+
+    &--danger {
+      &:checked {
+        @apply border-red-500;
+
+        &:after {
+          @apply border-red-500 bg-red-500;
+        }
+        &:focus {
+          @apply border-red-500;
+
+          &::before {
+            box-shadow: 0px 0px 0px 13px theme("colors.red.500");
+          }
+        }
+      }
+    }
+  }
+}

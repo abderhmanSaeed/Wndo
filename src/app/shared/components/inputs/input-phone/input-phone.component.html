@@ -11,7 +11,7 @@
     {{ label }}
     <span class="text-red-500" *ngIf="required"> * </span>
   </label>
-  <div class="flex" [class.items-center]="isFloating">
+  <div class="flex"  >
     <app-dropdown
       [options]="countriesCode"
       [label]="countriesCode[0].label"

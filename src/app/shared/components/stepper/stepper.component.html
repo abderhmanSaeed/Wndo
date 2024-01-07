@@ -1,18 +1,19 @@
 <div class="stepper">
-  <div class="stepper__header w-[70%] mx-auto">
-    <ol class="flex items-center justify-between mb-4 sm:mb-5">
+  <div class="stepper__header xl:w-[70%] mx-auto">
+    <ol
+      class="flex flex-col md:flex-row smLitems-base xl:items-center justify-between gap-4 xl:gap-8 mb-4 md:mb-5"
+    >
       <li
         [ngClass]="{
-          'divide-blue-900 after:bg-blue-900':
-            currentStep === i || currentStep > i,
+          'after:!bg-blue-900': currentStep === i || currentStep > i,
           'divide-dashed': currentStep !== i
         }"
         *ngFor="let step of steps; let i = index"
-        class="flex-auto relative items-center after:content[''] last:after:hidden after:absolute after:w-[calc(100%-(-20px))] after:h-[2px] after:start-[118px] after:top-[10px] after:bg-blueGray-300"
+        class="flex-auto relative items-center after:content[''] last:after:hidden after:absolute after:h-[2px] after:w-[calc(100%-4px)] after:start-[20px] after:top-[10px] after:bg-blueGray-300"
         [class.divide-blueGray-300]="currentStep !== i"
       >
         <div
-          class="flex mx-auto relative z-10 items-center justify-center w-5 h-5 border rounded-full shrink-0 after:content[''] last:after:hidden after:absolute after:w-[1px] after:h-[20px] after:start-[8px] after:top-[20px] after:bg-transparent after:border after:border-blueGray-300"
+          class="flex relative z-10 items-center justify-center w-5 h-5 border rounded-full shrink-0 after:content[''] last:after:hidden after:absolute after:w-[1px] after:h-[20px] after:start-[8px] after:top-[20px] after:bg-transparent after:border after:border-blueGray-300"
           [class.border-blueGray-300]="currentStep !== i"
           [ngClass]="{
             'border-blue-900 after:border-dashed after:border-blue-900':
@@ -35,7 +36,7 @@
         </div>
         <div
           [class.shadow-sm]="currentStep > i"
-          class="bg-white mx-8 shadow-sm mt-6 p-4 py-6 gap-2 flex items-center justify-center"
+          class="bg-white shadow-sm mt-10 p-4 py-6 gap-2 flex items-center justify-center"
         >
           <h3
             [ngClass]="{
@@ -63,7 +64,9 @@
       </ng-container>
     </div>
 
-    <div class="stepper__footer flex gap-4 w-2/3 pe-4 justify-end">
+    <div
+      class="stepper__footer flex-col xl:flex-row flex gap-4 xl:w-2/3 xl:pe-4 justify-end"
+    >
       <button
         type="button"
         *ngIf="currentStep >= 1"
@@ -72,6 +75,12 @@
       >
         Back
       </button>
+
+      <ng-container *ngFor="let step of steps; let i = index">
+        <ng-container *ngIf="currentStep === i">
+         <button title="action" type="button" [innerHTML]="step.additionalAction"></button>
+        </ng-container>
+      </ng-container>
 
       <button
         type="button"
@@ -88,6 +97,5 @@
         </ng-container>
       </button>
     </div>
-
   </div>
 </div>

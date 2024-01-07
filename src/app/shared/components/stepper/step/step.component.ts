@@ -10,6 +10,8 @@ export class StepComponent {
   @Input() label: string | undefined;
   @Input() icon: string | undefined;
   @Input() nextButtonLabel: string | undefined;
+  @Input() additionalAction: any;
+
   private _template: TemplateRef<any> | null = null;
 
   @Input()

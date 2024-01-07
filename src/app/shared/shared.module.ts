@@ -1,8 +1,9 @@
+import { ModalComponent } from './components/modal/modal.component';
+ import { ModalHideDirective } from './directives/modal.directive';
 import { SelectComponent } from './components/inputs/Select/select.component';
 import { InputFiledComponent } from './components/inputs/input-filed/input-filed.component';
 import { StepperComponent } from './components/stepper/stepper.component';
 import { SwiperDirective } from './directives/swiper-directive';
-import { ModalComponent } from './components/modal/modal.component';
 import { QuantityButtonComponent } from './components/quantity-button/quantity-button.component';
 import { ProductDetailsCardComponent } from './components/product/product-details-card/product-details-card.component';
 import { NgModule } from '@angular/core';
@@ -26,6 +27,9 @@ import { RadioComponent } from './components/radio/radio.component';
 import { VisualProductSummaryComponent } from './components/product/visual-product-summary/visual-product-summary.component';
 import { CheckoutComponent } from './components/order/checkout/checkout.component';
 import { OrderSummaryCardComponent } from './components/order/order-summary-card/order-summary-card.component';
+import { TemporaryPasswordSetModalComponent } from './components/modals/temporary-password-set-modal/temporary-password-set-modal.component';
+import { LoginModalComponent } from './components/modals/login-modal/login-modal.component';
+import { ModalContentComponent } from './components/modal/modal-content/modal-content.component';
 
 
 register();
@@ -37,7 +41,6 @@ register();
     SwitchLanguageComponent,
     QuantityButtonComponent,
     ProductSnapshotCardComponent,
-    ModalComponent,
     InputPasswordComponent,
     HeaderOfPageComponent,
     ProductMayLikeComponent,
@@ -54,7 +57,13 @@ register();
     RadioComponent,
     VisualProductSummaryComponent,
     CheckoutComponent,
-    OrderSummaryCardComponent
+    OrderSummaryCardComponent,
+    TemporaryPasswordSetModalComponent,
+    ModalHideDirective,
+    ModalComponent,
+    LoginModalComponent,
+    ModalContentComponent,
+    LoginModalComponent,
   ],
   imports: [
     CommonModule,
@@ -72,7 +81,6 @@ register();
     SwitchLanguageComponent,
     QuantityButtonComponent,
     ProductSnapshotCardComponent,
-    ModalComponent,
     InputPasswordComponent,
     HeaderOfPageComponent,
     ProductMayLikeComponent,
@@ -87,7 +95,12 @@ register();
     RadioComponent,
     VisualProductSummaryComponent,
     CheckoutComponent,
-    OrderSummaryCardComponent
+    OrderSummaryCardComponent,
+    TemporaryPasswordSetModalComponent,
+    ModalHideDirective,
+    ModalComponent,
+    ModalContentComponent,
+    LoginModalComponent
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })

@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, TemplateRef, ViewChild, ViewContainerRef } from '@angular/core';
+import { ModalService } from '../../modal/modal.service';
 
 @Component({
   selector: 'app-shipping-payment',
@@ -6,6 +7,7 @@ import { Component } from '@angular/core';
   styleUrl: './shipping-payment.component.scss',
 })
 export class ShippingPaymentComponent {
+  constructor(private modalService: ModalService) {}
   cities = [
     { label: 'Cairo', value: 'cairo' },
     { label: 'Alex', value: 'alex' },
@@ -47,4 +49,29 @@ export class ShippingPaymentComponent {
       value: 'evening',
      },
   ];
+
+//Modal
+  @ViewChild('temporaryPasswordModal',  { static: true, read: ViewContainerRef })
+  vcr!: ViewContainerRef;
+
+  openModalTemporaryPassword(view: TemplateRef<Element>) {
+    this.modalService.open(this.vcr, view , {
+      animations: {
+        modal: {
+          enter: 'enter-slide-down 0.8s',
+        },
+        overlay: {
+          enter: 'fade-in 0.8s',
+          leave: 'fade-out 0.3s forwards',
+        },
+      },
+      size: {
+        width: '36rem',
+      },
+    });
+  }
+
+  close() {
+    this.modalService.close();
+  }
 }

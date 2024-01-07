@@ -72,6 +72,7 @@ module.exports = {
       fontSize: {
         xxs: "0.625rem",
         '2.5xl': '1.75rem',
+        '4.5xl': '2.5rem',
       },
       lineHeight: {
         0: 0,
@@ -81,5 +82,5 @@ module.exports = {
       }
     },
   },
-  plugins: [],
+  plugins: [require('flowbite/plugin')],
 };

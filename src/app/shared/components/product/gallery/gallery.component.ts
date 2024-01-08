@@ -3,13 +3,16 @@ import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
 import { SwiperOptions } from 'swiper/types';
 import { Image } from '../../../models';
 import { SwiperContainer } from 'swiper/element';
-
+import { BsModalRef } from 'ngx-bootstrap/modal';
+import { BsModalService } from 'ngx-bootstrap/modal';
+import { VideoModalComponent } from '../video-modal/video-modal.component';
 @Component({
   selector: 'app-gallery',
   templateUrl: './gallery.component.html',
   styleUrl: './gallery.component.scss'
 })
 export class GalleryComponent implements OnInit {
+  @Input() videoUrl: string = '';
   @Input() items: Image[] = [
     {
       id: 45084,
@@ -121,6 +124,7 @@ export class GalleryComponent implements OnInit {
   // ngAfterViewInit() {
   //   this.swiper.nativeElement.addEventListener('slidechange', (evt) => this.slideChange(evt));
   // }
+  constructor(private modalService: BsModalService) {}
   ngOnInit(): void {
     this.urlPreview = this.imags[0].urlPreview;
   }
@@ -131,7 +135,9 @@ export class GalleryComponent implements OnInit {
     }
   }
 
-
+  // closeModal() {
+  //   this.bsModalRef.hide();
+  // }
   // slideChange(swiperRef: any) {
   //   this.index = swiperRef.detail[0].activeIndex;
   // }
@@ -169,7 +175,12 @@ export class GalleryComponent implements OnInit {
       console.error(`Container with ID ${containerId} not found.`);
     }
   }
-
+  openVideoModal(videoUrl: string) {
+    const initialState = {
+      videoUrl: videoUrl,
+    };
+    this.modalService.show(VideoModalComponent, { initialState });
+  }
   closeIframe() {
     if (this.currentIframe) {
       this.currentIframe.remove();

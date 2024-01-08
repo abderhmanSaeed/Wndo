@@ -31,6 +31,8 @@ import { TemporaryPasswordSetModalComponent } from './components/modals/temporar
 import { LoginModalComponent } from './components/modals/login-modal/login-modal.component';
 import { ModalContentComponent } from './components/modal/modal-content/modal-content.component';
 import { ConfirmationComponent } from './components/order/confirmation/confirmation.component';
+import { VideoModalComponent } from './components/product/video-modal/video-modal.component';
+import { ModalModule } from 'ngx-bootstrap/modal';
 
 
 register();
@@ -65,13 +67,15 @@ register();
     ModalContentComponent,
     LoginModalComponent,
     ConfirmationComponent,
-    OrderConfirmedModal
+    OrderConfirmedModal,
+    VideoModalComponent,
   ],
   imports: [
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
     RouterModule,
+    ModalModule.forRoot()
   ],
   exports: [
     CommonModule,

@@ -1,6 +1,5 @@
 <section class="slider">
-  <div id="videoContainer" class="video-container">dd</div>
-
+  <!-- <div id="videoContainer" class="video-container">dd</div> -->
   <div class="md:flex items-start justify-between">
     <div class="slider__images">
       <swiper-container init="false" class="swiper-container1 swiper2" appSwiper #swiper [config]="swiperConfig"
@@ -39,7 +38,7 @@
                 <img (click)="slideChange(item)" [src]="item.urlPreview" alt="{{ item.id }}" />
               </ng-container>
               <ng-template #videoTemplate>
-                <video width="640" height="360" controls (click)="openVideoInIframe(item.urlPreview, 'videoContainer')">
+                <video width="640" height="360" controls (click)="openVideoModal(item.urlPreview)">
                   <source [src]="item.urlPreview" type="video/mp4">
                   Your browser does not support the video tag.
                 </video>

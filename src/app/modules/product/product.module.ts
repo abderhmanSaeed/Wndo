@@ -7,6 +7,7 @@ import { ProductDetailsComponent } from './product-details/product-details.compo
 import { ProductOrdersComponent } from './product-orders/product-orders.component';
 import { OrderProcessComponent } from './order-process/order-process.component';
 import { ProductOffersComponent } from './product-offers/product-offers.component';
+import { ModalModule } from 'ngx-bootstrap/modal';
 
 
 @NgModule({
@@ -19,6 +20,7 @@ import { ProductOffersComponent } from './product-offers/product-offers.componen
   imports: [
     SharedModule,
     ProductRoutingModule,
+    ModalModule.forRoot()
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })

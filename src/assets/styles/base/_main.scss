@@ -25,4 +25,33 @@ body {
   .content-page {
     @apply px-10 pb-10
   }
+
+  .info-circle {
+    @apply text-xs me-1 rounded-full w-5 h-5 border-2 border-blue-900 inline-flex items-center justify-center;
+  }
+
+  .scroll {
+    scroll-snap-type: y mandatory;
+    overflow: auto;
+    height: 25.1875rem;
+    padding-inline-end: 0.5rem;
+
+    &::-webkit-scrollbar {
+      width: theme('spacing.1');
+    }
+
+    &::-webkit-scrollbar-track {
+      box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background-color: theme('colors.purple.300');
+      // outline: 1px solid slategrey;
+    }
+
+    &__item {
+      scroll-snap-stop:always;
+      scroll-snap-align: start;
+    }
+  }
 }

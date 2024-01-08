@@ -1,0 +1,7 @@
+.close-btn {
+  @apply bg-gray-200 shadow-sm  rounded-full w-10 h-10 ms-auto inline-flex justify-center items-center;
+
+  &:hover {
+    @apply bg-gray-200 text-gray-900;
+  }
+}

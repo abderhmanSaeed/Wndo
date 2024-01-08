@@ -1,0 +1,23 @@
+<div class="modal__container px-10 text-center">
+  <div class="modal__header">
+    <div class="p-4 rounded-t">
+      <div class="flex justify-end">
+        <button
+          type="button"
+          class="close-btn"
+          (click)="close()"
+        >
+          <i class="fa-solid fa-xmark text-purple-300/50 text-md"></i>
+          <span class="sr-only">Close modal</span>
+        </button>
+      </div>
+      <div>
+        <h1 class="text-xl font-semibold text-primary mb-3 {{classes?.title}}">{{title}}</h1>
+
+        <p class="text-lg text-blue-700" *ngIf="subtitle">{{subtitle}}</p>
+      </div>
+    </div>
+  </div>
+
+  <ng-content></ng-content>
+</div>

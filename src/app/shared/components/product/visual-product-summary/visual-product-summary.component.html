@@ -1,13 +1,23 @@
-<div class="bg-white flex gap-6 py-2.5 px-5 border-b-2 border-orange-400">
-  <div>
-    <img
-      [src]="product.image"
-      class="w-36 h-36 object-cover rounded"
-      alt="{{ product.name }}"
-    />
-  </div>
+<div
+  class="bg-white flex flex-col md:flex-row  gap-6 py-2.5 px-5 border-b-2 border-orange-400 {{
+    classes?.base
+  }}"
+>
+  <img
+    [src]="product.image"
+    class="w-36 h-36 object-cover rounded"
+    alt="{{ product.name }}"
+  />
+
   <div class="flex flex-col flex-grow items-baseline justify-between">
     <h6>{{ product.name }}</h6>
+
+    <p
+      class="text-base text-purple-300 my-3"
+      *ngIf="showDesc && product.description"
+    >
+      {{ product.description }}
+    </p>
     <div
       class="bg-gray-100 inline-flex text-gray-350 text-xs rounded divide-x p-2 gap-2 items-center"
     >
@@ -24,12 +34,14 @@
 
     <div class="flex flex-wrap justify-between w-full">
       <p class="flex-grow">
-        <span class="line-through me-2 text-xs" *ngIf="product.totalPrice > 0">{{
-          product.totalPrice
-        }} EGP</span>
-        <span class="text-primary text-base" *ngIf="product.priceAfterDiscount > 0">{{
-          product.priceAfterDiscount
-        }} EGP</span>
+        <span class="line-through me-2 text-xs" *ngIf="product.totalPrice > 0"
+          >{{ product.totalPrice }} EGP</span
+        >
+        <span
+          class="text-primary text-base"
+          *ngIf="product.priceAfterDiscount > 0"
+          >{{ product.priceAfterDiscount }} EGP</span
+        >
       </p>
 
       <app-quantity-button

@@ -20,7 +20,7 @@ module.exports = {
         },
 
         red: {
-          500: "#FF002A"
+          500: "#FF002A",
         },
 
         blueGray: {
@@ -29,11 +29,15 @@ module.exports = {
           900: "#272833",
         },
         blue: {
+          100: "#0D186312",
           200: "#99A4CB",
           700: "#001D7D",
           800: "#0D1863",
           900: "#011447",
           950: "#04043F",
+        },
+        lightBlue: {
+          500: "#4EA3F8",
         },
         gray: {
           20: "#E5E6E8",
@@ -43,6 +47,7 @@ module.exports = {
           100: "#F8F8F8",
           150: "#D9D9E0",
           200: "#E0E0E0",
+          250: "#BFBFBF",
           300: "#aaaaaa",
           350: "#8D8D8D",
           400: "#969696",
@@ -51,10 +56,16 @@ module.exports = {
           950: "#1C1C1C",
         },
         orange: {
+          300:"#FDC55B",
           400: "#FFAD39",
           500: "#FFA90A",
           600: "#FFA800",
         },
+
+        green: {
+          500: "#02A707"
+        },
+
         purple: {
           300: "#524C72",
           400: "#545454",
@@ -71,15 +82,16 @@ module.exports = {
       },
       fontSize: {
         xxs: "0.625rem",
-        '2.5xl': '1.75rem',
+        "2.5xl": "1.75rem",
+        "4.5xl": "2.5rem",
       },
       lineHeight: {
         0: 0,
       },
       boxShadow: {
-        sm: "0px 3px 6px #00000029"
-      }
+        sm: "0px 3px 6px #00000029",
+      },
     },
   },
-  plugins: [],
+  plugins: [require("flowbite/plugin")],
 };

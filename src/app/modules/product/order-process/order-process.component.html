@@ -1,70 +1,121 @@
 <app-header-of-page></app-header-of-page>
 
 <section class="content-page">
-  <app-stepper>
+  <app-stepper [hasActionFooter]="false">
     <app-step
-      label="Check Out"
-      icon='<span class="icon-cart"
-      ><span class="path1"></span><span class="path2"></span
-      ><span class="path3"></span><span class="path4"></span
-      ><span class="path5"></span><span class="path6"></span
-      ><span class="path7"></span><span class="path8"></span
-      ><span class="path9"></span><span class="path10"></span
-      ><span class="path11"></span><span class="path12"></span
-      ><span class="path13"></span><span class="path14"></span
-      ><span class="path15"></span><span class="path16"></span
-      ><span class="path17"></span><span class="path18"></span
-      ><span class="path19"></span><span class="path20"></span
-      ><span class="path21"></span><span class="path22"></span
-      ><span class="path23"></span><span class="path24"></span
-      ><span class="path25"></span><span class="path26"></span
-      ><span class="path27"></span><span class="path28"></span
-      ><span class="path29"></span><span class="path30"></span
-      ><span class="path31"></span><span class="path32"></span
-      ><span class="path33"></span><span class="path34"></span
-      ><span class="path35"></span><span class="path36"></span
-      ><span class="path37"></span><span class="path38"></span
-      ><span class="path39"></span
-    ></span>'
-      [template]="checkout"
-      nextButtonLabel="CHECK OUT"
-      additionalAction='<a (click)="addMore" class="button button--primary button--bordered rounded-full px-24">ADD MORE PRODUCT</a>'
-     >
+      label="Order Placed"
+      icon='<img src="../../../../assets/icons/order-placed.svg" class="inline-flex" />'
+      [template]="orderPlaced"
+    >
     </app-step>
     <app-step
-      label="Shipping & Payment"
-      icon='<span class="icon-car-shipping"><span class="path1"></span><span class="path2"></span><span class="path3"></span><span class="path4"></span><span class="path5"></span><span class="path6"></span><span class="path7"></span><span class="path8"></span><span class="path9"></span><span class="path10"></span><span class="path11"></span><span class="path12"></span><span class="path13"></span><span class="path14"></span><span class="path15"></span><span class="path16"></span><span class="path17"></span><span class="path18"></span></span>'
-      [template]="shippingAndPayment"
-      nextButtonLabel="CONTINUE"
+      label="Picked up"
+      icon='<img src="../../../../assets/icons/picked-up.svg" class="inline-flex" />'
+      [template]="pickedUp"
     ></app-step>
     <app-step
-      label="Confirmation"
-      icon='<span class="icon-bag-shopping"><span class="path1"></span><span class="path2"></span><span class="path3"></span><span class="path4"></span><span class="path5"></span><span class="path6"></span><span class="path7"></span><span class="path8"></span></span>'
-      [template]="shippingAndPayment"
+      label="Out for delivery"
+      icon='<img src="../../../../assets/icons/out-for-delivery.svg" class="inline-flex" />'
+      [template]="outForDelivery"
     ></app-step>
+    <app-step label="Delivered" icon='<img src="../../../../assets/icons/delivered.svg" class="inline-flex" />' [template]="delivered"></app-step>
   </app-stepper>
 </section>
-<section class="pb-12">
-  <p class="text-xs text-blue-900 flex items-center justify-center">
-    <span class="icon-car-coloring text-4xl"
-      ><span class="path1"></span><span class="path2"></span
-      ><span class="path3"></span><span class="path4"></span
-      ><span class="path5"></span><span class="path6"></span
-      ><span class="path7"></span><span class="path8"></span
-      ><span class="path9"></span><span class="path10"></span
-      ><span class="path11"></span><span class="path12"></span
-      ><span class="path13"></span><span class="path14"></span
-    ></span>
-    Get Free Shipping If You Buy The Product From Wndo Application
-    <a class="ms-1 underline hover:no-underline">Download Now</a>
-  </p>
+
+<ng-template #orderPlaced>
+  <h6 class="text-blur-950 text-lg mb-6">Track the order</h6>
+  <div class="flex justify-between mb-4">
+    <h6 class="text-base font-medium text-blue-900">Order No : 234</h6>
+    <p class="text-blue-900">
+      Order Statues: <span class="text-lightBlue-500">Order Placed</span>
+    </p>
+  </div>
+  <div class="bg-white border-s border-s-4 border-lightBlue-500 roude">
+    <p class="p-6">Items: {{ products.length }}</p>
+
+    <div class="scroll px-6 space-y-3 h-[30vh]">
+      <div *ngFor="let product of products" class="scroll__item">
+        <app-visual-product-summary
+          [product]="product"
+          [classes]="{ base: '!border-b-0 !bg-blue-100 !rounded' }"
+          [showDesc]="true"
+        ></app-visual-product-summary>
+      </div>
+    </div>
+  </div>
+</ng-template>
+
+<ng-template #pickedUp>
+  <h6 class="text-blur-950 text-lg mb-6">Track the order</h6>
+  <div class="flex justify-between mb-4">
+    <h6 class="text-base font-medium text-blue-900">Order No : 234</h6>
+    <p class="text-blue-900">
+      Order Statues: <span class="text-orange-300">Picked up</span>
+    </p>
+  </div>
+  <div class="bg-white border-s border-s-4 border-lightBlue-500 roude">
+    <p class="p-6">Items: {{ products.length }}</p>
+
+    <div class="scroll px-6 space-y-3 h-[30vh]">
+      <div *ngFor="let product of products" class="scroll__item">
+        <app-visual-product-summary
+          [product]="product"
+          [classes]="{ base: '!border-b-0 bg-blue-100 rounded' }"
+          [showDesc]="true"
+        ></app-visual-product-summary>
+      </div>
+    </div>
+  </div>
+</ng-template>
+
+<ng-template #outForDelivery>
+  <h6 class="text-blur-950 text-lg mb-6">Track the order</h6>
+  <div class="flex justify-between mb-4">
+    <h6 class="text-base font-medium text-blue-900">Order No : 234</h6>
+    <p class="text-blue-900">
+      Order Statues: <span class="text-orange-600">Out for delivery</span>
+    </p>
+  </div>
+  <div class="bg-white border-s border-s-4 border-lightBlue-500 roude">
+    <p class="p-6">Items: {{ products.length }}</p>
+
+    <div class="scroll px-6 space-y-3 h-[30vh]">
+      <div *ngFor="let product of products" class="scroll__item">
+        <app-visual-product-summary
+          [product]="product"
+          [classes]="{ base: '!border-b-0 bg-blue-100 rounded' }"
+          [showDesc]="true"
+        ></app-visual-product-summary>
+      </div>
+    </div>
+  </div>
+</ng-template>
+
+<ng-template #delivered>
+  <h6 class="text-blur-950 text-lg mb-6">Track the order</h6>
+  <div class="flex justify-between mb-4">
+    <h6 class="text-base font-medium text-blue-900">Order No : 234</h6>
+    <p class="text-blue-900">
+      Order Statues: <span class="text-green-500">Delivered</span>
+    </p>
+  </div>
+  <div class="bg-white border-s border-s-4 border-lightBlue-500 roude">
+    <p class="p-6">Items: {{ products.length }}</p>
+
+    <div class="scroll px-6 space-y-3 h-[30vh]">
+      <div *ngFor="let product of products" class="scroll__item">
+        <app-visual-product-summary
+          [product]="product"
+          [classes]="{ base: '!border-b-0 bg-blue-100 rounded' }"
+          [showDesc]="true"
+        ></app-visual-product-summary>
+      </div>
+    </div>
+  </div>
+</ng-template>
+
+<section class="content-page flex justify-center">
+  <button type="button" class="button button--primary rounded-full px-24">
+    ORDER DETAILS
+  </button>
 </section>
-
-
-<ng-template #checkout>
-    <app-checkout></app-checkout>
-</ng-template>
-
-<ng-template #shippingAndPayment>
-  <app-shipping-payment></app-shipping-payment>
-</ng-template>

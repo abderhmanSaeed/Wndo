@@ -29,7 +29,7 @@
       [template]="checkout"
       nextButtonLabel="CHECK OUT"
       additionalAction='<a (click)="addMore" class="button button--primary button--bordered rounded-full px-24">ADD MORE PRODUCT</a>'
-     >
+    >
     </app-step>
     <app-step
       label="Shipping & Payment"
@@ -45,7 +45,6 @@
     ></app-step>
   </app-stepper>
 </section>
-
 
 <section class="pb-12">
   <p class="text-xs text-blue-900 flex items-center justify-center">
@@ -63,9 +62,8 @@
   </p>
 </section>
 
-
 <ng-template #checkout>
-    <app-checkout></app-checkout>
+  <app-checkout></app-checkout>
 </ng-template>
 
 <ng-template #shippingAndPayment>
@@ -74,8 +72,30 @@
 
 <ng-template #confirmation>
   <div class="mb-4">
-  <app-checkout></app-checkout>
-</div>
+    <app-checkout></app-checkout>
+  </div>
 
-    <app-confirmation></app-confirmation>
+  <app-confirmation></app-confirmation>
 </ng-template>
+
+<!-- I think the  temporary PasswordModal open when click  CONTINUE at the Shipping & Payment step -->
+<!-- temporaryPasswordModal -->
+<button
+  type="button"
+  class="button button--primary"
+  (click)="openTemporaryPasswordModal()"
+>
+  Open modal with TemplateRef
+</button>
+
+
+<!-- When click Confirm (step confirmation) show this modal -->
+<!-- confirmationModal -->
+  <!-- Just Example button will be open confirmation Modal the confirm button in modal -->
+  <button
+    type="button"
+    class="button button--primary"
+    (click)="openConfirmedModal()"
+  >
+    Open Confirmed
+  </button>

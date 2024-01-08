@@ -1,3 +1,4 @@
+import { OrderConfirmedModal } from './components/modals/order-confirmed-modal/order-confirmed-modall.component';
 import { ModalComponent } from './components/modal/modal.component';
 import { SelectComponent } from './components/inputs/Select/select.component';
 import { InputFiledComponent } from './components/inputs/input-filed/input-filed.component';
@@ -64,6 +65,7 @@ register();
     ModalContentComponent,
     LoginModalComponent,
     ConfirmationComponent,
+    OrderConfirmedModal
   ],
   imports: [
     CommonModule,
@@ -100,7 +102,8 @@ register();
     ModalComponent,
     ModalContentComponent,
     LoginModalComponent,
-    ConfirmationComponent
+    ConfirmationComponent,
+    OrderConfirmedModal
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })

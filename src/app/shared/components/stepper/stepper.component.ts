@@ -19,6 +19,7 @@ import { StepComponent } from './step/step.component';
 export class StepperComponent implements AfterContentInit {
   @Input() btnLabel: string = 'Next';
   @Input() disabledNextButton: boolean = false;
+  @Input() hasActionFooter: boolean = true;
 
   constructor(private renderer: Renderer2) {}
 
@@ -76,16 +77,16 @@ export class StepperComponent implements AfterContentInit {
             // For the first step, adjust the calculation
             lineWidth =
               nextStep.offsetLeft +
-              nextStep.clientWidth / lengthOfSteps - 1 -
+              nextStep.clientWidth / 1 -
               step.offsetLeft -
-              step.clientWidth / lengthOfSteps - 1;
+              step.clientWidth / 1;
           } else {
             // For subsequent steps
             lineWidth =
               nextStep.offsetLeft -
               step.offsetLeft +
-              nextStep.clientWidth / lengthOfSteps -
-              step.clientWidth / 2.5 ;
+              nextStep.clientWidth / 1 -
+              step.clientWidth / 1 ;
           }
 
           this.renderer.setStyle(line, 'width', `${lineWidth}px`);

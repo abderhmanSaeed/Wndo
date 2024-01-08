@@ -8,6 +8,7 @@ import { ProductOrdersComponent } from './product-orders/product-orders.componen
 import { OrderProcessComponent } from './order-process/order-process.component';
 import { ProductOffersComponent } from './product-offers/product-offers.component';
 import { ModalModule } from 'ngx-bootstrap/modal';
+import { MyOrdersComponent } from './my-orders/my-orders.component';
 
 
 @NgModule({
@@ -15,7 +16,8 @@ import { ModalModule } from 'ngx-bootstrap/modal';
     ProductDetailsComponent,
     ProductOrdersComponent,
     OrderProcessComponent,
-    ProductOffersComponent
+    ProductOffersComponent,
+    MyOrdersComponent
   ],
   imports: [
     SharedModule,

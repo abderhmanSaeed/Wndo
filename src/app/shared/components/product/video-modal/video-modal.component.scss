@@ -1,0 +1,28 @@
+// Add your styles to the modal component SCSS file
+
+.modal-header {
+  background-color: #007bff; // Set the background color for the header
+  color: #ffffff; // Set text color in the header
+  padding: 15px; // Add padding to the header
+  border-bottom: 1px solid #ddd; // Add a border at the bottom of the header
+}
+
+.modal-title {
+  margin: 0; // Remove default margin on the title
+}
+
+.close {
+  color: #ffffff; // Set the close button color
+  font-size: 20px; // Adjust the font size of the close button
+}
+
+.modal-body {
+  padding: 20px; // Add padding to the body
+}
+
+video {
+  width: 100%; // Make the video responsive and take 100% width of its container
+  height: auto; // Maintain the aspect ratio
+  display: block; // Remove default inline behavior
+  margin: 0 auto; // Center the video horizontally
+}

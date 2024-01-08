@@ -1,3 +1,4 @@
+import { MyOrdersComponent } from './my-orders/my-orders.component';
 import { OrderProcessComponent } from './order-process/order-process.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
@@ -15,6 +16,7 @@ const productRoutes: Routes = [
   { path: 'productOrders', component: ProductOrdersComponent },
   { path: 'orderProcess', component: OrderProcessComponent },
   { path: 'productOffers', component: ProductOffersComponent },
+  { path: 'myOrders', component: MyOrdersComponent },
   { path: '', redirectTo: 'productDetails', pathMatch: 'full' } // Default route for /product
 ];
 

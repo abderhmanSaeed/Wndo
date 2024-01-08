@@ -1,6 +1,4 @@
 .stepper {
-  text-align: center;
-
   &__footer {
     @apply flex-col lg:flex-row flex gap-4 lg:w-2/3 lg:pe-4 justify-end;
   }

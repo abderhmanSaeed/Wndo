@@ -19,7 +19,7 @@ export class ShippingPaymentComponent {
       name: 'cash',
       value: 'cash',
       desc: 'Extra fee will be applied',
-      children: '<i class="fa-solid fa-wallet"></i>',
+      children: '<i class="fa-solid fa-door-open"></i>',
     },
     {
       label: 'Credit Card',

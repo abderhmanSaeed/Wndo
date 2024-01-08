@@ -1,0 +1,42 @@
+<div class="grid grid-cols-1 md:grid-cols-3 justify-between gap-10">
+  <div class="md:col-span-2 relative">
+    <ul
+      class="bg-white divide-gray-20 rounded flex items-center justify-between gap-8 divide-x p-4"
+    >
+      <li class="flex-1">
+        <h6 class="text-blue-800 text-start mb-4">Shipping Address</h6>
+        <p class="text-purple-500 text-sm">
+          12, Bay Brook, Sharps Rd, Keilor East, Melbourne, Australia
+        </p>
+      </li>
+      <li class="flex-1 ms-4 ps-6">
+        <h6 class="text-blue-800 text-start mb-4">Payment</h6>
+        <p class="text-sm text-purple-500">
+          <i class="fa-solid fa-door-open text-primary"></i> Cash on Delievery
+        </p>
+      </li>
+    </ul>
+
+    <button
+      type="button"
+      class="edit-button button button--white absolute end-[-16px] bottom-1/2 translate-y-[40%]"
+    >
+      <span class="sr-only">Edit</span>
+      <i class="fa-solid fa-pencil"></i>
+    </button>
+  </div>
+
+  <div>
+    <app-input-filed
+      label="Do You Have A Voucher?"
+      placeholder="Enter Coupon Code"
+      [classes]="{
+        label: 'text-sm text-purple-500',
+        input: 'placeholder: !text-xs !px-2 placeholder:!text-gray-250'
+      }"
+    ></app-input-filed>
+    <button type="button" class="ms-auto button text-xs button--primary button--bordered">
+      ADD VOUCHER
+    </button>
+  </div>
+</div>

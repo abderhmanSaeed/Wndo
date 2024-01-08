@@ -29,6 +29,7 @@ import { OrderSummaryCardComponent } from './components/order/order-summary-card
 import { TemporaryPasswordSetModalComponent } from './components/modals/temporary-password-set-modal/temporary-password-set-modal.component';
 import { LoginModalComponent } from './components/modals/login-modal/login-modal.component';
 import { ModalContentComponent } from './components/modal/modal-content/modal-content.component';
+import { ConfirmationComponent } from './components/order/confirmation/confirmation.component';
 
 
 register();
@@ -62,6 +63,7 @@ register();
     LoginModalComponent,
     ModalContentComponent,
     LoginModalComponent,
+    ConfirmationComponent,
   ],
   imports: [
     CommonModule,
@@ -97,7 +99,8 @@ register();
     TemporaryPasswordSetModalComponent,
     ModalComponent,
     ModalContentComponent,
-    LoginModalComponent
+    LoginModalComponent,
+    ConfirmationComponent
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })

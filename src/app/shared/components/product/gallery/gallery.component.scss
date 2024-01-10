@@ -45,14 +45,6 @@
   }
 
   @media (max-width: theme("screens.sm")) {
-    &__col {
-      flex-direction: row;
-      align-items: center;
-      margin-right: 0;
-      margin-top: 24px;
-      width: 100%;
-    }
-
     &__images {
       width: 100%;
     }
@@ -60,9 +52,10 @@
     &__thumbs {
       height: 100px;
       width: 100%;
-      margin: 0 16px;
 
-
+      .slider__image {
+        height: 95%;
+      }
     }
 
     &__prev,
@@ -72,8 +65,3 @@
     }
   }
 }
-// .video-container {
-//   border: 1px solid #ccc;
-//   padding: 10px;
-//   margin-top: 20px;
-// }

@@ -26,6 +26,7 @@ module.exports = {
         blueGray: {
           200: "#9599B3",
           300: "#96A1AB",
+          400: "#7A8D9C",
           900: "#272833",
         },
         blue: {

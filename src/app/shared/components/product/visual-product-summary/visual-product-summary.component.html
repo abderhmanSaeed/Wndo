@@ -44,10 +44,16 @@
         >
       </p>
 
-      <app-quantity-button
+      <!-- <app-quantity-button
         [classes]="{ base: 'ms-auto' }"
-        [(quantity)]="productQuantity"
-      ></app-quantity-button>
+        [(quantity)]="product.quantity"
+      ></app-quantity-button> -->
+
+      <app-quantity-button
+      [classes]="{ base: 'ms-auto' }"
+      [(quantity)]="product.quantity" [disabledAddQuantity]="product.quantity === product.sizeQuantity"
+      [maxQuantity]="product.sizeQuantity">
+    </app-quantity-button>
     </div>
   </div>
 </div>

@@ -1,7 +1,8 @@
 import { Component, Input } from '@angular/core';
-type Product =  {
+import { ProductResponse } from '../../../models';
+type Product = {
   name: string;
-  hexColor:string;
+  hexColor: string;
   totalPrice: number;
   priceAfterDiscount: number
 }
@@ -15,9 +16,9 @@ type ClassProps = {
   styleUrl: './visual-product-summary.component.scss'
 })
 export class VisualProductSummaryComponent {
-  @Input() product:any ;
-  @Input() classes?:ClassProps ;
-  @Input() showDesc?:boolean = false;
+  @Input() product: any | null = null;
+  @Input() classes?: ClassProps;
+  @Input() showDesc?: boolean = false;
 
   productQuantity: number = 0;
 }

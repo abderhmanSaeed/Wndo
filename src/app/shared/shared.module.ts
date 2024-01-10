@@ -75,7 +75,7 @@ register();
     FormsModule,
     ReactiveFormsModule,
     RouterModule,
-    ModalModule.forRoot()
+    ModalModule.forRoot(),
   ],
   exports: [
     CommonModule,

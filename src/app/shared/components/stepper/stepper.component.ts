@@ -63,35 +63,40 @@ export class StepperComponent implements AfterContentInit {
 
   calculateLineWidths() {
     let stepElementsArray: any[] = [];
+
     if (this.steps && this.stepsElement) {
       stepElementsArray = this.stepsElement.nativeElement.childNodes;
 
       stepElementsArray.forEach((step: any, index: number) => {
         if (index < stepElementsArray.length - 1) {
           const nextStep = stepElementsArray[index + 1];
-          const line = step.children[0].children[0];
+          const line = step.children[0]?.children[0];
 
-          let lineWidth: number;
-          const lengthOfSteps = (this.steps && this.steps.length) || 2
-          if (index === 0) {
-            // For the first step, adjust the calculation
-            lineWidth =
-              nextStep.offsetLeft +
-              nextStep.clientWidth / 1 -
-              step.offsetLeft -
-              step.clientWidth / 1;
-          } else {
-            // For subsequent steps
-            lineWidth =
-              nextStep.offsetLeft -
-              step.offsetLeft +
-              nextStep.clientWidth / 1 -
-              step.clientWidth / 1 ;
+          if (line) {  // Check if the line element is defined
+            let lineWidth: number;
+            const lengthOfSteps = (this.steps && this.steps.length) || 2;
+
+            if (index === 0) {
+              // For the first step, adjust the calculation
+              lineWidth =
+                nextStep.offsetLeft +
+                nextStep.clientWidth / 1 -
+                step.offsetLeft -
+                step.clientWidth / 1;
+            } else {
+              // For subsequent steps
+              lineWidth =
+                nextStep.offsetLeft -
+                step.offsetLeft +
+                nextStep.clientWidth / 1 -
+                step.clientWidth / 1;
+            }
+
+            this.renderer.setStyle(line, 'width', `${lineWidth}px`);
           }
-
-          this.renderer.setStyle(line, 'width', `${lineWidth}px`);
         }
       });
     }
   }
+
 }

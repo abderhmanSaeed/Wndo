@@ -22,7 +22,7 @@ import { MyOrdersComponent } from './my-orders/my-orders.component';
   imports: [
     SharedModule,
     ProductRoutingModule,
-    ModalModule.forRoot()
+    ModalModule.forRoot(),
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })

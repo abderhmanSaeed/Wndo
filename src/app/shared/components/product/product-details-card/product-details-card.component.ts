@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -21,7 +21,7 @@ export class ProductDetailsCardComponent implements OnInit {
   colorWithSizesSelected: any;
   selectedColor: any; // Assuming your color object has a specific type, replace 'any' with the actual type
   selectedSize: any; // Assuming your color object has a specific type, replace 'any' with the actual type
-
+  size: any;
   productColor = [
     {
       color: {
@@ -80,6 +80,9 @@ export class ProductDetailsCardComponent implements OnInit {
     }
   ]
   colorWithSizes: any;
+  constructor(private router: Router) {
+    // Your constructor logic here
+  }
   ngOnInit(): void {
     // throw new Error('Method not implemented.');
     // this.selectedColor = this.productColor[0]; // Assuming productColor is an array
@@ -90,6 +93,38 @@ export class ProductDetailsCardComponent implements OnInit {
     // You can add additional logic or error checking as needed
   }
 
+  // Method to handle the button click and store productId in localStorage
+  storeProductInLocalStorage(product: any): void {
+    // Retrieve the existing products array from localStorage
+    const existingProductsString = localStorage.getItem('products');
+    let existingProducts: any[] = [];
+
+    if (existingProductsString) {
+      existingProducts = JSON.parse(existingProductsString);
+    }
+
+    // Create a new product object
+    const newProduct = {
+      id: product.id,
+      name: product.name,
+      hexColor: this.colorWithSizesSelected.color.hexaCode,
+      size: this.size.name,
+      sizeQuantity: this.size.quantity,
+      quantity: this.productQuantity,
+      totalPrice: product.price.price,
+      priceAfterDiscount: product.price.priceAfterOffer,
+      image: product.images[0].urlPreview
+    };
+
+    // Push the new product to the existing array
+    existingProducts.push(newProduct);
+
+    // Store the updated products array in localStorage
+    localStorage.setItem('products', JSON.stringify(existingProducts));
+
+    // Navigate to the 'product/productOrders' URL
+    this.router.navigate(['/product/productOrders']);
+  }
 
   logColor(colorWithSizes: any): void {
     console.log(colorWithSizes);
@@ -97,6 +132,7 @@ export class ProductDetailsCardComponent implements OnInit {
     this.colorWithSizesSelected = colorWithSizes;
   }
   logSize(size: any): void {
+    this.size = size;
     console.log(size);
 
     // Check if the size already exists in sizeQuantities, if not, initialize it to 0

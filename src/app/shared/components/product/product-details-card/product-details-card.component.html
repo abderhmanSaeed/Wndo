@@ -1,5 +1,7 @@
-<section class="bg-white grid lg:grid-cols-9 3xl:grid-cols-5 gap-16 rounded py-10 px-14">
-  <div class="lg:col-span-4 xxl:col-span-3 3xl:col-span-2">
+<section
+  class="bg-white md:grid lg:grid-cols-9 3xl:grid-cols-5 gap-16 rounded py-10 md:px-14 px-6"
+>
+  <div class="lg:col-span-4 xxl:col-span-3 3xl:col-span-2 mb-8 md:mb-0">
     <div class="mb-5">
       <app-gallery [items]="product.images"></app-gallery>
     </div>
@@ -8,37 +10,42 @@
       <h6 class="mb-4">Additional Info</h6>
       <ul class="flex flex-col">
         <li
-          class="inline-flex items-center gap-x-2 py-3 px-4 text-sm font-medium odd:bg-gray-100 bg-white text-gray-800 -mt-px first:mt-0 rounded">
+          class="inline-flex items-center gap-x-2 py-3 px-4 text-sm font-medium odd:bg-gray-100 bg-white text-gray-800 -mt-px first:mt-0 rounded"
+        >
           <span class="text-base text-purple-400">Model</span>
           <span class="text-gray-950">Odsy-1000</span>
         </li>
         <li
-          class="inline-flex items-center gap-x-2 py-3 px-4 text-sm font-medium odd:bg-gray-100 bg-white text-gray-800 -mt-px first:mt-0 rounded">
+          class="inline-flex items-center gap-x-2 py-3 px-4 text-sm font-medium odd:bg-gray-100 bg-white text-gray-800 -mt-px first:mt-0 rounded"
+        >
           <span class="text-base text-purple-400">Color</span>
           <span class="text-gray-950 text-base">Multi Color</span>
         </li>
         <li
-          class="inline-flex justify-betweenitems-center gap-x-2 py-3 px-4 text-sm font-medium odd:bg-gray-100 bg-white text-gray-800 -mt-px first:mt-0 rounded">
+          class="inline-flex justify-betweenitems-center gap-x-2 py-3 px-4 text-sm font-medium odd:bg-gray-100 bg-white text-gray-800 -mt-px first:mt-0 rounded"
+        >
           <span class="space-x-2">
             <span class="text-base text-purple-400">Delivery</span>
             <span class="text-gray-950 text-base">3 Days </span>
           </span>
-          <span class="text-gray-950 text-base ms-auto">(Based on your address)</span>
+          <span class="text-gray-950 text-base ms-auto"
+            >(Based on your address)</span
+          >
         </li>
       </ul>
     </div>
   </div>
 
   <div class="lg:col-span-5 xxl:col-span-6 3xl:col-span-3">
-    <div class="h-full flex flex-col justify-between">
+    <div class="h-full flex flex-col justify-between gap-5 md:gap-0">
       <div>
-        <h2 class="mb-4.5 text-blue-950">
+        <h2 class="mb-0 md:mb-4.5 text-blue-950">
           {{ product.name }}
         </h2>
-        <div class="flex items-center justify-between">
+        <div class="flex flex-col md:flex-row md:items-center justify-between gap-y-2 md:gap-y-0">
           <span class="flex gap-8">
-            <h2 class="text-primary">${{ responseData.totalCount }}</h2>
-            <h5 class="text-gray-900 line-through">${{ product.discount }}</h5>
+            <h2 class="text-primary" *ngIf="responseData.totalCount">${{ responseData.totalCount }}</h2>
+            <h5 class="text-gray-900 line-through" *ngIf="product.discount">${{ product.discount }}</h5>
           </span>
           <span class="bg-orange-500 text-black rounded py-1 px-2">
             This Offer Will Expire in 3 Days
@@ -50,30 +57,35 @@
         <div>
           <h6 class="mb-2">Choose Color</h6>
           <ul class="flex flex-wrap gap-2">
-            <button *ngFor="let colorWithSizes of product.colorWithSizes" type="button"
-              class="product-color-button capitalize border py-2 px-3 bg-white border-gray-150 rounded-[3px] text-xxs"
-              style="--hover-color: #{{ colorWithSizes.color.hexaCode }}" (click)="logColor(colorWithSizes)"
-              [ngClass]="{ 'selected': colorWithSizes === selectedColor }">
+            <button
+              *ngFor="let colorWithSizes of product.colorWithSizes"
+              type="button"
+              class="capitalize product-color-button hover:bg-primary hover:text-white border h-6 px-3 bg-white border-gray-150 rounded-[3px] text-xxs"
+              style="--hover-color: #{{ colorWithSizes.color.hexaCode }}"
+              (click)="logColor(colorWithSizes)"
+              [ngClass]="{ selected: colorWithSizes === selectedColor }"
+            >
               {{ colorWithSizes.color.name }}
             </button>
           </ul>
-
         </div>
 
         <div>
           <h6 class="mb-2">Choose Size</h6>
           <ul class="flex flex-wrap gap-2">
             <li *ngFor="let size of colorWithSizesSelected?.sizes">
-              <button type="button"
+              <button
+                type="button"
                 class="capitalize hover:bg-primary hover:text-white border h-6 px-3 bg-white border-gray-150 rounded-[3px] text-xxs"
-                (click)="logSize(size)" [ngClass]="{ 'selected': size.id === selectedSize }">
+                (click)="logSize(size)"
+                [ngClass]="{ selected: size.id === selectedSize }"
+              >
                 {{ size.name }}
               </button>
             </li>
           </ul>
         </div>
       </ng-container>
-
 
       <!-- @for (colorWithSizes of product.colorWithSizes; track colorWithSizes) {
       <ng-container>
@@ -112,29 +124,43 @@
       </p>
       } -->
 
-      <div *ngIf="sizeQuantities" class="mb-8 flex flex-wrap gap-8 items-center">
+      <div
+        *ngIf="sizeQuantities"
+        class="mb-8 flex flex-wrap gap-8 items-center"
+      >
         <h6>Quantity:</h6>
-        <app-quantity-button [(quantity)]="productQuantity" [disabledAddQuantity]="productQuantity === sizeQuantities"
-          [maxQuantity]="sizeQuantities" (quantityChange)="onQuantityChange($event)">
+        <app-quantity-button
+          [(quantity)]="productQuantity"
+          [disabledAddQuantity]="productQuantity === sizeQuantities"
+          [maxQuantity]="sizeQuantities"
+          (quantityChange)="onQuantityChange($event)"
+        >
         </app-quantity-button>
-
       </div>
 
       <p class="text-base text-purple-300 mb-10">{{ product.description }}</p>
 
       <div class="card-footer">
         <div class="flex flex-wrap gap-5">
-          <button type="button" class="button button--primary w-[250px] button--bordered button--rounded-bill"
-            [disabled]="!sizeQuantities" (click)="storeProductInLocalStorage(product)">
+          <button
+            type="button"
+            class="button button--primary md:w-[250px] w-full button--bordered button--rounded-bill"
+            [disabled]="!sizeQuantities"
+            (click)="storeProductInLocalStorage(product)"
+          >
             BUY NOW
           </button>
 
-          <button type="button" class="button button--primary w-[250px] button--rounded-bill">
+          <button
+            type="button"
+            class="button button--primary md:w-[250px] w-full button--rounded-bill"
+          >
             ADD TO CART
           </button>
-
         </div>
-        <p class="text-xs text-bluegray-900 flex gap-2 items-center mt-6 justify-center w-[500px]">
+        <p
+          class="text-xs text-bluegray-900 flex gap-2 items-center mt-6 justify-center md:w-[500px]"
+        >
           <i class="fa-solid fa-dolly text-lg"></i> Delivered By Carrier
         </p>
       </div>

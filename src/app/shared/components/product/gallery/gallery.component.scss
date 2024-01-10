@@ -1,5 +1,3 @@
-$border-radius-lg: theme('borderRadius.lg');
-
 .slider {
   .swiper-container1,
   .swiper-container2 {
@@ -7,48 +5,17 @@ $border-radius-lg: theme('borderRadius.lg');
     height: 100%;
   }
 
-
-  &__col {
-    display: flex;
-    flex-direction: column;
-    width: 110px;
-  }
-
   &__prev,
   &__next {
-    cursor: pointer;
-    text-align: center;
-    font-size: 14px;
-    height: 48px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
-
-    &:focus {
-      outline: none;
-    }
+    @apply cursor-pointer text-center text-sm;
   }
 
   &__thumbs {
     height: calc(400px - 100px);
 
-    .slider__image {
-      transition: 0.25s;
-
-      &:hover {
-        opacity: 1;
-      }
-    }
-
-    .swiper-slide-thumb-active {
+    .swiper-slide-active {
       .slider__image {
-        -webkit-filter: grayscale(0%);
-        filter: grayscale(0%);
-        opacity: 1;
+        @apply border border-primary rounded;
       }
     }
   }
@@ -69,22 +36,15 @@ $border-radius-lg: theme('borderRadius.lg');
   }
 
   &__image {
-    width: 100%;
     height: 100%;
-    border-radius: $border-radius-lg;
-    overflow: hidden;
 
-    img {
-      display: block;
-      width: 100%;
-      height: 100%;
-      -o-object-fit: cover;
-      object-fit: cover;
+    img,
+    video {
+      @apply rounded block w-full h-full object-cover;
     }
   }
 
-  @media (max-width: theme('screens.sm')){
-
+  @media (max-width: theme("screens.sm")) {
     &__col {
       flex-direction: row;
       align-items: center;
@@ -99,8 +59,10 @@ $border-radius-lg: theme('borderRadius.lg');
 
     &__thumbs {
       height: 100px;
-      width: calc(100% - 96px);
+      width: 100%;
       margin: 0 16px;
+
+
     }
 
     &__prev,
@@ -110,10 +72,8 @@ $border-radius-lg: theme('borderRadius.lg');
     }
   }
 }
-.video-container {
-  border: 1px solid #ccc;
-  padding: 10px;
-  margin-top: 20px;
-  /* Add any additional styling you want here */
-}
-
+// .video-container {
+//   border: 1px solid #ccc;
+//   padding: 10px;
+//   margin-top: 20px;
+// }

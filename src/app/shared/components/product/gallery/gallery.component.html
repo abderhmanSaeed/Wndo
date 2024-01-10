@@ -1,23 +1,48 @@
-<section class="slider">
-  <!-- <div id="videoContainer" class="video-container">dd</div> -->
-  <div class="md:flex items-start justify-between">
-    <div class="slider__images">
-      <swiper-container init="false" class="swiper-container1 swiper2" appSwiper #swiper [config]="swiperConfig"
-        controller-control=".swiperThumbs">
-        <swiper-slide *ngFor="let item of imags" class="h-full">
+
+<section class="slider md:flex items-start justify-between gap-x-6 space-y-4 md:space-y-0">
+  <!-- <div class=""> -->
+    <div class="slider__images flex-grow">
+      <swiper-container
+        init="false"
+        class="swiper-container1 swiper2 "
+        appSwiper
+        #swiper
+        [config]="swiperConfig"
+        controller-control=".swiperThumbs"
+      >
+        <swiper-slide *ngFor="let item of images.concat(videos)" class="h-full">
           <div class="slider__image">
-            <!-- <img [src]="item.urlPreview" alt="{{ item.id }}" /> -->
-            <img [src]="urlPreview" />
+            <img
+              *ngIf="item.imageId; else videoTemplatePreview"
+              [src]="urlPreview"
+              alt="{{ item.imageId }}"
+            />
+
+            <ng-template #videoTemplatePreview>
+              <video controls>
+                <source [src]="item.urlPreview" type="video/mp4" />
+                Your browser does not support the video tag.
+              </video>
+            </ng-template>
+
           </div>
         </swiper-slide>
       </swiper-container>
     </div>
 
-    <div class="slider__col">
-      <button type="button" class="slider__prev" *ngIf="imags.length > 3">Prev</button>
+    <div class="justify-center flex md:flex-col gap-y-2">
+      <button type="button" class="slider__prev hidden md:flex" *ngIf="images.length > 3">
+        Prev
+      </button>
       <div class="slider__thumbs">
-        <swiper-container init="false" class="swiper-container1 swiperThumbs" appSwiper #swiperThumbs
-          [config]="swiperConfigThumbs" (slidechange)="slideChange($event)">
+        <swiper-container
+          init="false"
+          class="swiper-container1 swiperThumbs"
+          appSwiper
+          #swiperThumbs
+          [config]="swiperConfigThumbs"
+          (slidechange)="slideChange($event)"
+        >
           <!-- <swiper-slide *ngFor="let item of imags">
             <div class="slider__image">
               <img (click)="slideChange(item)" [src]="item.urlPreview" alt="{{ item.id }}" />
@@ -32,26 +57,39 @@
             </div>
           </swiper-slide> -->
 
-          <swiper-slide *ngFor="let item of (imags.concat(videos))">
-            <div class="slider__image">
-              <ng-container *ngIf="item.imageId; else videoTemplate">
-                <img (click)="slideChange(item)" [src]="item.urlPreview" alt="{{ item.id }}" />
-              </ng-container>
-              <ng-template #videoTemplate>
-                <video width="640" height="360" controls (click)="openVideoModal(item.urlPreview)">
-                  <source [src]="item.urlPreview" type="video/mp4">
-                  Your browser does not support the video tag.
-                </video>
-              </ng-template>
-            </div>
-          </swiper-slide>
+          <ng-container *ngFor="let item of images.concat(videos); let i = index">
+            <swiper-slide  class="slider__slide" [class.swiper-slide-active]="index === i">
+              <div class="slider__image">
+                <ng-container *ngIf="item.imageId; else videoTemplate">
+                  <img
+                    (click)="slideChange(item)"
+                    [src]="item.urlPreview"
+                    alt="{{ item.id }}"
+                  />
+                </ng-container>
+                <ng-template #videoTemplate>
+                  <video (click)="slideChange(item)" [poster]="item.urlThumbnail">
+                    <source [src]="item.urlPreview" type="video/mp4" />
+                    Your browser does not support the video tag.
+                  </video>
+                </ng-template>
 
+
+              </div>
+            </swiper-slide>
+          </ng-container>
 
         </swiper-container>
       </div>
 
-      <button type="button" class="slider__next disabled:opacity-40 cursor-none" *ngIf="imags.length > 3"
-        [disabled]="imags.length <= 3">Next</button>
+      <button
+        type="button"
+        class="slider__next disabled:opacity-40 cursor-none hidden md:flex"
+        *ngIf="images.length > 3"
+        [disabled]="images.length <= 3"
+      >
+        Next
+      </button>
     </div>
-  </div>
+  <!-- </div> -->
 </section>

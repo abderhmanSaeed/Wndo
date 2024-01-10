@@ -13,33 +13,8 @@ import { VideoModalComponent } from '../video-modal/video-modal.component';
 })
 export class GalleryComponent implements OnInit {
   @Input() videoUrl: string = '';
-  @Input() items: Image[] = [
-    {
-      id: 45084,
-      imageId: "53453",
-      urlPreview: "https://swiperjs.com/demos/images/nature-1.jpg",
-      urlThumbnail: "https://swiperjs.com/demos/images/nature-1.jpg"
-    },
-    {
-      id: 45085,
-      imageId: "53453",
-      urlPreview: "https://swiperjs.com/demos/images/nature-2.jpg",
-      urlThumbnail: "https://swiperjs.com/demos/images/nature-2.jpg"
-    },
-    {
-      id: 45086,
-      imageId: "4353",
-      urlPreview: "https://swiperjs.com/demos/images/nature-3.jpg",
-      urlThumbnail: "https://swiperjs.com/demos/images/nature-3.jpg"
-    },
-    {
-      id: 45087,
-      imageId: "453",
-      urlPreview: "https://swiperjs.com/demos/images/nature-4.jpg",
-      urlThumbnail: "https://swiperjs.com/demos/images/nature-4.jpg"
-    }
-  ]
-  imags: any[] = [
+  // @Input() items: Image[] = []
+  images: any[] = [
     {
       id: 45084,
       imageId: "53453",
@@ -126,13 +101,14 @@ export class GalleryComponent implements OnInit {
   // }
   constructor(private modalService: BsModalService) {}
   ngOnInit(): void {
-    this.urlPreview = this.imags[0].urlPreview;
+    this.urlPreview = this.images[0].urlPreview;
   }
   ngAfterViewInit() {
     if (this.swiper && this.swiperThumbs) {
       this.swiper.nativeElement.swiper.controller.control = this.swiperThumbs.nativeElement.swiper;
       this.swiperThumbs.nativeElement.swiper.controller.control = this.swiper.nativeElement.swiper;
     }
+console.log(this.index)
   }
 
   // closeModal() {
@@ -143,9 +119,12 @@ export class GalleryComponent implements OnInit {
   // }
 
   slideChange(swiperRef: any) {
-    console.log("slideChange", swiperRef);
-    this.urlPreview = swiperRef.urlPreview
-    this.index = swiperRef.activeIndex;
+    console.log("🫠slideChange", swiperRef);
+    this.urlPreview = swiperRef.urlPreview;
+    this.index = this.images.concat(this.videos).findIndex((item) => item.id === swiperRef.id)
+    // if(this.swiperThumbs){
+    //   console.log(this.images.concat(this.videos).findIndex((item) => item.id === swiperRef.id))
+    // }
   }
 
   currentIframe: HTMLIFrameElement | null = null;
@@ -175,19 +154,16 @@ export class GalleryComponent implements OnInit {
       console.error(`Container with ID ${containerId} not found.`);
     }
   }
-  openVideoModal(videoUrl: string) {
-    const initialState = {
-      videoUrl: videoUrl,
-    };
-    this.modalService.show(VideoModalComponent, { initialState });
-  }
+  // openVideoModal(videoUrl: string) {
+  //   const initialState = {
+  //     videoUrl: videoUrl,
+  //   };
+  //   this.modalService.show(VideoModalComponent, { initialState });
+  // }
   closeIframe() {
     if (this.currentIframe) {
       this.currentIframe.remove();
       this.currentIframe = null;
     }
   }
-
-
-
 }

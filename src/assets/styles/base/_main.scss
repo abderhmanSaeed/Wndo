@@ -23,7 +23,7 @@ body {
 
 @layer components {
   .content-page {
-    @apply px-10 pb-10
+    @apply md:px-10 pb-10 px-4
   }
 
   .info-circle {

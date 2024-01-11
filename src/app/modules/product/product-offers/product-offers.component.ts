@@ -1,3 +1,4 @@
+import { SvgIconComponent } from 'angular-svg-icon';
 import { Component } from '@angular/core';
 import { SharedModule } from '../../../shared/shared.module';
 
@@ -6,7 +7,7 @@ import { SharedModule } from '../../../shared/shared.module';
   templateUrl: './product-offers.component.html',
   styleUrl: './product-offers.component.scss',
   standalone: true,
-  imports: [SharedModule],
+  imports: [SharedModule, SvgIconComponent],
 })
 export class ProductOffersComponent {
   products: any = {

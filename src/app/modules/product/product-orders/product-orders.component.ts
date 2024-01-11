@@ -1,3 +1,4 @@
+import { SvgIconComponent } from 'angular-svg-icon';
 import { Component, OnInit, TemplateRef, ViewChild, ViewContainerRef } from '@angular/core';
 import { SharedModule } from '../../../shared/shared.module';
 import { ModalService } from '../../../shared/components/modal/modal.service';
@@ -12,7 +13,7 @@ import { Router } from '@angular/router';
   templateUrl: './product-orders.component.html',
   styleUrl: './product-orders.component.scss',
   standalone: true,
-  imports: [SharedModule]
+  imports: [SharedModule, SvgIconComponent]
 })
 export class ProductOrdersComponent implements OnInit {
   productDetails: ProductResponse | null = null; // Initialize to null or default value

@@ -22,7 +22,7 @@
 
     <div>
       <h6 class="line-through text-gray-900" [class.line-through]="product.offerPercentage > 0">${{ product.price }}</h6>
-      <h5  *ngIf="product.offerPercentage > 0" class="text-primary">$ {{ product.priceAfterOffer }}</h5>
+      <h4 *ngIf="product.offerPercentage > 0" class="text-primary">$ {{ product.priceAfterOffer }}</h4>
     </div>
 
     <button

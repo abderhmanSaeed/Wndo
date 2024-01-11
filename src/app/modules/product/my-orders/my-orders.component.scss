@@ -1,0 +1,66 @@
+.my-orders {
+  --hover: #ff002a;
+
+  &__tab-btn {
+    transition: 0.25s;
+    @apply px-6 py-3   capitalize text-start bg-white text-blueGray-100 rounded-lg;
+    width: 180px;
+
+    &:hover {
+      transform: translateY(-0.25em);
+    }
+
+    &[aria-selected="true"] {
+      @apply text-white fill-white;
+    }
+
+    &.tab-btn--ordered {
+      &:hover {
+        box-shadow: 0 0.5em 0.5em -0.4em rgba(78, 163, 248, 0.8);
+      }
+
+      &[aria-selected="true"] {
+        @apply bg-gradient-to-r from-lightBlue-400 to-lightBlue-500;
+      }
+    }
+
+    &.tab-btn--shipping {
+      &:hover {
+        box-shadow: 0 0.5em 0.5em -0.4em rgba(252, 166, 0, 0.8);
+      }
+
+      &[aria-selected="true"] {
+        @apply bg-gradient-to-r from-orange-600 to-orange-800;
+      }
+    }
+
+    &.tab-btn--delivered {
+      &:hover {
+        box-shadow: 0 0.5em 0.5em -0.4em rgba(2, 162, 7, 0.8);
+      }
+
+      &[aria-selected="true"] {
+        @apply bg-gradient-to-r from-green-500 to-green-800;
+      }
+    }
+
+    &.tab-btn--returned {
+      &:hover {
+        box-shadow: 0 0.5em 0.5em -0.4em rgba(244, 208, 20, 0.8);
+      }
+      &[aria-selected="true"] {
+        @apply bg-gradient-to-r from-yellow-600 to-yellow-700;
+      }
+    }
+
+    &.tab-btn--cancelled {
+      &:hover {
+        box-shadow: 0 0.5em 0.5em -0.4em rgba(250, 0, 41, 0.8);
+      }
+
+      &[aria-selected="true"] {
+        @apply bg-gradient-to-r from-primary to-primary-800;
+      }
+    }
+  }
+}

@@ -1,3 +1,4 @@
+import { HttpClientModule } from '@angular/common/http';
 import { OrderConfirmedModal } from './components/modals/order-confirmed-modal/order-confirmed-modall.component';
 import { ModalComponent } from './components/modal/modal.component';
 import { SelectComponent } from './components/inputs/Select/select.component';
@@ -10,7 +11,6 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
-import { IconComponent } from './components/icon/icon.component';
 import { SwitchLanguageComponent } from './components/switch-language/switch-language.component';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { ProductSnapshotCardComponent } from './components/product/product-snapshot-card/product-snapshot-card.component';
@@ -33,13 +33,12 @@ import { ModalContentComponent } from './components/modal/modal-content/modal-co
 import { ConfirmationComponent } from './components/order/confirmation/confirmation.component';
 import { VideoModalComponent } from './components/product/video-modal/video-modal.component';
 import { ModalModule } from 'ngx-bootstrap/modal';
-
+import { AngularSvgIconModule } from 'angular-svg-icon';
 
 register();
 
 @NgModule({
   declarations: [
-    IconComponent,
     ProductDetailsCardComponent,
     SwitchLanguageComponent,
     QuantityButtonComponent,
@@ -69,6 +68,7 @@ register();
     ConfirmationComponent,
     OrderConfirmedModal,
     VideoModalComponent,
+
   ],
   imports: [
     CommonModule,
@@ -76,13 +76,15 @@ register();
     ReactiveFormsModule,
     RouterModule,
     ModalModule.forRoot(),
+    HttpClientModule,
+    AngularSvgIconModule.forRoot(),
   ],
+
   exports: [
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
     RouterModule,
-    IconComponent,
     ProductDetailsCardComponent,
     SwitchLanguageComponent,
     QuantityButtonComponent,
@@ -107,8 +109,8 @@ register();
     ModalContentComponent,
     LoginModalComponent,
     ConfirmationComponent,
-    OrderConfirmedModal
+    OrderConfirmedModal,
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
-export class SharedModule { }
+export class SharedModule {}

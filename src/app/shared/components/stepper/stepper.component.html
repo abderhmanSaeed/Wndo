@@ -20,11 +20,12 @@
         </div>
 
         <h3
-          class="step-name"
+          class="step-name flex gap-1 items-center"
           [class.step-name--active]="currentStep === i"
           [class.step-name--done]="currentStep > i"
         >
-          <span [innerHTML]="step.icon"></span>
+          <!-- <span [innerHTML]="step.icon"></span> -->
+          <svg-icon src="../../../../assets/icons/{{step.icon}}.svg"> </svg-icon>
           {{ step.label }}
         </h3>
       </div>

@@ -1,7 +1,7 @@
 
 
 <footer class="px-8 py-4 divide-y divide-y-1 space-y-4 border-t border-gray-200 border-solid bg-white">
-  <div class="grid grid-cols-4 justify-between items-center">
+  <div class="md:grid grid-cols-4 justify-between items-center md:space-0">
     <span class="flex-auto"
       ><img
         src="../../../assets/images/logo.svg"
@@ -9,7 +9,7 @@
         width="126"
         height="25"
     /></span>
-    <ul role="list" class="flex gap-4 items-center col-span-2">
+    <ul role="list" class="md:flex gap-4 items-center col-span-2">
       <li
         role="listitem"
         *ngFor="let link of links"
@@ -18,9 +18,9 @@
         <a [href]="link.href">{{ link.title }}</a>
       </li>
     </ul>
-    <div class="flex-auto space-y-2">
-      <h6 class="text-xxs font-medium text-end">Download Now</h6>
-      <ul class="flex gap-2 items-center justify-end">
+    <div class="space-y-2 justify-self-end">
+      <h6 class="text-xxs font-medium">Download Now</h6>
+      <ul class="flex gap-2 items-center">
         <li>
           <a
             ><img src="../../../assets/images/google-play.svg" alt="app-store"
@@ -35,12 +35,12 @@
     </div>
   </div>
 
-  <div class="grid grid-cols-3 items-center justify-between pt-3">
+  <div class="md:grid grid-cols-3 items-center justify-between pt-3 space-y-4 md:space-y-0">
     <p class="text-xs text-gray-300">
       © 2021 Wndo Business Solutions All Rights Reserved.
     </p>
 
-    <ul class="flex items-center justify-center gap-8">
+    <ul class="flex items-center md:justify-center gap-8">
       <li
         *ngFor="let socialMedia of socialMedia"
         class="text-base text-gray-400"
@@ -49,7 +49,7 @@
       </li>
     </ul>
 
-    <ul class="flex items-center gap-4 justify-end">
+    <ul class="flex items-center gap-4 md:justify-end">
       <li *ngFor="let payment of payments">
         <img
           [src]="'../../../assets/icons/' + payment.icon + '.svg'"

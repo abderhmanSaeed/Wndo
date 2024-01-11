@@ -1,1 +1,98 @@
-<p>product-offers works!</p>
+<app-header-of-page></app-header-of-page>
+<section aria-label="product-offers" class="content-page">
+  <ng-container *ngIf="products && products.items.length > 0; else noProducts">
+    <div class="mb-4">
+      <ul
+        class="flex flex-wrap -mb-px text-sm font-medium text-center justify-center"
+        id="offers"
+        data-tabs-toggle="#offers-content"
+        role="tablist"
+      >
+        <li class="me-2" role="presentation">
+          <button
+            class="inline-flex button gap-2 button--white rounded-full text-blueGray-300 px-24 aria-selected:button--primary"
+            id="all-products-tab"
+            data-tabs-target="#all-products"
+            type="button"
+            role="tab"
+            aria-controls="all-products"
+            aria-selected="true"
+          >
+            Products ({{ products.items.length }})
+            <svg-icon src="../../../../assets/icons/box.svg"></svg-icon>
+          </button>
+        </li>
+        <li class="me-2" role="presentation">
+          <button
+            class="inline-flex gap-2 button button--white rounded-full text-blueGray-300 px-24 aria-selected:button--primary"
+            id="products-offers-tab"
+            data-tabs-target="#products-offers"
+            type="button"
+            role="tab"
+            aria-controls="products-offers"
+            aria-selected="false"
+          >
+            Offers ({{ offers.length }})
+            <svg-icon src="../../../../assets/icons/bill.svg"></svg-icon>
+
+          </button>
+        </li>
+      </ul>
+    </div>
+    <div id="offers-content">
+      <div
+        class="hidden p-4"
+        id="all-products"
+        role="tabpanel"
+        aria-labelledby="all-products-tab"
+      >
+        <div
+          class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 2xl:grid-cols-8"
+        >
+          <ng-container *ngFor="let item of products.items">
+            <app-product-snapshot-card
+              [product]="item"
+            ></app-product-snapshot-card>
+          </ng-container>
+        </div>
+      </div>
+
+      <div
+        class="hidden p-4"
+        id="products-offers"
+        role="tabpanel"
+        aria-labelledby="products-offers-tab"
+      >
+        <div
+          class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 2xl:grid-cols-8"
+        >
+          <ng-container *ngFor="let item of offers">
+            <app-product-snapshot-card
+              [product]="item"
+            ></app-product-snapshot-card>
+          </ng-container>
+        </div>
+      </div>
+    </div>
+  </ng-container>
+  <ng-template #noProducts>
+    <div class="flex flex-wrap justify-center gap-3 flex-col">
+      <img
+        src="../../../../assets/icons/no-products.svg"
+        alt="no-produvts-icon"
+      />
+      <p class="text-base text-blueGray-400 text-center">
+        This seller didn't publish any content yet.
+      </p>
+    </div>
+  </ng-template>
+
+</section>
+
+<section class="pb-12 content-page">
+  <p class="text-xs text-blue-900 flex items-center gap-1">
+  <svg-icon src="../../../../assets/icons/car-coloring.svg" ></svg-icon>
+    Get Free Shipping If You Buy The Product From Wndo Application
+    <a class="ms-1 underline hover:no-underline">Download Now</a>
+  </p>
+</section>

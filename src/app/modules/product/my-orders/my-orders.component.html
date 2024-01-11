@@ -1,1 +1,71 @@
-<p>my-orders works!</p>
+<app-header-of-page></app-header-of-page>
+
+<div class="content-page my-orders">
+  <h5 class="mb-8">Your Orders {{orders.length}}</h5>
+
+  <section class="px-32">
+    <div class="mb-4">
+      <ul
+        class="flex flex-wrap text-sm font-medium text-center gap-4 mb-14"
+        id="myOrders-tab"
+        data-tabs-toggle="#myOrders-tab-content"
+        role="tablist"
+      >
+        <li *ngFor="let item of myOrderStatus" class="me-2" role="presentation">
+          <button
+            [ngClass]="getStyleAndIcon(item).ButtonBg"
+            class="my-orders__tab-btn"
+            [attr.id]="item + '-tab'"
+            [attr.data-tabs-target]="'#' + item"
+            type="button"
+            role="tab"
+            [attr.aria-controls]="item"
+            [attr.aria-selected]="false"
+          >
+            <div class="flex justify-between mb-2">
+              <span
+                class="inline-flex text-lg items-center justify-center w-9 h-9 rounded-full bg-gray-100"
+                [ngClass]="getStyleAndIcon(item).lengthSpan"
+              >
+                {{ getItems(item).length }}
+              </span>
+
+              <svg-icon
+                [src]="
+                  '../../../../assets/icons/' +
+                  getStyleAndIcon(item).icon +
+                  '.svg'
+                "
+                [svgStyle]="{
+                'width.px': 34,
+                'height.px': 34,
+              }"
+                class="aria-selected:fill-white fill-current"
+              ></svg-icon>
+            </div>
+
+            {{ item === "cancelled" ? item + "/refunded" : item }}
+          </button>
+        </li>
+      </ul>
+    </div>
+
+    <div id="myOrders-tab-content">
+      <div
+        *ngFor="let item of myOrderStatus"
+        class="hidden p-4 rounded-lg bg-gray-50"
+        [attr.id]="item"
+        role="tabpanel"
+        [attr.aria-labelledby]="item + '-tab'"
+      >
+      <ng-container *ngFor="let order of getItems(item)">
+        <div class="bg-white">
+          <h1>{{order.id}}</h1>
+          <h1>{{order.statues}}</h1>
+          </div>
+        </ng-container>
+
+      </div>
+    </div>
+  </section>
+</div>

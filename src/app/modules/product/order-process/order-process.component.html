@@ -2,23 +2,23 @@
 
 <section class="content-page">
   <app-stepper [hasActionFooter]="false">
-    <app-step
-      label="Order Placed"
-      icon='<img src="../../../../assets/icons/order-placed.svg" class="inline-flex" />'
-      [template]="orderPlaced"
-    >
+    <app-step label="Order Placed" icon="order-placed" [template]="orderPlaced">
     </app-step>
     <app-step
       label="Picked up"
-      icon='<img src="../../../../assets/icons/picked-up.svg" class="inline-flex" />'
+      icon="picked-up"
       [template]="pickedUp"
     ></app-step>
     <app-step
       label="Out for delivery"
-      icon='<img src="../../../../assets/icons/out-for-delivery.svg" class="inline-flex" />'
+      icon="out-for-delivery"
       [template]="outForDelivery"
     ></app-step>
-    <app-step label="Delivered" icon='<img src="../../../../assets/icons/delivered.svg" class="inline-flex" />' [template]="delivered"></app-step>
+    <app-step
+      label="Delivered"
+      icon="delivered"
+      [template]="delivered"
+    ></app-step>
   </app-stepper>
 </section>
 

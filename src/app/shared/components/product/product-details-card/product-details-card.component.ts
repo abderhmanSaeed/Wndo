@@ -93,38 +93,100 @@ export class ProductDetailsCardComponent implements OnInit {
     // You can add additional logic or error checking as needed
   }
 
-  // Method to handle the button click and store productId in localStorage
-  storeProductInLocalStorage(product: any): void {
-    // Retrieve the existing products array from localStorage
-    const existingProductsString = localStorage.getItem('products');
-    let existingProducts: any[] = [];
 
-    if (existingProductsString) {
-      existingProducts = JSON.parse(existingProductsString);
-    }
+  // storeProductInLocalStorage(product: any): void {
 
-    // Create a new product object
-    const newProduct = {
-      id: product.id,
-      name: product.name,
-      hexColor: this.colorWithSizesSelected.color.hexaCode,
-      size: this.size.name,
-      sizeQuantity: this.size.quantity,
-      quantity: this.productQuantity,
-      totalPrice: product.price.price,
-      priceAfterDiscount: product.price.priceAfterOffer,
-      image: product.images[0].urlPreview
-    };
+  //   const existingProductsString = localStorage.getItem('products');
+  //   let existingProducts: any[] = [];
 
-    // Push the new product to the existing array
-    existingProducts.push(newProduct);
+  //   if (existingProductsString) {
+  //     existingProducts = JSON.parse(existingProductsString);
+  //   }
 
-    // Store the updated products array in localStorage
-    localStorage.setItem('products', JSON.stringify(existingProducts));
+  //   const newProduct = {
+  //     id: product.id,
+  //     name: product.name,
+  //     hexColor: this.colorWithSizesSelected.color.hexaCode,
+  //     size: this.size.name,
+  //     sizeQuantity: this.size.quantity,
+  //     quantity: this.productQuantity,
+  //     totalPrice: product.price.price,
+  //     priceAfterDiscount: product.price.priceAfterOffer,
+  //     image: product.images[0].urlPreview
+  //   };
 
-    // Navigate to the 'product/productOrders' URL
-    this.router.navigate(['/product/productOrders']);
+
+  //   existingProducts.push(newProduct);
+
+  //   localStorage.setItem('products', JSON.stringify(existingProducts));
+
+
+  //   this.router.navigate(['/product/productOrders']);
+  // }
+
+
+// Method to handle the button click and store productId in localStorage
+storeProductInLocalStorage(product: any): void {
+  // Retrieve the existing products array from localStorage
+  const existingProductsString = localStorage.getItem('products');
+  let existingProducts: any[] = [];
+
+  if (existingProductsString) {
+    existingProducts = JSON.parse(existingProductsString);
   }
+
+  // Check if the product with the same ID and hexaCode already exists
+  const existingProductIndex = existingProducts.findIndex(existingProduct =>
+    existingProduct.id === product.id && existingProduct.hexColor === this.colorWithSizesSelected.color.hexaCode
+  );
+
+  if (existingProductIndex !== -1) {
+    // If the product already exists, check if quantity update is allowed
+    const existingProduct = existingProducts[existingProductIndex];
+
+    if (this.size.quantity >= existingProduct.quantity + this.productQuantity) {
+      // Update the existing product quantity
+      existingProducts[existingProductIndex] = {
+        ...existingProduct,
+        // size: this.size.name,
+        // sizeQuantity: this.size.quantity,
+        quantity: existingProduct.quantity + this.productQuantity,
+        // totalPrice: product.price.price,
+        // priceAfterDiscount: product.price.priceAfterOffer,
+      };
+    } else {
+      console.log('Cannot update quantity. Not enough available.');
+    }
+  } else {
+    // If the product does not exist, check if a new product can be added
+    if (this.size.quantity >= this.productQuantity) {
+      // Add a new product
+      const newProduct = {
+        id: product.id,
+        name: product.name,
+        hexColor: this.colorWithSizesSelected.color.hexaCode,
+        size: this.size.name,
+        sizeQuantity: this.size.quantity,
+        quantity: this.productQuantity,
+        totalPrice: product.price.price,
+        priceAfterDiscount: product.price.priceAfterOffer,
+        image: product.images[0].urlPreview
+      };
+
+      // Push the new product to the existing array
+      existingProducts.push(newProduct);
+    } else {
+      console.log('Cannot add new product. Not enough available.');
+    }
+  }
+
+  // Store the updated products array in localStorage
+  localStorage.setItem('products', JSON.stringify(existingProducts));
+
+  // Navigate to the 'product/productOrders' URL
+  this.router.navigate(['/product/productOrders']);
+}
+
 
   logColor(colorWithSizes: any): void {
     console.log(colorWithSizes);

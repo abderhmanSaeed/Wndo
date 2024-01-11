@@ -90,14 +90,9 @@ export class ProductOrdersComponent implements OnInit {
     }
   }
 
-  addMoreButton = {
-    label: 'ADD MORE PRODUCT',
-    action: () => this.addMore(),
-    // Add any additional styling or properties you need for the button
-  };
 
   addMore(): void {
     this.router.navigate(['/product/productDetails']);
-
+    console.log('any thing');
   }
 }

@@ -1,0 +1,104 @@
+<div
+  class="bg-white flex flex-col xl:flex-row gap-6 pt-3 pb-6 px-5 border-s-2 border-lightBlue-500"
+>
+  <div class="xl:w-[76px] xl:h-[87px]">
+    <swiper-container
+      class="mySwiper2 w-full xl:h-9 h-[300px] mb-3"
+      space-between="5"
+      slides-per-view="2"
+      free-mode="true"
+      watch-slides-progress="true"
+    >
+      <ng-container
+        *ngFor="
+          let item of product.images;
+          let i = index
+        "
+      >
+        <swiper-slide [class.swiper-slide-active]="index === i" class="cursor-pointer">
+          <ng-container *ngIf="item.imageId">
+            <img
+              [src]="item.urlPreview"
+              alt="{{ item.id }}"
+              class="w-full h-[80%] object-cover"
+            />
+          </ng-container>
+
+        </swiper-slide>
+      </ng-container>
+    </swiper-container>
+
+    <swiper-container
+      slides-per-view="1"
+      [navigation]="false"
+      class="mySwiper w-full xl:h-13 h-[300px] -mt-12 lg:mt-0"
+      thumbs-swiper=".mySwiper2"
+      space-between="10"
+      navigation="true"
+    >
+      <swiper-slide *ngFor="let item of product.images">
+        <img
+          *ngIf="item.imageId"
+          [src]="item.urlPreview"
+          alt="{{ item.imageId }}"
+          class="w-full h-full object-cover"
+        />
+      </swiper-slide>
+    </swiper-container>
+  </div>
+
+  <div
+    class="flex flex-grow items-stretch justify-between gap-6 xl:gap-24 flex-col xl:flex-row"
+  >
+    <div class="space-y-2">
+      <h6 class="font-medium text-blue-900">Order No :{{ product.id }}</h6>
+      <h6 class="text-sm font-semibold">Price: {{ product.price }} EGP</h6>
+      <h6 class="text-xs font-semibold">
+        Order Statues:
+        <span [ngClass]="getStyle(product.statues).textColor">{{
+          product.statues
+        }}</span>
+      </h6>
+    </div>
+
+    <div class="flex-auto">
+      <h6 class="font-medium text-blue-900 mb-1">
+        Items :{{ product.items.length }}
+      </h6>
+      <ul class="bg-blue-100 rounded-sm py-1 px-2 inline-flex flex-col">
+        <li
+          *ngFor="let item of product.items"
+          [ngClass]="getStyle(product.statues).textColor"
+          class="flex gap-2 items-center"
+        >
+          <svg-icon
+            src="../../../../../assets/icons/dot-square.svg"
+            [svgStyle]="{
+              'width.px': 8,
+              'height.px': 8,
+            }"
+            class="fill-current"
+          ></svg-icon>
+          <span class="text-xs text-blue-900">{{ item.name }}</span>
+        </li>
+      </ul>
+    </div>
+
+    <div class="flex xl:flex-col justify-between">
+      <section class="flex-grow self-end">
+        <app-dropdown
+          [showSelectedValue]="false"
+          [options]="dropdownactions"
+          dropdownIcon="fa-ellipsis-vertical"
+          [classes]="{
+            label: 'bg-primary-100',
+            btn: 'outline-none w-8 h-8 rounded-full hover:bg-gray-200'
+          }"
+        >
+        </app-dropdown>
+      </section>
+
+      <p class="text-sm text-purple-500">{{ product.date }}</p>
+    </div>
+  </div>
+</div>

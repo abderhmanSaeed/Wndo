@@ -34,6 +34,7 @@ import { ConfirmationComponent } from './components/order/confirmation/confirmat
 import { VideoModalComponent } from './components/product/video-modal/video-modal.component';
 import { ModalModule } from 'ngx-bootstrap/modal';
 import { AngularSvgIconModule } from 'angular-svg-icon';
+import { MyOrderCardComponent } from './components/order/my-order-card/my-order-card.component';
 
 register();
 
@@ -68,7 +69,7 @@ register();
     ConfirmationComponent,
     OrderConfirmedModal,
     VideoModalComponent,
-
+    MyOrderCardComponent,
   ],
   imports: [
     CommonModule,
@@ -110,6 +111,7 @@ register();
     LoginModalComponent,
     ConfirmationComponent,
     OrderConfirmedModal,
+    MyOrderCardComponent
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })

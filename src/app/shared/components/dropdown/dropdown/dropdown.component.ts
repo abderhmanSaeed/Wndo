@@ -1,7 +1,8 @@
 import { Component, ElementRef, HostListener, Input, Renderer2 } from '@angular/core';
 
 type OptionProps = {
-  label: string, value: string,
+  label: string,
+  value: string,
   startContentMenu?: any,
   endContentMenu?: any
 }
@@ -23,6 +24,8 @@ export class DropdownComponent {
   @Input() options:OptionProps[] = []
   @Input() label?:string = '';
   @Input() classes?:ClassesProps;
+  @Input() dropdownIcon?:string = "";
+  @Input() showSelectedValue?:boolean = true;
   selectedValue:string = this.options.length > 0 ? this.options[0].label : '';
 
 

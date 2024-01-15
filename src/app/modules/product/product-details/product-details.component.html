@@ -1,13 +1,11 @@
 <!-- <button (click)="getProductDetails()">Get Product Details</button> -->
 
-<app-header-of-page></app-header-of-page>
+<app-header-of-page [seller]="productDetails?.responseData?.seller"></app-header-of-page>
 
 <section aria-label="product-details" class="content-page">
-  <app-product-details-card
-    [product]="productDetails?.responseData"
+  <app-product-details-card [product]="productDetails?.responseData"
     [productColorAndSizesResponse]="productColorAndSizesResponse"
-    [responseData]="responseData?.responseData"
-  ></app-product-details-card>
+    [responseData]="responseData?.responseData"></app-product-details-card>
 </section>
 
 <!-- @if(productDetails){
@@ -59,7 +57,5 @@
 } -->
 
 <section class="content-page space-y-6" aria-label="you may also like">
-  <app-product-may-like
-    [items]="responseData?.responseData?.items || []"
-  ></app-product-may-like>
+  <app-product-may-like [items]="responseData?.responseData?.items || []"></app-product-may-like>
 </section>

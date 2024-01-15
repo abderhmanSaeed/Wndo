@@ -1,15 +1,7 @@
 <section class="header-page mb-24">
   <div class="content-page flex justify-between items-center">
-    <img class="w-32 h-32 rounded-full mt-12"
-     [src]="productDetails?.responseData?.seller?.imagePath"
-     alt="{{ productDetails?.responseData?.seller?.id }}"
-     *ngIf="!isProductOffersRoute"
-     (mouseover)="changeCursorToHand()"
-     (click)="logSellerId()" />
-
-
-
-
+    <img class="w-32 h-32 rounded-full mt-12" [src]="seller?.imagePath" alt="{{ seller?.id }}"
+      [class.pointer-cursor]="!isProductOffersRoute" (click)="logSellerId()" />
 
     <ul class="flex gap-5">
       <li>

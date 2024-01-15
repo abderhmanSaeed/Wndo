@@ -7,14 +7,18 @@
 >
 <ng-content select="[startContent]"></ng-content>
 
-  <ng-container *ngIf="selectedValue; else elseTemplate">
+  <ng-container *ngIf="showSelectedValue && selectedValue; else elseTemplate">
     {{ selectedValue }}
   </ng-container>
   <ng-template #elseTemplate>
     {{ label }}
   </ng-template>
 
-  <svg
+  <ng-container *ngIf="dropdownIcon; else defaultDropdownIcon">
+    <i class="fa-solid {{dropdownIcon}}" class="text-sm text-blueGray-500"></i>
+  </ng-container>
+  <ng-template #defaultDropdownIcon>
+    <svg
     class="w-2.5 h-2.5 ms-3"
     aria-hidden="true"
     xmlns="http://www.w3.org/2000/svg"
@@ -29,6 +33,9 @@
       d="m1 1 4 4 4-4"
     />
   </svg>
+  </ng-template>
+
+
 </button>
 
 <!-- Dropdown menu -->

@@ -306,5 +306,41 @@ export class ProductDetailsCardComponent implements OnInit {
     this.userSelectedQuantity = newQuantity;
   }
 
+  videos = [{
+    id: 17203,
+    videoId: "9e1097f7-111e-4cf3-b2ff-d4bcbf82c87d",
+    urlThumbnail: "https://wndoprobucket.s3.eu-west-3.amazonaws.com/a6ad2173-f649-4c7c-abc5-5f71d0b48e13.png",
+    urlPreview: "https://wndovodstack-source71e471f1-12o7ase9r16a7.s3.eu-west-3.amazonaws.com/assets01/9e1097f7-111e-4cf3-b2ff-d4bcbf82c87d.3gp",
+    isMain: true,
+    name: "Main",
+    description: "Main"
+  }
+  ]
+  images= [
+    {
+      id: 45084,
+      imageId: "53453",
+      urlPreview: "https://swiperjs.com/demos/images/nature-1.jpg",
+      urlThumbnail: "https://swiperjs.com/demos/images/nature-1.jpg"
+    },
+    {
+      id: 45085,
+      imageId: "53453",
+      urlPreview: "https://swiperjs.com/demos/images/nature-2.jpg",
+      urlThumbnail: "https://swiperjs.com/demos/images/nature-2.jpg"
+    },
+    {
+      id: 45086,
+      imageId: "4353",
+      urlPreview: "https://swiperjs.com/demos/images/nature-3.jpg",
+      urlThumbnail: "https://swiperjs.com/demos/images/nature-3.jpg"
+    },
+    {
+      id: 45087,
+      imageId: "453",
+      urlPreview: "https://swiperjs.com/demos/images/nature-4.jpg",
+      urlThumbnail: "https://swiperjs.com/demos/images/nature-4.jpg"
+    }
+  ]
 
 }

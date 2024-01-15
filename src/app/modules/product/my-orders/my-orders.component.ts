@@ -9,257 +9,259 @@ import { SvgIconComponent, provideAngularSvgIcon } from 'angular-svg-icon';
   imports: [SharedModule, SvgIconComponent],
 })
 export class MyOrdersComponent {
+  currentTab: string = 'ordered';
   myOrderStatus = ['ordered', 'shipping', 'delivered', 'returned', 'cancelled'];
 
-  orders = [
+  myOrders = [
     {
+      name: '385',
+      description: '385',
+      price: 385,
+      date: '28 June , 6 PM',
       statues: 'ordered',
-      id: 234,
-      price: 1000,
-      date: '28 June , 6 PM',
-      items: [
+      images: [
         {
-          id: 'd9c4bc36-2eac-486b-b3cf-89d6b797ced9',
-          name: '145',
-          image: {
-            id: 45087,
-            imageId: '60',
-            urlThumbnail:
-              'https://wndoprobucket.s3.eu-west-3.amazonaws.com/cfaec020-9bf4-4c0e-a2e3-dd0a6b7d8c0b.jpg',
-            urlPreview:
-              'https://wndoprobucket.s3.eu-west-3.amazonaws.com/cfaec020-9bf4-4c0e-a2e3-dd0a6b7d8c0b.jpg',
-            urlDownload:
-              'https://wndoprobucket.s3.eu-west-3.amazonaws.com/cfaec020-9bf4-4c0e-a2e3-dd0a6b7d8c0b.jpg',
-          },
-          price: 145,
-          priceAfterOffer: 0,
-          offerPercentage: 0,
-          description: 'Classic Radio Golon F10',
-          shareUrl:
-            'https://store.wndo.com/product/d9c4bc36-2eac-486b-b3cf-89d6b797ced9',
+          id: 45084,
+          imageId: '51',
+          urlThumbnail:
+            'https://wndoprobucket.s3.eu-west-3.amazonaws.com/50caa500-eced-4803-9800-2fac3798ab6b.jpg',
+          urlPreview:
+            'https://wndoprobucket.s3.eu-west-3.amazonaws.com/50caa500-eced-4803-9800-2fac3798ab6b.jpg',
         },
         {
-          id: 'd9c4bc36-2eac-486b-b3cf-89d6b797ced659',
-          name: '145',
-          image: {
-            id: 45087,
-            imageId: '60',
-            urlThumbnail:
-              'https://wndoprobucket.s3.eu-west-3.amazonaws.com/cfaec020-9bf4-4c0e-a2e3-dd0a6b7d8c0b.jpg',
-            urlPreview:
-              'https://wndoprobucket.s3.eu-west-3.amazonaws.com/cfaec020-9bf4-4c0e-a2e3-dd0a6b7d8c0b.jpg',
-            urlDownload:
-              'https://wndoprobucket.s3.eu-west-3.amazonaws.com/cfaec020-9bf4-4c0e-a2e3-dd0a6b7d8c0b.jpg',
-          },
-          price: 145,
-          priceAfterOffer: 0,
-          offerPercentage: 0,
-          description: 'Classic Radio Golon F10',
-          shareUrl:
-            'https://store.wndo.com/product/d9c4bc36-2eac-486b-b3cf-89d6b797ced9',
+          id: 3424,
+          imageId: '51',
+          urlThumbnail:
+            'https://wndoprobucket.s3.eu-west-3.amazonaws.com/50caa500-eced-4803-9800-2fac3798ab6b.jpg',
+          urlPreview:
+            'https://wndoprobucket.s3.eu-west-3.amazonaws.com/50caa500-eced-4803-9800-2fac3798ab6b.jpg',
         },
       ],
+      videos: [
+        {
+          id: 17203,
+          videoId: '9e1097f7-111e-4cf3-b2ff-d4bcbf82c87d',
+          urlThumbnail:
+            'https://wndoprobucket.s3.eu-west-3.amazonaws.com/a6ad2173-f649-4c7c-abc5-5f71d0b48e13.png',
+          urlPreview:
+            'https://wndovodstack-source71e471f1-12o7ase9r16a7.s3.eu-west-3.amazonaws.com/assets01/9e1097f7-111e-4cf3-b2ff-d4bcbf82c87d.3gp',
+          isMain: true,
+          name: 'Main',
+          description: 'Main',
+        },
+      ],
+      items: [
+        {
+          id: 5345,
+          name: 'Classic Radio Golon F10',
+        },
+        {
+          id: 56546,
+          name: 'Classic Radio Golon F10',
+        },
+        {
+          id: 543243,
+          name: 'Classic Radio Golon F10',
+        },
+      ],
+
+      id: '7a734dd3-3cf8-4ec1-b7ad-7a8912d0a03b',
     },
     {
+      name: '385',
+      description: '385',
+      price: 385,
+      date: '28 June , 6 PM',
       statues: 'shipping',
-      id: 234,
-      price: 1000,
-      date: '28 June , 6 PM',
-      items: [
+      images: [
         {
-          id: 'd9c4bc36-2eac-486b-b3cf-89d6b797ced9',
-          name: '145',
-          image: {
-            id: 45087,
-            imageId: '60',
-            urlThumbnail:
-              'https://wndoprobucket.s3.eu-west-3.amazonaws.com/cfaec020-9bf4-4c0e-a2e3-dd0a6b7d8c0b.jpg',
-            urlPreview:
-              'https://wndoprobucket.s3.eu-west-3.amazonaws.com/cfaec020-9bf4-4c0e-a2e3-dd0a6b7d8c0b.jpg',
-            urlDownload:
-              'https://wndoprobucket.s3.eu-west-3.amazonaws.com/cfaec020-9bf4-4c0e-a2e3-dd0a6b7d8c0b.jpg',
-          },
-          price: 145,
-          priceAfterOffer: 0,
-          offerPercentage: 0,
-          description: 'Classic Radio Golon F10',
-          shareUrl:
-            'https://store.wndo.com/product/d9c4bc36-2eac-486b-b3cf-89d6b797ced9',
-        },
-        {
-          id: 'd9c4bc36-2eac-486b-b3cf-89d6b797ced659',
-          name: '145',
-          image: {
-            id: 45087,
-            imageId: '60',
-            urlThumbnail:
-              'https://wndoprobucket.s3.eu-west-3.amazonaws.com/cfaec020-9bf4-4c0e-a2e3-dd0a6b7d8c0b.jpg',
-            urlPreview:
-              'https://wndoprobucket.s3.eu-west-3.amazonaws.com/cfaec020-9bf4-4c0e-a2e3-dd0a6b7d8c0b.jpg',
-            urlDownload:
-              'https://wndoprobucket.s3.eu-west-3.amazonaws.com/cfaec020-9bf4-4c0e-a2e3-dd0a6b7d8c0b.jpg',
-          },
-          price: 145,
-          priceAfterOffer: 0,
-          offerPercentage: 0,
-          description: 'Classic Radio Golon F10',
-          shareUrl:
-            'https://store.wndo.com/product/d9c4bc36-2eac-486b-b3cf-89d6b797ced9',
+          id: 45084,
+          imageId: '51',
+          urlThumbnail:
+            'https://wndoprobucket.s3.eu-west-3.amazonaws.com/50caa500-eced-4803-9800-2fac3798ab6b.jpg',
+          urlPreview:
+            'https://wndoprobucket.s3.eu-west-3.amazonaws.com/50caa500-eced-4803-9800-2fac3798ab6b.jpg',
         },
       ],
-    },
+      videos: [
+        {
+          id: 17203,
+          videoId: '9e1097f7-111e-4cf3-b2ff-d4bcbf82c87d',
+          urlThumbnail:
+            'https://wndoprobucket.s3.eu-west-3.amazonaws.com/a6ad2173-f649-4c7c-abc5-5f71d0b48e13.png',
+          urlPreview:
+            'https://wndovodstack-source71e471f1-12o7ase9r16a7.s3.eu-west-3.amazonaws.com/assets01/9e1097f7-111e-4cf3-b2ff-d4bcbf82c87d.3gp',
+          isMain: true,
+          name: 'Main',
+          description: 'Main',
+        },
+      ],
+      items: [
+        {
+          id: 5345,
+          name: 'Classic Radio Golon F10',
+        },
+        {
+          id: 56546,
+          name: 'Classic Radio Golon F10',
+        },
+        {
+          id: 543243,
+          name: 'Classic Radio Golon F10',
+        },
+      ],
 
+      id: '7a734dd3-3cf8-4ec1-b7ad-7a8912d0a03b',
+    },
     {
+      name: '34556',
+      description: '385',
+      price: 385,
+      date: '28 June , 6 PM',
       statues: 'delivered',
-      id: 234,
-      price: 1000,
-      date: '28 June , 6 PM',
-      items: [
+      images: [
         {
-          id: 'd9c4bc36-2eac-486b-b3cf-89d6b797ced9',
-          name: '145',
-          image: {
-            id: 45087,
-            imageId: '60',
-            urlThumbnail:
-              'https://wndoprobucket.s3.eu-west-3.amazonaws.com/cfaec020-9bf4-4c0e-a2e3-dd0a6b7d8c0b.jpg',
-            urlPreview:
-              'https://wndoprobucket.s3.eu-west-3.amazonaws.com/cfaec020-9bf4-4c0e-a2e3-dd0a6b7d8c0b.jpg',
-            urlDownload:
-              'https://wndoprobucket.s3.eu-west-3.amazonaws.com/cfaec020-9bf4-4c0e-a2e3-dd0a6b7d8c0b.jpg',
-          },
-          price: 145,
-          priceAfterOffer: 0,
-          offerPercentage: 0,
-          description: 'Classic Radio Golon F10',
-          shareUrl:
-            'https://store.wndo.com/product/d9c4bc36-2eac-486b-b3cf-89d6b797ced9',
-        },
-        {
-          id: 'd9c4bc36-2eac-486b-b3cf-89d6b797ced659',
-          name: '145',
-          image: {
-            id: 45087,
-            imageId: '60',
-            urlThumbnail:
-              'https://wndoprobucket.s3.eu-west-3.amazonaws.com/cfaec020-9bf4-4c0e-a2e3-dd0a6b7d8c0b.jpg',
-            urlPreview:
-              'https://wndoprobucket.s3.eu-west-3.amazonaws.com/cfaec020-9bf4-4c0e-a2e3-dd0a6b7d8c0b.jpg',
-            urlDownload:
-              'https://wndoprobucket.s3.eu-west-3.amazonaws.com/cfaec020-9bf4-4c0e-a2e3-dd0a6b7d8c0b.jpg',
-          },
-          price: 145,
-          priceAfterOffer: 0,
-          offerPercentage: 0,
-          description: 'Classic Radio Golon F10',
-          shareUrl:
-            'https://store.wndo.com/product/d9c4bc36-2eac-486b-b3cf-89d6b797ced9',
+          id: 45084,
+          imageId: '51',
+          urlThumbnail:
+            'https://wndoprobucket.s3.eu-west-3.amazonaws.com/50caa500-eced-4803-9800-2fac3798ab6b.jpg',
+          urlPreview:
+            'https://wndoprobucket.s3.eu-west-3.amazonaws.com/50caa500-eced-4803-9800-2fac3798ab6b.jpg',
         },
       ],
-    },
+      videos: [
+        {
+          id: 17203,
+          videoId: '9e1097f7-111e-4cf3-b2ff-d4bcbf82c87d',
+          urlThumbnail:
+            'https://wndoprobucket.s3.eu-west-3.amazonaws.com/a6ad2173-f649-4c7c-abc5-5f71d0b48e13.png',
+          urlPreview:
+            'https://wndovodstack-source71e471f1-12o7ase9r16a7.s3.eu-west-3.amazonaws.com/assets01/9e1097f7-111e-4cf3-b2ff-d4bcbf82c87d.3gp',
+          isMain: true,
+          name: 'Main',
+          description: 'Main',
+        },
+      ],
+      items: [
+        {
+          id: 5345,
+          name: 'Classic Radio Golon F10',
+        },
+        {
+          id: 56546,
+          name: 'Classic Radio Golon F10',
+        },
+        {
+          id: 543243,
+          name: 'Classic Radio Golon F10',
+        },
+      ],
 
+      id: '7a734dd3-3cf8-4ec1-b7ad-7a8912d0a03b',
+    },
     {
+      name: '5345',
+      description: '385',
+      price: 385,
+      date: '28 June , 6 PM',
       statues: 'returned',
-      id: 234,
-      price: 1000,
-      date: '28 June , 6 PM',
-      items: [
+      images: [
         {
-          id: 'd9c4bc36-2eac-486b-b3cf-89d6b797ced9',
-          name: '145',
-          image: {
-            id: 45087,
-            imageId: '60',
-            urlThumbnail:
-              'https://wndoprobucket.s3.eu-west-3.amazonaws.com/cfaec020-9bf4-4c0e-a2e3-dd0a6b7d8c0b.jpg',
-            urlPreview:
-              'https://wndoprobucket.s3.eu-west-3.amazonaws.com/cfaec020-9bf4-4c0e-a2e3-dd0a6b7d8c0b.jpg',
-            urlDownload:
-              'https://wndoprobucket.s3.eu-west-3.amazonaws.com/cfaec020-9bf4-4c0e-a2e3-dd0a6b7d8c0b.jpg',
-          },
-          price: 145,
-          priceAfterOffer: 0,
-          offerPercentage: 0,
-          description: 'Classic Radio Golon F10',
-          shareUrl:
-            'https://store.wndo.com/product/d9c4bc36-2eac-486b-b3cf-89d6b797ced9',
-        },
-        {
-          id: 'd9c4bc36-2eac-486b-b3cf-89d6b797ced659',
-          name: '145',
-          image: {
-            id: 45087,
-            imageId: '60',
-            urlThumbnail:
-              'https://wndoprobucket.s3.eu-west-3.amazonaws.com/cfaec020-9bf4-4c0e-a2e3-dd0a6b7d8c0b.jpg',
-            urlPreview:
-              'https://wndoprobucket.s3.eu-west-3.amazonaws.com/cfaec020-9bf4-4c0e-a2e3-dd0a6b7d8c0b.jpg',
-            urlDownload:
-              'https://wndoprobucket.s3.eu-west-3.amazonaws.com/cfaec020-9bf4-4c0e-a2e3-dd0a6b7d8c0b.jpg',
-          },
-          price: 145,
-          priceAfterOffer: 0,
-          offerPercentage: 0,
-          description: 'Classic Radio Golon F10',
-          shareUrl:
-            'https://store.wndo.com/product/d9c4bc36-2eac-486b-b3cf-89d6b797ced9',
+          id: 45084,
+          imageId: '51',
+          urlThumbnail:
+            'https://wndoprobucket.s3.eu-west-3.amazonaws.com/50caa500-eced-4803-9800-2fac3798ab6b.jpg',
+          urlPreview:
+            'https://wndoprobucket.s3.eu-west-3.amazonaws.com/50caa500-eced-4803-9800-2fac3798ab6b.jpg',
         },
       ],
-    },
+      videos: [
+        {
+          id: 17203,
+          videoId: '9e1097f7-111e-4cf3-b2ff-d4bcbf82c87d',
+          urlThumbnail:
+            'https://wndoprobucket.s3.eu-west-3.amazonaws.com/a6ad2173-f649-4c7c-abc5-5f71d0b48e13.png',
+          urlPreview:
+            'https://wndovodstack-source71e471f1-12o7ase9r16a7.s3.eu-west-3.amazonaws.com/assets01/9e1097f7-111e-4cf3-b2ff-d4bcbf82c87d.3gp',
+          isMain: true,
+          name: 'Main',
+          description: 'Main',
+        },
+      ],
+      items: [
+        {
+          id: 5345,
+          name: 'Classic Radio Golon F10',
+        },
+        {
+          id: 56546,
+          name: 'Classic Radio Golon F10',
+        },
+        {
+          id: 543243,
+          name: 'Classic Radio Golon F10',
+        },
+      ],
 
+      id: '7a734dd3-3cf8-4ec1-b7ad-7a8912d0a03b',
+    },
     {
-      statues: 'cancelled',
-      id: 234,
-      price: 1000,
+      name: '5345',
+      description: '385',
+      price: 385,
       date: '28 June , 6 PM',
-      items: [
+      statues: 'cancelled',
+      images: [
         {
-          id: 'd9c4bc36-2eac-486b-b3cf-89d6b797ced9',
-          name: '145',
-          image: {
-            id: 45087,
-            imageId: '60',
-            urlThumbnail:
-              'https://wndoprobucket.s3.eu-west-3.amazonaws.com/cfaec020-9bf4-4c0e-a2e3-dd0a6b7d8c0b.jpg',
-            urlPreview:
-              'https://wndoprobucket.s3.eu-west-3.amazonaws.com/cfaec020-9bf4-4c0e-a2e3-dd0a6b7d8c0b.jpg',
-            urlDownload:
-              'https://wndoprobucket.s3.eu-west-3.amazonaws.com/cfaec020-9bf4-4c0e-a2e3-dd0a6b7d8c0b.jpg',
-          },
-          price: 145,
-          priceAfterOffer: 0,
-          offerPercentage: 0,
-          description: 'Classic Radio Golon F10',
-          shareUrl:
-            'https://store.wndo.com/product/d9c4bc36-2eac-486b-b3cf-89d6b797ced9',
-        },
-        {
-          id: 'd9c4bc36-2eac-486b-b3cf-89d6b797ced659',
-          name: '145',
-          image: {
-            id: 45087,
-            imageId: '60',
-            urlThumbnail:
-              'https://wndoprobucket.s3.eu-west-3.amazonaws.com/cfaec020-9bf4-4c0e-a2e3-dd0a6b7d8c0b.jpg',
-            urlPreview:
-              'https://wndoprobucket.s3.eu-west-3.amazonaws.com/cfaec020-9bf4-4c0e-a2e3-dd0a6b7d8c0b.jpg',
-            urlDownload:
-              'https://wndoprobucket.s3.eu-west-3.amazonaws.com/cfaec020-9bf4-4c0e-a2e3-dd0a6b7d8c0b.jpg',
-          },
-          price: 145,
-          priceAfterOffer: 0,
-          offerPercentage: 0,
-          description: 'Classic Radio Golon F10',
-          shareUrl:
-            'https://store.wndo.com/product/d9c4bc36-2eac-486b-b3cf-89d6b797ced9',
+          id: 45084,
+          imageId: '51',
+          urlThumbnail:
+            'https://wndoprobucket.s3.eu-west-3.amazonaws.com/50caa500-eced-4803-9800-2fac3798ab6b.jpg',
+          urlPreview:
+            'https://wndoprobucket.s3.eu-west-3.amazonaws.com/50caa500-eced-4803-9800-2fac3798ab6b.jpg',
         },
       ],
+      videos: [
+        {
+          id: 17203,
+          videoId: '9e1097f7-111e-4cf3-b2ff-d4bcbf82c87d',
+          urlThumbnail:
+            'https://wndoprobucket.s3.eu-west-3.amazonaws.com/a6ad2173-f649-4c7c-abc5-5f71d0b48e13.png',
+          urlPreview:
+            'https://wndovodstack-source71e471f1-12o7ase9r16a7.s3.eu-west-3.amazonaws.com/assets01/9e1097f7-111e-4cf3-b2ff-d4bcbf82c87d.3gp',
+          isMain: true,
+          name: 'Main',
+          description: 'Main',
+        },
+      ],
+      items: [
+        {
+          id: 5345,
+          name: 'Classic Radio Golon F10',
+        },
+        {
+          id: 56546,
+          name: 'Classic Radio Golon F10',
+        },
+        {
+          id: 543243,
+          name: 'Classic Radio Golon F10',
+        },
+      ],
+
+      id: '7a734dd3-3cf8-4ec1-b7ad-7a8912d0a03b',
     },
   ];
 
+  activeTab(item: string) {
+    this.currentTab = item;
+    // Additional logic if needed when a tab is activated
+    console.log(`Tab ${item} is now active.`);
+  }
+
   getItems(status: string) {
     let items: any[];
-    items = this.orders.filter((order) => order.statues === status);
+    items = this.myOrders.filter((order) => order.statues === status);
     return items;
   }
 
@@ -267,37 +269,32 @@ export class MyOrdersComponent {
     switch (status) {
       case 'ordered':
         return {
-          ButtonBg:
-            'tab-btn--ordered',
+          ButtonBg: 'tab-btn--ordered',
           lengthSpan: 'text-lightBlue-500',
           icon: 'ordered-note',
         };
       case 'shipping':
         return {
-          ButtonBg:
-            'tab-btn--shipping',
+          ButtonBg: 'tab-btn--shipping',
           lengthSpan: 'text-orange-700',
           icon: 'out-for-delivery-one',
         };
       case 'delivered':
         return {
-          ButtonBg:
-            'tab-btn--delivered',
+          ButtonBg: 'tab-btn--delivered',
           lengthSpan: 'text-green-600',
           icon: 'deliverytruck',
         };
 
       case 'returned':
         return {
-          ButtonBg:
-            'tab-btn--returned',
+          ButtonBg: 'tab-btn--returned',
           lengthSpan: 'text-yellow-500',
           icon: 'returned',
         };
       case 'cancelled':
         return {
-          ButtonBg:
-            'tab-btn--cancelled',
+          ButtonBg: 'tab-btn--cancelled',
           lengthSpan: 'text-red-600',
           icon: 'canceled',
         };

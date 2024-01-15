@@ -71,26 +71,19 @@ export class StepperComponent implements AfterContentInit {
         if (index < stepElementsArray.length - 1) {
           const nextStep = stepElementsArray[index + 1];
           const line = step.children[0]?.children[0];
-
-          if (line) {  // Check if the line element is defined
+          if (line) {
             let lineWidth: number;
-            const lengthOfSteps = (this.steps && this.steps.length) || 2;
 
-            if (index === 0) {
-              // For the first step, adjust the calculation
-              lineWidth =
-                nextStep.offsetLeft +
-                nextStep.clientWidth / 1 -
-                step.offsetLeft -
-                step.clientWidth / 1;
-            } else {
-              // For subsequent steps
-              lineWidth =
-                nextStep.offsetLeft -
-                step.offsetLeft +
-                nextStep.clientWidth / 1 -
-                step.clientWidth / 1;
-            }
+            const stepX = step.offsetLeft + step.offsetWidth / 2;
+            const stepY = step.offsetTop + step.offsetHeight / 2;
+
+            const nextStepX = nextStep.offsetLeft + nextStep.offsetWidth / 2;
+            const nextStepY = nextStep.offsetTop + nextStep.offsetHeight / 2;
+
+            const distance = Math.sqrt(Math.pow(nextStepX - stepX, 2) + Math.pow(nextStepY - stepY, 2));
+            const circleWidth = 11;
+
+            lineWidth = distance - circleWidth * 2;
 
             this.renderer.setStyle(line, 'width', `${lineWidth}px`);
           }

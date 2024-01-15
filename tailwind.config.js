@@ -15,6 +15,7 @@ module.exports = {
       colors: {
         primary: {
           DEFAULT: "#ff002a",
+          100: "#FFF7F8",
           400: "#FF4B46",
           500: "#ff002a",
           600: "#FA0029",
@@ -22,6 +23,7 @@ module.exports = {
         },
 
         red: {
+          100: "#FFF7F8",
           500: "#FF002A",
           600: "#FA0029",
         },
@@ -95,6 +97,9 @@ module.exports = {
         6.5: "1.625rem",
       },
       height: {
+        13: "3.125rem",
+      },
+      width: {
         13: "3.125rem",
       },
       fontSize: {

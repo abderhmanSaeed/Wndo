@@ -9,7 +9,7 @@ import { VideoModalComponent } from '../video-modal/video-modal.component';
 @Component({
   selector: 'app-gallery',
   templateUrl: './gallery.component.html',
-  styleUrl: './gallery.component.scss'
+  styleUrl: './gallery.component.scss',
 })
 export class GalleryComponent implements OnInit {
   @Input() videoUrl: string = '';
@@ -17,39 +17,42 @@ export class GalleryComponent implements OnInit {
   images: any[] = [
     {
       id: 45084,
-      imageId: "53453",
-      urlPreview: "https://swiperjs.com/demos/images/nature-1.jpg",
-      urlThumbnail: "https://swiperjs.com/demos/images/nature-1.jpg"
+      imageId: '53453',
+      urlPreview: 'https://swiperjs.com/demos/images/nature-1.jpg',
+      urlThumbnail: 'https://swiperjs.com/demos/images/nature-1.jpg',
     },
     {
       id: 45085,
-      imageId: "53453",
-      urlPreview: "https://swiperjs.com/demos/images/nature-2.jpg",
-      urlThumbnail: "https://swiperjs.com/demos/images/nature-2.jpg"
+      imageId: '53453',
+      urlPreview: 'https://swiperjs.com/demos/images/nature-2.jpg',
+      urlThumbnail: 'https://swiperjs.com/demos/images/nature-2.jpg',
     },
     {
       id: 45086,
-      imageId: "4353",
-      urlPreview: "https://swiperjs.com/demos/images/nature-3.jpg",
-      urlThumbnail: "https://swiperjs.com/demos/images/nature-3.jpg"
+      imageId: '4353',
+      urlPreview: 'https://swiperjs.com/demos/images/nature-3.jpg',
+      urlThumbnail: 'https://swiperjs.com/demos/images/nature-3.jpg',
     },
     {
       id: 45087,
-      imageId: "453",
-      urlPreview: "https://swiperjs.com/demos/images/nature-4.jpg",
-      urlThumbnail: "https://swiperjs.com/demos/images/nature-4.jpg"
-    }
-  ]
-  videos: any[] = [{
-    id: 17203,
-    videoId: "9e1097f7-111e-4cf3-b2ff-d4bcbf82c87d",
-    urlThumbnail: "https://wndoprobucket.s3.eu-west-3.amazonaws.com/a6ad2173-f649-4c7c-abc5-5f71d0b48e13.png",
-    urlPreview: "https://wndovodstack-source71e471f1-12o7ase9r16a7.s3.eu-west-3.amazonaws.com/assets01/9e1097f7-111e-4cf3-b2ff-d4bcbf82c87d.3gp",
-    isMain: true,
-    name: "Main",
-    description: "Main"
-  }
-  ]
+      imageId: '453',
+      urlPreview: 'https://swiperjs.com/demos/images/nature-4.jpg',
+      urlThumbnail: 'https://swiperjs.com/demos/images/nature-4.jpg',
+    },
+  ];
+  videos: any[] = [
+    {
+      id: 17203,
+      videoId: '9e1097f7-111e-4cf3-b2ff-d4bcbf82c87d',
+      urlThumbnail:
+        'https://wndoprobucket.s3.eu-west-3.amazonaws.com/a6ad2173-f649-4c7c-abc5-5f71d0b48e13.png',
+      urlPreview:
+        'https://wndovodstack-source71e471f1-12o7ase9r16a7.s3.eu-west-3.amazonaws.com/assets01/9e1097f7-111e-4cf3-b2ff-d4bcbf82c87d.3gp',
+      isMain: true,
+      name: 'Main',
+      description: 'Main',
+    },
+  ];
   @ViewChild('swiper') swiper!: ElementRef<SwiperContainer>;
   @ViewChild('swiperThumbs') swiperThumbs!: ElementRef<SwiperContainer>;
   urlPreview: any;
@@ -105,10 +108,12 @@ export class GalleryComponent implements OnInit {
   }
   ngAfterViewInit() {
     if (this.swiper && this.swiperThumbs) {
-      this.swiper.nativeElement.swiper.controller.control = this.swiperThumbs.nativeElement.swiper;
-      this.swiperThumbs.nativeElement.swiper.controller.control = this.swiper.nativeElement.swiper;
+      this.swiper.nativeElement.swiper.controller.control =
+        this.swiperThumbs.nativeElement.swiper;
+      this.swiperThumbs.nativeElement.swiper.controller.control =
+        this.swiper.nativeElement.swiper;
     }
-console.log(this.index)
+    console.log(this.index);
   }
 
   // closeModal() {
@@ -119,9 +124,11 @@ console.log(this.index)
   // }
 
   slideChange(swiperRef: any) {
-    console.log("🫠slideChange", swiperRef);
+    console.log('🫠slideChange', swiperRef);
     this.urlPreview = swiperRef.urlPreview;
-    this.index = this.images.concat(this.videos).findIndex((item) => item.id === swiperRef.id)
+    this.index = this.images
+      .concat(this.videos)
+      .findIndex((item) => item.id === swiperRef.id);
     // if(this.swiperThumbs){
     //   console.log(this.images.concat(this.videos).findIndex((item) => item.id === swiperRef.id))
     // }

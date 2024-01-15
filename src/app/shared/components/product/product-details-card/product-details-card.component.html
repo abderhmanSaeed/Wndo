@@ -9,31 +9,20 @@
     <div>
       <h6 class="mb-4">Additional Info</h6>
       <ul class="flex flex-col">
-        <li
-          class="inline-flex items-center gap-x-2 py-3 px-4 text-sm font-medium odd:bg-gray-100 bg-white text-gray-800 -mt-px first:mt-0 rounded"
+        <li *ngFor="let lookup of product.lookups"
+            class="inline-flex items-center gap-x-2 py-3 px-4 text-sm font-medium odd:bg-gray-100 bg-white text-gray-800 -mt-px first:mt-0 rounded"
         >
-          <span class="text-base text-purple-400">Model</span>
-          <span class="text-gray-950">Odsy-1000</span>
-        </li>
-        <li
-          class="inline-flex items-center gap-x-2 py-3 px-4 text-sm font-medium odd:bg-gray-100 bg-white text-gray-800 -mt-px first:mt-0 rounded"
-        >
-          <span class="text-base text-purple-400">Color</span>
-          <span class="text-gray-950 text-base">Multi Color</span>
-        </li>
-        <li
-          class="inline-flex justify-betweenitems-center gap-x-2 py-3 px-4 text-sm font-medium odd:bg-gray-100 bg-white text-gray-800 -mt-px first:mt-0 rounded"
-        >
-          <span class="space-x-2">
-            <span class="text-base text-purple-400">Delivery</span>
-            <span class="text-gray-950 text-base">3 Days </span>
+          <span class="text-base text-purple-400">{{ lookup.displayName }}</span>
+          <span class="text-gray-950 text-base" *ngIf="!lookup.isMultiChoice">{{ lookup.lookupValues[0].displayName }}</span>
+          <span class="text-gray-950 text-base" *ngIf="lookup.isMultiChoice">
+            <ng-container *ngFor="let value of lookup.lookupValues">
+              {{ value.displayName }}
+            </ng-container>
           </span>
-          <span class="text-gray-950 text-base ms-auto"
-            >(Based on your address)</span
-          >
         </li>
       </ul>
     </div>
+
   </div>
 
   <div class="lg:col-span-5 xxl:col-span-6 3xl:col-span-3">

@@ -2,6 +2,7 @@ import { SharedModule } from './../../../shared/shared.module';
 import { ProductResponse, ProductApiAlsoResponse, ProductColorAndSizesResponse } from '../../../shared/models';
 import { ProductService } from './../../../data/service/product/product.service';
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 
 
 @Component({
@@ -17,8 +18,8 @@ export class ProductDetailsComponent implements OnInit {
   responseData: ProductApiAlsoResponse | null = null; // Initialize to null or default value
   productColorAndSizesResponse: ProductColorAndSizesResponse | undefined;
 
-  productId: any = '7a734dd3-3cf8-4ec1-b7ad-7a8912d0a03b';
-  constructor(private productService: ProductService) {
+  // productId: any = '7a734dd3-3cf8-4ec1-b7ad-7a8912d0a03b';
+  constructor(private productService: ProductService, private route: ActivatedRoute,) {
 
   }
   ngOnInit(): void {
@@ -26,13 +27,16 @@ export class ProductDetailsComponent implements OnInit {
 
   }
   init(): void {
+    // Retrieve seller ID from route parameters
+    const productId = this.route.snapshot.paramMap.get('productId');
+    console.log('Seller ID in ProductOffersComponent:', productId);
     // Your initialization code here
-    this.getProductDetails();
-    this.getProductAlsoDetails();
-    this.getProductColorAndSizes();
+    this.getProductDetails(productId);
+    this.getProductAlsoDetails(productId);
+    this.getProductColorAndSizes(productId);
   }
-  getProductDetails(): void {
-    this.productService.getProductDetails(this.productId)
+  getProductDetails(productId: any): void {
+    this.productService.getProductDetails(productId)
       .subscribe(
         (data: ProductResponse) => {
           console.log('Product Details:', data);
@@ -44,8 +48,8 @@ export class ProductDetailsComponent implements OnInit {
         }
       );
   }
-  getProductAlsoDetails() {
-    this.productService.getProductAlsoLikeDetails(this.productId).subscribe(
+  getProductAlsoDetails(productId: any) {
+    this.productService.getProductAlsoLikeDetails(productId).subscribe(
       (response: ProductApiAlsoResponse) => {
         if (response.isSuccess && response.statusCode === 200) {
           // Handle the successful response here
@@ -61,8 +65,8 @@ export class ProductDetailsComponent implements OnInit {
       }
     );
   }
-  getProductColorAndSizes() {
-    this.productService.getProductColorAndSizes(this.productId)
+  getProductColorAndSizes(productId: any) {
+    this.productService.getProductColorAndSizes(productId)
       .subscribe(
         (data: ProductColorAndSizesResponse) => {
           this.productColorAndSizesResponse = data;

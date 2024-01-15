@@ -1,4 +1,4 @@
- import { SharedModule } from './../../../shared/shared.module';
+import { SharedModule } from './../../../shared/shared.module';
 import { ProductResponse, ProductApiAlsoResponse, ProductColorAndSizesResponse } from '../../../shared/models';
 import { ProductService } from './../../../data/service/product/product.service';
 import { Component, OnInit } from '@angular/core';
@@ -18,8 +18,15 @@ export class ProductDetailsComponent implements OnInit {
   productColorAndSizesResponse: ProductColorAndSizesResponse | undefined;
 
   productId: any = '7a734dd3-3cf8-4ec1-b7ad-7a8912d0a03b';
-  constructor(private productService: ProductService) { }
+  constructor(private productService: ProductService) {
+
+  }
   ngOnInit(): void {
+    this.init();
+
+  }
+  init(): void {
+    // Your initialization code here
     this.getProductDetails();
     this.getProductAlsoDetails();
     this.getProductColorAndSizes();
@@ -54,14 +61,14 @@ export class ProductDetailsComponent implements OnInit {
       }
     );
   }
-  getProductColorAndSizes(){
+  getProductColorAndSizes() {
     this.productService.getProductColorAndSizes(this.productId)
-    .subscribe(
-      (data: ProductColorAndSizesResponse) => {
-        this.productColorAndSizesResponse = data;
-        console.log('Product Color and Sizes Response:', data);
-      },
-      error => console.error('Error:', error)
-    );
+      .subscribe(
+        (data: ProductColorAndSizesResponse) => {
+          this.productColorAndSizesResponse = data;
+          console.log('Product Color and Sizes Response:', data);
+        },
+        error => console.error('Error:', error)
+      );
   }
 }

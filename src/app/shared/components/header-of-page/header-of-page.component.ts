@@ -7,7 +7,6 @@ import { ActivatedRoute, Router } from '@angular/router';
 })
 export class HeaderOfPageComponent implements OnInit {
   @Input() seller!: any;
-  productId: any = '7a734dd3-3cf8-4ec1-b7ad-7a8912d0a03b';
   isProductOffersRoute: boolean = false;
 
   constructor(private renderer: Renderer2, private el: ElementRef, private route: ActivatedRoute, private router: Router,) { }

@@ -1,4 +1,5 @@
-import { HttpClientModule } from '@angular/common/http';
+import { TranslatePipe } from './pipes/translate.pipe';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { OrderConfirmedModal } from './components/modals/order-confirmed-modal/order-confirmed-modall.component';
 import { ModalComponent } from './components/modal/modal.component';
 import { SelectComponent } from './components/inputs/Select/select.component';
@@ -35,6 +36,8 @@ import { VideoModalComponent } from './components/product/video-modal/video-moda
 import { ModalModule } from 'ngx-bootstrap/modal';
 import { AngularSvgIconModule } from 'angular-svg-icon';
 import { MyOrderCardComponent } from './components/order/my-order-card/my-order-card.component';
+import { TranslationService } from '../data/service/translation/translation.service';
+import { TranslateModule } from '@ngx-translate/core';
 
 register();
 
@@ -70,6 +73,7 @@ register();
     OrderConfirmedModal,
     VideoModalComponent,
     MyOrderCardComponent,
+    TranslatePipe,
   ],
   imports: [
     CommonModule,
@@ -79,6 +83,7 @@ register();
     ModalModule.forRoot(),
     HttpClientModule,
     AngularSvgIconModule.forRoot(),
+    TranslateModule,
   ],
 
   exports: [
@@ -111,8 +116,11 @@ register();
     LoginModalComponent,
     ConfirmationComponent,
     OrderConfirmedModal,
-    MyOrderCardComponent
+    MyOrderCardComponent,
+    TranslateModule
   ],
+  providers: [TranslationService],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
-export class SharedModule {}
+export class SharedModule {
+}

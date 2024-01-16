@@ -9,7 +9,8 @@ import { OrderProcessComponent } from './order-process/order-process.component';
 import { ProductOffersComponent } from './product-offers/product-offers.component';
 import { ModalModule } from 'ngx-bootstrap/modal';
 import { MyOrdersComponent } from './my-orders/my-orders.component';
-import { provideClientHydration } from '@angular/platform-browser';
+import {provideClientHydration} from '@angular/platform-browser';
+import { TranslateModule } from '@ngx-translate/core';
 
 
 @NgModule({

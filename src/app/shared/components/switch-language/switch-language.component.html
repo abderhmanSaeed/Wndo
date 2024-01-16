@@ -1,53 +1,33 @@
-<button
-(click)="toggleDropdown()"
-id="changeLangButton"
-[class.active]="isDropdownVisible"
-class="gap-x-2 text-xxs text-blue-800 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-full px-5 py-2.5 text-center inline-flex items-center"
-type="button"
->
-<i class="fa-solid fa-earth-asia"></i>
-English
-<svg
-  class="w-2.5 h-2.5 ms-3"
-  aria-hidden="true"
-  xmlns="http://www.w3.org/2000/svg"
-  fill="none"
-  viewBox="0 0 10 6"
->
-  <path
-    stroke="currentColor"
-    stroke-linecap="round"
-    stroke-linejoin="round"
-    stroke-width="2"
-    d="m1 1 4 4 4-4"
-  />
-</svg>
+<button (click)="toggleDropdown()" id="changeLangButton" [class.active]="isDropdownVisible"
+  class="gap-x-2 text-xxs text-blue-800 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-full px-5 py-2.5 text-center inline-flex items-center"
+  type="button">
+  <i class="fa-solid fa-earth-asia"></i>
+  {{ selectedLanguage }}
+  <svg class="w-2.5 h-2.5 ms-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
+    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 4 4 4-4" />
+  </svg>
 </button>
 
+<!-- <button mat-menu-item *ngFor="let flag of flags" (click)="changeLang(flag, flag.lang)">
+  <img [src]="flag.image" width="18" class="mat-elevation-z1 mx-2" /><span class="flag-name">{{ flag.name }}</span>
+</button> -->
+
 <!-- Dropdown menu -->
-<div
-id="dropdown"
-[class.hidden]="!isDropdownVisible"
-class="z-10 bg-white divide-y divide-gray-100 rounded-lg shadow w-44"
->
-<ul
-  class="py-2 text-sm text-gray-700"
-  aria-labelledby="changeLangButton"
->
-  <li class="text-start">
-    <button
-      class="text-start w-full px-4 py-2 hover:bg-gray-100 text-xxs"
-    >
-      English
-    </button>
-  </li>
-  <li>
-    <button
-      href="#"
-      class="text-start w-full px-4 py-2 hover:bg-gray-100 text-xxs"
-    >
-      Arabic
-    </button>
-  </li>
-</ul>
+<div id="dropdown" [class.hidden]="!isDropdownVisible"
+  class="z-10 bg-white divide-y divide-gray-100 rounded-lg shadow w-44">
+  <ul class="py-2 text-sm text-gray-700" aria-labelledby="changeLangButton">
+    <li *ngFor="let flag of flags" class="text-start">
+      <button (click)="handleLanguageSelection(flag, flag.lang)"
+        class="text-start w-full px-4 py-2 hover:bg-gray-100 text-xxs">
+        <img [src]="flag.image" width="18" class="mat-elevation-z1 mx-2" /><span class="flag-name">{{ flag.name
+          }}</span>
+      </button>
+    </li>
+    <!-- <li>
+      <button (click)="handleLanguageSelection('ar')" href="#"
+        class="text-start w-full px-4 py-2 hover:bg-gray-100 text-xxs">
+        Arabic
+      </button>
+    </li> -->
+  </ul>
 </div>

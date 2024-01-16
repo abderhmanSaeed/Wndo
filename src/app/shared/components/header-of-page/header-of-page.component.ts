@@ -1,5 +1,7 @@
+import { RestApiService } from './../../services/api.service';
 import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { TranslateService } from '@ngx-translate/core';
 @Component({
   selector: 'app-header-of-page',
   templateUrl: './header-of-page.component.html',
@@ -9,7 +11,10 @@ export class HeaderOfPageComponent implements OnInit {
   @Input() seller!: any;
   isProductOffersRoute: boolean = false;
 
-  constructor(private route: ActivatedRoute, private router: Router) { }
+  constructor(private route: ActivatedRoute, private router: Router,
+
+
+  ) { }
 
   ngOnInit(): void {
     this.route.queryParams.subscribe(queryParams => {
@@ -22,7 +27,8 @@ export class HeaderOfPageComponent implements OnInit {
     // Only navigate if not on the productOffers route
     if (!this.isProductOffersRoute) {
       // Navigate to the product/productOffers route with seller ID
-      this.router.navigate(['/product/productOffers', { sellerId: sellerId }]);    }
+      this.router.navigate(['/product/productOffers', { sellerId: sellerId }]);
+    }
   }
 
 

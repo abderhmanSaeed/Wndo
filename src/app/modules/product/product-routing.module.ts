@@ -17,7 +17,7 @@ const productRoutes: Routes = [
   { path: 'orderProcess', component: OrderProcessComponent },
   { path: 'productOffers', component: ProductOffersComponent },
   { path: 'myOrders', component: MyOrdersComponent },
-  { path: '', redirectTo: 'productDetails', pathMatch: 'full' } // Default route for /product
+  { path: '**', redirectTo: 'productDetails', pathMatch: 'full' } // Default route for /product
 ];
 
 @NgModule({

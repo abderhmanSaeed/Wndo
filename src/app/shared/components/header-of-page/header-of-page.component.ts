@@ -12,7 +12,7 @@ export class HeaderOfPageComponent implements OnInit {
   constructor(private renderer: Renderer2, private el: ElementRef, private route: ActivatedRoute, private router: Router,) { }
   ngOnInit(): void {
     this.route.paramMap.subscribe(paramMap => {
-      this.isProductOffersRoute = paramMap.has('productOffers');
+      this.isProductOffersRoute = paramMap.get('sellerId') !== null;
     });
   }
 

@@ -1,8 +1,7 @@
 <section class="header-page mb-24">
   <div class="content-page flex justify-between items-center">
     <img class="w-32 h-32 rounded-full mt-12" [src]="seller?.imagePath" alt="{{ seller?.id }}"
-      [class.pointer-cursor]="!isProductOffersRoute" (click)="logSellerId()" />
-
+      [class.pointer-cursor]="!isProductOffersRoute" *ngIf="!this.isProductOffersRoute" (click)="logSellerId()" />
     <ul class="flex gap-5">
       <li>
         <app-switch-language></app-switch-language>

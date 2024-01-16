@@ -1,4 +1,4 @@
-import { Component, ElementRef, HostListener, Renderer2 } from '@angular/core';
+import { Component, ElementRef, HostListener, OnInit, Renderer2 } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 
 @Component({
@@ -6,7 +6,7 @@ import { TranslateService } from '@ngx-translate/core';
   templateUrl: './switch-language.component.html',
   styleUrls: ['./switch-language.component.scss']
 })
-export class SwitchLanguageComponent {
+export class SwitchLanguageComponent implements OnInit {
   isDropdownVisible = false;
   selectedLanguage = 'English';
 
@@ -22,8 +22,11 @@ export class SwitchLanguageComponent {
     private renderer: Renderer2,
     public translate: TranslateService,
 
-  ) {}
+  ) { }
+  ngOnInit(): void {
 
+    this.setLanguageOnInit();
+  }
   toggleDropdown() {
     this.isDropdownVisible = !this.isDropdownVisible;
 
@@ -58,6 +61,7 @@ export class SwitchLanguageComponent {
       document.documentElement.setAttribute('data-lang', 'en');
       // this.spinner.show();
       document.querySelector('.ar-stylesheet')?.setAttribute('href', '');
+      this.selectedLanguage = flag.name;
     } else {
       document.documentElement.dir = 'rtl';
       document.documentElement.lang = 'ar';
@@ -65,25 +69,50 @@ export class SwitchLanguageComponent {
       document
         .querySelector('.ar-stylesheet')
         ?.setAttribute('href', '/assets/css/ar-style.css');
+      this.selectedLanguage = flag.name;
+
     }
     this.translate.use(lang);
     localStorage.setItem('lang', lang);
     // Perform language-specific action here
     console.log(`Selected language: ${lang}`);
 
-    // Update the selected language
-    if(lang === 'en'){
-
-      this.selectedLanguage = 'English';
-    }
-    else {
-      this.selectedLanguage = 'عربي';
-
-    }
-
     // Close the dropdown after language selection
     this.isDropdownVisible = false;
   }
+  lang: any;
+  setLanguageOnInit() {
+    // Check if the language is stored in localStorage
+    const storedLang = localStorage.getItem('lang');
+    if (storedLang == 'ar') {
+      this.translate.use('ar');
+      localStorage.setItem('lang', 'ar');
+      document.documentElement.setAttribute('data-lang', 'ar');
+      document.documentElement.dir = 'rtl';
+      document.documentElement.lang = 'ar';
+      this.lang = 'ar';
+      this.selectedLanguage = 'عربي';
 
+      document
+        .querySelector('.ar-stylesheet')
+        ?.setAttribute('href', '/assets/css/ar-style.css');
+      this.flag = this.flags[0];
+
+      // this.api.lang.next(this.lang);
+    } else {
+      this.translate.use('en');
+      localStorage.setItem('lang', 'en');
+      document.documentElement.setAttribute('data-lang', 'en');
+      document.documentElement.dir = 'ltr';
+      document.documentElement.lang = 'en';
+      this.lang = 'en';
+      this.selectedLanguage = 'English';
+
+      document.querySelector('.ar-stylesheet')?.setAttribute('href', ' ');
+
+      this.flag = this.flags[1];
+      // this.api.lang.next(this.lang);
+    }
+  }
 
 }

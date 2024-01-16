@@ -1,13 +1,41 @@
-import { Component, TemplateRef, ViewChild, ViewContainerRef } from '@angular/core';
+import { Component, OnInit, TemplateRef, ViewChild, ViewContainerRef } from '@angular/core';
 import { ModalService } from '../../modal/modal.service';
+import { OptionProps } from '../../../models';
+import { CountryPhoneCodeService } from '../../../../data/service/country-phone/country-phone-code.service';
 
 @Component({
   selector: 'app-shipping-payment',
   templateUrl: './shipping-payment.component.html',
   styleUrl: './shipping-payment.component.scss',
 })
-export class ShippingPaymentComponent {
-  constructor(private modalService: ModalService) {}
+export class ShippingPaymentComponent implements OnInit {
+  countriesCode: OptionProps[] = [];
+  constructor(private modalService: ModalService , private countryPhoneCodeService: CountryPhoneCodeService) {}
+  ngOnInit(): void {
+    this.getCountryPhoneCodes();
+  }
+  getCountryPhoneCodes(): void {
+    this.countryPhoneCodeService.getCountryPhoneCodes()
+      .subscribe(
+        response => {
+          if (response.isSuccess) {
+            this.countriesCode = response.responseData.map((code: string) => ({ label: code, value: code }));
+            // Handle the codes as needed
+          } else {
+            console.error('Error:', response.errorMessage);
+            // Handle error cases
+          }
+        },
+        error => {
+          console.error('HTTP Error:', error);
+          // Handle HTTP errors
+        }
+      );
+  }
+  handleSelectedOption(selectedOption: string) {
+    console.log('Selected option:', selectedOption);
+    // Do whatever you need to do with the selected option in the parent component
+  }
   cities = [
     { label: 'Cairo', value: 'cairo' },
     { label: 'Alex', value: 'alex' },

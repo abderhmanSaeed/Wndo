@@ -19,7 +19,7 @@ export class SellerProductsOffersService {
     const endpoint = isOffers ? 'seller-offers' : 'seller-products';
 
     // Construct the full URL
-    const url = `${this.apiEndPoint}/seller-products-or-offers/${sellerId}?isOffers=${isOffers}`;
+    const url = `${this.apiEndPoint}/product-web/seller-products-or-offers/${sellerId}?isOffers=${isOffers}`;
 
     // Make the API call
     return this.http.get(url);

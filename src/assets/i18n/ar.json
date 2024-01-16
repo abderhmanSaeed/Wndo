@@ -4,5 +4,18 @@
   "menuItems": {
     "english": "الإنجليزية",
     "arabic": "العربية"
-  }
+  },
+  "Prev": "السابق",
+  "Next": "التالي",
+  "chooseColor": "أختر اللون",
+  "yourOrders": "طلباتك",
+  "getShipping": " احصل على شحن مجاني إذا قمت بشراء المنتج من تطبيق Wndo",
+  "downloadNow": "حمل الآن",
+  "termsCondition": "الشروط والأحكام",
+  "privacyPolicy" :"سياسة الخصوصية",
+  "cookiePolicy" : "سياسة المُتصفح",
+  "offerTerms" : "شروط العرض",
+  "sell" : "بيع معنا",
+  "infringement" : "التعدي",
+  "security" : "الحماية"
 }

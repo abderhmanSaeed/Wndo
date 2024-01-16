@@ -4,34 +4,25 @@
       <h6 class="text-sm text-blue-900 mb-3">Your Cart has (2) items</h6>
       <div class="bg-white rounded flex flex-wrap p-4 gap-6">
         <div class="flex-auto">
-          <app-input-filed
-            [required]="true"
-            label="Your Name"
-            [isFloating]="true"
-            placeholder="You Didn't Add Your Name"
-            name="name"
-            [classes]="{
+          <app-input-filed [required]="true" label="Your Name" [isFloating]="true"
+            placeholder="You Didn't Add Your Name" name="name" [classes]="{
               label: 'peer-focus:text-base',
               labelColor: 'peer-focus:text-purple-500'
-            }"
-          ></app-input-filed>
+            }"></app-input-filed>
         </div>
         <div class="flex-auto">
-          <app-input-phone
-            [classes]="{
+          <app-input-phone [countriesCode]="countriesCode" [classes]="{
               label: 'peer-focus:text-base',
               labelColor: 'peer-focus:text-purple-500'
-            }"
-            label="Phone Number"
-            [isFloating]="true"
-            placeholder="You Didn't Add Your Phone Number"
-          ></app-input-phone>
+            }" label="Phone Number" [isFloating]="true" placeholder="You Didn't Add Your Phone Number"
+            (selectedOption)="handleSelectedOption($event)">
+          </app-input-phone>
+
         </div>
       </div>
       <p class="text-blue-900 text-xs p-4">
         <i
-          class="fa-solid text-xs me-1 fa-info rounded-full w-5 h-5 border-2 border-blue-900 inline-flex items-center justify-center"
-        ></i>
+          class="fa-solid text-xs me-1 fa-info rounded-full w-5 h-5 border-2 border-blue-900 inline-flex items-center justify-center"></i>
         Your Name And Phone Are Mandatory To Proceed Your Order.
       </p>
     </section>
@@ -39,73 +30,42 @@
       <h6 class="text-sm text-blue-900">Shipping Address</h6>
       <div class="grid sm:grid-cols-2 p-5 gap-6">
         <div>
-          <app-input-filed
-            [required]="true"
-            label="Address Name"
-            [isFloating]="true"
-            placeholder="Enter Your Address"
-            name="address"
-            [classes]="{
+          <app-input-filed [required]="true" label="Address Name" [isFloating]="true" placeholder="Enter Your Address"
+            name="address" [classes]="{
               label: 'peer-focus:text-base peer-focus:font-medium',
               labelColor: 'peer-focus:text-purple-500'
-            }"
-          ></app-input-filed>
+            }"></app-input-filed>
         </div>
         <div>
-          <app-select
-            [options]="cities"
-            placeholder="Enter your city"
-            label="City"
-            [required]="true"
-            name="cities"
+          <app-select [options]="cities" placeholder="Enter your city" label="City" [required]="true" name="cities"
             [classes]="{
               label:
                 'peer-focus:text-base peer-focus:font-medium font-medium text-base',
               labelColor: 'peer-focus:text-purple-500'
-            }"
-            [isFloating]="true"
-          ></app-select>
+            }" [isFloating]="true"></app-select>
         </div>
         <div>
-          <app-select
-            [options]="cities"
-            placeholder="Enter your district name"
-            label="District"
-            [required]="true"
-            name="district"
-            [classes]="{
+          <app-select [options]="cities" placeholder="Enter your district name" label="District" [required]="true"
+            name="district" [classes]="{
               label:
                 'peer-focus:text-base peer-focus:font-medium font-medium text-base',
               labelColor: 'peer-focus:text-purple-500'
-            }"
-            [isFloating]="true"
-          ></app-select>
+            }" [isFloating]="true"></app-select>
         </div>
         <div>
-          <app-input-filed
-            [required]="true"
-            label="Street Address"
-            [isFloating]="true"
-            placeholder="Enter your street address"
-            name="adress"
-            [classes]="{
+          <app-input-filed [required]="true" label="Street Address" [isFloating]="true"
+            placeholder="Enter your street address" name="adress" [classes]="{
               label: 'peer-focus:text-base',
               labelColor: 'peer-focus:text-purple-500'
-            }"
-          ></app-input-filed>
+            }"></app-input-filed>
         </div>
 
         <div>
-          <app-input-filed
-            label="Building No."
-            [isFloating]="true"
-            placeholder="Enter Your Building Number"
-            name="Address"
-            [classes]="{
+          <app-input-filed label="Building No." [isFloating]="true" placeholder="Enter Your Building Number"
+            name="Address" [classes]="{
               label: 'peer-focus:text-base',
               labelColor: 'peer-focus:text-purple-500'
-            }"
-          ></app-input-filed>
+            }"></app-input-filed>
         </div>
       </div>
     </section>
@@ -123,8 +83,7 @@
 
     <p class="text-xs font-semibold text-blue-900 px-6 py-5.5">
       <i
-        class="fa-solid text-xs me-1 fa-info rounded-full w-5 h-5 border-2 border-blue-900 inline-flex items-center justify-center"
-      ></i>
+        class="fa-solid text-xs me-1 fa-info rounded-full w-5 h-5 border-2 border-blue-900 inline-flex items-center justify-center"></i>
       You Will Be Able To Add A Voucher In The Next Step
     </p>
 

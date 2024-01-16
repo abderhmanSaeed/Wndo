@@ -1,32 +1,22 @@
 <app-header-of-page></app-header-of-page>
 <section class="content-page">
   <app-stepper>
-    <app-step
-    label="Check Out"
-    icon='bag-coloring'
-    [template]="checkout"
-    nextButtonLabel="CHECK OUT"
-    additionalAction='<a (click)="addMore()" routerLink="/product/productDetails" class="button button--primary button--bordered rounded-full px-24">ADD MORE PRODUCT</a>'
-  >
-  </app-step>
+    <app-step label="Check Out" icon='bag-coloring' [template]="checkout" nextButtonLabel="CHECK OUT"
+      additionalAction='<a (click)="addMore()" routerLink="/product/productDetails" class="button button--primary button--bordered rounded-full px-24">ADD MORE PRODUCT</a>'>
+    </app-step>
 
-    <app-step label="Shipping & Payment"
-      icon='shipping'
-      [template]="shippingAndPayment" nextButtonLabel="CONTINUE"></app-step>
-    <app-step label="Confirmation"
-      icon='bag-coloring'
-      [template]="confirmation" nextButtonLabel="CONFIRM"></app-step>
+    <app-step label="Shipping & Payment" icon='shipping' [template]="shippingAndPayment"
+      nextButtonLabel="CONTINUE"></app-step>
+    <app-step label="Confirmation" icon='bag-coloring' [template]="confirmation" nextButtonLabel="CONFIRM"></app-step>
   </app-stepper>
 </section>
 
 <section class="pb-12">
   <p class="text-xs text-blue-900 flex items-center justify-center gap-1">
-    <svg-icon
-    src="../../../../assets/icons/car-coloring.svg"
+    <svg-icon src="../../../../assets/icons/car-coloring.svg"></svg-icon>
+    {{"getShipping" |translate}}
 
-  ></svg-icon>
-    Get Free Shipping If You Buy The Product From Wndo Application
-    <a class="ms-1 underline hover:no-underline">Download Now</a>
+    <a class="ms-1 underline hover:no-underline">{{"downloadNow" | translate}}</a>
   </p>
 </section>
 

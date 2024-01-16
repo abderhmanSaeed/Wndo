@@ -15,7 +15,7 @@ export class ProductService {
     this.apiEndPoint = environment.apiEndPoint;
   }
   getProductDetails(productId: string): Observable<ProductResponse> {
-    const url = `${this.apiEndPoint}/product-details-for-web/${productId}`;
+    const url = `${this.apiEndPoint}/product-web/product-details-for-web/${productId}`;
 
     return this.http.get<ProductResponse>(url)
       .pipe(
@@ -25,7 +25,7 @@ export class ProductService {
   }
 
   getProductAlsoLikeDetails(productId: string): Observable<ProductApiAlsoResponse> {
-    const url = `${this.apiEndPoint}/may-also-like/${productId}`;
+    const url = `${this.apiEndPoint}/product-web/may-also-like/${productId}`;
 
     return this.http.get<ProductApiAlsoResponse>(url)
       .pipe(
@@ -35,7 +35,7 @@ export class ProductService {
   }
 
   getProductColorAndSizes(productId: string): Observable<ProductColorAndSizesResponse> {
-    const url = `${this.apiEndPoint}/product-color-and-sizes-when-add-to-cart-clicked/${productId}`;
+    const url = `${this.apiEndPoint}/product-web/product-color-and-sizes-when-add-to-cart-clicked/${productId}`;
 
     return this.http.get<ProductColorAndSizesResponse>(url)
       .pipe(

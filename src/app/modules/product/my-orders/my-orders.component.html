@@ -1,7 +1,7 @@
 <app-header-of-page></app-header-of-page>
 
 <div class="content-page my-orders">
-  <h5 class="mb-8">Your Orders {{ myOrders.length }}</h5>
+  <h5 class="mb-8">{{"yourOrders" | translate}} {{ myOrders.length }}</h5>
 
   <section class="xl:px-32 px-8">
     <div class="mb-4">
@@ -76,8 +76,9 @@
   <section class="pb-12 content-page">
     <p class="text-xs text-blue-900 flex items-center gap-1">
       <svg-icon src="../../../../assets/icons/car-coloring.svg"></svg-icon>
-      Get Free Shipping If You Buy The Product From Wndo Application
-      <a class="ms-1 underline hover:no-underline">Download Now</a>
+      {{"getShipping" |translate}}
+
+      <a class="ms-1 underline hover:no-underline">{{"downloadNow" | translate}}</a>
     </p>
   </section>
 </div>

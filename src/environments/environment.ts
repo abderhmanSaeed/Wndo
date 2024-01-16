@@ -11,7 +11,7 @@ export const environment = {
   serverUrl: '/api',
   envName: 'DEV',
   middleware: '',
-  apiEndPoint: 'https://wndo.net:8090/api/app/product-web',
+  apiEndPoint: 'https://wndo.net:8090/api/app',
 };
 
 /*

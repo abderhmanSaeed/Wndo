@@ -1,35 +1,38 @@
-
-
 <footer class="px-8 py-4 divide-y divide-y-1 space-y-4 border-t border-gray-200 border-solid bg-white">
   <div class="md:grid grid-cols-4 justify-between items-center md:space-0">
-    <span class="flex-auto"
-      ><img
-        src="../../../assets/images/logo.svg"
-        alt="Wndo-logo"
-        width="126"
-        height="25"
-    /></span>
+    <span class="flex-auto"><img src="../../../assets/images/logo.svg" alt="Wndo-logo" width="126" height="25" /></span>
     <ul role="list" class="md:flex gap-4 items-center col-span-2">
-      <li
-        role="listitem"
-        *ngFor="let link of links"
-        class="text-xs font-medium"
-      >
-        <a [href]="link.href">{{ link.title }}</a>
+      <!-- *ngFor="let link of links" -->
+      <li role="listitem" class="text-xs font-medium">
+        <a href="/">{{ "termsCondition"| translate }}</a>
+      </li>
+      <li role="listitem" class="text-xs font-medium">
+        <a href="/">{{ "privacyPolicy"| translate }}</a>
+      </li>
+      <li role="listitem" class="text-xs font-medium">
+        <a href="/">{{ "privacyPolicy"| translate }}</a>
+      </li>
+      <li role="listitem" class="text-xs font-medium">
+        <a href="/">{{ "cookiePolicy"| translate }}</a>
+      </li>
+      <li role="listitem" class="text-xs font-medium">
+        <a href="/">{{ "offerTerms"| translate }}</a>
+      </li>
+      <li role="listitem" class="text-xs font-medium">
+        <a href="/">{{ "sell"| translate }}</a>
+      </li>
+      <li role="listitem" class="text-xs font-medium">
+        <a href="/">{{ "security"| translate }}</a>
       </li>
     </ul>
     <div class="space-y-2 justify-self-end">
-      <h6 class="text-xxs font-medium">Download Now</h6>
+      <h6 class="text-xxs font-medium">{{"downloadNow" | translate}}</h6>
       <ul class="flex gap-2 items-center">
         <li>
-          <a
-            ><img src="../../../assets/images/google-play.svg" alt="app-store"
-          /></a>
+          <a><img src="../../../assets/images/google-play.svg" alt="app-store" /></a>
         </li>
         <li>
-          <a
-            ><img src="../../../assets/images/app-store.svg" alt="app-store"
-          /></a>
+          <a><img src="../../../assets/images/app-store.svg" alt="app-store" /></a>
         </li>
       </ul>
     </div>
@@ -41,21 +44,14 @@
     </p>
 
     <ul class="flex items-center md:justify-center gap-8">
-      <li
-        *ngFor="let socialMedia of socialMedia"
-        class="text-base text-gray-400"
-      >
+      <li *ngFor="let socialMedia of socialMedia" class="text-base text-gray-400">
         <a><i class="fa-brands text-base {{ socialMedia.icon }}"></i></a>
       </li>
     </ul>
 
     <ul class="flex items-center gap-4 md:justify-end">
       <li *ngFor="let payment of payments">
-        <img
-          [src]="'../../../assets/icons/' + payment.icon + '.svg'"
-          class="object-cover"
-          alt="{{ payment.title }}"
-        />
+        <img [src]="'../../../assets/icons/' + payment.icon + '.svg'" class="object-cover" alt="{{ payment.title }}" />
       </li>
     </ul>
   </div>

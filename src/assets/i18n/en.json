@@ -4,5 +4,19 @@
   "menuItems": {
     "english": "English",
     "arabic": "Arabic"
-  }
+  },
+  "Prev": "Previous",
+  "Next": "Next",
+  "chooseColor": "Choose Color",
+  "yourOrders": "Your Orders",
+  "getShipping": " Get Free Shipping If You Buy The Product From Wndo Application",
+  "downloadNow": "Download Now",
+  "termsCondition": "Terms & Condition",
+  "privacyPolicy" : "Privacy Policy",
+  "cookiePolicy" : "Cookie Policy",
+  "offerTerms" : "Offer Terms",
+  "sell" : "Sell with us",
+  "infringement" : "Infringement",
+  "security" : "Security"
+
 }

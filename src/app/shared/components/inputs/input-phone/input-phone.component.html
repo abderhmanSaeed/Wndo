@@ -5,7 +5,8 @@
     <span class="text-red-500" *ngIf="required"> * </span>
   </label>
   <div class="flex">
-    <app-dropdown [options]="countriesCode" [label]="countriesCode![0]?.label" [classes]="{
+    <!-- [label]="'select' | translet" -->
+    <app-dropdown [options]="countriesCode" [classes]="{
       btn: isFloating
         ? 'border-b h-full border-e-2 px-4 text-sm text-blue-900 font-semibold flex items-center justify-between'
         : 'select-code border-e-0 !h-full flex-shrink-0 z-10 inline-flex items-center py-2.5 px-4 text-sm font-medium text-center text-gray-500  border border-gray-30 rounded-s-lg hover:bg-gray-200 focus:ring-4 focus:outline-none focus:ring-gray-100'

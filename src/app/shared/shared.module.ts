@@ -1,4 +1,3 @@
-import { TranslatePipe } from './pipes/translate.pipe';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { OrderConfirmedModal } from './components/modals/order-confirmed-modal/order-confirmed-modall.component';
 import { ModalComponent } from './components/modal/modal.component';
@@ -57,7 +56,6 @@ register();
     ShippingPaymentComponent,
     InputFiledComponent,
     InputPhoneComponent,
-    InputPhoneComponent,
     DropdownComponent,
     SelectComponent,
     RadioComponent,
@@ -73,7 +71,6 @@ register();
     OrderConfirmedModal,
     VideoModalComponent,
     MyOrderCardComponent,
-    TranslatePipe,
   ],
   imports: [
     CommonModule,

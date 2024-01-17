@@ -3,11 +3,12 @@ import { ProductResponse, ProductApiAlsoResponse, ProductColorAndSizesResponse }
 import { ProductService } from './../../../data/service/product/product.service';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { TranslateModule } from '@ngx-translate/core';
 
 
 @Component({
   standalone: true,
-  imports: [SharedModule],
+  imports: [SharedModule, TranslateModule],
   selector: 'app-product-details',
   templateUrl: './product-details.component.html',
   styleUrl: './product-details.component.scss'

@@ -1,3 +1,4 @@
+import { TranslateModule } from '@ngx-translate/core';
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { OptionProps } from '../../../models';
 

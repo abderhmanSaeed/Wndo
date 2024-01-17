@@ -1,7 +1,6 @@
 <!-- <button (click)="getProductDetails()">Get Product Details</button> -->
 
 <app-header-of-page [seller]="productDetails?.responseData?.seller"></app-header-of-page>
-<p>{{ 'buttonText' | translate }}</p>
 
 <section aria-label="product-details" class="content-page">
   <app-product-details-card [product]="productDetails?.responseData"

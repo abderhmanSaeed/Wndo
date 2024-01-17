@@ -10,9 +10,17 @@ import { CountryPhoneCodeService } from '../../../../data/service/country-phone/
 })
 export class ShippingPaymentComponent implements OnInit {
   countriesCode: OptionProps[] = [];
+  products: any[] = []; // Assuming your products have a certain structure
+
   constructor(private modalService: ModalService, private countryPhoneCodeService: CountryPhoneCodeService) { }
   ngOnInit(): void {
     this.getCountryPhoneCodes();
+     // Retrieve products from localStorage
+     const storedProductsString = localStorage.getItem('products');
+
+     if (storedProductsString) {
+       this.products = JSON.parse(storedProductsString);
+     }
   }
   getCountryPhoneCodes(): void {
     this.countryPhoneCodeService.getCountryPhoneCodes()

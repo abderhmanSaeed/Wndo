@@ -9,6 +9,9 @@ import {
   ElementRef,
 } from '@angular/core';
 import { StepComponent } from './step/step.component';
+import { LoginPhonePasswordComponent } from '../modals/login-phone-password/login-phone-password.component';
+import { ModalService } from '../modal/modal.service';
+import { SharedService } from '../../services/shared.service';
 
 
 @Component({
@@ -21,13 +24,16 @@ export class StepperComponent implements AfterContentInit {
   @Input() disabledNextButton: boolean = false;
   @Input() hasActionFooter: boolean = true;
 
-  constructor(private renderer: Renderer2) {}
+  constructor(private renderer: Renderer2, private modalService: ModalService,
+    private sharedService: SharedService) { }
 
   @ContentChildren(StepComponent) steps: QueryList<StepComponent> | undefined;
   currentStep: number = 0;
   currentStepTemplate: any = null;
 
   @ViewChild('stepContainer') stepsElement: ElementRef | undefined;
+  // Declare a ViewChild for the LoginPhonePasswordComponent
+  @ViewChild(LoginPhonePasswordComponent) loginComponent: LoginPhonePasswordComponent | undefined;
 
   ngAfterViewInit() {
     this.calculateLineWidths();
@@ -37,15 +43,52 @@ export class StepperComponent implements AfterContentInit {
     this.steps?.changes.subscribe(() => {
       this.updateCurrentStepTemplate();
     });
+
+    // Subscribe to the login button clicks
+    this.sharedService.loginButtonClicked$.subscribe(() => {
+      // Advance to the next step when the LOGIN button is clicked
+      this.currentStep++;
+      this.updateCurrentStepTemplate();
+    });
   }
 
   nextStep() {
     if (this.steps && this.currentStep < this.steps.length - 1) {
-      this.currentStep++;
-      this.updateCurrentStepTemplate();
+      // this.currentStep++;
+      // this.updateCurrentStepTemplate();
+
+      if (this.currentStep === 0) {
+        // If the current step is the "Check Out" step, call the openLoginModal method
+        this.openLoginModal();
+      } else {
+        // Otherwise, proceed to the next step
+        this.currentStep++;
+        this.updateCurrentStepTemplate();
+      }
     }
   }
-
+  openLoginModal() {
+    this.modalService.open(LoginPhonePasswordComponent, {
+      animations: {
+        modal: {
+          enter: 'enter-slide-down 0.8s',
+        },
+        overlay: {
+          enter: 'fade-in 0.8s',
+          leave: 'fade-out 0.3s forwards',
+        },
+      },
+      size: {
+        width: '36rem',
+      },
+    });
+  }
+  // Add this method to handle the close event from LoginPhonePasswordComponent
+  handleLoginClose() {
+    // Advance to the next step when the "LOGIN" button is clicked in LoginPhonePasswordComponent
+    this.currentStep++;
+    this.updateCurrentStepTemplate();
+  }
   backStep() {
     if (this.steps && this.currentStep > 0) {
       this.currentStep--;

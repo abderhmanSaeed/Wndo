@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { SharedService } from './../../../services/shared.service';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { ModalService } from '../../modal/modal.service';
 import { CountryPhoneCodeService } from '../../../../data/service/country-phone/country-phone-code.service';
 import { OptionProps } from '../../../models';
@@ -10,8 +11,10 @@ import { OptionProps } from '../../../models';
 })
 export class LoginPhonePasswordComponent implements OnInit {
   countriesCode: OptionProps[] = [];
-
-  constructor(private modalService: ModalService, private countryPhoneCodeService: CountryPhoneCodeService) { }
+  // Define an EventEmitter for emitting the close event
+  @Output() closeEvent = new EventEmitter<void>();
+  constructor(private modalService: ModalService, private countryPhoneCodeService: CountryPhoneCodeService,
+    private sharedService: SharedService) { }
   ngOnInit(): void {
     this.getCountryPhoneCodes();
   }
@@ -38,6 +41,8 @@ export class LoginPhonePasswordComponent implements OnInit {
     // Do whatever you need to do with the selected option in the parent component
   }
   close() {
+    // Notify the service that the LOGIN button is clicked
+    this.sharedService.notifyLoginButtonClicked();
     this.modalService.close();
   }
   onNameChanged(name: string) {

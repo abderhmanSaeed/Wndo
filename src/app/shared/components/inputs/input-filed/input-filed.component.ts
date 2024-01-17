@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 
 type ClassesProps = {
   label?: string,
@@ -24,5 +24,12 @@ export class InputFiledComponent {
 
   @Input() type: 'text' | 'number' = 'text'
 
+  @Output() nameChanged: EventEmitter<string> = new EventEmitter<string>();
+
+
+  onNameChange(event: Event) {
+    const inputValue = (event.target as HTMLInputElement).value;
+    this.nameChanged.emit(inputValue);
+  }
 
 }

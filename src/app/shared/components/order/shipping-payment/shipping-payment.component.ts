@@ -10,7 +10,7 @@ import { CountryPhoneCodeService } from '../../../../data/service/country-phone/
 })
 export class ShippingPaymentComponent implements OnInit {
   countriesCode: OptionProps[] = [];
-  constructor(private modalService: ModalService , private countryPhoneCodeService: CountryPhoneCodeService) {}
+  constructor(private modalService: ModalService, private countryPhoneCodeService: CountryPhoneCodeService) { }
   ngOnInit(): void {
     this.getCountryPhoneCodes();
   }
@@ -35,6 +35,10 @@ export class ShippingPaymentComponent implements OnInit {
   handleSelectedOption(selectedOption: string) {
     console.log('Selected option:', selectedOption);
     // Do whatever you need to do with the selected option in the parent component
+  }
+  onNameChanged(name: string) {
+    console.log('Name changed:', name);
+    // You can perform any other actions with the emitted 'name' value here
   }
   cities = [
     { label: 'Cairo', value: 'cairo' },
@@ -70,36 +74,36 @@ export class ShippingPaymentComponent implements OnInit {
       label: 'Morning 9 am - 2 pm',
       name: 'morning',
       value: 'morning',
-     },
-     {
+    },
+    {
       label: 'Evening 2 pm - 8 pm',
       name: 'evening',
       value: 'evening',
-     },
+    },
   ];
 
-// //Modal
-//   @ViewChild('temporaryPasswordModal',  { static: true, read: ViewContainerRef })
-//   vcr!: ViewContainerRef;
+  // //Modal
+  //   @ViewChild('temporaryPasswordModal',  { static: true, read: ViewContainerRef })
+  //   vcr!: ViewContainerRef;
 
-//   openModalTemporaryPassword(view: TemplateRef<Element>) {
-//     this.modalService.open(this.vcr, view , {
-//       animations: {
-//         modal: {
-//           enter: 'enter-slide-down 0.8s',
-//         },
-//         overlay: {
-//           enter: 'fade-in 0.8s',
-//           leave: 'fade-out 0.3s forwards',
-//         },
-//       },
-//       size: {
-//         width: '36rem',
-//       },
-//     });
-//   }
+  //   openModalTemporaryPassword(view: TemplateRef<Element>) {
+  //     this.modalService.open(this.vcr, view , {
+  //       animations: {
+  //         modal: {
+  //           enter: 'enter-slide-down 0.8s',
+  //         },
+  //         overlay: {
+  //           enter: 'fade-in 0.8s',
+  //           leave: 'fade-out 0.3s forwards',
+  //         },
+  //       },
+  //       size: {
+  //         width: '36rem',
+  //       },
+  //     });
+  //   }
 
-//   close() {
-//     this.modalService.close();
-//   }
+  //   close() {
+  //     this.modalService.close();
+  //   }
 }

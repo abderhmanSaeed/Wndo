@@ -37,6 +37,7 @@ import { AngularSvgIconModule } from 'angular-svg-icon';
 import { MyOrderCardComponent } from './components/order/my-order-card/my-order-card.component';
 import { TranslationService } from '../data/service/translation/translation.service';
 import { TranslateModule } from '@ngx-translate/core';
+import { LoginPhonePasswordComponent } from './components/modals/login-phone-password/login-phone-password.component';
 
 register();
 
@@ -71,6 +72,7 @@ register();
     OrderConfirmedModal,
     VideoModalComponent,
     MyOrderCardComponent,
+    LoginPhonePasswordComponent,
   ],
   imports: [
     CommonModule,

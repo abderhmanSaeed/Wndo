@@ -7,6 +7,7 @@ import { TemporaryPasswordSetModalComponent } from '../../../shared/components/m
 import { ProductService } from '../../../data/service/product/product.service';
 import { ProductResponse } from '../../../shared/models';
 import { Router } from '@angular/router';
+import { LoginPhonePasswordComponent } from '../../../shared/components/modals/login-phone-password/login-phone-password.component';
 
 @Component({
   selector: 'app-product-orders',
@@ -46,6 +47,22 @@ export class ProductOrdersComponent implements OnInit {
     });
   }
 
+  openLoginModal() {
+    this.modalService.open(LoginPhonePasswordComponent, {
+      animations: {
+        modal: {
+          enter: 'enter-slide-down 0.8s',
+        },
+        overlay: {
+          enter: 'fade-in 0.8s',
+          leave: 'fade-out 0.3s forwards',
+        },
+      },
+      size: {
+        width: '36rem',
+      },
+    });
+  }
   openTemporaryPasswordModal() {
     this.modalService.open(TemporaryPasswordSetModalComponent, {
       animations: {

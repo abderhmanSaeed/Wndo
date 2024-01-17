@@ -30,9 +30,9 @@ export class InputPasswordComponent {
     this.isShowPassword = !this.isShowPassword
 
     if (this.isShowPassword) {
-      this.type = 'password'
-    } else {
       this.type = 'text'
+    } else {
+      this.type = 'password'
     }
     console.log(this.isShowPassword)
   }

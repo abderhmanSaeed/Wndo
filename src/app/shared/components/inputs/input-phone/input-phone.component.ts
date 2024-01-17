@@ -36,6 +36,38 @@ export class InputPhoneComponent {
       this.selectedOption.emit(optionLabel);
     }
   }
+
+  countriesCodeStatic = [
+    {
+      label: '+20',
+      value: '+20',
+    },
+    {
+      label: '+966',
+      value: '+966',
+    },
+    {
+      label: '+971',
+      value: '+971',
+    },
+    {
+      label: '+965',
+      value: '+965',
+    },
+    {
+      label: '+974',
+      value: '+974',
+    },
+    {
+      label: '+973',
+      value: '+973',
+    },
+    {
+      label: '+968',
+      value: '+968',
+    },
+
+  ];
   // countriesCode = [
   //   {
   //     name: 'usa',

@@ -24,7 +24,7 @@ export class InputPhoneComponent {
   @Input() value: string = '';
   @Input() classes?: ClassesProps;
   @Input() error: string = '';
-  @Input() countriesCode: OptionProps[] = [];
+  @Input() countriesCode: any[] = [];
   @Input() options: any[] = [];
 
   @Output() selectedOption: EventEmitter<string> = new EventEmitter<string>();

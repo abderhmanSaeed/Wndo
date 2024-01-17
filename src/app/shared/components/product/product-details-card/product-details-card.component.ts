@@ -1,6 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { MatSnackBar } from '@angular/material/snack-bar';
 
 
 @Component({
@@ -9,6 +8,9 @@ import { MatSnackBar } from '@angular/material/snack-bar';
   styleUrl: './product-details-card.component.scss',
 })
 export class ProductDetailsCardComponent implements OnInit {
+  showNotification: boolean = false;
+
+
   sizeQuantities: any;
   // Product
 
@@ -81,7 +83,7 @@ export class ProductDetailsCardComponent implements OnInit {
     }
   ]
   colorWithSizes: any;
-  constructor(private router: Router, private snackBar: MatSnackBar) {
+  constructor(private router: Router) {
     // Your constructor logic here
   }
   ngOnInit(): void {
@@ -157,14 +159,14 @@ export class ProductDetailsCardComponent implements OnInit {
         };
       } else {
         // Show a snackbar error message with detailed information
-        this.snackBar.open(
-          `Cannot update quantity. Available quantity: ${this.size.quantity}. You selected ${this.productQuantity}
-        + in your store ${existingProduct.quantity}`,
-          'Close',
-          {
-            duration: 5000, // Display duration in milliseconds
-          }
-        );
+        // this.snackBar.open(
+        //   `Cannot update quantity. Available quantity: ${this.size.quantity}. You selected ${this.productQuantity}
+        // + in your store ${existingProduct.quantity}`,
+        //   'Close',
+        //   {
+        //     duration: 5000, // Display duration in milliseconds
+        //   }
+        // );
       }
     } else {
       // If the product does not exist, check if a new product can be added
@@ -186,13 +188,13 @@ export class ProductDetailsCardComponent implements OnInit {
         existingProducts.push(newProduct);
       } else {
         // Show a snackbar error message with detailed information
-        this.snackBar.open(
-          `Cannot add new product. Available quantity: ${this.size.quantity}. You selected ${this.productQuantity}.`,
-          'Close',
-          {
-            duration: 5000, // Display duration in milliseconds
-          }
-        );
+        // this.snackBar.open(
+        //   `Cannot add new product. Available quantity: ${this.size.quantity}. You selected ${this.productQuantity}.`,
+        //   'Close',
+        //   {
+        //     duration: 5000, // Display duration in milliseconds
+        //   }
+        // );
         // console.log('Cannot add new product. Not enough available.');
       }
     }
@@ -235,14 +237,15 @@ export class ProductDetailsCardComponent implements OnInit {
         };
       } else {
         // Show a snackbar error message with detailed information
-        this.snackBar.open(
-          `Cannot update quantity. Available quantity: ${this.size.quantity}. You selected ${this.productQuantity}
-          + in your store ${existingProduct.quantity}`,
-          'Close',
-          {
-            duration: 5000, // Display duration in milliseconds
-          }
-        );
+        this.showCustomNotification();
+        // this.snackBar.open(
+        //   `Cannot update quantity. Available quantity: ${this.size.quantity}. You selected ${this.productQuantity}
+        //   + in your store ${existingProduct.quantity}`,
+        //   'Close',
+        //   {
+        //     duration: 5000, // Display duration in milliseconds
+        //   }
+        // );
       }
     } else {
       // If the product does not exist, check if a new product can be added
@@ -264,13 +267,15 @@ export class ProductDetailsCardComponent implements OnInit {
         existingProducts.push(newProduct);
       } else {
         // Show a snackbar error message with detailed information
-        this.snackBar.open(
-          `Cannot add new product. Available quantity: ${this.size.quantity}. You selected ${this.productQuantity}.`,
-          'Close',
-          {
-            duration: 5000, // Display duration in milliseconds
-          }
-        );
+        this.showCustomNotification();
+
+        // this.snackBar.open(
+        //   `Cannot add new product. Available quantity: ${this.size.quantity}. You selected ${this.productQuantity}.`,
+        //   'Close',
+        //   {
+        //     duration: 5000, // Display duration in milliseconds
+        //   }
+        // );
         // console.log('Cannot add new product. Not enough available.');
       }
     }
@@ -280,6 +285,20 @@ export class ProductDetailsCardComponent implements OnInit {
 
   }
 
+  // Method to show the notification
+  showCustomNotification() {
+    this.showNotification = true;
+
+    // Optional: Auto-close after a certain duration
+    setTimeout(() => {
+      this.closeNotification();
+    }, 5000); // Display duration in milliseconds
+  }
+
+  // Method to close the notification
+  closeNotification() {
+    this.showNotification = false;
+  }
 
   logColor(colorWithSizes: any): void {
     console.log(colorWithSizes);

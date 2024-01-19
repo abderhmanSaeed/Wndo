@@ -16,7 +16,6 @@ export class LoginPhonePasswordComponent implements OnInit {
   constructor(private modalService: ModalService, private countryPhoneCodeService: CountryPhoneCodeService,
     private sharedService: SharedService) { }
   ngOnInit(): void {
-    this.getCountryPhoneCodes();
   }
   getCountryPhoneCodes(): void {
     this.countryPhoneCodeService.getCountryPhoneCodes()

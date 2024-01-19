@@ -1,6 +1,7 @@
 import { TranslateModule } from '@ngx-translate/core';
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { OptionProps } from '../../../models';
+import { CountryPhoneCodeService } from '../../../../data/service/country-phone/country-phone-code.service';
 
 type ClassesProps = {
   label?: string;
@@ -14,7 +15,7 @@ type ClassesProps = {
   templateUrl: './input-phone.component.html',
   styleUrl: './input-phone.component.scss',
 })
-export class InputPhoneComponent {
+export class InputPhoneComponent implements OnInit{
   @Input() placeholder: string = '';
   @Input() label: string = '';
   @Input() disabled: boolean = false;
@@ -24,11 +25,33 @@ export class InputPhoneComponent {
   @Input() value: string = '';
   @Input() classes?: ClassesProps;
   @Input() error: string = '';
-  @Input() countriesCode: any[] = [];
   @Input() options: any[] = [];
+  countriesCode: OptionProps[] = [];
 
   @Output() selectedOption: EventEmitter<string> = new EventEmitter<string>();
 
+  constructor( private countryPhoneCodeService: CountryPhoneCodeService) { }
+  ngOnInit(): void {
+    this.getCountryPhoneCodes();
+  }
+  getCountryPhoneCodes(): void {
+    this.countryPhoneCodeService.getCountryPhoneCodes()
+      .subscribe(
+        response => {
+          if (response.isSuccess) {
+            this.countriesCode = response.responseData.map((code: string) => ({ label: code, value: code }));
+            // Handle the codes as needed
+          } else {
+            console.error('Error:', response.errorMessage);
+            // Handle error cases
+          }
+        },
+        error => {
+          console.error('HTTP Error:', error);
+          // Handle HTTP errors
+        }
+      );
+  }
   onOptionSelected(event: any) {
     // Extract the option label from the event or modify this based on your component's logic
     const optionLabel = event?.target?.id;

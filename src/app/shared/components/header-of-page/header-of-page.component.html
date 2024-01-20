@@ -5,17 +5,15 @@
 >
   <div class="content-page">
     <section class="flex justify-between items-center">
-      <div class="flex items-end">
+      <div class="flex items-end w-32 h-32 mt-12">
         <img
-          class="w-32 h-32 rounded-full mt-12"
-          [src]="
-            seller?.imagePath || '../../../../assets/images/default-user.svg'
-          "
+          class="rounded-full  h-full w-full"
+          [src]="seller?.imagePath"
           alt="{{ seller?.id }}"
           [class.cursor-pointer]="!isProductOffersRoute"
           (click)="logSellerId()"
+          *ngIf="!isProductOffersRoute && this.seller"
         />
-        <!-- *ngIf="!isProductOffersRoute && this.seller" -->
       </div>
 
       <ul class="flex gap-5">

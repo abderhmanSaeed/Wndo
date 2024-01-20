@@ -68,7 +68,8 @@
               'text-blue-1000 font-bold text-base ps-2 pe-4 h-[34px] border border-blueGray-500 rounded-full flex items-center gap-2 bg-white',
             menuBtn:
               '!text-sm !text-blue-800 border border-gray-10 rounded text-nowrap',
-            list: 'space-y-4 px-2.5'
+            list: 'space-y-4 px-2.5',
+            dropdownMenu: '!w-[220px]'
           }"
           [options]="isAuth ? authUserDropdown : guestUserDropdown"
         >
@@ -87,7 +88,6 @@
             </button>
           </div>
         </app-dropdown>
-
 
         <ng-template #myOrdersIcon>
           <svg-icon

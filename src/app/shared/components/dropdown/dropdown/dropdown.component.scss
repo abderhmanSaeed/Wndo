@@ -1,5 +1,34 @@
-.dropdown {
+.app-dropdown {
+  position: relative;
+  display: inline-block;
+  height: 100%;
+
+  // Button styles
   &__btn {
-    @apply gap-x-2 text-xxs text-blue-800 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-full px-5 py-2.5 text-center inline-flex items-center
+    @apply gap-x-2 text-xxs text-blue-800 bg-white font-medium rounded-full px-5 py-2.5 text-center inline-flex items-center justify-center;
+
+    &:hover {
+      @apply bg-gray-100;
+    }
+
+    &:focus {
+      @apply ring-4 outline-none ring-blue-300;
+    }
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+
+  // Dropdown menu styles
+  .dropdown-menu {
+    @apply absolute bg-white divide-y divide-gray-100 rounded-lg shadow;
+    top: 125%;
+    inset-inline-end: 0.5rem;
+    z-index: 1000;
+    width: 100%;
+    display: none;
+
+    &.show {
+      display: block;
+    }
   }
 }

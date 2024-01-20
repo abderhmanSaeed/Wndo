@@ -33,6 +33,7 @@ export class HeaderOfPageComponent implements OnInit, AfterViewInit {
   isAuth: boolean = false;
 
   constructor(private route: ActivatedRoute, private router: Router) {}
+
   ngAfterViewInit(): void {
     this.authUserDropdown = [
       {

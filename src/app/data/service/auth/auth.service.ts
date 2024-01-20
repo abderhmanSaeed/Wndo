@@ -8,9 +8,11 @@ export class AuthService {
 
   private isAuthenticatedSubject = new BehaviorSubject<boolean>(false);
   private userNameSubject = new BehaviorSubject<string | null>(null);
+  private tokenSubject = new BehaviorSubject<string | null>(null);
 
   isAuthenticated$ = this.isAuthenticatedSubject.asObservable();
   userName$ = this.userNameSubject.asObservable();
+  token$ = this.tokenSubject.asObservable();
 
   constructor() { }
 
@@ -23,14 +25,18 @@ export class AuthService {
   }
 
   setToken(token: string): void {
-    return localStorage.setItem('token', token);
+    localStorage.setItem('token', token);
+    this.tokenSubject.next(token);
   }
+
+  getToken(): string | null {
+    return localStorage.getItem('token');
+  }
+
   setRefreshToken(token: string): void {
     return localStorage.setItem('refresh_token', token);
   }
-  getToken(): string {
-    return localStorage.getItem('token') ?? "";
-  }
+
 
   logout() {
     localStorage.removeItem('token');
@@ -38,7 +44,11 @@ export class AuthService {
     localStorage.removeItem('user_info');
     localStorage.removeItem('token_expiration');
   }
-
+  // Add a method to clear the token
+  clearToken(): void {
+    localStorage.removeItem('token');
+    this.tokenSubject.next(null);
+  }
   isAuth(): boolean {
     // Check if access token is present in local storage
     const accessToken = localStorage.getItem('token');

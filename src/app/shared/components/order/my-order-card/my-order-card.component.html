@@ -9,13 +9,11 @@
       free-mode="true"
       watch-slides-progress="true"
     >
-      <ng-container
-        *ngFor="
-          let item of product.images;
-          let i = index
-        "
-      >
-        <swiper-slide [class.swiper-slide-active]="index === i" class="cursor-pointer">
+      <ng-container *ngFor="let item of product.images; let i = index">
+        <swiper-slide
+          [class.swiper-slide-active]="index === i"
+          class="cursor-pointer"
+        >
           <ng-container *ngIf="item.imageId">
             <img
               [src]="item.urlPreview"
@@ -23,7 +21,6 @@
               class="w-full h-[80%] object-cover"
             />
           </ng-container>
-
         </swiper-slide>
       </ng-container>
     </swiper-container>
@@ -87,12 +84,13 @@
     <div class="flex xl:flex-col justify-between">
       <section class="flex-grow self-end">
         <app-dropdown
+          [id]="'actionDropdown'+product.id"
           [showSelectedValue]="false"
           [options]="dropdownactions"
           dropdownIcon="fa-ellipsis-vertical"
           [classes]="{
             label: 'bg-primary-100',
-            btn: 'outline-none w-8 h-8 rounded-full hover:bg-gray-200'
+            toggleBtn: 'outline-none w-8 h-8 rounded-full hover:bg-gray-200',
           }"
         >
         </app-dropdown>

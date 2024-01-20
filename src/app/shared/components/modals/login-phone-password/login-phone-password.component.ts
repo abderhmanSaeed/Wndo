@@ -1,3 +1,4 @@
+import { AuthService } from './../../../../data/service/auth/auth.service';
 import { LoginService } from './../../../../data/service/login/login.service';
 import { SharedService } from './../../../services/shared.service';
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
@@ -15,7 +16,7 @@ export class LoginPhonePasswordComponent implements OnInit {
   // Define an EventEmitter for emitting the close event
   @Output() closeEvent = new EventEmitter<void>();
   constructor(private modalService: ModalService, private countryPhoneCodeService: CountryPhoneCodeService,
-    private sharedService: SharedService, private loginService: LoginService) { }
+    private sharedService: SharedService, private authService: AuthService, private loginService: LoginService) { }
   ngOnInit(): void {
   }
   login() {
@@ -31,8 +32,8 @@ export class LoginPhonePasswordComponent implements OnInit {
         // Handle the response as needed
         if (response.isSuccess && response.responseData) {
           // Set tokens and user information in local storage
-          this.sharedService.setToken(response.responseData.access_Token);
-          this.sharedService.setRefreshToken(response.responseData.refresh_Token);
+          this.authService.setToken(response.responseData.access_Token);
+          this.authService.setRefreshToken(response.responseData.refresh_Token);
           // localStorage.setItem('access_token', response.responseData.access_Token);
           // localStorage.setItem('refresh_token', response.responseData.refresh_Token);
           localStorage.setItem('user_info', JSON.stringify({

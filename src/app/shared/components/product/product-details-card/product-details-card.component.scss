@@ -19,25 +19,14 @@
 }
 .selected {
   // Define styles for the selected state, for example, changing background color or border
-  background-color: #e0e0e0;
   border-color: #a0a0a0;
 }
 .custom-notification {
-  position: fixed;
-  bottom: 10px;
-  right: 10px;
-  background-color: #333;
-  color: #fff;
-  padding: 10px;
-  border-radius: 5px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+   @apply flex items-center p-4 mb-4 text-red-800 border-t-4 border-red-500 bg-red-100 start-1/2 -translate-x-1/2 top-6 fixed me-6;
 }
 
 .custom-notification button {
-  background-color: #fff;
-  color: #333;
-  border: none;
-  padding: 5px 10px;
-  margin-left: 10px;
+   @apply ms-6 -mx-1.5 -my-1.5 bg-red-50 text-red-500 rounded-lg focus:ring-2 focus:ring-red-400 p-1.5 hover:bg-red-200 inline-flex items-center justify-center h-8 w-8;
+
   cursor: pointer;
 }

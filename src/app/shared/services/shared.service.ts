@@ -17,20 +17,4 @@ export class SharedService {
     this.loginButtonClickedSubject.next();
   }
 
-  setToken(token:  string):  void {
-    return  localStorage.setItem('token', token );
-  }
-  setRefreshToken(token:  string):  void {
-    return  localStorage.setItem('refresh_token', token );
-  }
-  getToken():  string {
-      return localStorage.getItem('token')??"";
-  }
-
-  logout() {
-    localStorage.removeItem('token');
-    localStorage.removeItem('refresh_token');
-    localStorage.removeItem('user_info');
-    localStorage.removeItem('token_expiration');
-}
 }

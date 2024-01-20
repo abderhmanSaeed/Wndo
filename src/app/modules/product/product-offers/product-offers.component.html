@@ -1,81 +1,110 @@
-<app-header-of-page></app-header-of-page>
+<app-header-of-page [isShowDetails]="true"></app-header-of-page>
 <section aria-label="product-offers" class="content-page">
-  <ng-container *ngIf="sellerProducts && sellerProducts?.items?.length > 0; else noProducts">
-
+  <ng-container
+    *ngIf="sellerProducts && sellerProducts?.items?.length > 0; else noProducts"
+  >
     <div class="mb-4">
-      <ul class="flex flex-wrap -mb-px text-sm font-medium text-center justify-center" id="offers" role="tablist">
+      <ul
+        class="flex flex-wrap -mb-px text-sm font-medium text-center justify-center"
+        id="offers"
+        role="tablist"
+      >
         <li class="me-2" role="presentation">
-          <button class="inline-flex button gap-2 button--white rounded-full text-blueGray-300 px-24"
-            id="all-products-tab" (click)="selectTab('all-products')" type="button" role="tab"
-            [attr.aria-selected]="selectedTab === 'all-products' ? 'true' : 'false'"
-            [class.button--primary]="selectedTab === 'all-products'">
+          <button
+            class="inline-flex button gap-2 button--white rounded-full text-blueGray-300 px-24"
+            id="all-products-tab"
+            (click)="selectTab('all-products')"
+            type="button"
+            role="tab"
+            [attr.aria-selected]="
+              selectedTab === 'all-products' ? 'true' : 'false'
+            "
+            [class.button--primary]="selectedTab === 'all-products'"
+          >
             Products ({{ sellerProducts?.items?.length }})
             <svg-icon src="../../../../assets/icons/box.svg"></svg-icon>
           </button>
         </li>
         <li class="me-2" role="presentation">
-          <button class="inline-flex gap-2 button button--white rounded-full text-blueGray-300 px-24"
-            id="products-offers-tab" (click)="selectTab('products-offers')" type="button" role="tab"
-            [attr.aria-selected]="selectedTab === 'products-offers' ? 'true' : 'false'"
-            [class.button--primary]="selectedTab === 'products-offers'">
+          <button
+            class="inline-flex gap-2 button button--white rounded-full text-blueGray-300 px-24"
+            id="products-offers-tab"
+            (click)="selectTab('products-offers')"
+            type="button"
+            role="tab"
+            [attr.aria-selected]="
+              selectedTab === 'products-offers' ? 'true' : 'false'
+            "
+            [class.button--primary]="selectedTab === 'products-offers'"
+          >
             Offers ({{ sellerOffers?.items?.length }})
             <svg-icon src="../../../../assets/icons/bill.svg"></svg-icon>
           </button>
         </li>
       </ul>
-
-      <!-- <div id="all-products" [hidden]="selectedTab !== 'all-products'">
-
-        <p>
-          Content for 'all-products' tab
-        </p>
-      </div>
-
-      <div id="products-offers" [hidden]="selectedTab !== 'products-offers'">
-
-        <p>
-          Content for 'products-offers' tab
-        </p>
-      </div> -->
     </div>
-
-
 
     <div id="offers-content">
-      <div *ngIf="selectedTab === 'all-products'" class="p-4" id="all-products" role="tabpanel" aria-labelledby="all-products-tab">
-        <div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 2xl:grid-cols-8">
+      <div
+        *ngIf="selectedTab === 'all-products'"
+        [class.hidden]="selectedTab !== 'all-products'"
+        class="p-4"
+        id="all-products"
+        role="tabpanel"
+        aria-labelledby="all-products-tab"
+      >
+        <div
+          class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-5 4xl:grid-cols-8 gap-4"
+        >
           <ng-container *ngFor="let item of sellerProducts?.items">
-            <app-product-snapshot-card [product]="item"></app-product-snapshot-card>
+            <app-product-snapshot-card
+              [product]="item"
+            ></app-product-snapshot-card>
           </ng-container>
         </div>
       </div>
 
-      <div *ngIf="selectedTab === 'products-offers'" class="p-4" id="products-offers" role="tabpanel" aria-labelledby="products-offers-tab">
-        <div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 2xl:grid-cols-8">
+      <div
+        *ngIf="selectedTab === 'products-offers'"
+        class="p-4"
+        id="products-offers"
+        role="tabpanel"
+        aria-labelledby="products-offers-tab"
+      >
+        <div
+          class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-5 4xl:grid-cols-8 gap-4"
+        >
           <ng-container *ngFor="let item of sellerOffers?.items">
-            <app-product-snapshot-card [product]="item"></app-product-snapshot-card>
+            <app-product-snapshot-card
+              [product]="item"
+            ></app-product-snapshot-card>
           </ng-container>
         </div>
       </div>
     </div>
-
   </ng-container>
+
+
   <ng-template #noProducts>
     <div class="flex flex-wrap justify-center gap-3 flex-col">
-      <img src="../../../../assets/icons/no-products.svg" alt="no-produvts-icon" />
+      <img
+        src="../../../../assets/icons/no-products.svg"
+        alt="no-produvts-icon"
+      />
       <p class="text-base text-blueGray-400 text-center">
         This seller didn't publish any content yet.
       </p>
     </div>
   </ng-template>
-
 </section>
 
 <section class="pb-12 content-page">
   <p class="text-xs text-blue-900 flex items-center gap-1">
     <svg-icon src="../../../../assets/icons/car-coloring.svg"></svg-icon>
-    {{"getShipping" |translate}}
+    {{ "getShipping" | translate }}
 
-    <a class="ms-1 underline hover:no-underline">{{"downloadNow" | translate}}</a>
+    <a class="ms-1 underline hover:no-underline">{{
+      "downloadNow" | translate
+    }}</a>
   </p>
 </section>

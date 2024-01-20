@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
+import { SvgIconComponent } from 'angular-svg-icon';
 import { SharedModule } from '../../../shared/shared.module';
-import { SvgIconComponent, provideAngularSvgIcon } from 'angular-svg-icon';
 @Component({
   selector: 'app-my-orders',
   templateUrl: './my-orders.component.html',
@@ -111,7 +111,7 @@ export class MyOrdersComponent {
         },
       ],
 
-      id: '7a734dd3-3cf8-4ec1-b7ad-7a8912d0a03b',
+      id: '7a734dd3-3cf8-4ec1-b7ad-7a8912d0a22',
     },
     {
       name: '34556',
@@ -157,7 +157,7 @@ export class MyOrdersComponent {
         },
       ],
 
-      id: '7a734dd3-3cf8-4ec1-b7ad-7a8912d0a03b',
+      id: '7a734dd3-3cf8-4ec1-b7ad-7a8912d0a877',
     },
     {
       name: '5345',
@@ -203,7 +203,7 @@ export class MyOrdersComponent {
         },
       ],
 
-      id: '7a734dd3-3cf8-4ec1-b7ad-7a8912d0a03b',
+      id: '7a734dd3-3cf8-4ec1-b7ad-7a8912d0a000',
     },
     {
       name: '5345',
@@ -249,7 +249,7 @@ export class MyOrdersComponent {
         },
       ],
 
-      id: '7a734dd3-3cf8-4ec1-b7ad-7a8912d0a03b',
+      id: '7a734dd3-3cf8-4ec1-b7ad-7a8912d0a1g7',
     },
   ];
 

@@ -5,19 +5,31 @@ import { BehaviorSubject } from 'rxjs';
   providedIn: 'root'
 })
 export class AuthService {
+
   private isAuthenticatedSubject = new BehaviorSubject<boolean>(false);
+  private userNameSubject = new BehaviorSubject<string | null>(null);
 
   isAuthenticated$ = this.isAuthenticatedSubject.asObservable();
+  userName$ = this.userNameSubject.asObservable();
+
   constructor() { }
 
-  setToken(token:  string):  void {
-    return  localStorage.setItem('token', token );
+  setAuthenticated(isAuthenticated: boolean): void {
+    this.isAuthenticatedSubject.next(isAuthenticated);
   }
-  setRefreshToken(token:  string):  void {
-    return  localStorage.setItem('refresh_token', token );
+
+  setUserName(userName: string | null): void {
+    this.userNameSubject.next(userName);
   }
-  getToken():  string {
-      return localStorage.getItem('token')??"";
+
+  setToken(token: string): void {
+    return localStorage.setItem('token', token);
+  }
+  setRefreshToken(token: string): void {
+    return localStorage.setItem('refresh_token', token);
+  }
+  getToken(): string {
+    return localStorage.getItem('token') ?? "";
   }
 
   logout() {
@@ -25,13 +37,13 @@ export class AuthService {
     localStorage.removeItem('refresh_token');
     localStorage.removeItem('user_info');
     localStorage.removeItem('token_expiration');
-}
+  }
 
-isAuth(): boolean {
-  // Check if access token is present in local storage
-  const accessToken = localStorage.getItem('token');
+  isAuth(): boolean {
+    // Check if access token is present in local storage
+    const accessToken = localStorage.getItem('token');
 
-  // Return true if access token is present, indicating the user is authenticated
-  return !!accessToken;
-}
+    // Return true if access token is present, indicating the user is authenticated
+    return !!accessToken;
+  }
 }

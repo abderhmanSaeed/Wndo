@@ -32,10 +32,13 @@ export class HeaderOfPageComponent implements OnInit, AfterViewInit {
   authUserDropdown: any[] = [];
   guestUserDropdown: any[] = [];
 
+  isAuthenticated$ = this.authService.isAuthenticated$;
+  userName$ = this.authService.userName$;
+
   isAuthenticated: boolean = false;
   userName: string | null = null;
 
-  constructor(private route: ActivatedRoute, private router: Router, private sharedService: SharedService ,
+  constructor(private route: ActivatedRoute, private router: Router, private sharedService: SharedService,
     private authService: AuthService) { }
   ngAfterViewInit(): void {
     this.authUserDropdown = [
@@ -90,15 +93,29 @@ export class HeaderOfPageComponent implements OnInit, AfterViewInit {
       this.isProductOffersRoute = 'sellerId' in queryParams;
     });
 
-    // Check if the user is authenticated when the component is initialized
-    this.isAuthenticated = this.authService.isAuth();
 
-    // If authenticated, get the user's name from local storage
-    if (this.isAuthenticated) {
+    // Subscribe to the authentication status and user name
+    this.authService.isAuthenticated$.subscribe((isAuthenticated) => {
+      this.isAuthenticated = isAuthenticated;
+    });
+
+    this.authService.userName$.subscribe((userName) => {
+      this.userName = userName;
+    });
+
+    // Check if the user is authenticated when the component is initialized
+    this.checkAuthenticationStatus();
+  }
+  private checkAuthenticationStatus(): void {
+    const isAuthenticated = this.authService.isAuth();
+
+    if (isAuthenticated) {
       const userInfoString = localStorage.getItem('user_info');
+
       if (userInfoString) {
         const userInfo = JSON.parse(userInfoString);
-        this.userName = userInfo.userName;
+        this.authService.setAuthenticated(true);
+        this.authService.setUserName(userInfo.userName);
       }
     }
   }

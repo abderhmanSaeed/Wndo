@@ -48,6 +48,9 @@ export class LoginPhonePasswordComponent implements OnInit {
           const expiresInMinutes = (expiresInInSeconds % (60 * 60)) / 60;
 
           localStorage.setItem('token_expiration', `Token will expire in ${expiresInDays} days, ${expiresInHours} hours, and ${expiresInMinutes} minutes.`);
+          // Update AuthService with authentication status and user information
+          this.authService.setAuthenticated(true);
+          this.authService.setUserName(response.responseData.userName);
           this.close();
         }
       },

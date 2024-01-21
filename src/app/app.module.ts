@@ -13,6 +13,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslationService } from './data/service/translation/translation.service';
+import { SharedModule } from './shared/shared.module';
 
 
 @NgModule({
@@ -27,6 +28,7 @@ import { TranslationService } from './data/service/translation/translation.servi
     BrowserModule,
     AppRoutingModule,
     CommonModule,
+    SharedModule,
     HttpClientModule,
     BrowserAnimationsModule,
     TranslateModule.forRoot({
@@ -42,7 +44,6 @@ import { TranslationService } from './data/service/translation/translation.servi
     TranslateModule
   ],
   providers: [
-    provideClientHydration()
   ],
   bootstrap: [AppComponent]
 })
@@ -50,7 +51,7 @@ export class AppModule {
   constructor(private translationService: TranslationService) {
     this.translationService.init();
   }
- }
- export function HttpLoaderFactory(http: HttpClient) {
+}
+export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, '../assets/i18n/', '.json');
 }

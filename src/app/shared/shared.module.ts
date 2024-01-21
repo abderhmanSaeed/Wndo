@@ -1,4 +1,6 @@
-import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { TokenInterceptor } from './../core/interceptor/token.interceptor';
+import { CoreModule } from './../core/core.module';
+import { HTTP_INTERCEPTORS, HttpClient, HttpClientModule } from '@angular/common/http';
 import { OrderConfirmedModal } from './components/modals/order-confirmed-modal/order-confirmed-modall.component';
 import { ModalComponent } from './components/modal/modal.component';
 import { SelectComponent } from './components/inputs/Select/select.component';
@@ -67,7 +69,6 @@ register();
     ModalComponent,
     LoginModalComponent,
     ModalContentComponent,
-    LoginModalComponent,
     ConfirmationComponent,
     OrderConfirmedModal,
     VideoModalComponent,
@@ -79,6 +80,7 @@ register();
     FormsModule,
     ReactiveFormsModule,
     RouterModule,
+    CoreModule,
     ModalModule.forRoot(),
     HttpClientModule,
     AngularSvgIconModule.forRoot(),
@@ -98,6 +100,7 @@ register();
     HeaderOfPageComponent,
     ProductMayLikeComponent,
     GalleryComponent,
+    CoreModule,
     StepperComponent,
     StepComponent,
     ShippingPaymentComponent,
@@ -118,7 +121,14 @@ register();
     MyOrderCardComponent,
     TranslateModule
   ],
-  providers: [TranslationService],
+  providers: [
+    TranslationService,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: TokenInterceptor,
+      multi: true
+    }
+  ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class SharedModule {

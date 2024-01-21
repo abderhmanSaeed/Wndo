@@ -30,8 +30,19 @@ export class AuthService {
   }
 
   getToken(): string | null {
-    return localStorage.getItem('token');
+    try {
+      const tokenLocalStorage = localStorage?.getItem('token');
+      if (tokenLocalStorage) {
+        // const token = JSON.parse(tokenLocalStorage);
+        return JSON.stringify(tokenLocalStorage);
+      }
+    } catch (error) {
+      console.error('Error accessing localStorage:', error);
+    }
+    return null;
   }
+
+
 
   setRefreshToken(token: string): void {
     return localStorage.setItem('refresh_token', token);

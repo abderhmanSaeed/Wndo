@@ -5,7 +5,6 @@ import { AuthGuard } from './guard/auth.guard';
 import { NoAuthGuard } from './guard/no-auth.guard';
 import { throwIfAlreadyLoaded } from './guard/module-import.guard';
 
-import { TokenInterceptor } from './interceptor/token.interceptor';
 import { CommonModule } from '@angular/common';
 
 
@@ -19,11 +18,8 @@ import { CommonModule } from '@angular/common';
   providers: [
     AuthGuard,
     NoAuthGuard,
-    {
-      provide: HTTP_INTERCEPTORS,
-      useClass: TokenInterceptor,
-      multi: true
-    }
+
   ]
 })
-export class CoreModule { }
+export class CoreModule {
+}

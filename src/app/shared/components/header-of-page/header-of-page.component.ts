@@ -37,7 +37,7 @@ export class HeaderOfPageComponent implements OnInit, AfterViewInit {
 
   isAuthenticated: boolean = false;
   userName: string | null = null;
-
+  products: any[] = [];
   constructor(private route: ActivatedRoute, private router: Router, private sharedService: SharedService,
     private authService: AuthService) { }
   ngAfterViewInit(): void {
@@ -89,6 +89,11 @@ export class HeaderOfPageComponent implements OnInit, AfterViewInit {
   ];
 
   ngOnInit(): void {
+    const productsLocalStorage = localStorage.getItem('products');
+    if (productsLocalStorage) {
+      this.products = JSON.parse(productsLocalStorage);
+    }
+
     this.route.queryParams.subscribe((queryParams) => {
       this.isProductOffersRoute = 'sellerId' in queryParams;
     });

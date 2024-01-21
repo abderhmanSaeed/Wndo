@@ -11,7 +11,8 @@ export class TokenInterceptor implements HttpInterceptor {
   //   console.log(this.authService.getToken());
   //   return next.handle(request);
   // }
-constructor(private authService: AuthService){}
+  constructor(private authService: AuthService) { }
+
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
 
     // Log original headers
@@ -24,7 +25,7 @@ constructor(private authService: AuthService){}
     // Clone the request and set the necessary headers
     request = request.clone({
       setHeaders: {
-        Authorization: token ? `Bearer ${token}` : '',
+        Authorization: token ? 'Bearer ' + token : '',
         'Content-Type': 'application/json',
         'Access-Control-Allow-Headers': 'Content-Type',
         'Access-Control-Allow-Origin': 'https://almansoroffice.net',

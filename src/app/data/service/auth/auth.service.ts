@@ -55,14 +55,11 @@ export class AuthService {
   getToken(): string | null {
     try {
       const tokenLocalStorage = localStorage?.getItem('token');
-      if (tokenLocalStorage) {
-        // const token = JSON.parse(tokenLocalStorage);
-        return JSON.stringify(tokenLocalStorage);
-      }
+      return tokenLocalStorage || null;
     } catch (error) {
       console.error('Error accessing localStorage:', error);
+      return null;
     }
-    return null;
   }
 
 

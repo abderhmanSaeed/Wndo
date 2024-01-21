@@ -302,7 +302,8 @@ export class ProductDetailsCardComponent implements OnInit {
 
   logColor(colorWithSizes: any): void {
     console.log(colorWithSizes);
-    this.selectedColor = colorWithSizes;
+    this.selectedColor = colorWithSizes?.color?.id
+    ;
     this.colorWithSizesSelected = colorWithSizes;
   }
   logSize(size: any): void {

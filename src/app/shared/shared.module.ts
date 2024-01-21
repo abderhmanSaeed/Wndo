@@ -40,6 +40,7 @@ import { MyOrderCardComponent } from './components/order/my-order-card/my-order-
 import { TranslationService } from '../data/service/translation/translation.service';
 import { TranslateModule } from '@ngx-translate/core';
 import { LoginPhonePasswordComponent } from './components/modals/login-phone-password/login-phone-password.component';
+import { AddProductToCardModalComponent } from './components/modals/add-product-to-card-modal/add-product-to-card-modal.component';
 
 register();
 
@@ -74,6 +75,7 @@ register();
     VideoModalComponent,
     MyOrderCardComponent,
     LoginPhonePasswordComponent,
+    AddProductToCardModalComponent,
   ],
   imports: [
     CommonModule,
@@ -119,7 +121,8 @@ register();
     ConfirmationComponent,
     OrderConfirmedModal,
     MyOrderCardComponent,
-    TranslateModule
+    TranslateModule,
+    AddProductToCardModalComponent
   ],
   providers: [
     TranslationService,

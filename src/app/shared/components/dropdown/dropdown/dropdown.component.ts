@@ -1,4 +1,4 @@
-import { Component, ElementRef, HostListener, Input, Renderer2 } from '@angular/core';
+import { Component, Input, Output, EventEmitter, TemplateRef } from '@angular/core';
 
 type OptionProps = {
   label: string,
@@ -14,29 +14,42 @@ type ClassesProps = {
   labelColor?: string;
   toggleBtn?: string;
   list?: string;
-  listItem?: string
+  listItem?: string;
+  dropdoenMenu?: string
 };
+
 
 @Component({
   selector: 'app-dropdown',
   templateUrl: './dropdown.component.html',
-  styleUrl: './dropdown.component.scss'
+  styleUrls: ['./dropdown.component.scss']
 })
 export class DropdownComponent {
+  @Input() id: string = "";
   @Input() options:OptionProps[] = []
-  @Input() label?:string = '';
-  @Input() id:string = 'dropdown';
-  @Input() classes?:ClassesProps;
-  @Input() dropdownIcon?:string = "";
-  @Input() showSelectedValue?:boolean = true;
-  selectedValue:string = this.options.length > 0 ? this.options[0].label : '';
+  @Input() selectedValue: string = "";
+  @Input() showSelectedValue: boolean = true;
+  @Input() label: string = "";
+  @Input() dropdownIcon: string = "";
+  @Input() classes: any;
+  @Output() valueChanged = new EventEmitter<any>();
+  isOpen: boolean = false;
 
-
-  isDropdownVisible = false;
-
-  onSelectValue(option: { label: string; value: string }) {
-    this.selectedValue = option.value;
-    this.isDropdownVisible = false;
+  toggleDropdown() {
+    this.isOpen = !this.isOpen;
   }
 
+  closeDropdown() {
+    this.isOpen = false;
+  }
+
+  onSelectValue(option: any) {
+    this.selectedValue = option.label;
+    this.valueChanged.emit(option.value);
+    this.closeDropdown();
+  }
+
+  trackByFn(index: any, item: any) {
+    return item.value;
+  }
 }

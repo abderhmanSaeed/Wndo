@@ -29,7 +29,7 @@ constructor(private authService: AuthService){}
         'Access-Control-Allow-Headers': 'Content-Type',
         'Access-Control-Allow-Origin': 'https://almansoroffice.net',
         'Access-Control-Allow-Method': 'OPTIONS,POST,GET',
-        'Lang': 'ar'
+        'Lang': 'en'
       }
     });
 

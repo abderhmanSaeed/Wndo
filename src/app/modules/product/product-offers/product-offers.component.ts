@@ -66,7 +66,4 @@ export class ProductOffersComponent implements OnInit {
     this.selectedTab = tabId;
   }
 
-
-
-
 }

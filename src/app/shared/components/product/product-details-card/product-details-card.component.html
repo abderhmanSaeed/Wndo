@@ -73,7 +73,7 @@
               class="capitalize product-color-button hover:bg-primary hover:text-white border h-6 px-3 bg-white border-gray-150 rounded-[3px] text-xxs"
               style="--hover-color: #{{ colorWithSizes?.color?.hexaCode }}"
               (click)="logColor(colorWithSizes)"
-              [ngClass]="{ selected: colorWithSizes === selectedColor }"
+              [ngClass]="{ selected: colorWithSizes?.color?.id === selectedColor }"
             >
               {{ colorWithSizes?.color?.name }}
             </button>

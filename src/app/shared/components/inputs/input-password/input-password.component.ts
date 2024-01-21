@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 
 type ClassesProps = {
   label?: string,
@@ -21,7 +21,7 @@ export class InputPasswordComponent {
   @Input() value: string = "";
   @Input() classes?: ClassesProps;
   @Input() error: string = "";
-
+  @Output() valueChange = new EventEmitter<string>();
   type: 'text' | 'password' = 'password'
   isShowPassword: boolean = false
 
@@ -35,5 +35,10 @@ export class InputPasswordComponent {
       this.type = 'password'
     }
     console.log(this.isShowPassword)
+  }
+
+  onInputChange(event: Event): void {
+    const inputValue = (event.target as HTMLInputElement).value;
+    this.valueChange.emit(inputValue);
   }
 }

@@ -12,6 +12,7 @@ import { StepComponent } from './step/step.component';
 import { LoginPhonePasswordComponent } from '../modals/login-phone-password/login-phone-password.component';
 import { ModalService } from '../modal/modal.service';
 import { SharedService } from '../../services/shared.service';
+import { AuthService } from '../../../data/service/auth/auth.service';
 
 
 @Component({
@@ -25,7 +26,7 @@ export class StepperComponent implements AfterContentInit {
   @Input() hasActionFooter: boolean = true;
 
   constructor(private renderer: Renderer2, private modalService: ModalService,
-    private sharedService: SharedService) { }
+    private sharedService: SharedService, private authService: AuthService) { }
 
   @ContentChildren(StepComponent) steps: QueryList<StepComponent> | undefined;
   currentStep: number = 0;
@@ -56,8 +57,8 @@ export class StepperComponent implements AfterContentInit {
     if (this.steps && this.currentStep < this.steps.length - 1) {
       // this.currentStep++;
       // this.updateCurrentStepTemplate();
-
-      if (this.currentStep === 0) {
+      const auth = this.authService.isAuth();
+      if (this.currentStep === 0 && !auth) {
         // If the current step is the "Check Out" step, call the openLoginModal method
         this.openLoginModal();
       } else {

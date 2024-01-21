@@ -15,7 +15,7 @@ type ClassesProps = {
   templateUrl: './input-phone.component.html',
   styleUrl: './input-phone.component.scss',
 })
-export class InputPhoneComponent implements OnInit{
+export class InputPhoneComponent implements OnInit {
   @Input() placeholder: string = '';
   @Input() label: string = '';
   @Input() disabled: boolean = false;
@@ -29,8 +29,9 @@ export class InputPhoneComponent implements OnInit{
   countriesCode: OptionProps[] = [];
 
   @Output() selectedOption: EventEmitter<string> = new EventEmitter<string>();
+  @Output() valueChange = new EventEmitter<string>();
 
-  constructor( private countryPhoneCodeService: CountryPhoneCodeService) { }
+  constructor(private countryPhoneCodeService: CountryPhoneCodeService) { }
   ngOnInit(): void {
     this.getCountryPhoneCodes();
   }
@@ -40,6 +41,7 @@ export class InputPhoneComponent implements OnInit{
         response => {
           if (response.isSuccess) {
             this.countriesCode = response.responseData.map((code: string) => ({ label: code, value: code }));
+            this.selectedOption.emit(this.countriesCode[0].label);
             // Handle the codes as needed
           } else {
             console.error('Error:', response.errorMessage);
@@ -58,6 +60,21 @@ export class InputPhoneComponent implements OnInit{
     if (optionLabel && optionLabel.includes('+')) {
       this.selectedOption.emit(optionLabel);
     }
+  }
+  onInputChange(event: Event): void {
+    const inputValue = (event.target as HTMLInputElement).value;
+    this.valueChange.emit(inputValue);
+  }
+  // Assuming this is part of your component class
+  onDropdownClick(event: any): void {
+    // Your logic for handling the dropdown click goes here
+    console.log('Dropdown clicked!', event);
+    const optionLabel = event?.target?.innerText;
+    if (optionLabel && optionLabel.includes('+')) {
+      this.selectedOption.emit(optionLabel);
+    }
+    // You can also prevent the default behavior if needed
+    event.preventDefault();
   }
 
   countriesCodeStatic = [

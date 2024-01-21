@@ -13,6 +13,10 @@ import { OptionProps } from '../../../models';
 })
 export class LoginPhonePasswordComponent implements OnInit {
   countriesCode: OptionProps[] = [];
+  selectedCountryCode: string | null = null;
+  phoneValue: string = '';
+  passwordValue: string = '';
+
   // Define an EventEmitter for emitting the close event
   @Output() closeEvent = new EventEmitter<void>();
   constructor(private modalService: ModalService, private countryPhoneCodeService: CountryPhoneCodeService,
@@ -20,46 +24,51 @@ export class LoginPhonePasswordComponent implements OnInit {
   ngOnInit(): void {
   }
   login() {
-    const requestBody = {
-      phone: '1129480938',
-      phoneCode: '+20',
-      password: 'Test_123',
-    };
+    // Check if all required values are available
+    if (this.selectedCountryCode && this.phoneValue && this.passwordValue) {
+      const requestBody = {
+        phone: this.phoneValue,
+        phoneCode: this.selectedCountryCode,
+        password: this.passwordValue,
+      };
 
-    this.loginService.login(requestBody).subscribe(
-      (response) => {
-        console.log('Login successful', response);
-        // Handle the response as needed
-        if (response.isSuccess && response.responseData) {
-          // Set tokens and user information in local storage
-          this.authService.setToken(response.responseData.access_Token);
-          this.authService.setRefreshToken(response.responseData.refresh_Token);
-          // localStorage.setItem('access_token', response.responseData.access_Token);
-          // localStorage.setItem('refresh_token', response.responseData.refresh_Token);
-          localStorage.setItem('user_info', JSON.stringify({
-            userName: response.responseData.userName,
-            phoneNumber: response.responseData.phoneNumber,
-            phoneCode: response.responseData.phoneCode
-          }));
-          // Calculate and store expiration time in local storage
-          const expiresInInSeconds = response.responseData.expires_In;
-          const expiresInDays = expiresInInSeconds / (60 * 60 * 24);
-          const expiresInHours = (expiresInInSeconds % (60 * 60 * 24)) / (60 * 60);
-          const expiresInMinutes = (expiresInInSeconds % (60 * 60)) / 60;
+      this.loginService.login(requestBody).subscribe(
+        (response) => {
+          console.log('Login successful', response);
+          // Handle the response as needed
+          if (response.isSuccess && response.responseData) {
+            // Set tokens and user information in local storage
+            this.authService.setToken(response.responseData.access_Token);
+            this.authService.setRefreshToken(response.responseData.refresh_Token);
+            localStorage.setItem('user_info', JSON.stringify({
+              userName: response.responseData.userName,
+              phoneNumber: response.responseData.phoneNumber,
+              phoneCode: response.responseData.phoneCode
+            }));
+            // Calculate and store expiration time in local storage
+            const expiresInInSeconds = response.responseData.expires_In;
+            const expiresInDays = expiresInInSeconds / (60 * 60 * 24);
+            const expiresInHours = (expiresInInSeconds % (60 * 60 * 24)) / (60 * 60);
+            const expiresInMinutes = (expiresInInSeconds % (60 * 60)) / 60;
 
-          localStorage.setItem('token_expiration', `Token will expire in ${expiresInDays} days, ${expiresInHours} hours, and ${expiresInMinutes} minutes.`);
-          // Update AuthService with authentication status and user information
-          this.authService.setAuthenticated(true);
-          this.authService.setUserName(response.responseData.userName);
-          this.close();
+            localStorage.setItem('token_expiration', `Token will expire in ${expiresInDays} days, ${expiresInHours} hours, and ${expiresInMinutes} minutes.`);
+            // Update AuthService with authentication status and user information
+            this.authService.setAuthenticated(true);
+            this.authService.setUserName(response.responseData.userName);
+            this.close();
+          }
+        },
+        (error) => {
+          console.error('Login failed', error);
+          // Handle errors
         }
-      },
-      (error) => {
-        console.error('Login failed', error);
-        // Handle errors
-      }
-    );
+      );
+    } else {
+      // Handle the case where not all required values are available
+      console.error('Please provide all required values.');
+    }
   }
+
   getCountryPhoneCodes(): void {
     this.countryPhoneCodeService.getCountryPhoneCodes()
       .subscribe(
@@ -78,9 +87,19 @@ export class LoginPhonePasswordComponent implements OnInit {
         }
       );
   }
-  handleSelectedOption(selectedOption: string) {
-    console.log('Selected option:', selectedOption);
+  handleSelectedOption(selectedCountryCode: string): void {
+    this.selectedCountryCode = selectedCountryCode;
     // Do whatever you need to do with the selected option in the parent component
+  }
+
+  handleInputValueChange(phoneValue: string): void {
+    this.phoneValue = phoneValue;
+    // Do something with the updated value
+  }
+
+  handlePasswordValueChange(passwordValue: string): void {
+    this.passwordValue = passwordValue;
+    // Do something with the updated password value
   }
   close() {
     // Notify the service that the LOGIN button is clicked

@@ -2,6 +2,7 @@ import { TranslateModule } from '@ngx-translate/core';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { OptionProps } from '../../../models';
 import { CountryPhoneCodeService } from '../../../../data/service/country-phone/country-phone-code.service';
+import { AuthService } from '../../../../data/service/auth/auth.service';
 
 type ClassesProps = {
   label?: string;
@@ -27,11 +28,12 @@ export class InputPhoneComponent implements OnInit {
   @Input() error: string = '';
   @Input() options: any[] = [];
   countriesCode: OptionProps[] = [];
-
+  phoneCode: string = '';
+  userInfoCheck: boolean = false
   @Output() selectedOption: EventEmitter<string> = new EventEmitter<string>();
   @Output() valueChange = new EventEmitter<string>();
 
-  constructor(private countryPhoneCodeService: CountryPhoneCodeService) { }
+  constructor(private countryPhoneCodeService: CountryPhoneCodeService, private authService: AuthService) { }
   ngOnInit(): void {
     this.getCountryPhoneCodes();
   }
@@ -42,6 +44,28 @@ export class InputPhoneComponent implements OnInit {
           if (response.isSuccess) {
             this.countriesCode = response.responseData.map((code: string) => ({ label: code, value: code }));
             this.selectedOption.emit(this.countriesCode[0].label);
+            let userInfo = this.authService.getUserInfo();
+            if (userInfo) {
+              this.value = userInfo.phoneCode + userInfo.phoneNumber;
+              this.userInfoCheck = true;
+            }
+            console.log(userInfo);            // this.authService.phoneNumber$.subscribe((phoneNumber) => {
+            //   if (phoneNumber) {
+            //     // this.authService.phoneCode$.subscribe((phoneCode) => {
+            //     //   if (phoneCode) {
+            //     //     this.value = phoneNumber + phoneCode;
+
+            //     //   }
+            //     // });
+            //     this.value = phoneNumber;
+            //   }
+
+            // });
+            // this.authService.phoneCode$.subscribe((phoneCode) => {
+            //   if (phoneCode) {
+            //     this.value += phoneCode;
+            //   }
+            // });
             // Handle the codes as needed
           } else {
             console.error('Error:', response.errorMessage);

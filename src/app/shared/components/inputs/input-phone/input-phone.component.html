@@ -1,23 +1,13 @@
-<div
-  class="input-container input-container--phone {{ classes?.base }}"
-  [class.floating-label]="isFloating"
->
-  <label
-    *ngIf="!isFloating"
-    [for]="name"
-    [ngClass]="{ 'text-blue-900': !classes?.labelColor }"
-    class="block mb-2 text-sm font-medium  {{ classes?.label }}"
-  >
+<div class="input-container input-container--phone {{ classes?.base }}" [class.floating-label]="isFloating">
+  <label *ngIf="!isFloating" [for]="name" [ngClass]="{ 'text-blue-900': !classes?.labelColor }"
+    class="block mb-2 text-sm font-medium  {{ classes?.label }}">
     {{ label }}
     <span class="text-red-500" *ngIf="required"> * </span>
   </label>
   <div class="flex">
     <!-- [label]="'select' | translet" -->
-    <app-dropdown
-      [id]="'countriesCodeDropdown'"
-      [options]="countriesCode"
-      [label]="countriesCode[0] ? countriesCode[0].label : ''"
-      [classes]="{
+    <app-dropdown *ngIf="!userInfoCheck" [id]="'countriesCodeDropdown'" [options]="countriesCode"
+    [label]="countriesCode[0] ? countriesCode[0].label : ''" [classes]="{
         dropdownMenu: '!top-[100%]',
         list: 'h-[225px] overflow-y-auto snap-y snap-mandatory',
         listItem: 'phone-code-list__item snap-start',
@@ -26,47 +16,25 @@
           : 'toggle-btn'
           ? 'border-b h-full border-e-2 px-4 text-sm text-blue-900 font-semibold flex items-center justify-between'
           : 'select-code border-e-0 !h-full flex-shrink-0 z-10 inline-flex items-center py-2.5 px-4 text-sm font-medium text-center text-gray-500  border border-gray-30 rounded-s-lg hover:bg-gray-200 focus:ring-4 focus:outline-none focus:ring-gray-100'
-      }"
-      (click)="onDropdownClick($event)"
-      >
+      }" (click)="onDropdownClick($event)">
       <!-- (click)="onDropdownClick($event)" -->
-      <ng-container
-        startContentMenu
-        *ngFor="let option of countriesCode; let i = index"
-        #startContentMenu
-      >
+      <ng-container startContentMenu *ngFor="let option of countriesCode; let i = index" #startContentMenu>
         <i alt="Country Image" class="country-image">{{ option?.label }}</i>
       </ng-container>
     </app-dropdown>
 
     <div class="relative w-full">
-      <input
-      (input)="onInputChange($event)"
-      title="{{ name }}"
-      pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
-      [title]="name"
-      type="text"
-      [id]="name"
-      [placeholder]="placeholder || '-456-7890'"
-      [disabled]="disabled"
-      [required]="required"
-      [name]="name"
-      [value]="value"
-      class="{{
-        classes?.input
-      }} w-full placeholder:text-sm placeholder:my-10 !rounded-s-none"
-      [ngClass]="{
-        'peer': isFloating,
-        'border-red-500': error,
-        'border-red-30': error !== '',
-      }"
-    />
-      <label
-        *ngIf="isFloating"
-        [for]="name"
-        [ngClass]="{ 'peer-focus:text-primary': !classes?.labelColor }"
-        class="floating-label__label {{ classes?.label }}"
-      >
+      <input (input)="onInputChange($event)" title="{{ name }}" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" [title]="name"
+      type="text" [id]="name" [placeholder]="placeholder || '-456-7890'" [disabled]="!!phoneCode || !!value" [required]="required"
+      [name]="name" [value]="value" class="{{
+      classes?.input
+    }} w-full placeholder:text-sm placeholder:my-10 !rounded-s-none" [ngClass]="{
+      'peer': isFloating,
+      'border-red-500': error,
+      'border-red-30': error !== '',
+    }" />
+      <label *ngIf="isFloating" [for]="name" [ngClass]="{ 'peer-focus:text-primary': !classes?.labelColor }"
+        class="floating-label__label {{ classes?.label }}">
         {{ label }}
         <span class="text-red-500" *ngIf="required"> * </span>
       </label>

@@ -55,6 +55,8 @@ export class LoginPhonePasswordComponent implements OnInit {
             // Update AuthService with authentication status and user information
             this.authService.setAuthenticated(true);
             this.authService.setUserName(response.responseData.userName);
+            this.authService.setPhoneNumber(response.responseData.phoneNumber);
+            this.authService.setPhoneCode(response.responseData.phoneCode);
             this.close();
           }
         },

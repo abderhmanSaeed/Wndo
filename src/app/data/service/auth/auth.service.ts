@@ -8,10 +8,14 @@ export class AuthService {
 
   private isAuthenticatedSubject = new BehaviorSubject<boolean>(false);
   private userNameSubject = new BehaviorSubject<string | null>(null);
+  private phoneNumberSubject = new BehaviorSubject<string | null>(null);
+  private phoneCodeSubject = new BehaviorSubject<string | null>(null);
   private tokenSubject = new BehaviorSubject<string | null>(null);
 
   isAuthenticated$ = this.isAuthenticatedSubject.asObservable();
   userName$ = this.userNameSubject.asObservable();
+  phoneNumber$ = this.phoneNumberSubject.asObservable();
+  phoneCode$ = this.phoneCodeSubject.asObservable();
   token$ = this.tokenSubject.asObservable();
 
   constructor() { }
@@ -23,10 +27,29 @@ export class AuthService {
   setUserName(userName: string | null): void {
     this.userNameSubject.next(userName);
   }
+  setPhoneNumber(phoneName: string | null): void {
+    this.phoneNumberSubject.next(phoneName);
+  }
+  setPhoneCode(phoneCode: string | null): void {
+    this.phoneCodeSubject.next(phoneCode);
+  }
 
   setToken(token: string): void {
     localStorage.setItem('token', token);
     this.tokenSubject.next(token);
+  }
+
+  getUserInfo(): any | null {
+    try {
+      const user_infoLocalStorage = localStorage?.getItem('user_info');
+      if (user_infoLocalStorage) {
+        const userInfo = JSON.parse(user_infoLocalStorage);
+        return userInfo;
+      }
+    } catch (error) {
+      console.error('Error accessing localStorage:', error);
+    }
+    return null;
   }
 
   getToken(): string | null {

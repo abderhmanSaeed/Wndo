@@ -14,10 +14,10 @@
           [class.swiper-slide-active]="index === i"
           class="cursor-pointer"
         >
-          <ng-container *ngIf="item.imageId">
+          <ng-container *ngIf="item">
             <img
-              [src]="item.urlPreview"
-              alt="{{ item.id }}"
+              [src]="item"
+              alt="{{ item }}"
               class="w-full h-[80%] object-cover"
             />
           </ng-container>
@@ -48,13 +48,15 @@
     class="flex flex-grow items-stretch justify-between gap-6 xl:gap-24 flex-col xl:flex-row"
   >
     <div class="space-y-2">
-      <h6 class="font-medium text-blue-900">Order No :{{ product.id }}</h6>
+      <h6 class="font-medium text-blue-900">Order No :{{ product.orderNumber }}</h6>
       <h6 class="text-sm font-semibold">Price: {{ product.price }} EGP</h6>
       <h6 class="text-xs font-semibold">
         Order Statues:
-        <span [ngClass]="getStyle(product.statues).textColor">{{
-          product.statues
-        }}</span>
+        <!-- <span *ngFor="let item of product?.items" [ngClass]="getIOrderItemState(item)">{{item.itemState}}</span> -->
+        <span *ngFor="let item of product?.items" [ngClass]="getIOrderItemState(item)">
+          {{ getOrderItemStateLabel(item) }}
+        </span>
+
       </h6>
     </div>
 

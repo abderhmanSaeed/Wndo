@@ -7,7 +7,7 @@
     <section class="flex justify-between items-center">
       <div class="flex items-end w-32 h-32 mt-12">
         <img
-          class="rounded-full  h-full w-full"
+          class="rounded-full h-full w-full"
           [src]="seller?.imagePath"
           alt="{{ seller?.id }}"
           [class.cursor-pointer]="!isProductOffersRoute"
@@ -32,7 +32,7 @@
             <span
               class="inline-flex items-center justify-center w-4 h-4 text-xxs text-white bg-primary rounded-full -mt-2"
             >
-            {{ products.length }}
+              {{ products.length }}
             </span>
           </button>
         </li>
@@ -72,6 +72,9 @@
             dropdownMenu: '!w-[220px]'
           }"
           [options]="isAuthenticated ? authUserDropdown : guestUserDropdown"
+          [selectedValue]="selectedValue"
+          (valueChanged)="onValueChanged($event)"
+
         >
           <div
             class="border-t border-blue-800 mt-6 text-center pt-4.5 pb-3"
@@ -80,7 +83,8 @@
             <button
               type="button"
               class="text-primary text-base font-medium hover:underline"
-              (click)="logout()">
+              (click)="logout()"
+            >
               <i
                 class="fa-solid fa-arrow-right-from-bracket ltr:rotate-180 text-lg me-2"
               ></i>
@@ -118,7 +122,5 @@
         </ng-template>
       </div>
     </section>
-
-
   </div>
 </section>

@@ -5,31 +5,18 @@
     <div class="mb-5">
       <app-gallery [items]="product?.images"></app-gallery>
     </div>
-
-    <div *ngIf="showNotification" class="custom-notification" role="alert">
-      Cannot add new product. Available quantity:
-      <strong class="ms-1"> {{ size.quantity }} </strong>. You selected
-      <strong class="ms-1"> {{ productQuantity }} </strong>.
-      <button type="button" (click)="closeNotification()">
-        <span class="sr-only">Close</span>
-        <i class="fa-solid fa-xmark"></i>
-      </button>
+    <div *ngIf="showNotification" class="custom-notification">
+      Cannot add new product. Available quantity: {{ size.quantity }}. You selected {{ productQuantity }}.
+      <button (click)="closeNotification()">Close</button>
     </div>
     <div>
       <h6 class="mb-4">Additional Info</h6>
       <ul class="flex flex-col">
-        <li
-          *ngFor="let lookup of product?.lookups"
-          class="inline-flex items-center gap-x-2 py-3 px-4 text-sm font-medium odd:bg-gray-100 bg-white text-gray-800 -mt-px first:mt-0 rounded"
+        <li *ngFor="let lookup of product?.lookups"
+            class="inline-flex items-center gap-x-2 py-3 px-4 text-sm font-medium odd:bg-gray-100 bg-white text-gray-800 -mt-px first:mt-0 rounded"
         >
-          <span class="text-base text-purple-400">{{
-            lookup?.displayName
-          }}</span>
-          <span
-            class="text-gray-950 text-base"
-            *ngIf="!lookup?.isMultiChoice"
-            >{{ lookup?.lookupValues[0]?.displayName }}</span
-          >
+          <span class="text-base text-purple-400">{{ lookup?.displayName }}</span>
+          <span class="text-gray-950 text-base" *ngIf="!lookup?.isMultiChoice">{{ lookup?.lookupValues[0]?.displayName }}</span>
           <span class="text-gray-950 text-base" *ngIf="lookup?.isMultiChoice">
             <ng-container *ngFor="let value of lookup?.lookupValues">
               {{ value.displayName }}
@@ -38,6 +25,7 @@
         </li>
       </ul>
     </div>
+
   </div>
 
   <div class="lg:col-span-5 xxl:col-span-6 3xl:col-span-3">
@@ -46,16 +34,10 @@
         <h2 class="mb-0 md:mb-4.5 text-blue-950">
           {{ product?.name }}
         </h2>
-        <div
-          class="flex flex-col md:flex-row md:items-center justify-between gap-y-2 md:gap-y-0"
-        >
+        <div class="flex flex-col md:flex-row md:items-center justify-between gap-y-2 md:gap-y-0">
           <span class="flex gap-8">
-            <h2 class="text-primary" *ngIf="responseData?.totalCount">
-              ${{ responseData?.totalCount }}
-            </h2>
-            <h4 class="text-gray-900 line-through" *ngIf="product?.discount">
-              ${{ product?.discount }}
-            </h4>
+            <h2 class="text-primary" *ngIf="responseData?.totalCount">${{ responseData?.totalCount }}</h2>
+            <h4 class="text-gray-900 line-through" *ngIf="product?.discount">${{ product?.discount }}</h4>
           </span>
           <span class="bg-orange-500 text-black rounded py-1 px-2">
             This Offer Will Expire in 3 Days
@@ -65,15 +47,19 @@
 
       <ng-container>
         <div>
-          <h6 class="mb-2">{{ "chooseColor" | translate }}</h6>
+          <h6 class="mb-2">{{'chooseColor' | translate}}</h6>
           <ul class="flex flex-wrap gap-2">
             <button
               *ngFor="let colorWithSizes of product?.colorWithSizes"
               type="button"
-              class="capitalize product-color-button hover:bg-primary hover:text-white border h-6 px-3 bg-white border-gray-150 rounded-[3px] text-xxs"
-              style="--hover-color: #{{ colorWithSizes?.color?.hexaCode }}"
+              class="capitalize leading-0 product-color-button hover:bg-primary hover:text-white border h-6 px-3 bg-white border-gray-150 rounded-[3px] text-xxs"
+              style="--hover-color: #{{ colorWithSizes?.color?.hexaCode }};
+              --selected-color:  #{{ colorWithSizes?.color?.hexaCode }}"
               (click)="logColor(colorWithSizes)"
-              [ngClass]="{ selected: colorWithSizes?.color?.id === selectedColor }"
+              [ngClass]="{
+                'product-color-button--selected text-white':
+                  colorWithSizes?.color?.id === selectedColor
+              }"
             >
               {{ colorWithSizes?.color?.name }}
             </button>
@@ -86,9 +72,9 @@
             <li *ngFor="let size of colorWithSizesSelected?.sizes">
               <button
                 type="button"
-                class="capitalize hover:bg-primary hover:text-white border h-6 px-3 bg-white border-gray-150 rounded-[3px] text-xxs"
+                class="capitalize hover:bg-primary leading-0 hover:text-white border h-6 px-3 bg-white border-gray-150 rounded-[3px] text-xxs"
                 (click)="logSize(size)"
-                [ngClass]="{ selected: size?.id === selectedSize }"
+                [ngClass]="{ 'selected !bg-primary !text-white': size?.id === selectedSize }"
               >
                 {{ size?.name }}
               </button>
@@ -149,6 +135,7 @@
       </div>
 
       <p class="text-base text-purple-300 mb-10">{{ product?.description }}</p>
+
 
       <div class="card-footer">
         <div class="flex flex-wrap gap-5">

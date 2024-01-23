@@ -11,16 +11,17 @@
     background-color: var(--hover-color);
     border-color: var(--hover-color);
   }
+
+  &--selected {
+    background-color: var(--selected-color);
+  }
 }
 .disabled-button-style {
   /* Add your styles for the disabled button here */
   opacity: 0.5; /* For example, reduce opacity */
   cursor: not-allowed; /* Optionally change the cursor to indicate it's not clickable */
 }
-.selected {
-  // Define styles for the selected state, for example, changing background color or border
-  border-color: #a0a0a0;
-}
+
 .custom-notification {
    @apply flex items-center p-4 mb-4 text-red-800 border-t-4 border-red-500 bg-red-100 start-1/2 -translate-x-1/2 top-6 fixed me-6;
 }

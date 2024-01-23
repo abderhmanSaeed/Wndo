@@ -9,6 +9,8 @@ import {
 import { ActivatedRoute, Router } from '@angular/router';
 import { SharedService } from '../../services/shared.service';
 import { AuthService } from '../../../data/service/auth/auth.service';
+import { ModalService } from '../modal/modal.service';
+import { LoginModalComponent } from '../modals/login-modal/login-modal.component';
 
 @Component({
   selector: 'app-header-of-page',
@@ -38,7 +40,7 @@ export class HeaderOfPageComponent implements OnInit, AfterViewInit {
   isAuthenticated: boolean = false;
   userName: string | null = null;
   products: any[] = [];
-  constructor(private route: ActivatedRoute, private router: Router, private sharedService: SharedService,
+  constructor(private modalService: ModalService, private route: ActivatedRoute, private router: Router, private sharedService: SharedService,
     private authService: AuthService) { }
   ngAfterViewInit(): void {
     this.authUserDropdown = [
@@ -68,6 +70,44 @@ export class HeaderOfPageComponent implements OnInit, AfterViewInit {
     ];
     throw new Error('Method not implemented.');
   }
+
+  selectedValue: string = '';
+
+  handleLogin() {
+    console.log("login")
+    this.modalService.open(LoginModalComponent, {
+      animations: {
+        modal: {
+          enter: 'enter-slide-down 0.8s',
+        },
+        overlay: {
+          enter: 'fade-in 0.8s',
+          leave: 'fade-out 0.3s forwards',
+        },
+      },
+      size: {
+        width: '36rem',
+      },
+      closeOnClickOutside: false
+    });
+  }
+
+  handleSignUp() {
+    console.log("SignUp")
+  }
+
+  onValueChanged(value: string) {
+    console.log('Value changed:', value);
+    if(value === "LogIn") {
+      this.handleLogin()
+    }
+
+    if(value === "SignUp") {
+      this.handleSignUp()
+    }
+
+  }
+
 
   socialMedia: any = [
     {

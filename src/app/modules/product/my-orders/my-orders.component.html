@@ -1,5 +1,18 @@
 <app-header-of-page></app-header-of-page>
 
+<div>
+  <label for="sellerDropdown">Select a Seller:</label>
+  <select id="sellerDropdown" (change)="onSellerSelected($event)">
+    <option value="" disabled selected>Select Seller</option>
+    <option *ngFor="let seller of sellersData" [value]="seller.userId">{{ seller.name }}</option>
+  </select>
+</div>
+
+<div *ngIf="selectedUserId">
+  <p>Selected userId: {{ selectedUserId }}</p>
+</div>
+
+
 <div class="content-page my-orders">
   <h5 class="mb-8">{{"yourOrders" | translate}} {{ ordersCount }}</h5>
   <section class="xl:px-32 px-8">

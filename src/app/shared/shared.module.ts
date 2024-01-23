@@ -1,3 +1,4 @@
+import { FilterByPipe } from './pipes/filter-by.pipe';
 import { TokenInterceptor } from './../core/interceptor/token.interceptor';
 import { CoreModule } from './../core/core.module';
 import { HTTP_INTERCEPTORS, HttpClient, HttpClientModule } from '@angular/common/http';
@@ -76,6 +77,7 @@ register();
     MyOrderCardComponent,
     LoginPhonePasswordComponent,
     AddProductToCardModalComponent,
+    FilterByPipe,
   ],
   imports: [
     CommonModule,
@@ -122,7 +124,9 @@ register();
     OrderConfirmedModal,
     MyOrderCardComponent,
     TranslateModule,
-    AddProductToCardModalComponent
+    AddProductToCardModalComponent,
+    FilterByPipe,
+
   ],
   providers: [
     TranslationService,

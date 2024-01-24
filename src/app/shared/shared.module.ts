@@ -1,3 +1,4 @@
+import { FilterByPipe } from './pipes/filter-by.pipe';
 import { TokenInterceptor } from './../core/interceptor/token.interceptor';
 import { CoreModule } from './../core/core.module';
 import { HTTP_INTERCEPTORS, HttpClient, HttpClientModule } from '@angular/common/http';
@@ -41,6 +42,7 @@ import { TranslationService } from '../data/service/translation/translation.serv
 import { TranslateModule } from '@ngx-translate/core';
 import { LoginPhonePasswordComponent } from './components/modals/login-phone-password/login-phone-password.component';
 import { AddProductToCardModalComponent } from './components/modals/add-product-to-card-modal/add-product-to-card-modal.component';
+import { NgSelectModule } from '@ng-select/ng-select';
 
 register();
 
@@ -76,6 +78,7 @@ register();
     MyOrderCardComponent,
     LoginPhonePasswordComponent,
     AddProductToCardModalComponent,
+    FilterByPipe,
   ],
   imports: [
     CommonModule,
@@ -87,6 +90,7 @@ register();
     HttpClientModule,
     AngularSvgIconModule.forRoot(),
     TranslateModule,
+    NgSelectModule
   ],
 
   exports: [
@@ -122,7 +126,10 @@ register();
     OrderConfirmedModal,
     MyOrderCardComponent,
     TranslateModule,
-    AddProductToCardModalComponent
+    AddProductToCardModalComponent,
+    FilterByPipe,
+    NgSelectModule
+
   ],
   providers: [
     TranslationService,

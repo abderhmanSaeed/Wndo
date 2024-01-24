@@ -24,4 +24,12 @@ export class SellerProductsOffersService {
     // Make the API call
     return this.http.get(url);
   }
+
+  // Method to get sellers from the API
+  getSellers(): Observable<any> {
+    const endpointUrl = `${this.apiEndPoint}/seller/sellers`;
+
+    // Make the GET request and return the observable
+    return this.http.get(endpointUrl);
+  }
 }

@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { SvgIconComponent } from 'angular-svg-icon';
 import { SharedModule } from '../../../shared/shared.module';
 import { Order, OrderItemState, OrderState, OrderStatistics } from '../../../shared/models';
+import { SellerProductsOffersService } from '../../../data/service/seller-products-offers/seller-products-offers.service';
 @Component({
   selector: 'app-my-orders',
   templateUrl: './my-orders.component.html',
@@ -11,7 +12,7 @@ import { Order, OrderItemState, OrderState, OrderStatistics } from '../../../sha
   imports: [SharedModule, SvgIconComponent],
 })
 export class MyOrdersComponent implements OnInit {
-  constructor(private myOrdersService: MyOrdersService) { }
+  constructor(private myOrdersService: MyOrdersService, private sellerProductsOffersService: SellerProductsOffersService) { }
   myOrders: Order[] = [];
   orderState: OrderState[] = [];
   orderItemState: OrderItemState[] = [];
@@ -19,14 +20,17 @@ export class MyOrdersComponent implements OnInit {
   orderStatisticsCount: string[] = [];
   ordersCount: number | undefined;
   ordersState: number | undefined;
+  sellersData: any;
+  selectedUserId: string | undefined;
   ngOnInit(): void {
     this.getMyOrders();
     this.getOrderStatistics();
+    this.getSeller();
   }
 
-  getMyOrders() {
+  getMyOrders(sellerId?: string) {
     // Example usage without optional parameters
-    this.myOrdersService.myOrders().subscribe(
+    this.myOrdersService.myOrders(sellerId).subscribe(
       (response) => {
         this.myOrders = response?.responseData?.items
         this.ordersState = 1;
@@ -50,6 +54,24 @@ export class MyOrdersComponent implements OnInit {
         console.error('Error fetching order statistics:', error);
       }
     );
+  }
+  getSeller() {
+    // Call the getSellers method when the component is initialized
+    this.sellerProductsOffersService.getSellers().subscribe(
+      (data) => {
+        this.sellersData = data?.responseData?.items;
+        console.log('Sellers Data:', this.sellersData);
+      },
+      (error) => {
+        console.error('Error fetching sellers data:', error);
+      }
+    );
+  }
+  onSellerSelected(event: any) {
+    // Your logic here
+    this.selectedUserId = event;
+    this.getMyOrders(event.userId);
+    console.log('Selected userId:', this.selectedUserId); // event contains the selected seller's data
   }
   currentTab: string = 'ordered';
   myOrderStatus = ['ordered', 'shipping', 'delivered', 'returned', 'cancelled'];

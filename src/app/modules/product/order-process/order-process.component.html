@@ -23,93 +23,66 @@
 </section>
 
 <ng-template #orderPlaced>
-  <h6 class="text-blur-950 text-lg mb-6">Track the order</h6>
   <div class="flex justify-between mb-4">
     <h6 class="text-base font-medium text-blue-900">Order No : 234</h6>
     <p class="text-blue-900">
       Order Statues: <span class="text-lightBlue-500">Order Placed</span>
     </p>
   </div>
-  <div class="bg-white border-s border-s-4 border-lightBlue-500 roude">
-    <p class="p-6">Items: {{ products.length }}</p>
 
-    <div class="scroll px-6 space-y-3 h-[30vh]">
-      <div *ngFor="let product of products" class="scroll__item">
-        <app-visual-product-summary
+    <div class="space-y-4">
+      <div *ngFor="let product of products" >
+        <app-product-summary-with-seller
           [product]="product"
-          [classes]="{ base: '!border-b-0 !bg-blue-100 !rounded' }"
-          [showDesc]="true"
-        ></app-visual-product-summary>
+        ></app-product-summary-with-seller>
       </div>
     </div>
-  </div>
 </ng-template>
 
 <ng-template #pickedUp>
-  <h6 class="text-blur-950 text-lg mb-6">Track the order</h6>
   <div class="flex justify-between mb-4">
     <h6 class="text-base font-medium text-blue-900">Order No : 234</h6>
     <p class="text-blue-900">
       Order Statues: <span class="text-orange-300">Picked up</span>
     </p>
   </div>
-  <div class="bg-white border-s border-s-4 border-lightBlue-500 roude">
-    <p class="p-6">Items: {{ products.length }}</p>
-
-    <div class="scroll px-6 space-y-3 h-[30vh]">
-      <div *ngFor="let product of products" class="scroll__item">
-        <app-visual-product-summary
-          [product]="product"
-          [classes]="{ base: '!border-b-0 bg-blue-100 rounded' }"
-          [showDesc]="true"
-        ></app-visual-product-summary>
-      </div>
+  <div class="space-y-4">
+    <div *ngFor="let product of products" >
+      <app-product-summary-with-seller
+        [product]="product"
+      ></app-product-summary-with-seller>
     </div>
   </div>
 </ng-template>
 
 <ng-template #outForDelivery>
-  <h6 class="text-blur-950 text-lg mb-6">Track the order</h6>
   <div class="flex justify-between mb-4">
     <h6 class="text-base font-medium text-blue-900">Order No : 234</h6>
     <p class="text-blue-900">
       Order Statues: <span class="text-orange-600">Out for delivery</span>
     </p>
   </div>
-  <div class="bg-white border-s border-s-4 border-lightBlue-500 roude">
-    <p class="p-6">Items: {{ products.length }}</p>
-
-    <div class="scroll px-6 space-y-3 h-[30vh]">
-      <div *ngFor="let product of products" class="scroll__item">
-        <app-visual-product-summary
-          [product]="product"
-          [classes]="{ base: '!border-b-0 bg-blue-100 rounded' }"
-          [showDesc]="true"
-        ></app-visual-product-summary>
-      </div>
+  <div class="space-y-4">
+    <div *ngFor="let product of products" >
+      <app-product-summary-with-seller
+        [product]="product"
+      ></app-product-summary-with-seller>
     </div>
   </div>
 </ng-template>
 
 <ng-template #delivered>
-  <h6 class="text-blur-950 text-lg mb-6">Track the order</h6>
   <div class="flex justify-between mb-4">
     <h6 class="text-base font-medium text-blue-900">Order No : 234</h6>
     <p class="text-blue-900">
       Order Statues: <span class="text-green-500">Delivered</span>
     </p>
   </div>
-  <div class="bg-white border-s border-s-4 border-lightBlue-500 roude">
-    <p class="p-6">Items: {{ products.length }}</p>
-
-    <div class="scroll px-6 space-y-3 h-[30vh]">
-      <div *ngFor="let product of products" class="scroll__item">
-        <app-visual-product-summary
-          [product]="product"
-          [classes]="{ base: '!border-b-0 bg-blue-100 rounded' }"
-          [showDesc]="true"
-        ></app-visual-product-summary>
-      </div>
+  <div class="space-y-4">
+    <div *ngFor="let product of products" >
+      <app-product-summary-with-seller
+        [product]="product"
+      ></app-product-summary-with-seller>
     </div>
   </div>
 </ng-template>

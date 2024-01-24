@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { ModalService } from '../../modal/modal.service';
 
 @Component({
   selector: 'app-add-product-to-card-modal',
@@ -6,6 +7,7 @@ import { Component, Input, OnInit } from '@angular/core';
   styleUrl: './add-product-to-card-modal.component.scss',
 })
 export class AddProductToCardModalComponent implements OnInit {
+  constructor(private modalService: ModalService) {}
   product: any;
 
   selectedColor: any;
@@ -66,5 +68,10 @@ export class AddProductToCardModalComponent implements OnInit {
     // Update your logic here based on the new quantity
     // For example, you can check if newQuantity > sizeQuantities and update accordingly
     this.userSelectedQuantity = newQuantity;
+  }
+
+  onCloseModal() {
+    console.log("close")
+    this.modalService.close()
   }
 }

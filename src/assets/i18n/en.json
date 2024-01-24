@@ -18,6 +18,7 @@
   "offerTerms" : "Offer Terms",
   "sell" : "Sell with us",
   "infringement" : "Infringement",
-  "security" : "Security"
-
+  "security" : "Security",
+  "save": "Save",
+  "discard": "Discard"
 }

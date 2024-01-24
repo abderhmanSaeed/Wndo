@@ -18,5 +18,7 @@
   "offerTerms" : "شروط العرض",
   "sell" : "بيع معنا",
   "infringement" : "التعدي",
-  "security" : "الحماية"
+  "security" : "الحماية",
+  "save": "حفظ",
+  "discard": "تجاهل"
 }

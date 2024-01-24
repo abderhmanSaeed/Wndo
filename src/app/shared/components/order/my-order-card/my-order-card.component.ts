@@ -33,7 +33,6 @@ export class MyOrderCardComponent {
 
   getIOrderItemState(item: any): string {
     // Check if the status exists in orderStatistics
-
     switch (item.itemState) {
       case OrderItemState.OrderPlaced:
         return 'text-lightBlue-500';
@@ -57,7 +56,6 @@ export class MyOrderCardComponent {
       default:
         return 'Unknown State';
     }
-
   }
   // New method to get the enum value for itemState
   getOrderItemStateLabel(item: any): string  {

@@ -43,6 +43,7 @@ import { TranslateModule } from '@ngx-translate/core';
 import { LoginPhonePasswordComponent } from './components/modals/login-phone-password/login-phone-password.component';
 import { AddProductToCardModalComponent } from './components/modals/add-product-to-card-modal/add-product-to-card-modal.component';
 import { NgSelectModule } from '@ng-select/ng-select';
+import { ProductSummaryWithSellerComponent } from './components/product/product-summary-with-seller/product-summary-with-seller.component';
 
 register();
 
@@ -79,6 +80,7 @@ register();
     LoginPhonePasswordComponent,
     AddProductToCardModalComponent,
     FilterByPipe,
+    ProductSummaryWithSellerComponent,
   ],
   imports: [
     CommonModule,
@@ -128,8 +130,8 @@ register();
     TranslateModule,
     AddProductToCardModalComponent,
     FilterByPipe,
-    NgSelectModule
-
+    NgSelectModule,
+    ProductSummaryWithSellerComponent
   ],
   providers: [
     TranslationService,

@@ -3,6 +3,7 @@ import { Component, Input } from '@angular/core';
 
  type ClassesProps = {
   title?: string;
+  base?: string
  }
 
 @Component({

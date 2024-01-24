@@ -1,0 +1,10 @@
+.product-color-button {
+  &:hover {
+    background-color: var(--hover-color);
+    border-color: var(--hover-color);
+  }
+
+  &--selected {
+    background-color: var(--selected-color);
+  }
+}

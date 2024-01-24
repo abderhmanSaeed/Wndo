@@ -1,4 +1,62 @@
-<div class="p-6">
-  <p>add-product-to-card-modal works!</p>
-  <app-dropdown [id]="'addToCardModal'" [options]="optionsModal" label="hello Test"></app-dropdown>
-</div>
+<app-modal-content [classes]="{base: '!text-start'}">
+
+  <div class="space-y-6 mb-8">
+      <div>
+        <h6 class="mb-4 text-lg">{{'chooseColor' | translate}}</h6>
+        <ul class="flex flex-wrap gap-2" role="list" aria-label="Show color and Sizes of product">
+          <li role="listitem">
+            <button
+              *ngFor="let colorWithSizes of product?.colorWithSizes"
+              type="button"
+              class="capitalize leading-0 product-color-button hover:text-white border h-6 px-3 bg-white border-gray-150 rounded-[3px] text-xxs"
+              style="--hover-color: #{{ colorWithSizes?.color?.hexaCode }};
+              --selected-color:  #{{ colorWithSizes?.color?.hexaCode }}"
+              (click)="logColor(colorWithSizes)"
+              [ngClass]="{
+                'product-color-button--selected text-white':
+                  colorWithSizes?.color?.id === selectedColor
+              }"
+            >
+              {{ colorWithSizes?.color?.name }}
+            </button>
+          </li>
+        </ul>
+      </div>
+
+      <div>
+        <h6 class="mb-4 text-lg">Choose Size</h6>
+        <ul class="flex flex-wrap gap-2">
+          <li *ngFor="let size of colorWithSizesSelected?.sizes">
+            <button
+              type="button"
+              class="capitalize hover:bg-primary leading-0 hover:text-white border h-6 px-3 bg-white border-gray-150 rounded-[3px] text-xxs"
+              (click)="logSize(size)"
+              [ngClass]="{ 'selected !bg-primary !text-white': size?.id === selectedSize }"
+            >
+              {{ size?.name }}
+            </button>
+          </li>
+        </ul>
+      </div>
+
+
+      <div
+      *ngIf="sizeQuantities"
+      class="mb-8 flex flex-wrap gap-8 items-center"
+    >
+      <h6>Quantity:</h6>
+      <app-quantity-button
+        [(quantity)]="productQuantity"
+        [disabledAddQuantity]="productQuantity === sizeQuantities"
+        [maxQuantity]="sizeQuantities"
+        (quantityChange)="onQuantityChange($event)"
+      >
+      </app-quantity-button>
+    </div>
+  </div>
+
+  <div class="space-y-6 mb-4">
+    <button type="button" class="button button--primary rounded-full w-full lg:w-[300px] mx-auto">{{'save' | translate}}</button>
+    <button type="button" class="button button--link uppercase text-blueGray-200 hover:text-blueGray-400 mx-auto">{{'discard' | translate}}</button>
+  </div>
+</app-modal-content>

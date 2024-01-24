@@ -40,8 +40,13 @@ export class HeaderOfPageComponent implements OnInit, AfterViewInit {
   isAuthenticated: boolean = false;
   userName: string | null = null;
   products: any[] = [];
-  constructor(private modalService: ModalService, private route: ActivatedRoute, private router: Router, private sharedService: SharedService,
-    private authService: AuthService) { }
+  constructor(private modalService: ModalService,
+    private route: ActivatedRoute,
+    private router: Router,
+    private sharedService: SharedService,
+    private authService: AuthService)
+    { }
+
   ngAfterViewInit(): void {
     this.authUserDropdown = [
       {
@@ -88,7 +93,7 @@ export class HeaderOfPageComponent implements OnInit, AfterViewInit {
       size: {
         width: '36rem',
       },
-      closeOnClickOutside: false
+      // closeOnClickOutside: false
     });
   }
 

@@ -28,9 +28,9 @@ export class MyOrdersComponent implements OnInit {
     this.getSeller();
   }
 
-  getMyOrders() {
+  getMyOrders(sellerId?: string) {
     // Example usage without optional parameters
-    this.myOrdersService.myOrders().subscribe(
+    this.myOrdersService.myOrders(sellerId).subscribe(
       (response) => {
         this.myOrders = response?.responseData?.items
         this.ordersState = 1;
@@ -67,9 +67,11 @@ export class MyOrdersComponent implements OnInit {
       }
     );
   }
-  onSellerSelected(event: any): void {
-    this.selectedUserId = event.target?.value;
-    console.log('Selected userId:', this.selectedUserId);
+  onSellerSelected(event: any) {
+    // Your logic here
+    this.selectedUserId = event;
+    this.getMyOrders(event.userId);
+    console.log('Selected userId:', this.selectedUserId); // event contains the selected seller's data
   }
   currentTab: string = 'ordered';
   myOrderStatus = ['ordered', 'shipping', 'delivered', 'returned', 'cancelled'];

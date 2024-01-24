@@ -42,6 +42,7 @@ import { TranslationService } from '../data/service/translation/translation.serv
 import { TranslateModule } from '@ngx-translate/core';
 import { LoginPhonePasswordComponent } from './components/modals/login-phone-password/login-phone-password.component';
 import { AddProductToCardModalComponent } from './components/modals/add-product-to-card-modal/add-product-to-card-modal.component';
+import { NgSelectModule } from '@ng-select/ng-select';
 
 register();
 
@@ -89,6 +90,7 @@ register();
     HttpClientModule,
     AngularSvgIconModule.forRoot(),
     TranslateModule,
+    NgSelectModule
   ],
 
   exports: [
@@ -126,6 +128,7 @@ register();
     TranslateModule,
     AddProductToCardModalComponent,
     FilterByPipe,
+    NgSelectModule
 
   ],
   providers: [

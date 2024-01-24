@@ -2,11 +2,16 @@
 
 <div>
   <label for="sellerDropdown">Select a Seller:</label>
-  <select id="sellerDropdown" (change)="onSellerSelected($event)">
-    <option value="" disabled selected>Select Seller</option>
-    <option *ngFor="let seller of sellersData" [value]="seller.userId">{{ seller.name }}</option>
-  </select>
+  <ng-select id="sellerDropdown"
+             [items]="sellersData"
+             bindLabel="name"
+             bindValue="userId"
+             placeholder="Select Seller"
+             [searchable]="true"
+             (change)="onSellerSelected($event)">
+  </ng-select>
 </div>
+
 
 <div *ngIf="selectedUserId">
   <p>Selected userId: {{ selectedUserId }}</p>

@@ -10,8 +10,8 @@ export class MyOrdersDetailsComponent implements OnInit {
   constructor(
     private route: ActivatedRoute) { }
   ngOnInit(): void {
-    const id = this.route.snapshot.paramMap.get('id');
-    console.log(`order ditais Id is ${id}`);
+    const orderNumber = this.route.snapshot.paramMap.get('orderNumber');
+    console.log(`order ditais order Number is ${orderNumber}`);
 
   }
 }

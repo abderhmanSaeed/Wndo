@@ -61,14 +61,14 @@ export class MyOrderCardComponent {
         return 'Unknown State';
     }
   }
-  onDropdownChange(selectedValue: string , id : any) {
+  onDropdownChange(selectedValue: string , orderNumber : any) {
     if(selectedValue === 'viewDetails')
     {
-      this.router.navigate(['/product/myOrdersDetails', { id }]);
+      this.router.navigate(['/product/myOrdersDetails', { orderNumber }]);
 
     }
     console.log("Selected Value:", selectedValue);
-    console.log("Selected id:", id);
+    console.log("Selected order Number:", orderNumber);
   }
   // New method to get the enum value for itemState
   getOrderItemStateLabel(item: any): string  {

@@ -12,12 +12,6 @@
   </ng-select>
 </div>
 
-
-<div *ngIf="selectedUserId">
-  <p>Selected userId: {{ selectedUserId }}</p>
-</div>
-
-
 <div class="content-page my-orders">
   <h5 class="mb-8">{{"yourOrders" | translate}} {{ ordersCount }}</h5>
   <section class="xl:px-32 px-8">
@@ -81,6 +75,7 @@
         role="tabpanel"
         [attr.aria-labelledby]="item + '-tab'"
       >
+
         <ng-container *ngFor="let order of myOrders">
           <div class="bg-whitetext-red-500">
             <app-my-order-card *ngIf="ordersState === order.orderState " [product]="order"></app-my-order-card>

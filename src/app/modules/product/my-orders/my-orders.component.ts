@@ -32,8 +32,17 @@ export class MyOrdersComponent implements OnInit {
     // Example usage without optional parameters
     this.myOrdersService.myOrders(sellerId).subscribe(
       (response) => {
-        this.myOrders = response?.responseData?.items
-        this.ordersState = 1;
+        this.myOrders = response?.responseData?.items;
+        if (!this.ordersState) {
+          this.ordersState = 1;
+          this.ordersCount = response?.responseData?.items.filter((order: { orderState: number; }) => order.orderState === 1).length;
+
+        }
+        else {
+          this.ordersState = this.ordersState;
+          this.ordersCount = response?.responseData?.items.filter((order: { orderState: number; }) => order.orderState === this.ordersState).length;
+
+        }
         console.log('API call successful');
         console.log('Response:', response);
 
@@ -335,19 +344,33 @@ export class MyOrdersComponent implements OnInit {
   getItems(status: string): number | undefined {
     // Check if the status exists in orderStatistics
     if (status === 'delivered') {
-      return this.orderStatistics.delivered;
+      // return this.orderStatistics.delivered;
+      // this.ordersCount = this.myOrders.filter(order => order.orderState === 3).length;
+      return this.myOrders.filter(order => order.orderState === 3).length;
     }
     else if (status === 'cancelled') {
-      return this.orderStatistics.cancelled + this.orderStatistics.refund;
+      // return this.orderStatistics.cancelled + this.orderStatistics.refund;
+      // this.ordersCount = this.myOrders.filter(order => order.orderState === 4 || order.orderState === 5).length;
+      return this.myOrders.filter(order => order.orderState === 4 || order.orderState === 5).length;
+
     }
     else if (status === 'shipping') {
-      return this.orderStatistics.shipped;
+      // return this.orderStatistics.shipped;
+      // this.ordersCount = this.myOrders.filter(order => order.orderState === 2).length;
+      return this.myOrders.filter(order => order.orderState === 2).length;
+
     }
     else if (status === 'ordered') {
-      return this.orderStatistics.placed;
+      // this.ordersCount = this.myOrders.filter(order => order.orderState === 1).length;
+      // return this.orderStatistics.placed;
+      return this.myOrders.filter(order => order.orderState === 1).length;
+
     }
     else if (status === 'returned') {
-      return this.orderStatistics.returned;
+      // return this.orderStatistics.returned;
+      // this.ordersCount = this.myOrders.filter(order => order.orderState === 6).length;
+      return this.myOrders.filter(order => order.orderState === 6).length;
+
     }
     else {
       // Return undefined if the status is not found
@@ -360,7 +383,10 @@ export class MyOrdersComponent implements OnInit {
       return OrderState.Delivered;
     }
     else if (state === 'cancelled') {
-      return OrderState.Canceled + OrderState.Refund;
+      return OrderState.Canceled;
+    }
+    else if (state === 'cancelled') {
+      return OrderState.Refund;
     }
     else if (state === 'shipping') {
       return OrderState.Shipping;

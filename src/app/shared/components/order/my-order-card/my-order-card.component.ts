@@ -4,6 +4,7 @@ import {
   Input,
 } from '@angular/core';
 import { OrderItemState } from '../../../models';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -31,6 +32,9 @@ export class MyOrderCardComponent {
       value: "cancelOrder"
     }]
 
+    constructor(private router: Router)
+      { }
+
   getIOrderItemState(item: any): string {
     // Check if the status exists in orderStatistics
     switch (item.itemState) {
@@ -56,6 +60,15 @@ export class MyOrderCardComponent {
       default:
         return 'Unknown State';
     }
+  }
+  onDropdownChange(selectedValue: string , id : any) {
+    if(selectedValue === 'viewDetails')
+    {
+      this.router.navigate(['/product/myOrdersDetails', { id }]);
+
+    }
+    console.log("Selected Value:", selectedValue);
+    console.log("Selected id:", id);
   }
   // New method to get the enum value for itemState
   getOrderItemStateLabel(item: any): string  {

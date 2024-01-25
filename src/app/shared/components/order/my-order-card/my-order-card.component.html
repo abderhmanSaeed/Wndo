@@ -86,7 +86,7 @@
     <div class="flex xl:flex-col justify-between">
       <section class="flex-grow self-end">
         <app-dropdown
-          [id]="'actionDropdown'+product.id"
+          [id]="'actionDropdown'+product.orderNumber"
           [showSelectedValue]="false"
           [options]="dropdownactions"
           dropdownIcon="fa-ellipsis-vertical"
@@ -94,6 +94,7 @@
             label: 'bg-primary-100',
             toggleBtn: 'outline-none w-8 h-8 rounded-full hover:bg-gray-200',
           }"
+          (valueChanged)="onDropdownChange($event , product.orderNumber)"
         >
         </app-dropdown>
       </section>

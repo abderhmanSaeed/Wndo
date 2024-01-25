@@ -11,6 +11,7 @@ import { ModalModule } from 'ngx-bootstrap/modal';
 import { MyOrdersComponent } from './my-orders/my-orders.component';
 import {provideClientHydration} from '@angular/platform-browser';
 import { TranslateModule } from '@ngx-translate/core';
+import { MyOrdersDetailsComponent } from './my-orders-details/my-orders-details.component';
 
 
 @NgModule({
@@ -19,7 +20,8 @@ import { TranslateModule } from '@ngx-translate/core';
     ProductOrdersComponent,
     OrderProcessComponent,
     ProductOffersComponent,
-    MyOrdersComponent
+    MyOrdersComponent,
+    MyOrdersDetailsComponent
   ],
   imports: [
     SharedModule,

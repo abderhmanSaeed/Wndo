@@ -38,4 +38,16 @@ export class LoginService {
         })
       );
   }
+
+  signUp(requestBody: any): Observable<any> {
+
+
+    return this.http.post(`${this.apiEndPoint}/user-web/sign-up`, requestBody)
+      .pipe(
+        catchError((error: HttpErrorResponse) => {
+          console.error('Login failed:', error);
+          return throwError('Something went wrong during login.');
+        })
+      );
+  }
 }

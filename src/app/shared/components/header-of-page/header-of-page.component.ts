@@ -11,6 +11,8 @@ import { SharedService } from '../../services/shared.service';
 import { AuthService } from '../../../data/service/auth/auth.service';
 import { ModalService } from '../modal/modal.service';
 import { LoginModalComponent } from '../modals/login-modal/login-modal.component';
+import { LoginPhonePasswordComponent } from '../modals/login-phone-password/login-phone-password.component';
+import { SignUpComponent } from '../modals/sign-up/sign-up.component';
 
 @Component({
   selector: 'app-header-of-page',
@@ -80,7 +82,7 @@ export class HeaderOfPageComponent implements OnInit, AfterViewInit {
 
   handleLogin() {
     console.log("login")
-    this.modalService.open(LoginModalComponent, {
+    this.modalService.open(LoginPhonePasswordComponent, {
       animations: {
         modal: {
           enter: 'enter-slide-down 0.8s',
@@ -93,12 +95,25 @@ export class HeaderOfPageComponent implements OnInit, AfterViewInit {
       size: {
         width: '36rem',
       },
-      // closeOnClickOutside: false
     });
   }
 
   handleSignUp() {
     console.log("SignUp")
+    this.modalService.open(SignUpComponent, {
+      animations: {
+        modal: {
+          enter: 'enter-slide-down 0.8s',
+        },
+        overlay: {
+          enter: 'fade-in 0.8s',
+          leave: 'fade-out 0.3s forwards',
+        },
+      },
+      size: {
+        width: '36rem',
+      },
+    });
   }
 
   onValueChanged(value: string) {
@@ -106,11 +121,13 @@ export class HeaderOfPageComponent implements OnInit, AfterViewInit {
     if(value === "LogIn") {
       this.handleLogin()
     }
-
-    if(value === "SignUp") {
+    else if(value === "SignUp") {
       this.handleSignUp()
     }
+    else if(value === "myOrders") {
+      this.router.navigate(['/product/myOrders']);
 
+    }
   }
 
 

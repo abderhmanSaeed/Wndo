@@ -44,6 +44,7 @@ import { LoginPhonePasswordComponent } from './components/modals/login-phone-pas
 import { AddProductToCardModalComponent } from './components/modals/add-product-to-card-modal/add-product-to-card-modal.component';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { ProductSummaryWithSellerComponent } from './components/product/product-summary-with-seller/product-summary-with-seller.component';
+import { SignUpComponent } from './components/modals/sign-up/sign-up.component';
 
 register();
 
@@ -81,6 +82,7 @@ register();
     AddProductToCardModalComponent,
     FilterByPipe,
     ProductSummaryWithSellerComponent,
+    SignUpComponent,
   ],
   imports: [
     CommonModule,

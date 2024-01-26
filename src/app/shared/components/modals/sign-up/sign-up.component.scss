@@ -1,0 +1,9 @@
+.custom-notification {
+  @apply flex items-center p-4 mb-4 text-red-800 border-t-4 border-red-500 bg-red-100 start-1/2 -translate-x-1/2 top-6 fixed me-6;
+}
+
+.custom-notification button {
+  @apply ms-6 -mx-1.5 -my-1.5 bg-red-50 text-red-500 rounded-lg focus:ring-2 focus:ring-red-400 p-1.5 hover:bg-red-200 inline-flex items-center justify-center h-8 w-8;
+
+ cursor: pointer;
+}

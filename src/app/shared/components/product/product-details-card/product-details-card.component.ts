@@ -9,7 +9,7 @@ import { Router } from '@angular/router';
 })
 export class ProductDetailsCardComponent implements OnInit {
   showNotification: boolean = false;
-
+  existingProductStore: any;
 
   sizeQuantities: any;
   // Product
@@ -146,6 +146,7 @@ export class ProductDetailsCardComponent implements OnInit {
     if (existingProductIndex !== -1) {
       // If the product already exists, check if quantity update is allowed
       const existingProduct = existingProducts[existingProductIndex];
+      this.existingProductStore = existingProduct;
 
       if (this.size.quantity >= existingProduct.quantity + this.productQuantity) {
         // Update the existing product quantity
@@ -224,7 +225,7 @@ export class ProductDetailsCardComponent implements OnInit {
     if (existingProductIndex !== -1) {
       // If the product already exists, check if quantity update is allowed
       const existingProduct = existingProducts[existingProductIndex];
-
+      this.existingProductStore = existingProduct;
       if (this.size.quantity >= existingProduct.quantity + this.productQuantity) {
         // Update the existing product quantity
         existingProducts[existingProductIndex] = {
@@ -303,7 +304,7 @@ export class ProductDetailsCardComponent implements OnInit {
   logColor(colorWithSizes: any): void {
     console.log(colorWithSizes);
     this.selectedColor = colorWithSizes?.color?.id
-    ;
+      ;
     this.colorWithSizesSelected = colorWithSizes;
   }
   logSize(size: any): void {
@@ -336,7 +337,7 @@ export class ProductDetailsCardComponent implements OnInit {
     description: "Main"
   }
   ]
-  images= [
+  images = [
     {
       id: 45084,
       imageId: "53453",

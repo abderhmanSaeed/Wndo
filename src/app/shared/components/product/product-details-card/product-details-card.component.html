@@ -6,7 +6,8 @@
       <app-gallery [items]="product?.images"></app-gallery>
     </div>
     <div *ngIf="showNotification" class="custom-notification">
-      Cannot add new product. Available quantity: {{ size.quantity }}. You selected {{ productQuantity }}.
+      Cannot add new product. Available quantity: {{ size.quantity }}. You selected {{ productQuantity }}
+      + in your store {{ existingProductStore.quantity}}.
       <button (click)="closeNotification()">Close</button>
     </div>
     <div>

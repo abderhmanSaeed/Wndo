@@ -1,8 +1,9 @@
-<ng-container *ngFor="let item of product.items">
+
   <div
     class="bg-white grid grid-cols-1 xl:grid-cols-3 gap-6 pt-3 pb-6 px-5 border-s-2 mb-4"
-    [ngClass]="getBorderColorClass(item.itemState)"
-  >
+    >
+    <!-- We need add this based each item state -->
+    <!-- [ngClass]="getBorderColorClass(item.itemState)" -->
     <div class="flex gap-3 flex-col sm:flex-row">
       <div *ngIf="product.images.length > 0">
         <div
@@ -12,7 +13,7 @@
 
           <img
             [src]="product.images[1]"
-            alt="{{ item.name }}"
+            alt="{{ product.name }}"
             class="w-full h-[100px] xl:h-[37px] object-contain"
             *ngIf="product.images.length > 1"
           />
@@ -20,7 +21,7 @@
           <img
             *ngIf="product.images.length > 2"
             [src]="product.images[2]"
-            alt="{{ item.name }}"
+            alt="{{ product.name }}"
             class="object-contain"
             class="w-full h-[100px] md:h-[37px] object-contain"
           />
@@ -30,7 +31,7 @@
         <div class="">
           <img
             [src]="product.images[0]"
-            alt="{{ item.name }}"
+            alt="{{ product.name }}"
             class="w-full md:w-[98px] h-[150px] xl:h-[80px] object-contain"
           />
         </div>
@@ -97,4 +98,3 @@
       </div>
     </div>
   </div>
-</ng-container>

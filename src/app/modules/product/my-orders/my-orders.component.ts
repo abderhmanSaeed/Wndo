@@ -22,7 +22,7 @@ export class MyOrdersComponent implements OnInit {
   ordersState: number | undefined;
   sellersData: any;
   selectedUserId: string | undefined;
-
+  selectedSeller: boolean = false;
   ngOnInit(): void {
     this.getMyOrders();
     this.getOrderStatistics();
@@ -82,9 +82,11 @@ export class MyOrdersComponent implements OnInit {
   onSellerSelected(event: any) {
     // Your logic here
     if (!event) {
+      this.selectedSeller = false;
       this.getMyOrders(undefined);
     }
     else {
+      this.selectedSeller = true;
       this.selectedUserId = event;
       this.getMyOrders(event.userId);
     }

@@ -1,4 +1,4 @@
-import { OrderItemState } from '../../shared/models';
+import { OrderItemState, OrderState } from '../../shared/models';
 import { Injectable } from '@angular/core';
 
 
@@ -48,23 +48,17 @@ export class OrderStateService {
   getIOrderItemBorderColorState(item: any): string {
        // Check if the status exists in orderStatistics
        switch (item) {
-        case OrderItemState.OrderPlaced:
+        case OrderState.OrderPlaced:
           return 'order-placed-state--borderColor';
-        case OrderItemState.Shipping:
+        case OrderState.Shipping:
           return 'order-shipping-state--borderColor';
-        case OrderItemState.PickUpOnTheWay:
-          return 'order-pickUp-state--borderColor';
-        case OrderItemState.PickUp:
-          return 'order-pickUp-state--borderColor';
-        case OrderItemState.DeliveryOnTheWay:
-          return 'order-delivery-state--borderColor';
-        case OrderItemState.Delivered:
+        case OrderState.Delivered:
           return 'order-delivered-state--borderColor';
-        case OrderItemState.Canceled:
+        case OrderState.Canceled:
           return 'order-canceled-state--borderColor';
-        case OrderItemState.Refund:
+        case OrderState.Refund:
           return 'order-refund-state--borderColor';
-        case OrderItemState.Returned:
+        case OrderState.Returned:
           return 'order-returned-state--borderColor';
 
         default:

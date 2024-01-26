@@ -4,19 +4,19 @@
   <div class="flex items-center gap-4">
     <label for="sellerDropdown" class="font-bold">Select a Seller:</label>
     <ng-select
-      id="sellerDropdown"
-      [items]="sellersData"
-      bindLabel="name"
-      bindValue="userId"
-      placeholder="Select Seller"
-      [searchable]="true"
-      (change)="onSellerSelected($event)"
-      class="bg-white/80 flex-grow py-2 px-4 rounded  shadow-xs"
-    >
-    </ng-select>
+    id="sellerDropdown"
+    [items]="sellersData"
+    bindLabel="name"
+    bindValue="userId"
+    [searchable]="true"
+    [placeholder]="!selectedSeller ? 'Select Seller:' : ''"
+    (change)="onSellerSelected($event)"
+    class="flex items-center border py-3 px-4 text-gray-950 text-sm rounded-lg w-[400px]"
+>
+</ng-select>
+
+
   </div>
-
-
 
   <h5 class="mb-8">{{ "yourOrders" | translate }} {{ ordersCount }}</h5>
   <section class="xl:px-32 px-8">

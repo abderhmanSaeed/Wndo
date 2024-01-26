@@ -113,6 +113,7 @@ export class MyOrderCardComponent {
     console.log("Selected Value:", selectedValue);
     console.log("Selected order Number:", orderNumber);
   }
+
   // New method to get the enum value for itemState
   getOrderItemStateLabel(item: any): string {
     switch (item.itemState) {

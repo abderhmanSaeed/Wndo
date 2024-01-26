@@ -22,6 +22,7 @@ export class MyOrdersComponent implements OnInit {
   ordersState: number | undefined;
   sellersData: any;
   selectedUserId: string | undefined;
+
   ngOnInit(): void {
     this.getMyOrders();
     this.getOrderStatistics();
@@ -52,6 +53,7 @@ export class MyOrdersComponent implements OnInit {
       }
     );
   }
+
   getOrderStatistics() {
     this.myOrdersService.getOrderStatistics().subscribe(
       (response) => {
@@ -64,6 +66,7 @@ export class MyOrdersComponent implements OnInit {
       }
     );
   }
+
   getSeller() {
     // Call the getSellers method when the component is initialized
     this.sellerProductsOffersService.getSellers().subscribe(
@@ -85,246 +88,7 @@ export class MyOrdersComponent implements OnInit {
   currentTab: string = 'ordered';
   myOrderStatus = ['ordered', 'shipping', 'delivered', 'returned', 'cancelled'];
 
-  // myOrders = [
-  //   {
-  //     name: '385',
-  //     description: '385',
-  //     price: 385,
-  //     date: '28 June , 6 PM',
-  //     statues: 'ordered',
-  //     images: [
-  //       {
-  //         id: 45084,
-  //         imageId: '51',
-  //         urlThumbnail:
-  //           'https://wndoprobucket.s3.eu-west-3.amazonaws.com/50caa500-eced-4803-9800-2fac3798ab6b.jpg',
-  //         urlPreview:
-  //           'https://wndoprobucket.s3.eu-west-3.amazonaws.com/50caa500-eced-4803-9800-2fac3798ab6b.jpg',
-  //       },
-  //       {
-  //         id: 3424,
-  //         imageId: '51',
-  //         urlThumbnail:
-  //           'https://wndoprobucket.s3.eu-west-3.amazonaws.com/50caa500-eced-4803-9800-2fac3798ab6b.jpg',
-  //         urlPreview:
-  //           'https://wndoprobucket.s3.eu-west-3.amazonaws.com/50caa500-eced-4803-9800-2fac3798ab6b.jpg',
-  //       },
-  //     ],
-  //     videos: [
-  //       {
-  //         id: 17203,
-  //         videoId: '9e1097f7-111e-4cf3-b2ff-d4bcbf82c87d',
-  //         urlThumbnail:
-  //           'https://wndoprobucket.s3.eu-west-3.amazonaws.com/a6ad2173-f649-4c7c-abc5-5f71d0b48e13.png',
-  //         urlPreview:
-  //           'https://wndovodstack-source71e471f1-12o7ase9r16a7.s3.eu-west-3.amazonaws.com/assets01/9e1097f7-111e-4cf3-b2ff-d4bcbf82c87d.3gp',
-  //         isMain: true,
-  //         name: 'Main',
-  //         description: 'Main',
-  //       },
-  //     ],
-  //     items: [
-  //       {
-  //         id: 5345,
-  //         name: 'Classic Radio Golon F10',
-  //       },
-  //       {
-  //         id: 56546,
-  //         name: 'Classic Radio Golon F10',
-  //       },
-  //       {
-  //         id: 543243,
-  //         name: 'Classic Radio Golon F10',
-  //       },
-  //     ],
 
-  //     id: '7a734dd3-3cf8-4ec1-b7ad-7a8912d0a03b',
-  //   },
-  //   {
-  //     name: '385',
-  //     description: '385',
-  //     price: 385,
-  //     date: '28 June , 6 PM',
-  //     statues: 'shipping',
-  //     images: [
-  //       {
-  //         id: 45084,
-  //         imageId: '51',
-  //         urlThumbnail:
-  //           'https://wndoprobucket.s3.eu-west-3.amazonaws.com/50caa500-eced-4803-9800-2fac3798ab6b.jpg',
-  //         urlPreview:
-  //           'https://wndoprobucket.s3.eu-west-3.amazonaws.com/50caa500-eced-4803-9800-2fac3798ab6b.jpg',
-  //       },
-  //     ],
-  //     videos: [
-  //       {
-  //         id: 17203,
-  //         videoId: '9e1097f7-111e-4cf3-b2ff-d4bcbf82c87d',
-  //         urlThumbnail:
-  //           'https://wndoprobucket.s3.eu-west-3.amazonaws.com/a6ad2173-f649-4c7c-abc5-5f71d0b48e13.png',
-  //         urlPreview:
-  //           'https://wndovodstack-source71e471f1-12o7ase9r16a7.s3.eu-west-3.amazonaws.com/assets01/9e1097f7-111e-4cf3-b2ff-d4bcbf82c87d.3gp',
-  //         isMain: true,
-  //         name: 'Main',
-  //         description: 'Main',
-  //       },
-  //     ],
-  //     items: [
-  //       {
-  //         id: 5345,
-  //         name: 'Classic Radio Golon F10',
-  //       },
-  //       {
-  //         id: 56546,
-  //         name: 'Classic Radio Golon F10',
-  //       },
-  //       {
-  //         id: 543243,
-  //         name: 'Classic Radio Golon F10',
-  //       },
-  //     ],
-
-  //     id: '7a734dd3-3cf8-4ec1-b7ad-7a8912d0a22',
-  //   },
-  //   {
-  //     name: '34556',
-  //     description: '385',
-  //     price: 385,
-  //     date: '28 June , 6 PM',
-  //     statues: 'delivered',
-  //     images: [
-  //       {
-  //         id: 45084,
-  //         imageId: '51',
-  //         urlThumbnail:
-  //           'https://wndoprobucket.s3.eu-west-3.amazonaws.com/50caa500-eced-4803-9800-2fac3798ab6b.jpg',
-  //         urlPreview:
-  //           'https://wndoprobucket.s3.eu-west-3.amazonaws.com/50caa500-eced-4803-9800-2fac3798ab6b.jpg',
-  //       },
-  //     ],
-  //     videos: [
-  //       {
-  //         id: 17203,
-  //         videoId: '9e1097f7-111e-4cf3-b2ff-d4bcbf82c87d',
-  //         urlThumbnail:
-  //           'https://wndoprobucket.s3.eu-west-3.amazonaws.com/a6ad2173-f649-4c7c-abc5-5f71d0b48e13.png',
-  //         urlPreview:
-  //           'https://wndovodstack-source71e471f1-12o7ase9r16a7.s3.eu-west-3.amazonaws.com/assets01/9e1097f7-111e-4cf3-b2ff-d4bcbf82c87d.3gp',
-  //         isMain: true,
-  //         name: 'Main',
-  //         description: 'Main',
-  //       },
-  //     ],
-  //     items: [
-  //       {
-  //         id: 5345,
-  //         name: 'Classic Radio Golon F10',
-  //       },
-  //       {
-  //         id: 56546,
-  //         name: 'Classic Radio Golon F10',
-  //       },
-  //       {
-  //         id: 543243,
-  //         name: 'Classic Radio Golon F10',
-  //       },
-  //     ],
-
-  //     id: '7a734dd3-3cf8-4ec1-b7ad-7a8912d0a877',
-  //   },
-  //   {
-  //     name: '5345',
-  //     description: '385',
-  //     price: 385,
-  //     date: '28 June , 6 PM',
-  //     statues: 'returned',
-  //     images: [
-  //       {
-  //         id: 45084,
-  //         imageId: '51',
-  //         urlThumbnail:
-  //           'https://wndoprobucket.s3.eu-west-3.amazonaws.com/50caa500-eced-4803-9800-2fac3798ab6b.jpg',
-  //         urlPreview:
-  //           'https://wndoprobucket.s3.eu-west-3.amazonaws.com/50caa500-eced-4803-9800-2fac3798ab6b.jpg',
-  //       },
-  //     ],
-  //     videos: [
-  //       {
-  //         id: 17203,
-  //         videoId: '9e1097f7-111e-4cf3-b2ff-d4bcbf82c87d',
-  //         urlThumbnail:
-  //           'https://wndoprobucket.s3.eu-west-3.amazonaws.com/a6ad2173-f649-4c7c-abc5-5f71d0b48e13.png',
-  //         urlPreview:
-  //           'https://wndovodstack-source71e471f1-12o7ase9r16a7.s3.eu-west-3.amazonaws.com/assets01/9e1097f7-111e-4cf3-b2ff-d4bcbf82c87d.3gp',
-  //         isMain: true,
-  //         name: 'Main',
-  //         description: 'Main',
-  //       },
-  //     ],
-  //     items: [
-  //       {
-  //         id: 5345,
-  //         name: 'Classic Radio Golon F10',
-  //       },
-  //       {
-  //         id: 56546,
-  //         name: 'Classic Radio Golon F10',
-  //       },
-  //       {
-  //         id: 543243,
-  //         name: 'Classic Radio Golon F10',
-  //       },
-  //     ],
-
-  //     id: '7a734dd3-3cf8-4ec1-b7ad-7a8912d0a000',
-  //   },
-  //   {
-  //     name: '5345',
-  //     description: '385',
-  //     price: 385,
-  //     date: '28 June , 6 PM',
-  //     statues: 'cancelled',
-  //     images: [
-  //       {
-  //         id: 45084,
-  //         imageId: '51',
-  //         urlThumbnail:
-  //           'https://wndoprobucket.s3.eu-west-3.amazonaws.com/50caa500-eced-4803-9800-2fac3798ab6b.jpg',
-  //         urlPreview:
-  //           'https://wndoprobucket.s3.eu-west-3.amazonaws.com/50caa500-eced-4803-9800-2fac3798ab6b.jpg',
-  //       },
-  //     ],
-  //     videos: [
-  //       {
-  //         id: 17203,
-  //         videoId: '9e1097f7-111e-4cf3-b2ff-d4bcbf82c87d',
-  //         urlThumbnail:
-  //           'https://wndoprobucket.s3.eu-west-3.amazonaws.com/a6ad2173-f649-4c7c-abc5-5f71d0b48e13.png',
-  //         urlPreview:
-  //           'https://wndovodstack-source71e471f1-12o7ase9r16a7.s3.eu-west-3.amazonaws.com/assets01/9e1097f7-111e-4cf3-b2ff-d4bcbf82c87d.3gp',
-  //         isMain: true,
-  //         name: 'Main',
-  //         description: 'Main',
-  //       },
-  //     ],
-  //     items: [
-  //       {
-  //         id: 5345,
-  //         name: 'Classic Radio Golon F10',
-  //       },
-  //       {
-  //         id: 56546,
-  //         name: 'Classic Radio Golon F10',
-  //       },
-  //       {
-  //         id: 543243,
-  //         name: 'Classic Radio Golon F10',
-  //       },
-  //     ],
-
-  //     id: '7a734dd3-3cf8-4ec1-b7ad-7a8912d0a1g7',
-  //   },
-  // ];
 
   activeTab(item: string) {
     this.ordersCount = this.getItems(item);

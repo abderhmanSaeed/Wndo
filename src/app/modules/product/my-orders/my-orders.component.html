@@ -8,15 +8,15 @@
       [items]="sellersData"
       bindLabel="name"
       bindValue="userId"
-      placeholder="Select Seller"
       [searchable]="true"
+      placeholder="Select Seller:"
       (change)="onSellerSelected($event)"
-      class="bg-white/80 flex-grow py-2 px-4 rounded  shadow-xs"
-    >
+      class="flex items-center border py-3 px-4 text-gray-950 text-sm rounded-lg w-[400px]"
+      >
+
     </ng-select>
+
   </div>
-
-
 
   <h5 class="mb-8">{{ "yourOrders" | translate }} {{ ordersCount }}</h5>
   <section class="xl:px-32 px-8">

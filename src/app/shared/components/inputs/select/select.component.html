@@ -1,5 +1,5 @@
 <div
-  class="mb-3 input-container input-container--select {{classes?.base}}"
+  class="mb-3 input-container input-container--select {{ classes?.base }}"
   [class.floating-label]="isFloating"
 >
   <label
@@ -15,11 +15,7 @@
     <div class="relative w-full">
       <select
         title="{{ name }}"
-        [id]="name"
-        [value]="value"
         [required]="required"
-        [name]="name"
-        [disabled]="disabled"
         class="{{
           classes?.input
         }} w-full placeholder:text-sm placeholder:my-10 z-10"
@@ -27,6 +23,11 @@
           'border-red-500': error,
           'border-red-30': error !== '',
       }"
+        [id]="id"
+        [name]="name"
+        [disabled]="disabled"
+        [value]="value"
+        (change)="onChange($event)"
       >
         <option selected>{{ placeholder }}</option>
 
@@ -34,7 +35,9 @@
           {{ option.label }}
         </option>
       </select>
-      <i class="fa-solid text-xxs z-0 fa-angle-down absolute top-1/2 -translate-y-1/2 end-4 cursor-pointer"></i>
+      <i
+        class="fa-solid text-xxs z-0 fa-angle-down absolute top-1/2 -translate-y-1/2 end-4 cursor-pointer"
+      ></i>
 
       <label
         *ngIf="isFloating"

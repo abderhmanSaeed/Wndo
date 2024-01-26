@@ -3,21 +3,6 @@
   [class.mb-40]="isShowDetails"
   [ngClass]="{ flex: isProductOffersRoute }"
 >
-<div
-class="border-t border-blue-800 mt-6 text-center pt-4.5 pb-3"
-*ngIf="isAuthenticated"
->
-<button
-  type="button"
-  class="text-primary text-base font-medium hover:underline"
-  (click)="logout()"
->
-  <i
-    class="fa-solid fa-arrow-right-from-bracket ltr:rotate-180 text-lg me-2"
-  ></i>
-  Logout
-</button>
-</div>
   <div class="content-page">
     <section class="flex justify-between items-center">
       <div class="flex items-end w-32 h-32 mt-12">

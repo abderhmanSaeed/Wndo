@@ -1,20 +1,24 @@
 <app-header-of-page></app-header-of-page>
 
-<div>
-  <label for="sellerDropdown">Select a Seller:</label>
-  <ng-select id="sellerDropdown"
-             [items]="sellersData"
-             bindLabel="name"
-             bindValue="userId"
-             placeholder="Select Seller"
-             [searchable]="true"
-             (change)="onSellerSelected($event)">
-  </ng-select>
-
-</div>
-
 <div class="content-page my-orders">
-  <h5 class="mb-8">{{"yourOrders" | translate}} {{ ordersCount }}</h5>
+  <div class="flex items-center gap-4">
+    <label for="sellerDropdown" class="font-bold">Select a Seller:</label>
+    <ng-select
+      id="sellerDropdown"
+      [items]="sellersData"
+      bindLabel="name"
+      bindValue="userId"
+      placeholder="Select Seller"
+      [searchable]="true"
+      (change)="onSellerSelected($event)"
+      class="bg-white/80 flex-grow py-2 px-4 rounded  shadow-xs"
+    >
+    </ng-select>
+  </div>
+
+
+
+  <h5 class="mb-8">{{ "yourOrders" | translate }} {{ ordersCount }}</h5>
   <section class="xl:px-32 px-8">
     <div class="mb-4">
       <ul
@@ -70,18 +74,20 @@
     <div id="myOrders-tab-content">
       <div
         *ngFor="let item of myOrderStatus"
-        class="p-4 rounded-lg bg-gray-50"
+        class="p-4 rounded-lg bg-gray-50 scroll"
         [class.hidden]="currentTab !== item"
         [attr.id]="item"
         role="tabpanel"
         [attr.aria-labelledby]="item + '-tab'"
       >
+        <div class="scroll--item" *ngFor="let order of myOrders">
+      <!-- <p *ngIf="ordersState === order.orderState">{{ordersState}} {{order.orderState}}</p> -->
 
-        <ng-container *ngFor="let order of myOrders">
-          <div class="bg-whitetext-red-500">
-            <app-my-order-card *ngIf="ordersState === order.orderState " [product]="order"></app-my-order-card>
-          </div>
-        </ng-container>
+          <app-my-order-card
+            *ngIf="ordersState === order.orderState"
+            [product]="order"
+          ></app-my-order-card>
+        </div>
       </div>
     </div>
   </section>
@@ -89,9 +95,11 @@
   <section class="pb-12 content-page">
     <p class="text-xs text-blue-900 flex items-center gap-1">
       <svg-icon src="../../../../assets/icons/car-coloring.svg"></svg-icon>
-      {{"getShipping" |translate}}
+      {{ "getShipping" | translate }}
 
-      <a class="ms-1 underline hover:no-underline">{{"downloadNow" | translate}}</a>
+      <a class="ms-1 underline hover:no-underline">{{
+        "downloadNow" | translate
+      }}</a>
     </p>
   </section>
 </div>

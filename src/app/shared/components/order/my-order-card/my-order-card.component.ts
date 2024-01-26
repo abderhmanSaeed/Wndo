@@ -1,4 +1,8 @@
+import { OrderState } from './../../../models/my-orders.model';
+import { OrderStateService } from './../../../services/order-state.service';
 import {
+  AfterContentInit,
+  AfterViewInit,
   Component,
   ElementRef,
   Input,
@@ -14,26 +18,65 @@ import { Router } from '@angular/router';
 })
 export class MyOrderCardComponent {
   urlPreview: any;
+
   index = 0;
 
   @Input() product: any;
 
   dropdownactions: any = [
     {
-      label: "View Details",
-      value: "viewDetails"
+      label: 'View Details',
+      value: 'viewDetails',
     },
     {
-      label: "Tracking Order",
-      value: "trackingOrder"
+      label: 'Tracking Order',
+      value: 'trackingOrder',
     },
     {
-      label: "Cancel Order",
-      value: "cancelOrder"
-    }]
+      label: 'Cancel Order',
+      value: 'cancelOrder',
+    },
+  ];
 
-    constructor(private router: Router)
-      { }
+  constructor(private orderStateService: OrderStateService, private router: Router) {}
+
+  getTextColorClass(item: any): string {
+    return this.orderStateService.getIOrderItemState(item);
+  }
+
+  getBorderColorClass(item: any): string {
+    return this.orderStateService.getIOrderItemBorderColorState(item);
+  }
+  getStyle(status: string) {
+    switch (status) {
+      case 'ordered':
+        return {
+          textColor: 'text-lightBlue-500',
+        };
+      case 'shipping':
+        return {
+          textColor: 'text-orange-700',
+        };
+      case 'delivered':
+        return {
+          textColor: 'text-green-600',
+        };
+
+      case 'returned':
+        return {
+          textColor: 'text-yellow-500',
+        };
+      case 'cancelled':
+        return {
+          textColor: 'text-red-600',
+        };
+      default:
+        return {
+          textColor: '',
+        };
+    }
+  }
+
 
   getIOrderItemState(item: any): string {
     // Check if the status exists in orderStatistics
@@ -71,8 +114,7 @@ export class MyOrderCardComponent {
     console.log("Selected order Number:", orderNumber);
   }
   // New method to get the enum value for itemState
-  getOrderItemStateLabel(item: any): string  {
-
+  getOrderItemStateLabel(item: any): string {
     switch (item.itemState) {
       case OrderItemState.OrderPlaced:
         return 'Order Placed';
@@ -97,36 +139,4 @@ export class MyOrderCardComponent {
         return 'Unknown State';
     }
   }
-
-  getStyle(status: string) {
-    switch (status) {
-      case 'ordered':
-        return {
-          textColor: 'text-lightBlue-500',
-        };
-      case 'shipping':
-        return {
-          textColor: 'text-orange-700',
-        };
-      case 'delivered':
-        return {
-          textColor: 'text-green-600',
-        };
-
-      case 'returned':
-        return {
-          textColor: 'text-yellow-500',
-        };
-      case 'cancelled':
-        return {
-          textColor: 'text-red-600',
-        };
-      default:
-        return {
-          textColor: '',
-        };
-    }
-  }
-
-
 }

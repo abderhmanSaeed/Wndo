@@ -21,7 +21,7 @@
   // Dropdown menu styles
   .dropdown-menu {
     @apply absolute bg-white divide-y divide-gray-100 rounded-lg shadow;
-    top: 125%;
+    top: 150%;
     inset-inline-end: 0.5rem;
     z-index: 1000;
     width: 100%;
@@ -29,6 +29,17 @@
 
     &.show {
       display: block;
+    }
+
+    &::before {
+      @apply absolute end-2 -top-3 ;
+      content: "";
+      width: 0;
+      height: 0;
+      border: 0 solid transparent;
+      border-right-width: 15px;
+      border-left-width: 15px;
+      border-bottom: 15px solid #fff;
     }
   }
 }

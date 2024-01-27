@@ -36,7 +36,10 @@ export class MyOrderCardComponent {
     },
   ];
 
+  indexOfItem: number = 0;
+
   constructor(private orderStateService: OrderStateService) {}
+
 
   getTextColorClass(item: any): string {
     return this.orderStateService.getIOrderItemState(item);

@@ -36,7 +36,7 @@
       >
         <li
           *ngFor="let option of options; trackBy: trackByFn"
-          class="dropdown-item text-start"
+          class="dropdown-item text-start {{classes?.listItem}}"
         >
           <button
             type="button"
@@ -51,8 +51,8 @@
             <ng-container *ngTemplateOutlet="option.endContentMenu"></ng-container>
           </button>
         </li>
-        <ng-content></ng-content>
       </ul>
+      <ng-content></ng-content>
     </div>
   </div>
 

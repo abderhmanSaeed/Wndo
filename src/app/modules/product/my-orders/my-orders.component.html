@@ -1,103 +1,102 @@
-<app-header-of-page></app-header-of-page>
+<div>
+  <app-header-of-page></app-header-of-page>
 
-<div class="content-page my-orders">
-  <div class="flex items-center gap-4">
-    <label for="sellerDropdown" class="font-bold">Select a Seller:</label>
-    <ng-select
-      id="sellerDropdown"
-      [items]="sellersData"
-      bindLabel="name"
-      bindValue="userId"
-      [searchable]="true"
-      placeholder="Select Seller:"
-      (change)="onSellerSelected($event)"
-      class="flex items-center border py-3 px-4 text-gray-950 text-sm rounded-lg w-[400px]"
+  <section class="content-page my-orders">
+    <div class="flex items-center gap-4 mb-4">
+      <label for="sellerDropdown" class="font-bold">Select a Seller:</label>
+      <ng-select
+        id="sellerDropdown"
+        [items]="sellersData"
+        bindLabel="name"
+        bindValue="userId"
+        [searchable]="true"
+        placeholder="Select Seller:"
+        (change)="onSellerSelected($event)"
+        class="flex items-center border py-3 px-4 text-gray-950 text-sm rounded-lg w-[400px]"
       >
-
-    </ng-select>
-
-  </div>
-
-  <h5 class="mb-8">{{ "yourOrders" | translate }} {{ ordersCount }}</h5>
-  <section class="xl:px-32 px-8">
-    <div class="mb-4">
-      <ul
-        class="flex flex-wrap text-sm font-medium text-center gap-4 mb-14"
-        id="myOrders-tab"
-        data-tabs-toggle="#myOrders-tab-content"
-        role="tablist"
-      >
-        <li
-          *ngFor="let item of myOrderStatus; let i = index"
-          class="me-2"
-          role="presentation"
-        >
-          <button
-            [ngClass]="getStyleAndIcon(item).ButtonBg"
-            class="my-orders__tab-btn"
-            [attr.id]="item + '-tab'"
-            [attr.data-tabs-target]="'#' + item"
-            type="button"
-            role="tab"
-            [attr.aria-controls]="item"
-            [attr.aria-selected]="currentTab === item"
-            (click)="activeTab(item)"
-          >
-            <div class="flex justify-between mb-2">
-              <span
-                class="inline-flex text-lg items-center justify-center w-9 h-9 rounded-full bg-gray-100"
-                [ngClass]="getStyleAndIcon(item).lengthSpan"
-              >
-                {{ getItems(item) }}
-              </span>
-
-              <svg-icon
-                [src]="
-                  '../../../../assets/icons/' +
-                  getStyleAndIcon(item).icon +
-                  '.svg'
-                "
-                [svgStyle]="{
-                'width.px': 34,
-                'height.px': 34,
-              }"
-                class="aria-selected:fill-white fill-current"
-              ></svg-icon>
-            </div>
-
-            {{ item === "cancelled" ? item + "/refunded" : item }}
-          </button>
-        </li>
-      </ul>
+      </ng-select>
     </div>
+    <section class="">
+      <h5 class="mb-8">{{ "yourOrders" | translate }} {{ ordersCount }}</h5>
+      <div class="xl:px-32 px-8">
+        <div class="mb-4">
+          <ul
+            class="flex flex-wrap text-sm font-medium text-center gap-4 mb-14"
+            id="myOrders-tab"
+            data-tabs-toggle="#myOrders-tab-content"
+            role="tablist"
+          >
+            <li
+              *ngFor="let item of myOrderStatus; let i = index"
+              class="me-2"
+              role="presentation"
+            >
+              <button
+                [ngClass]="getStatusGradientBgButton(item)"
+                class="my-orders__tab-btn"
+                [attr.id]="item + '-tab'"
+                [attr.data-tabs-target]="'#' + item"
+                type="button"
+                role="tab"
+                [attr.aria-controls]="item"
+                [attr.aria-selected]="currentTab === item"
+                (click)="activeTab(item)"
+              >
+                <div class="flex justify-between mb-2">
+                  <span
+                    class="inline-flex text-lg items-center justify-center w-9 h-9 rounded-full bg-gray-100"
+                    [ngClass]="getStatusTextColor(item)"
+                  >
+                    {{ getItems(item) }}
+                  </span>
 
-    <div id="myOrders-tab-content">
-      <div
-        *ngFor="let item of myOrderStatus"
-        class="p-4 rounded-lg bg-gray-50 scroll"
-        [class.hidden]="currentTab !== item"
-        [attr.id]="item"
-        role="tabpanel"
-        [attr.aria-labelledby]="item + '-tab'"
-      >
-        <div class="scroll--item" *ngFor="let order of myOrders">
-          <app-my-order-card
-            *ngIf="ordersState === order.orderState"
-            [product]="order"
-          ></app-my-order-card>
+                  <svg-icon
+                    [src]="
+                      '../../../../assets/icons/' + getStatusIcon(item) + '.svg'
+                    "
+                    [svgStyle]="{
+                    'width.px': 34,
+                    'height.px': 34,
+                  }"
+                    class="aria-selected:fill-white fill-current"
+                  ></svg-icon>
+                </div>
+
+                {{ item === "cancelled" ? item + "/refunded" : item }}
+              </button>
+            </li>
+          </ul>
+        </div>
+
+        <div id="myOrders-tab-content">
+          <div
+            *ngFor="let item of myOrderStatus"
+            class="p-4 rounded-lg bg-gray-50 scroll"
+            [class.hidden]="currentTab !== item"
+            [attr.id]="item"
+            role="tabpanel"
+            [attr.aria-labelledby]="item + '-tab'"
+          >
+            <div class="scroll--item" *ngFor="let order of myOrders">
+              <app-my-order-card
+                *ngIf="ordersState === order.orderState"
+                [product]="order"
+              ></app-my-order-card>
+            </div>
+          </div>
         </div>
       </div>
-    </div>
-  </section>
-
-  <section class="pb-12 content-page">
-    <p class="text-xs text-blue-900 flex items-center gap-1">
-      <svg-icon src="../../../../assets/icons/car-coloring.svg"></svg-icon>
-      {{ "getShipping" | translate }}
-
-      <a class="ms-1 underline hover:no-underline">{{
-        "downloadNow" | translate
-      }}</a>
-    </p>
+    </section>
   </section>
 </div>
+
+<section class="pb-12 content-page">
+  <p class="text-xs text-blue-900 flex items-center gap-1">
+    <svg-icon src="../../../../assets/icons/car-coloring.svg"></svg-icon>
+    {{ "getShipping" | translate }}
+
+    <a class="ms-1 underline hover:no-underline">{{
+      "downloadNow" | translate
+    }}</a>
+  </p>
+</section>

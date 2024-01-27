@@ -65,10 +65,11 @@
           [classes]="{
             label: '!text-red-400 !font-bold !text-base',
             toggleBtn:
-              'text-blue-1000 font-bold text-base ps-2 pe-4 h-[34px] border border-blueGray-30 rounded-full flex items-center gap-2 bg-white',
+              'text-blue-1000 font-bold text-base px-4 h-[34px] border border-blueGray-30 rounded-full flex items-center gap-2 bg-white',
             menuBtn:
-              '!text-sm !text-blue-800 border border-gray-10 rounded text-nowrap',
+              'text-nowrap',
             list: 'space-y-4 px-2.5',
+            listItem: 'border border-gray-10 rounded text-blue-800 text-sm',
             dropdownMenu: '!w-[220px]'
           }"
           [options]="isAuthenticated ? authUserDropdown : guestUserDropdown"
@@ -77,7 +78,7 @@
 
         >
           <div
-            class="border-t border-blue-800 mt-6 text-center pt-4.5 pb-3"
+            class="border-t border-blue-800 mt-3 text-center pt-3 pb-3 mx-3"
             *ngIf="isAuthenticated"
           >
             <button

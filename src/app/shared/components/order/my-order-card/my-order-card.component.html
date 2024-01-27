@@ -1,99 +1,101 @@
-<ng-container>
-  <div
-    class="bg-white grid grid-cols-1 xl:grid-cols-3 gap-6 pt-3 pb-6 px-5 border-s-2 mb-4"
-    [ngClass]="getBorderColorClass(product.orderState)"
-  >
-    <div class="flex gap-3 flex-col sm:flex-row">
-      <div *ngIf="product.images.length > 0">
-        <div
-          class="grid grid-cols-2 h-[100px] xl:h-[37px] gap-3 justify-center mb-3"
-          *ngIf="product.images.length > 1"
-        >
 
-          <img
-            [src]="product.images[1]"
+<div
+class="bg-white grid grid-cols-1 xl:grid-cols-3 gap-6 pt-3 pb-6 px-5 border-s-2 mb-4"
+[ngClass]="getBorderColorClass(product.orderState)"
+>
+<!-- We need add this based each item state -->
+<!-- [ngClass]="getBorderColorClass(item.itemState)" -->
+<div class="flex gap-3 flex-col sm:flex-row">
+  <div *ngIf="product.images.length > 0">
+    <div
+      class="grid grid-cols-2 h-[100px] xl:h-[37px] gap-3 justify-center mb-3"
+      *ngIf="product.images.length > 1"
+    >
 
-            class="w-full h-[100px] xl:h-[37px] object-contain"
-            *ngIf="product.images.length > 1"
-          />
+      <img
+        [src]="product.images[1]"
+        alt="{{ product.name }}"
+        class="w-full h-[100px] xl:h-[37px] object-contain"
+        *ngIf="product.images.length > 1"
+      />
 
-          <img
-            *ngIf="product.images.length > 2"
-            [src]="product.images[2]"
+      <img
+        *ngIf="product.images.length > 2"
+        [src]="product.images[2]"
+        alt="{{ product.name }}"
+        class="object-contain"
+        class="w-full h-[100px] md:h-[37px] object-contain"
+      />
 
-            class="object-contain"
-            class="w-full h-[100px] md:h-[37px] object-contain"
-          />
-
-        </div>
-
-        <div class="">
-          <img
-            [src]="product.images[0]"
-
-            class="w-full md:w-[98px] h-[150px] xl:h-[80px] object-contain"
-          />
-        </div>
-      </div>
-      <div class="space-y-2">
-        <h6 class="font-medium text-blue-900">
-          Order No :{{ product.orderNumber }}
-        </h6>
-        <h6 class="text-sm font-semibold">Price: {{ product.price }} EGP</h6>
-        <h6 *ngFor="let item of product.items" class="text-xs font-semibold">
-          Order Statues <span class="text-blue-900/60">({{ item.name }}) :</span>
-          <!-- <span *ngFor="let item of product?.items" [ngClass]="getIOrderItemState(item)">{{item.itemState}}</span> -->
-          <span [ngClass]="getTextColorClass(item.itemState)">
-            {{ getOrderItemStateLabel(item) }}
-          </span>
-        </h6>
-      </div>
     </div>
 
-    <div class="col-span-2 flex flex-col xl:flex-row gap-8 xl:gap-20">
-      <div class="flex-grow">
-        <h6 class="font-medium text-blue-900 mb-1">
-          Items :{{ product.items.length }}
-        </h6>
-        <ul
-          class="bg-blue-100 rounded-sm py-1 px-2 inline-flex flex-col w-full"
-        >
-          <li
-            *ngFor="let item of product.items"
-            [ngClass]="getTextColorClass(item.itemState)"
-            class="flex gap-2 items-center"
-          >
-            <svg-icon
-              src="../../../../../assets/icons/dot-square.svg"
-              [svgStyle]="{
-            'width.px': 8,
-            'height.px': 8,
-          }"
-              class="fill-current"
-            ></svg-icon>
-            <span class="text-xs text-blue-900">{{ item.name }}</span>
-          </li>
-        </ul>
-      </div>
-
-      <div class="flex xl:flex-col justify-between">
-        <section class="flex-grow self-end">
-          <app-dropdown
-          [id]="'actionDropdown'+product.orderNumber"
-          [showSelectedValue]="false"
-          [options]="dropdownactions"
-          dropdownIcon="fa-ellipsis-vertical"
-          [classes]="{
-            label: 'bg-primary-100',
-            toggleBtn: 'outline-none w-8 h-8 rounded-full hover:bg-gray-200',
-          }"
-          (valueChanged)="onDropdownChange($event , product.orderNumber)"
-        >
-        </app-dropdown>
-        </section>
-
-        <p class="text-sm text-purple-500">{{ product.createdAt }}</p>
-      </div>
+    <div class="">
+      <img
+        [src]="product.images[0]"
+        alt="{{ product.name }}"
+        class="w-full md:w-[98px] h-[150px] xl:h-[80px] object-contain"
+      />
     </div>
   </div>
-</ng-container>
+  <div class="space-y-2">
+    <h6 class="font-medium text-blue-900">
+      Order No :{{ product.orderNumber }}
+    </h6>
+    <h6 class="text-sm font-semibold">Price: {{ product.price }} EGP</h6>
+    <h6 *ngFor="let item of product.items" class="text-xs font-semibold">
+      Order Statues <span class="text-blue-900/60">({{ item.name }}) :</span>
+      <!-- <span *ngFor="let item of product?.items" [ngClass]="getIOrderItemState(item)">{{item.itemState}}</span> -->
+      <span [ngClass]="getTextColorClass(item.itemState)">
+        {{ getOrderItemStateLabel(item) }}
+      </span>
+    </h6>
+  </div>
+</div>
+
+<div class="col-span-2 flex flex-col xl:flex-row gap-8 xl:gap-20">
+  <div class="flex-grow">
+    <h6 class="font-medium text-blue-900 mb-1">
+      Items :{{ product.items.length }}
+    </h6>
+    <ul
+      class="bg-blue-100 rounded-sm py-1 px-2 inline-flex flex-col w-full"
+    >
+      <li
+        *ngFor="let item of product.items"
+        [ngClass]="getTextColorClass(item.itemState)"
+        class="flex gap-2 items-center"
+      >
+        <svg-icon
+          src="../../../../../assets/icons/dot-square.svg"
+          [svgStyle]="{
+        'width.px': 8,
+        'height.px': 8,
+      }"
+          class="fill-current"
+        ></svg-icon>
+        <span class="text-xs text-blue-900">{{ item.name }}</span>
+      </li>
+    </ul>
+  </div>
+
+  <div class="flex xl:flex-col justify-between">
+    <section class="flex-grow self-end">
+      <app-dropdown
+        [id]="'actionDropdown' + product.id"
+        [showSelectedValue]="false"
+        [options]="dropdownactions"
+        dropdownIcon="fa-ellipsis-vertical"
+        [classes]="{
+          label: 'bg-primary-100',
+          toggleBtn: 'outline-none w-8 h-8 rounded-full hover:bg-gray-200',
+          dropdownMenu: '!w-[220px]',
+          base: '!h-auto'
+        }"
+      >
+      </app-dropdown>
+    </section>
+
+    <p class="text-sm text-purple-500">{{ product.createdAt }}</p>
+  </div>
+</div>
+</div>

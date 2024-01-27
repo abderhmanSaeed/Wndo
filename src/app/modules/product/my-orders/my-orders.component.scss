@@ -1,10 +1,15 @@
-
+:host {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
 .my-orders {
   --hover: #ff002a;
 
   &__tab-btn {
     transition: 0.25s;
-    @apply px-6 py-3   capitalize text-start bg-white text-blueGray-100 rounded-lg;
+    @apply px-6 py-3 capitalize text-start bg-white text-blueGray-100 rounded-lg;
     width: 180px;
 
     &:hover {

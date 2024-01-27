@@ -2,7 +2,12 @@ import { MyOrdersService } from './../../../data/service/my-orders/my-orders.ser
 import { Component, OnInit } from '@angular/core';
 import { SvgIconComponent } from 'angular-svg-icon';
 import { SharedModule } from '../../../shared/shared.module';
-import { Order, OrderItemState, OrderState, OrderStatistics } from '../../../shared/models';
+import {
+  Order,
+  OrderItemState,
+  OrderState,
+  OrderStatistics,
+} from '../../../shared/models';
 import { SellerProductsOffersService } from '../../../data/service/seller-products-offers/seller-products-offers.service';
 @Component({
   selector: 'app-my-orders',
@@ -12,7 +17,10 @@ import { SellerProductsOffersService } from '../../../data/service/seller-produc
   imports: [SharedModule, SvgIconComponent],
 })
 export class MyOrdersComponent implements OnInit {
-  constructor(private myOrdersService: MyOrdersService, private sellerProductsOffersService: SellerProductsOffersService) { }
+  constructor(
+    private myOrdersService: MyOrdersService,
+    private sellerProductsOffersService: SellerProductsOffersService
+  ) {}
   myOrders: Order[] = [];
   orderState: OrderState[] = [];
   orderItemState: OrderItemState[] = [];
@@ -36,17 +44,18 @@ export class MyOrdersComponent implements OnInit {
         this.myOrders = response?.responseData?.items;
         if (!this.ordersState) {
           this.ordersState = 1;
-          this.ordersCount = response?.responseData?.items.filter((order: { orderState: number; }) => order.orderState === 1).length;
-
-        }
-        else {
+          this.ordersCount = response?.responseData?.items.filter(
+            (order: { orderState: number }) => order.orderState === 1
+          ).length;
+        } else {
           this.ordersState = this.ordersState;
-          this.ordersCount = response?.responseData?.items.filter((order: { orderState: number; }) => order.orderState === this.ordersState).length;
-
+          this.ordersCount = response?.responseData?.items.filter(
+            (order: { orderState: number }) =>
+              order.orderState === this.ordersState
+          ).length;
         }
         console.log('API call successful');
         console.log('Response:', response);
-
       },
       (error) => {
         console.error('API call failed:', error);
@@ -58,7 +67,7 @@ export class MyOrdersComponent implements OnInit {
     this.myOrdersService.getOrderStatistics().subscribe(
       (response) => {
         this.orderStatistics = response.responseData;
-        this.ordersCount = response.responseData.placed
+        this.ordersCount = response.responseData.placed;
         console.log('Order statistics response:', response);
       },
       (error) => {
@@ -95,8 +104,6 @@ export class MyOrdersComponent implements OnInit {
   currentTab: string = 'ordered';
   myOrderStatus = ['ordered', 'shipping', 'delivered', 'returned', 'cancelled'];
 
-
-
   activeTab(item: string) {
     this.ordersCount = this.getItems(item);
     this.ordersState = this.getIOrderState(item);
@@ -117,33 +124,26 @@ export class MyOrdersComponent implements OnInit {
     if (status === 'delivered') {
       // return this.orderStatistics.delivered;
       // this.ordersCount = this.myOrders.filter(order => order.orderState === 3).length;
-      return this.myOrders.filter(order => order.orderState === 3).length;
-    }
-    else if (status === 'cancelled') {
+      return this.myOrders.filter((order) => order.orderState === 3).length;
+    } else if (status === 'cancelled') {
       // return this.orderStatistics.cancelled + this.orderStatistics.refund;
       // this.ordersCount = this.myOrders.filter(order => order.orderState === 4 || order.orderState === 5).length;
-      return this.myOrders.filter(order => order.orderState === 4 || order.orderState === 5).length;
-
-    }
-    else if (status === 'shipping') {
+      return this.myOrders.filter(
+        (order) => order.orderState === 4 || order.orderState === 5
+      ).length;
+    } else if (status === 'shipping') {
       // return this.orderStatistics.shipped;
       // this.ordersCount = this.myOrders.filter(order => order.orderState === 2).length;
-      return this.myOrders.filter(order => order.orderState === 2).length;
-
-    }
-    else if (status === 'ordered') {
+      return this.myOrders.filter((order) => order.orderState === 2).length;
+    } else if (status === 'ordered') {
       // this.ordersCount = this.myOrders.filter(order => order.orderState === 1).length;
       // return this.orderStatistics.placed;
-      return this.myOrders.filter(order => order.orderState === 1).length;
-
-    }
-    else if (status === 'returned') {
+      return this.myOrders.filter((order) => order.orderState === 1).length;
+    } else if (status === 'returned') {
       // return this.orderStatistics.returned;
       // this.ordersCount = this.myOrders.filter(order => order.orderState === 6).length;
-      return this.myOrders.filter(order => order.orderState === 6).length;
-
-    }
-    else {
+      return this.myOrders.filter((order) => order.orderState === 6).length;
+    } else {
       // Return undefined if the status is not found
       return undefined;
     }
@@ -152,67 +152,70 @@ export class MyOrdersComponent implements OnInit {
     // Check if the status exists in orderStatistics
     if (state === 'delivered') {
       return OrderState.Delivered;
-    }
-    else if (state === 'cancelled') {
+    } else if (state === 'cancelled') {
       return OrderState.Canceled;
-    }
-    else if (state === 'cancelled') {
+    } else if (state === 'cancelled') {
       return OrderState.Refund;
-    }
-    else if (state === 'shipping') {
+    } else if (state === 'shipping') {
       return OrderState.Shipping;
-    }
-    else if (state === 'ordered') {
+    } else if (state === 'ordered') {
       return OrderState.OrderPlaced;
-    }
-    else if (state === 'returned') {
+    } else if (state === 'returned') {
       return OrderState.Returned;
-    }
-    else {
+    } else {
       // Return undefined if the status is not found
       return undefined;
     }
   }
 
-  getStyleAndIcon(status: any) {
+  getStatusGradientBgButton(status: any): string {
     switch (status) {
       case 'ordered':
-        return {
-          ButtonBg: 'tab-btn--ordered',
-          lengthSpan: 'text-lightBlue-500',
-          icon: 'ordered-note',
-        };
+        return 'tab-btn--ordered';
       case 'shipping':
-        return {
-          ButtonBg: 'tab-btn--shipping',
-          lengthSpan: 'text-orange-700',
-          icon: 'out-for-delivery-one',
-        };
+        return 'tab-btn--shipping';
       case 'delivered':
-        return {
-          ButtonBg: 'tab-btn--delivered',
-          lengthSpan: 'text-green-600',
-          icon: 'deliverytruck',
-        };
-
+        return 'tab-btn--delivered';
       case 'returned':
-        return {
-          ButtonBg: 'tab-btn--returned',
-          lengthSpan: 'text-yellow-500',
-          icon: 'returned',
-        };
+        return 'tab-btn--returned';
       case 'cancelled':
-        return {
-          ButtonBg: 'tab-btn--cancelled',
-          lengthSpan: 'text-red-600',
-          icon: 'canceled',
-        };
+        return 'tab-btn--cancelled';
       default:
-        return {
-          ButtonBg: '',
-          lengthSpan: '',
-          icon: '',
-        };
+        return 'Unknown State';
+    }
+  }
+
+  getStatusTextColor(status: string): string {
+    switch (status) {
+      case 'ordered':
+        return 'text-lightBlue-500';
+      case 'shipping':
+        return 'text-orange-700';
+      case 'delivered':
+        return 'text-green-600';
+      case 'returned':
+        return 'text-yellow-500';
+      case 'cancelled':
+        return 'text-red-600';
+      default:
+        return 'Unknown State';
+    }
+  }
+
+  getStatusIcon(status: string): string {
+    switch (status) {
+      case 'ordered':
+        return 'ordered-note';
+      case 'shipping':
+        return 'out-for-delivery-one';
+      case 'delivered':
+        return 'deliverytruck';
+      case 'returned':
+        return 'returned';
+      case 'cancelled':
+        return 'canceled';
+      default:
+        return '';
     }
   }
 }

@@ -38,6 +38,8 @@ export class MyOrderCardComponent {
     },
   ];
 
+  indexOfItem: number = 0;
+
   constructor(private orderStateService: OrderStateService, private router: Router) {}
 
   getTextColorClass(item: any): string {

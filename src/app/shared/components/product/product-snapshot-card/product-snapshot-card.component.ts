@@ -1,6 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { AddProductToCardModalComponent } from '../../modals/add-product-to-card-modal/add-product-to-card-modal.component';
 import { ModalService } from '../../modal/modal.service';
+import { ModalDataService } from '../../modal/modal.data.service';
 
 @Component({
   selector: 'app-product-snapshot-card',
@@ -13,7 +14,7 @@ export class ProductSnapshotCardComponent {
    // Variable to control the visibility of the copied message
    showCopiedMessage: boolean = false;
 
-   constructor(private modalService: ModalService){}
+   constructor(private modalService: ModalService , private modalDataService: ModalDataService){}
 
    // Method to copy the share URL to the clipboard and show the message
    shareProduct() {
@@ -42,7 +43,8 @@ export class ProductSnapshotCardComponent {
      }, 3000);
    }
 
-   openAddProductToCardModal() {
+   openAddProductToCardModal(product: any) {
+    this.modalDataService.setData({ product: product });
     this.modalService.open(AddProductToCardModalComponent, {
       animations: {
         modal: {
@@ -58,4 +60,5 @@ export class ProductSnapshotCardComponent {
       },
     });
   }
+
 }

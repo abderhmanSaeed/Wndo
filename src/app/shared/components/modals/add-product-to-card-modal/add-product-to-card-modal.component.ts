@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { ModalService } from '../../modal/modal.service';
+import { ModalDataService } from '../../modal/modal.data.service';
 
 @Component({
   selector: 'app-add-product-to-card-modal',
@@ -7,8 +8,11 @@ import { ModalService } from '../../modal/modal.service';
   styleUrl: './add-product-to-card-modal.component.scss',
 })
 export class AddProductToCardModalComponent implements OnInit {
-  constructor(private modalService: ModalService) {}
+
+  constructor(private modalService: ModalService, private modalDataService: ModalDataService) {}
   product: any;
+  showNotification: boolean = false;
+  existingProductStore: any;
 
   selectedColor: any;
   selectedSize: any;
@@ -19,28 +23,30 @@ export class AddProductToCardModalComponent implements OnInit {
   userSelectedQuantity!: number;
 
   ngOnInit() {
-    this.product = {
-      id: '7a734dd3-3cf8-4ec1-b7ad-7a8912d0a03b',
-      colorWithSizes: [
-        {
-          color: {
-            id: 36,
-            name: 'Dark green',
-            hexaCode: '006400',
-            quantity: -1,
-          },
-          sizes: [
-            {
-              id: 4,
-              name: 'XL',
-              quantity: 5,
-            },
-          ],
-        },
-      ],
-      sizes: [],
-      quantity: -1,
-    };
+    const modalData = this.modalDataService.getData();
+    this.product = modalData.product;
+    // this.product = {
+    //   id: '7a734dd3-3cf8-4ec1-b7ad-7a8912d0a03b',
+    //   colorWithSizes: [
+    //     {
+    //       color: {
+    //         id: 36,
+    //         name: 'Dark green',
+    //         hexaCode: '006400',
+    //         quantity: -1,
+    //       },
+    //       sizes: [
+    //         {
+    //           id: 4,
+    //           name: 'XL',
+    //           quantity: 5,
+    //         },
+    //       ],
+    //     },
+    //   ],
+    //   sizes: [],
+    //   quantity: -1,
+    // };
   }
 
   logColor(colorWithSizes: any): void {
@@ -74,4 +80,89 @@ export class AddProductToCardModalComponent implements OnInit {
     console.log("close")
     this.modalService.close()
   }
+
+  // Method to handle the button click and store productId in localStorage
+  storeProductInLocalStorageWithoutNavigate(product: any): void {
+    // Retrieve the existing products array from localStorage
+    const existingProductsString = localStorage.getItem('products');
+    let existingProducts: any[] = [];
+
+    if (existingProductsString) {
+      existingProducts = JSON.parse(existingProductsString);
+    }
+
+    // Check if the product with the same ID and hexaCode already exists
+    const existingProductIndex = existingProducts.findIndex(existingProduct =>
+      existingProduct.id === product.id && existingProduct.hexColor === this.colorWithSizesSelected.color.hexaCode
+    );
+
+    if (existingProductIndex !== -1) {
+      // If the product already exists, check if quantity update is allowed
+      const existingProduct = existingProducts[existingProductIndex];
+      this.existingProductStore = existingProduct;
+      if (this.size.quantity >= existingProduct.quantity + this.productQuantity) {
+        // Update the existing product quantity
+        existingProducts[existingProductIndex] = {
+          ...existingProduct,
+          // size: this.size.name,
+          // sizeQuantity: this.size.quantity,
+          quantity: existingProduct.quantity + this.productQuantity,
+          // totalPrice: product.price.price,
+          // priceAfterDiscount: product.price.priceAfterOffer,
+        };
+      } else {
+        // Show a snackbar error message with detailed information
+        this.showCustomNotification();
+        // this.snackBar.open(
+        //   `Cannot update quantity. Available quantity: ${this.size.quantity}. You selected ${this.productQuantity}
+        //   + in your store ${existingProduct.quantity}`,
+        //   'Close',
+        //   {
+        //     duration: 5000, // Display duration in milliseconds
+        //   }
+        // );
+      }
+    } else {
+      // If the product does not exist, check if a new product can be added
+      if (this.size.quantity >= this.productQuantity) {
+        // Add a new product
+        const newProduct = {
+          id: product.id,
+          name: product.name,
+          hexColor: this.colorWithSizesSelected.color.hexaCode,
+          size: this.size.name,
+          sizeQuantity: this.size.quantity,
+          quantity: this.productQuantity,
+          totalPrice: product.price.price,
+          priceAfterDiscount: product.price.priceAfterOffer,
+          image: product.images[0].urlPreview
+        };
+
+        // Push the new product to the existing array
+        existingProducts.push(newProduct);
+      } else {
+        // Show a snackbar error message with detailed information
+        this.showCustomNotification();
+
+      }
+    }
+
+    // Store the updated products array in localStorage
+    localStorage.setItem('products', JSON.stringify(existingProducts));
+
+  }
+  // Method to show the notification
+  showCustomNotification() {
+    this.showNotification = true;
+
+    // Optional: Auto-close after a certain duration
+    setTimeout(() => {
+      this.closeNotification();
+    }, 5000); // Display duration in milliseconds
+  }
+  // Method to close the notification
+  closeNotification() {
+    this.showNotification = false;
+  }
+
 }

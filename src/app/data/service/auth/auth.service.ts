@@ -87,4 +87,18 @@ export class AuthService {
     // Return true if access token is present, indicating the user is authenticated
     return !!accessToken;
   }
+
+  getCurrentLanguage(): string | null  {
+    try {
+      const currentLang = localStorage.getItem('lang');
+      return currentLang || 'en';
+    } catch (error) {
+      console.error('Error accessing localStorage:', error);
+      return 'en';
+    }
+
+    // console.log('Current Language:', localStorage.getItem('lang'));
+
+    // return localStorage.getItem('lang') || 'en'; // Default to 'en' if no language is set
+  }
 }

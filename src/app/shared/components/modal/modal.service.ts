@@ -79,4 +79,5 @@ export class ModalService {
   close() {
     this.newModalComponent.instance.close();
   }
+
 }

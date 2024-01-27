@@ -1,5 +1,9 @@
+<div *ngIf="showNotification" class="custom-notification">
+  Cannot add new product. Available quantity: {{ size.quantity }}. You selected {{ productQuantity }}
+  + in your store {{ existingProductStore.quantity}}.
+  <button (click)="closeNotification()">Close</button>
+</div>
 <app-modal-content [classes]="{base: '!text-start'}">
-
   <div class="space-y-6 mb-8">
       <div>
         <h6 class="mb-4 text-lg">{{'chooseColor' | translate}}</h6>
@@ -56,7 +60,7 @@
   </div>
 
   <div class="space-y-6 mb-4">
-    <button type="button" class="button button--primary rounded-full w-full lg:w-[300px] mx-auto">{{'save' | translate}}</button>
+    <button type="button" class="button button--primary rounded-full w-full lg:w-[300px] mx-auto" (click)="storeProductInLocalStorageWithoutNavigate(product)">{{'save' | translate}}</button>
     <button type="button" class="button button--link uppercase text-blueGray-200 hover:text-blueGray-400 mx-auto" (click)="onCloseModal()">{{'discard' | translate}}</button>
   </div>
 </app-modal-content>

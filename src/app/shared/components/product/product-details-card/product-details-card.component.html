@@ -3,7 +3,7 @@
 >
   <div class="lg:col-span-4 xxl:col-span-3 3xl:col-span-2 mb-8 md:mb-0">
     <div class="mb-5">
-      <app-gallery [items]="product?.images"></app-gallery>
+      <app-gallery [images]="product?.images"></app-gallery>
     </div>
     <div *ngIf="showNotification" class="custom-notification">
       Cannot add new product. Available quantity: {{ size.quantity }}. You selected {{ productQuantity }}

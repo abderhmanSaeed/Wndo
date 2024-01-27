@@ -1,3 +1,4 @@
+import { LoaderInterceptor } from './../core/interceptor/loader-interceptor/loader.interceptor';
 import { FilterByPipe } from './pipes/filter-by.pipe';
 import { TokenInterceptor } from './../core/interceptor/token.interceptor';
 import { CoreModule } from './../core/core.module';
@@ -26,6 +27,7 @@ import { StepComponent } from './components/stepper/step/step.component';
 import { ShippingPaymentComponent } from './components/order/shipping-payment/shipping-payment.component';
 import { InputPhoneComponent } from './components/inputs/input-phone/input-phone.component';
 import { DropdownComponent } from './components/dropdown/dropdown/dropdown.component';
+import { LoadingComponent } from './components/loading/loading.component';
 import { RadioComponent } from './components/radio/radio.component';
 import { VisualProductSummaryComponent } from './components/product/visual-product-summary/visual-product-summary.component';
 import { CheckoutComponent } from './components/order/checkout/checkout.component';
@@ -83,6 +85,7 @@ register();
     FilterByPipe,
     ProductSummaryWithSellerComponent,
     SignUpComponent,
+    LoadingComponent
   ],
   imports: [
     CommonModule,
@@ -133,7 +136,8 @@ register();
     AddProductToCardModalComponent,
     FilterByPipe,
     NgSelectModule,
-    ProductSummaryWithSellerComponent
+    ProductSummaryWithSellerComponent,
+    LoadingComponent
   ],
   providers: [
     TranslationService,
@@ -141,7 +145,8 @@ register();
       provide: HTTP_INTERCEPTORS,
       useClass: TokenInterceptor,
       multi: true
-    }
+    },
+    { provide: HTTP_INTERCEPTORS, useClass: LoaderInterceptor, multi: true }
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })

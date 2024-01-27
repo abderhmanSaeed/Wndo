@@ -81,7 +81,7 @@ class="bg-white grid grid-cols-1 xl:grid-cols-3 gap-6 pt-3 pb-6 px-5 border-s-2 
   <div class="flex xl:flex-col justify-between">
     <section class="flex-grow self-end">
       <app-dropdown
-        [id]="'actionDropdown' + product.id"
+        [id]="'actionDropdown' + product.orderNumber"
         [showSelectedValue]="false"
         [options]="dropdownactions"
         dropdownIcon="fa-ellipsis-vertical"
@@ -91,6 +91,7 @@ class="bg-white grid grid-cols-1 xl:grid-cols-3 gap-6 pt-3 pb-6 px-5 border-s-2 
           dropdownMenu: '!w-[220px]',
           base: '!h-auto'
         }"
+        (valueChanged)="onDropdownChange($event , product.orderNumber)"
       >
       </app-dropdown>
     </section>

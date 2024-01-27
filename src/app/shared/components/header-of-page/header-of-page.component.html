@@ -22,19 +22,21 @@
         </li>
         <li>
           <button
-            type="button"
-            class="inline-flex button button--white border border-blueGray-50 rounded-full h-8 py-0 px-2"
+          type="button"
+          class="inline-flex button button--white border border-blueGray-50 rounded-full h-8 py-0 px-2"
+          [routerLink]="['/product/productOrders']"
+        >
+          <svg-icon
+            src="../../../../assets/icons/cart.svg"
+            [svgStyle]="{ 'width.px': 22, fill: '#4E4E78' }"
+          ></svg-icon>
+          <span
+            class="inline-flex items-center justify-center w-4 h-4 text-xxs text-white bg-primary rounded-full -mt-2"
           >
-            <svg-icon
-              src="../../../../assets/icons/cart.svg"
-              [svgStyle]="{ 'width.px': 22, fill: '#4E4E78' }"
-            ></svg-icon>
-            <span
-              class="inline-flex items-center justify-center w-4 h-4 text-xxs text-white bg-primary rounded-full -mt-2"
-            >
-              {{ products.length }}
-            </span>
-          </button>
+            {{ products.length }}
+          </span>
+        </button>
+
         </li>
       </ul>
     </section>

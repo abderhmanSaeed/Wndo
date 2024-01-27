@@ -1,6 +1,6 @@
-import { LoaderInterceptor } from './../core/interceptor/loader-interceptor/loader.interceptor';
+import { LoaderInterceptor } from './../core/interceptors/loader-interceptor/loader.interceptor';
 import { FilterByPipe } from './pipes/filter-by.pipe';
-import { TokenInterceptor } from './../core/interceptor/token.interceptor';
+import { TokenInterceptor } from '../core/interceptors/auth-interceptor/token.interceptor';
 import { CoreModule } from './../core/core.module';
 import { HTTP_INTERCEPTORS, HttpClient, HttpClientModule } from '@angular/common/http';
 import { OrderConfirmedModal } from './components/modals/order-confirmed-modal/order-confirmed-modall.component';

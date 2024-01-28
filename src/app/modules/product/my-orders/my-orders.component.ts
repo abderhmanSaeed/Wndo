@@ -82,6 +82,7 @@ export class MyOrdersComponent implements OnInit {
       (data) => {
         this.sellersData = data?.responseData?.items;
         console.log('Sellers Data:', this.sellersData);
+
       },
       (error) => {
         console.error('Error fetching sellers data:', error);
@@ -111,6 +112,7 @@ export class MyOrdersComponent implements OnInit {
     this.currentTab = item;
     // Additional logic if needed when a tab is activated
     console.log(`Tab ${item} is now active.`);
+
   }
 
   // getItems(status: string) {
@@ -218,4 +220,6 @@ export class MyOrdersComponent implements OnInit {
         return '';
     }
   }
+
+
 }

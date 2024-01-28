@@ -8,7 +8,8 @@ type Product = {
 }
 
 type ClassProps = {
-  base?: string
+  base?: string,
+  baseBorderColor?: string
 }
 @Component({
   selector: 'app-visual-product-summary',
@@ -19,6 +20,8 @@ export class VisualProductSummaryComponent {
   @Input() product: any | null = null;
   @Input() classes?: ClassProps;
   @Input() showDesc?: boolean = false;
+  @Input() hasCustomBorderColor?: boolean = false;
+  @Input() hasQuantity?: boolean = true;
 
   productQuantity: number = 0;
 }

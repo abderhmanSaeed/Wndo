@@ -1,1 +1,61 @@
-<app-header-of-page></app-header-of-page>
+<section>
+  <app-header-of-page></app-header-of-page>
+
+  <div class="content-page">
+    <h5 class="text-blue-900">
+      Your order (10)<span class="text-blue-100">></span>
+      <span class="text-sm text-blue-950">Order No. Details</span>
+    </h5>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 justify-between gap-10">
+      <div class="md:col-span-2">
+        <h6 class="text-blue-950 mb-6">Summary : ORDER #21412</h6>
+        <div class="flex items-center justify-between">
+          <p class="text-sm font-medium text-blueGray-200">
+            Placed On: <span>23Th Of January</span>
+          </p>
+          <p class="text-sm font-medium text-blueGray-200">
+            Overall Status: <span>Placed</span>
+          </p>
+        </div>
+        <div class="scroll">
+          <div *ngFor="let product of products" class="scroll__item">
+            <div class="mb-6">
+              <app-visual-product-summary
+                [product]="product"
+              ></app-visual-product-summary>
+            </div>
+          </div>
+        </div>
+
+        <app-confirmation
+        [classes]="{ base: '!grid-cols-1 mb-4' }"
+      ></app-confirmation>
+
+        <div class="flex flex-wrap gap-4 items-center lg:px-14">
+          <button type="button" class="flex-auto button rounded-full button--primary button--bordered">
+            CANCEL ALL
+          </button>
+          <button type="button" class="flex-auto button rounded-full button--primary">
+            TRACK THE ORDER
+          </button>
+        </div>
+
+      </div>
+      <div class="h-full">
+        <app-order-summary-card></app-order-summary-card>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="pb-12 content-page">
+  <p class="text-xs text-blue-900 flex items-center gap-1 justify-center">
+    <svg-icon src="../../../../assets/icons/car-coloring.svg"></svg-icon>
+    {{ "getShipping" | translate }}
+
+    <a class="ms-1 underline hover:no-underline">{{
+      "downloadNow" | translate
+    }}</a>
+  </p>
+</section>

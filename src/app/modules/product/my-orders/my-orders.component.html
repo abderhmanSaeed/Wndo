@@ -21,14 +21,14 @@
       <div class="xl:px-32 px-8">
         <div class="mb-4">
           <ul
-            class="flex flex-wrap text-sm font-medium text-center gap-4 mb-14"
+            class="flex flex-wrap text-sm font-medium text-center gap-y-4 mb-14"
             id="myOrders-tab"
             data-tabs-toggle="#myOrders-tab-content"
             role="tablist"
           >
             <li
               *ngFor="let item of myOrderStatus; let i = index"
-              class="me-2"
+              class="me-2 flex-auto"
               role="presentation"
             >
               <button
@@ -91,7 +91,7 @@
 </div>
 
 <section class="pb-12 content-page">
-  <p class="text-xs text-blue-900 flex items-center gap-1">
+  <p class="text-xs text-blue-900 flex flex-wrap items-center gap-1">
     <svg-icon src="../../../../assets/icons/car-coloring.svg"></svg-icon>
     {{ "getShipping" | translate }}
 

@@ -15,7 +15,7 @@ type ClassesProps = {
   toggleBtn?: string;
   list?: string;
   listItem?: string;
-  dropdoenMenu?: string
+  dropdownMenu?: string
 };
 
 

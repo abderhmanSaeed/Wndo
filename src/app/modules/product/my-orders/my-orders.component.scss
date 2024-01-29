@@ -3,6 +3,10 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+
+  @media  (max-width: theme("screens.sm")) {
+    height: auto;
+  }
 }
 .my-orders {
   --hover: #ff002a;
@@ -10,7 +14,12 @@
   &__tab-btn {
     transition: 0.25s;
     @apply px-6 py-3 capitalize text-start bg-white text-blueGray-100 rounded-lg;
-    width: 180px;
+    // width: 180px;
+    width: 100%;
+
+    @media  (max-width: theme("screens.lg")) {
+       @apply w-full
+    }
 
     &:hover {
       transform: translateY(-0.25em);

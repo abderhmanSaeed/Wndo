@@ -1,1 +1,88 @@
-<app-header-of-page></app-header-of-page>
+<section>
+  <app-header-of-page></app-header-of-page>
+
+  <div class="content-page">
+    <h5 class="text-blue-900 mb-11">
+      Your order (10)<span class="text-blue-100">></span>
+      <span class="text-sm text-blue-950">Order No. Details</span>
+    </h5>
+
+    <div class="grid grid-cols-1 md:grid-cols-7 justify-between gap-10">
+      <div class="md:col-span-5">
+        <h6 class="text-blue-950 mb-6">Summary : ORDER #21412</h6>
+        <div class="flex items-center justify-between mb-8">
+          <p class="text-sm font-medium text-blueGray-200">
+            Placed On: <span>23Th Of January</span>
+          </p>
+          <p class="text-sm font-medium text-blueGray-200">
+            Overall Status:
+            <span [ngClass]="getTextColorClass(products[0].orderState)"
+              >Placed</span
+            >
+          </p>
+        </div>
+        <div class="scroll">
+          <div *ngFor="let product of products" class="scroll__item">
+            <div class="mb-6">
+              <!-- [classes]="{baseBorderColor: getBorderColorClass(product.orderState)}" -->
+              <app-visual-product-summary
+                [classes]="{ base: getBorderColorClass(product.orderState) }"
+                [hasCustomBorderColor]="true"
+                [product]="product"
+                [hasQuantity]="false"
+              >
+
+              <div class="flex flex-wrap items-center justify-between w-full mt-4 lg:mt-0">
+                <div class="flex gap-2 items-center flex-grow">
+                  <img [src]="product.seller.image" alt="seller image" class="h-8 w-8 rounded-full object-cover" />
+                  <p class="text-xs capitalize text-blueGray-200">{{product.seller.name}}</p>
+                </div>
+                <div class="space-x-3">
+                  <span [class.line-through]="product.priceAfterDiscount > 0" class="text-xs" >{{product.price}}</span>
+                  <span *ngIf="product.priceAfterDiscount > 0" class="text-primary">{{product.priceAfterDiscount}}</span>
+                  <button type="button" class="border rounded py-1 px-5 border-gray-200 text-gray-200 hover:bg-gray-100 uppercase text-sm">cancel</button>
+                </div>
+              </div>
+            </app-visual-product-summary>
+            </div>
+          </div>
+        </div>
+
+        <app-confirmation
+          [classes]="{ base: '!grid-cols-1 mb-4' }"
+        ></app-confirmation>
+
+        <div class="flex flex-wrap gap-4 items-center lg:px-14">
+          <button
+            type="button"
+            class="flex-auto button rounded-full button--primary button--bordered"
+          >
+            CANCEL ALL
+          </button>
+          <button
+            type="button"
+            class="flex-auto button rounded-full button--primary"
+          >
+            TRACK THE ORDER
+          </button>
+        </div>
+      </div>
+      <div class="h-full md:col-span-2">
+        <app-order-summary-card></app-order-summary-card>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="pb-12 content-page">
+  <p
+    class="text-xs text-blue-900 flex flex-wrap items-center gap-1 justify-center"
+  >
+    <svg-icon src="../../../../assets/icons/car-coloring.svg"></svg-icon>
+    {{ "getShipping" | translate }}
+
+    <a class="ms-1 underline hover:no-underline">{{
+      "downloadNow" | translate
+    }}</a>
+  </p>
+</section>

@@ -88,6 +88,7 @@ export class ProductOrdersComponent implements OnInit {
     // Retrieve the productId array from localStorage
     const storedProductIdString = localStorage.getItem('productId');
 
+
     if (storedProductIdString) {
       const productIdArray: string[] = JSON.parse(storedProductIdString);
 
@@ -103,10 +104,13 @@ export class ProductOrdersComponent implements OnInit {
             error => console.error('Error:', error)
           );
       });
+
     } else {
       console.error('No productId found in localStorage.');
     }
   }
+
+
 
 
   addMore(): void {

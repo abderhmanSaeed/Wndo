@@ -47,6 +47,7 @@ import { AddProductToCardModalComponent } from './components/modals/add-product-
 import { NgSelectModule } from '@ng-select/ng-select';
 import { ProductSummaryWithSellerComponent } from './components/product/product-summary-with-seller/product-summary-with-seller.component';
 import { SignUpComponent } from './components/modals/sign-up/sign-up.component';
+import { FreeShippingComponent } from './components/free-shipping/free-shipping.component';
 
 register();
 
@@ -85,7 +86,8 @@ register();
     FilterByPipe,
     ProductSummaryWithSellerComponent,
     SignUpComponent,
-    LoadingComponent
+    LoadingComponent,
+    FreeShippingComponent
   ],
   imports: [
     CommonModule,
@@ -137,7 +139,8 @@ register();
     FilterByPipe,
     NgSelectModule,
     ProductSummaryWithSellerComponent,
-    LoadingComponent
+    LoadingComponent,
+    FreeShippingComponent
   ],
   providers: [
     TranslationService,

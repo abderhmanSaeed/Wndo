@@ -1,0 +1,24 @@
+<div
+  class="text-xs text-blue-900 flex flex-wrap items-center gap-1 {{
+    classes?.base
+  }}"
+>
+  <div class="relative inline-flex">
+    <img src="../../../../assets/icons/car-coloring.gif" alt="" class="w-16" />
+    <svg-icon
+
+      src="../../../../assets/icons/star-four-point.svg"
+      [svgStyle]="{
+        'width.px': 15,
+        'height.px': 15,
+        fill: '#FFAD39'
+      }"
+      class="absolute end-0 top-0 pulse"
+    ></svg-icon>
+  </div>
+  {{ "getShipping" | translate }}
+
+  <a class="ms-1 underline hover:no-underline">{{
+    "downloadNow" | translate
+  }}</a>
+</div>

@@ -31,19 +31,39 @@
                 [product]="product"
                 [hasQuantity]="false"
               >
-
-              <div class="flex flex-wrap items-center justify-between w-full mt-4 lg:mt-0">
-                <div class="flex gap-2 items-center flex-grow">
-                  <img [src]="product.seller.image" alt="seller image" class="h-8 w-8 rounded-full object-cover" />
-                  <p class="text-xs capitalize text-blueGray-200">{{product.seller.name}}</p>
+                <div
+                  class="flex flex-wrap items-center justify-between w-full mt-4 lg:mt-0"
+                >
+                  <div class="flex gap-2 items-center flex-grow">
+                    <img
+                      [src]="product.seller.image"
+                      alt="seller image"
+                      class="h-8 w-8 rounded-full object-cover"
+                    />
+                    <p class="text-xs capitalize text-blueGray-200">
+                      {{ product.seller.name }}
+                    </p>
+                  </div>
+                  <div class="space-x-3">
+                    <span
+                      [class.line-through]="product.priceAfterDiscount > 0"
+                      class="text-xs"
+                      >{{ product.price }}</span
+                    >
+                    <span
+                      *ngIf="product.priceAfterDiscount > 0"
+                      class="text-primary"
+                      >{{ product.priceAfterDiscount }}</span
+                    >
+                    <button
+                      type="button"
+                      class="border rounded py-1 px-5 border-gray-200 text-gray-200 hover:bg-gray-100 uppercase text-sm"
+                    >
+                      cancel
+                    </button>
+                  </div>
                 </div>
-                <div class="space-x-3">
-                  <span [class.line-through]="product.priceAfterDiscount > 0" class="text-xs" >{{product.price}}</span>
-                  <span *ngIf="product.priceAfterDiscount > 0" class="text-primary">{{product.priceAfterDiscount}}</span>
-                  <button type="button" class="border rounded py-1 px-5 border-gray-200 text-gray-200 hover:bg-gray-100 uppercase text-sm">cancel</button>
-                </div>
-              </div>
-            </app-visual-product-summary>
+              </app-visual-product-summary>
             </div>
           </div>
         </div>
@@ -75,14 +95,5 @@
 </section>
 
 <section class="pb-12 content-page">
-  <p
-    class="text-xs text-blue-900 flex flex-wrap items-center gap-1 justify-center"
-  >
-    <svg-icon src="../../../../assets/icons/car-coloring.svg"></svg-icon>
-    {{ "getShipping" | translate }}
-
-    <a class="ms-1 underline hover:no-underline">{{
-      "downloadNow" | translate
-    }}</a>
-  </p>
+ <app-free-shipping [classes]="{base: 'justify-center'}"></app-free-shipping>
 </section>

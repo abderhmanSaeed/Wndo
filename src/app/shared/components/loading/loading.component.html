@@ -1,10 +1,14 @@
-
-
-<div *ngIf="loading$ | async" class="loader">
-  <section class="wndo-loader flex items-center justify-center w-full h-full"
-  [ngStyle]="{
+<ng-container *ngIf="loading$ | async" class="loader">
+  <section
+    class="inline-flex items-center justify-center absolute !bg-transparent w-full h-full"
+    [ngStyle]="{
       'background-color': bdColor
-  }"
+    }"
   >
-      <img class="img-fluid" src='assets/media/gif/loader.gif' />
-  </section></div>
+    <img
+      class="bg-blend-multiply"
+      src="assets/media/gif/loader.gif"
+      alt="loader image"
+    />
+  </section>
+</ng-container>

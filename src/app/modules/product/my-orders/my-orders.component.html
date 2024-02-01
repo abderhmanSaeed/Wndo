@@ -10,7 +10,7 @@
         bindLabel="name"
         bindValue="userId"
         [searchable]="true"
-        placeholder="Seller Name:"
+        [placeholder]="selectedSeller ? '' : 'Seller Name:'"
         (change)="onSellerSelected($event)"
         class="flex items-center border py-3 px-4 text-gray-950 text-sm rounded-lg w-[400px]"
       >

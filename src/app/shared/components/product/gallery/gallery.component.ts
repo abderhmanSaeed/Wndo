@@ -13,33 +13,33 @@ import { VideoModalComponent } from '../video-modal/video-modal.component';
 })
 export class GalleryComponent implements OnInit {
   @Input() videoUrl: string = '';
-  @Input() images: Image[] = [];
-  // images: any[] = [
-  //   {
-  //     id: 45084,
-  //     imageId: '53453',
-  //     urlPreview: 'https://swiperjs.com/demos/images/nature-1.jpg',
-  //     urlThumbnail: 'https://swiperjs.com/demos/images/nature-1.jpg',
-  //   },
-  //   {
-  //     id: 45085,
-  //     imageId: '53453',
-  //     urlPreview: 'https://swiperjs.com/demos/images/nature-2.jpg',
-  //     urlThumbnail: 'https://swiperjs.com/demos/images/nature-2.jpg',
-  //   },
-  //   {
-  //     id: 45086,
-  //     imageId: '4353',
-  //     urlPreview: 'https://swiperjs.com/demos/images/nature-3.jpg',
-  //     urlThumbnail: 'https://swiperjs.com/demos/images/nature-3.jpg',
-  //   },
-  //   {
-  //     id: 45087,
-  //     imageId: '453',
-  //     urlPreview: 'https://swiperjs.com/demos/images/nature-4.jpg',
-  //     urlThumbnail: 'https://swiperjs.com/demos/images/nature-4.jpg',
-  //   },
-  // ];
+  // @Input() images: Image[] = [];
+  images: any[] = [
+    {
+      id: 45084,
+      imageId: '53453',
+      urlPreview: 'https://swiperjs.com/demos/images/nature-1.jpg',
+      urlThumbnail: 'https://swiperjs.com/demos/images/nature-1.jpg',
+    },
+    {
+      id: 45085,
+      imageId: '53453',
+      urlPreview: 'https://swiperjs.com/demos/images/nature-2.jpg',
+      urlThumbnail: 'https://swiperjs.com/demos/images/nature-2.jpg',
+    },
+    {
+      id: 45086,
+      imageId: '4353',
+      urlPreview: 'https://swiperjs.com/demos/images/nature-3.jpg',
+      urlThumbnail: 'https://swiperjs.com/demos/images/nature-3.jpg',
+    },
+    {
+      id: 45087,
+      imageId: '453',
+      urlPreview: 'https://swiperjs.com/demos/images/nature-4.jpg',
+      urlThumbnail: 'https://swiperjs.com/demos/images/nature-4.jpg',
+    },
+  ];
   videos: any[] = [
     {
       id: 17203,

@@ -1,0 +1,40 @@
+<div
+  class="bg-white flex flex-col md:flex-row  gap-6 py-2.5 px-5 border-b-2  {{
+    classes?.base
+  }} "
+[ngClass]="{'border-orange-400': !hasCustomBorderColor}"
+>
+  <img
+    [src]="order.image.urlPreview"
+    class="w-36 h-36 object-cover rounded"
+    alt="{{ order.name }}"
+  />
+
+  <div class="flex flex-col flex-grow items-baseline justify-between">
+    <h6>{{ order.name }}</h6>
+
+    <p
+      class="text-base text-purple-300 my-3"
+      *ngIf="showDesc && order.description"
+    >
+      {{ order.description }}
+    </p>
+    <div
+      class="bg-gray-100 inline-flex text-gray-350 text-xs rounded divide-x p-2 gap-2 items-center"
+    >
+      <span class="px-2"
+        >color:
+        <i
+          class="fa-solid fa-circle text-xxs"
+          [style]="{ color: '#' + order.hexColor }"
+        ></i
+      ></span>
+      <span class="px-2" *ngIf="order.size">size: {{ order.size }}</span>
+      <span class="px-2">QTY: {{ order.quantity }}</span>
+    </div>
+
+
+
+    <ng-content></ng-content>
+  </div>
+</div>

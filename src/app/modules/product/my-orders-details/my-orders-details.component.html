@@ -1,60 +1,58 @@
 <section>
   <app-header-of-page></app-header-of-page>
-
   <div class="content-page">
-    <h5 class="text-blue-900 mb-11">
+    <!-- <h5 class="text-blue-900 mb-11">
       Your order (10)<span class="text-blue-100">></span>
       <span class="text-sm text-blue-950">Order No. Details</span>
-    </h5>
+    </h5> -->
 
     <div class="grid grid-cols-1 md:grid-cols-7 justify-between gap-10">
       <div class="md:col-span-5">
-        <h6 class="text-blue-950 mb-6">Summary : ORDER #21412</h6>
+        <h6 class="text-blue-950 mb-6">Summary : ORDER #{{orderDetails?.orderNumber}}</h6>
         <div class="flex items-center justify-between mb-8">
           <p class="text-sm font-medium text-blueGray-200">
-            Placed On: <span>23Th Of January</span>
+            Placed On: <span>{{orderDetails?.createdAt | date}}</span>
           </p>
           <p class="text-sm font-medium text-blueGray-200">
             Overall Status:
-            <span [ngClass]="getTextColorClass(products[0].orderState)"
+            <span [ngClass]="getTextColorClass(orderDetails?.orderState)"
               >Placed</span
             >
           </p>
         </div>
         <div class="scroll">
-          <div *ngFor="let product of products" class="scroll__item">
+          <div *ngFor="let order of orderDetails?.orderItems" class="scroll__item">
             <div class="mb-6">
               <!-- [classes]="{baseBorderColor: getBorderColorClass(product.orderState)}" -->
-              <app-visual-product-summary
-                [classes]="{ base: getBorderColorClass(product.orderState) }"
+              <app-item-orders-details
+                [classes]="{ base: getBorderColorClass(order.orderItemState) }"
                 [hasCustomBorderColor]="true"
-                [product]="product"
+                [order]="order"
                 [hasQuantity]="false"
               >
                 <div
                   class="flex flex-wrap items-center justify-between w-full mt-4 lg:mt-0"
                 >
-                  <div class="flex gap-2 items-center flex-grow">
-                    <img
-                      [src]="product.seller.image"
+                <div (click)="navigateSeller(order.seller.id)" class="pointer-div flex gap-2 items-center flex-grow">
+                  <img
+                      [src]="order.seller.imagePath"
                       alt="seller image"
                       class="h-8 w-8 rounded-full object-cover"
-                    />
-                    <p class="text-xs capitalize text-blueGray-200">
-                      {{ product.seller.name }}
-                    </p>
-                  </div>
+                  />
+                  <p class="text-xs capitalize text-blueGray-200">
+                      {{ order.seller.name }}
+                  </p>
+              </div>
+
                   <div class="space-x-3">
-                    <span
-                      [class.line-through]="product.priceAfterDiscount > 0"
-                      class="text-xs"
-                      >{{ product.price }}</span
-                    >
-                    <span
-                      *ngIf="product.priceAfterDiscount > 0"
-                      class="text-primary"
-                      >{{ product.priceAfterDiscount }}</span
-                    >
+                    <span class="line-through me-2 text-xs" *ngIf="order.priceAfterOffer || order.priceAfterOffer === 0"
+          >{{ order.price }} EGP</span
+        >
+        <span
+          class="text-primary text-base"
+          *ngIf="order.priceAfterOffer || order.priceAfterOffer > 0"
+          >{{ order.priceAfterOffer }} EGP</span
+        >
                     <button
                       type="button"
                       class="border rounded py-1 px-5 border-gray-200 text-gray-200 hover:bg-gray-100 uppercase text-sm"
@@ -63,14 +61,21 @@
                     </button>
                   </div>
                 </div>
-              </app-visual-product-summary>
+              </app-item-orders-details>
             </div>
           </div>
         </div>
 
-        <app-confirmation
+        <!-- <div class="col-lg-6 ltr:border-r rtl:border-l">
+          <div class="col-box">
+              <h4 class="fw-500 text-[.9rem] mb-2">{{ 'my-orders.shipping-address' | translate }}</h4>
+              <span class="fw-400 text-[#424E78] text-[.85rem] lh-normal">{{ orderDetails?.address?.name }}</span>
+          </div>
+      </div> -->
+
+        <app-confirmation-details [address]="orderDetails?.address"
           [classes]="{ base: '!grid-cols-1 mb-4' }"
-        ></app-confirmation>
+        ></app-confirmation-details>
 
         <div class="flex flex-wrap gap-4 items-center lg:px-14">
           <button

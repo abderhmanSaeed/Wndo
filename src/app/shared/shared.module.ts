@@ -48,6 +48,8 @@ import { NgSelectModule } from '@ng-select/ng-select';
 import { ProductSummaryWithSellerComponent } from './components/product/product-summary-with-seller/product-summary-with-seller.component';
 import { SignUpComponent } from './components/modals/sign-up/sign-up.component';
 import { FreeShippingComponent } from './components/free-shipping/free-shipping.component';
+import { ItemOrdersDetailsComponent } from './components/product/item-orders-details/item-orders-details.component';
+import { ConfirmationDetailsComponent } from './components/product/confirmation-details/confirmation-details.component';
 
 register();
 
@@ -87,7 +89,9 @@ register();
     ProductSummaryWithSellerComponent,
     SignUpComponent,
     LoadingComponent,
-    FreeShippingComponent
+    FreeShippingComponent,
+    ItemOrdersDetailsComponent,
+    ConfirmationDetailsComponent
   ],
   imports: [
     CommonModule,
@@ -140,7 +144,9 @@ register();
     NgSelectModule,
     ProductSummaryWithSellerComponent,
     LoadingComponent,
-    FreeShippingComponent
+    FreeShippingComponent,
+    ItemOrdersDetailsComponent,
+    ConfirmationDetailsComponent
   ],
   providers: [
     TranslationService,

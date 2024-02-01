@@ -27,4 +27,10 @@ export class MyOrdersService {
   getOrderStatistics(): Observable<any> {
     return this.http.get<any>(`${this.apiEndPoint}/order/buyer-order-statistics`);
   }
+
+  getOrderDetails(orderNumber: string): Observable<any> {
+    // Append the orderNumber to the query params
+    const url = `${this.apiEndPoint}/order/order-details?orderNumber=${orderNumber}`;
+    return this.http.get(url);
+  }
 }

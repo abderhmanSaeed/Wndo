@@ -9,7 +9,7 @@ import { ModalDataService } from '../../modal/modal.data.service';
 })
 export class AddProductToCardModalComponent implements OnInit {
 
-  constructor(private modalService: ModalService, private modalDataService: ModalDataService) {}
+  constructor(private modalService: ModalService, private modalDataService: ModalDataService) { }
   product: any;
   showNotification: boolean = false;
   existingProductStore: any;
@@ -109,7 +109,10 @@ export class AddProductToCardModalComponent implements OnInit {
           quantity: existingProduct.quantity + this.productQuantity,
           // totalPrice: product.price.price,
           // priceAfterDiscount: product.price.priceAfterOffer,
+
         };
+        this.onCloseModal();
+
       } else {
         // Show a snackbar error message with detailed information
         this.showCustomNotification();
@@ -135,11 +138,13 @@ export class AddProductToCardModalComponent implements OnInit {
           quantity: this.productQuantity,
           totalPrice: product.price.price,
           priceAfterDiscount: product.price.priceAfterOffer,
-          image: product.images[0].urlPreview
+          image: (product.images && product.images.length > 0) ? product.images[0].urlPreview : (product.image ? product.image.urlPreview : null)
         };
 
         // Push the new product to the existing array
         existingProducts.push(newProduct);
+        this.onCloseModal();
+
       } else {
         // Show a snackbar error message with detailed information
         this.showCustomNotification();
@@ -149,7 +154,6 @@ export class AddProductToCardModalComponent implements OnInit {
 
     // Store the updated products array in localStorage
     localStorage.setItem('products', JSON.stringify(existingProducts));
-
   }
   // Method to show the notification
   showCustomNotification() {

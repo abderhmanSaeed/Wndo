@@ -33,4 +33,10 @@ export class MyOrdersService {
     const url = `${this.apiEndPoint}/order/order-details?orderNumber=${orderNumber}`;
     return this.http.get(url);
   }
+
+  refundOrder(orderNumber: number, refundReason: number) {
+    const url = `${this.apiEndPoint}/order/refund-orders`;
+    const body = { orderNumber, refundReason };
+    return this.http.post(url, body);
+  }
 }

@@ -1,66 +1,62 @@
-<div *ngIf="showNotification" class="custom-notification">
-  Cannot add new product. Available quantity: {{ size.quantity }}. You selected {{ productQuantity }}
-  + in your store {{ existingProductStore.quantity}}.
-  <button (click)="closeNotification()">Close</button>
-</div>
 <app-modal-content [classes]="{base: '!text-start'}">
   <div class="space-y-6 mb-8">
-      <div>
-        <h6 class="mb-4 text-lg">{{'chooseColor' | translate}}</h6>
-        <ul class="flex flex-wrap gap-2" role="list" aria-label="Show color and Sizes of product">
-          <li role="listitem">
-            <button
-              *ngFor="let colorWithSizes of product?.colorWithSizes"
-              type="button"
-              class="capitalize leading-0 product-color-button hover:text-white border h-6 px-3 bg-white border-gray-150 rounded-[3px] text-xxs"
-              style="--hover-color: #{{ colorWithSizes?.color?.hexaCode }};
-              --selected-color:  #{{ colorWithSizes?.color?.hexaCode }}"
-              (click)="logColor(colorWithSizes)"
-              [ngClass]="{
+    <div *ngIf="product?.colorWithSizes.length > 0">
+      <h6 class="mb-4 text-lg">{{'chooseColor' | translate}}</h6>
+      <ul class="flex flex-wrap gap-2" role="list" aria-label="Show color and Sizes of product">
+        <li role="listitem">
+          <button *ngFor="let colorWithSizes of product?.colorWithSizes" type="button"
+            class="capitalize leading-0 product-color-button hover:text-white border h-6 px-3 bg-white border-gray-150 rounded-[3px] text-xxs"
+            style="--hover-color: #{{ colorWithSizes?.color?.hexaCode }};
+              --selected-color:  #{{ colorWithSizes?.color?.hexaCode }}" (click)="logColor(colorWithSizes)" [ngClass]="{
                 'product-color-button--selected text-white':
                   colorWithSizes?.color?.id === selectedColor
-              }"
-            >
-              {{ colorWithSizes?.color?.name }}
-            </button>
-          </li>
-        </ul>
-      </div>
+              }">
+            {{ colorWithSizes?.color?.name }}
+          </button>
+        </li>
+      </ul>
+    </div>
 
-      <div>
-        <h6 class="mb-4 text-lg">Choose Size</h6>
-        <ul class="flex flex-wrap gap-2">
-          <li *ngFor="let size of colorWithSizesSelected?.sizes">
-            <button
-              type="button"
-              class="capitalize hover:bg-primary leading-0 hover:text-white border h-6 px-3 bg-white border-gray-150 rounded-[3px] text-xxs"
-              (click)="logSize(size)"
-              [ngClass]="{ 'selected !bg-primary !text-white': size?.id === selectedSize }"
-            >
-              {{ size?.name }}
-            </button>
-          </li>
-        </ul>
-      </div>
+    <div *ngIf="colorWithSizesSelected?.sizes.length > 0 || product?.sizes.length > 0 ">
+      <h6 class="mb-4 text-lg">Choose Size</h6>
+      <ul class="flex flex-wrap gap-2">
+        <li *ngFor="let size of colorWithSizesSelected?.sizes ? colorWithSizesSelected?.sizes : product?.sizes">
+          <button type="button"
+            class="capitalize hover:bg-primary leading-0 hover:text-white border h-6 px-3 bg-white border-gray-150 rounded-[3px] text-xxs"
+            (click)="logSize(size)" [ngClass]="{ 'selected !bg-primary !text-white': size?.id === selectedSize }">
+            {{ size?.name }}
+          </button>
+        </li>
+      </ul>
+    </div>
 
 
-      <div
-      *ngIf="sizeQuantities"
-      class="mb-8 flex flex-wrap gap-8 items-center"
-    >
+    <div *ngIf="sizeQuantities || product?.quantity !== -1" class="mb-8 flex flex-wrap gap-8 items-center">
       <h6>Quantity:</h6>
+      <!-- <app-quantity-button [(quantity)]="productQuantity" [disabledAddQuantity]="productQuantity === sizeQuantities"
+        [maxQuantity]="sizeQuantities" (quantityChange)="onQuantityChange($event)">
+      </app-quantity-button> -->
+
       <app-quantity-button
-        [(quantity)]="productQuantity"
-        [disabledAddQuantity]="productQuantity === sizeQuantities"
-        [maxQuantity]="sizeQuantities"
-        (quantityChange)="onQuantityChange($event)"
-      >
-      </app-quantity-button>
+          [(quantity)]="productQuantity"
+          [disabledAddQuantity]="productQuantity >= (product?.quantity !== -1 ? product?.quantity : sizeQuantities)"
+          [maxQuantity]="sizeQuantities ?  sizeQuantities : product?.quantity"
+          (quantityChange)="onQuantityChange($event)"
+        >
+        </app-quantity-button>
     </div>
   </div>
 
+  <div *ngIf="showNotification" class="custom-notification">
+    Cannot add new product. Available quantity: {{ size.quantity }}. You selected {{ productQuantity }}
+    + in your store {{ existingProductStore.quantity}}.
+    <button (click)="closeNotification()">Close</button>
+  </div>
+
   <div class="space-y-6 mb-4">
-    <button type="button" class="button button--primary rounded-full w-full lg:w-[300px] mx-auto" (click)="storeProductInLocalStorageWithoutNavigate(product)">{{'save' | translate}}</button>
-    <button type="button" class="button button--link uppercase text-blueGray-200 hover:text-blueGray-400 mx-auto" (click)="onCloseModal()">{{'discard' | translate}}</button>
+    <button type="button" class="button button--primary rounded-full w-full lg:w-[300px] mx-auto"
+      (click)="storeProductInLocalStorageWithoutNavigate(product)">{{'save' | translate}}</button>
+    <button type="button" class="button button--link uppercase text-blueGray-200 hover:text-blueGray-400 mx-auto"
+      (click)="onCloseModal()">{{'discard' | translate}}</button>
   </div>
 </app-modal-content>

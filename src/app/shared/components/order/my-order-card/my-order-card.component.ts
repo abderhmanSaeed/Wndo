@@ -9,6 +9,9 @@ import {
 } from '@angular/core';
 import { OrderItemState } from '../../../models';
 import { Router } from '@angular/router';
+import { ModalService } from '../../modal/modal.service';
+import { RefundOrderComponent } from '../../modals/refund-order/refund-order.component';
+import { ModalDataService } from '../../modal/modal.data.service';
 
 
 @Component({
@@ -36,14 +39,35 @@ export class MyOrderCardComponent {
       label: 'Cancel Order',
       value: 'cancelOrder',
     },
+    {
+      label: 'Refund Order',
+      value: 'refundOrder',
+    },
   ];
 
   indexOfItem: number = 0;
+  orderNumber: any;
 
-  constructor(private orderStateService: OrderStateService, private router: Router) {}
+  constructor(private orderStateService: OrderStateService, private router: Router , private modalService: ModalService
+    , private modalDataService: ModalDataService) { }
 
   getTextColorClass(item: any): string {
     return this.orderStateService.getIOrderItemState(item);
+  }
+  getDropdownActions(product: any) {
+    // Clone the original dropdown actions to avoid modifying the original array
+    let actions = [...this.dropdownactions];
+
+    // Conditionally remove the 'Cancel Order' action based on product.orderState
+    if (product.orderState !== 1) {
+      actions = actions.filter(action => action.value !== 'cancelOrder');
+    }
+    // Conditionally remove the 'Refund Order' action based on product.orderState
+    if (product.orderState !== 3) {
+      actions = actions.filter(action => action.value !== 'refundOrder');
+    }
+
+    return actions;
   }
 
   getBorderColorClass(item: any): string {
@@ -106,16 +130,37 @@ export class MyOrderCardComponent {
         return 'Unknown State';
     }
   }
-  onDropdownChange(selectedValue: string , orderNumber : any) {
-    if(selectedValue === 'viewDetails')
-    {
+  onDropdownChange(selectedValue: string, orderNumber: any) {
+    if (selectedValue === 'viewDetails') {
       this.router.navigate(['/product/myOrdersDetails', { orderNumber }]);
+
+    }
+    if (selectedValue === 'refundOrder') {
+      this.orderNumber = orderNumber;
+     this.openLoginModal();
 
     }
     console.log("Selected Value:", selectedValue);
     console.log("Selected order Number:", orderNumber);
   }
 
+  openLoginModal() {
+    this.modalDataService.setOrderNumber(this.orderNumber);
+    this.modalService.open(RefundOrderComponent, {
+      animations: {
+        modal: {
+          enter: 'enter-slide-down 0.8s',
+        },
+        overlay: {
+          enter: 'fade-in 0.8s',
+          leave: 'fade-out 0.3s forwards',
+        },
+      },
+      size: {
+        width: '36rem',
+      },
+    });
+  }
   // New method to get the enum value for itemState
   getOrderItemStateLabel(item: any): string {
     switch (item.itemState) {

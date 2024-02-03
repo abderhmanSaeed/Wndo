@@ -47,7 +47,7 @@
       </div>
 
       <ng-container>
-        <div>
+        <div *ngIf="product?.colorWithSizes.length > 0">
           <h6 class="mb-2">{{'chooseColor' | translate}}</h6>
           <ul class="flex flex-wrap gap-2">
             <button
@@ -68,9 +68,9 @@
         </div>
 
         <div>
-          <h6 class="mb-2">Choose Size</h6>
+          <h6 *ngIf="colorWithSizesSelected?.sizes.length > 0 || product?.sizes.length > 0 " class="mb-2">Choose Size</h6>
           <ul class="flex flex-wrap gap-2">
-            <li *ngFor="let size of colorWithSizesSelected?.sizes">
+            <li *ngFor="let size of colorWithSizesSelected?.sizes ? colorWithSizesSelected?.sizes : product?.sizes">
               <button
                 type="button"
                 class="capitalize hover:bg-primary leading-0 hover:text-white border h-6 px-3 bg-white border-gray-150 rounded-[3px] text-xxs"
@@ -122,14 +122,14 @@
       } -->
 
       <div
-        *ngIf="sizeQuantities"
+        *ngIf="sizeQuantities || product?.quantity !== -1"
         class="mb-8 flex flex-wrap gap-8 items-center"
       >
         <h6>Quantity:</h6>
         <app-quantity-button
           [(quantity)]="productQuantity"
-          [disabledAddQuantity]="productQuantity === sizeQuantities"
-          [maxQuantity]="sizeQuantities"
+          [disabledAddQuantity]="productQuantity >= (product?.quantity !== -1 ? product?.quantity : sizeQuantities)"
+          [maxQuantity]="sizeQuantities ?  sizeQuantities : product?.quantity"
           (quantityChange)="onQuantityChange($event)"
         >
         </app-quantity-button>

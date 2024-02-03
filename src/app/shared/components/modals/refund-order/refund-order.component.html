@@ -1,0 +1,19 @@
+<app-modal-content  subtitle="Reasons of Refund">
+  <app-radio
+  [options]="refundReasons"
+  [value]="defaultReasonValue"
+  (change)="handleChange($event)">
+</app-radio>
+
+<div class="flex flex-wrap gap-5">
+
+
+  <button
+    type="button"
+    class="button button--primary md:w-[250px] w-full button--rounded-bill"
+    (click)="submitRefund()"
+  >
+    Sumbit
+  </button>
+</div>
+</app-modal-content>

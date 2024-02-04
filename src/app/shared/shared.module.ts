@@ -51,6 +51,7 @@ import { FreeShippingComponent } from './components/free-shipping/free-shipping.
 import { ItemOrdersDetailsComponent } from './components/product/item-orders-details/item-orders-details.component';
 import { ConfirmationDetailsComponent } from './components/product/confirmation-details/confirmation-details.component';
 import { RefundOrderComponent } from './components/modals/refund-order/refund-order.component';
+import { CancelOrderComponent } from './components/modals/cancel-order/cancel-order.component';
 
 register();
 
@@ -93,7 +94,8 @@ register();
     FreeShippingComponent,
     ItemOrdersDetailsComponent,
     ConfirmationDetailsComponent,
-    RefundOrderComponent
+    RefundOrderComponent,
+    CancelOrderComponent
   ],
   imports: [
     CommonModule,
@@ -149,7 +151,8 @@ register();
     FreeShippingComponent,
     ItemOrdersDetailsComponent,
     ConfirmationDetailsComponent,
-    RefundOrderComponent
+    RefundOrderComponent,
+    CancelOrderComponent
   ],
   providers: [
     TranslationService,

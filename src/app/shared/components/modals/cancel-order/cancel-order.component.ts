@@ -2,13 +2,13 @@ import { Component } from '@angular/core';
 import { MyOrdersService } from '../../../../data/service/my-orders/my-orders.service';
 import { ModalService } from '../../modal/modal.service';
 import { ModalDataService } from '../../modal/modal.data.service';
-export enum RefundReason {
-  ProductDeliveredToWrongAddress = 0,
-  CheaperAlternativeAvailableWithLessPrice = 1,
-  ProductDoesNotMatchMyExpectation = 2,
-  // Assuming you might want to add 'Other' as an option in your enum
+export enum CancellationReason {
+  DeliveryDateChanged = 0,
+  ProductNotRequiredAnymore = 1,
+  BadReviewFromFriends = 2,
   Other = 3
 }
+
 type OptionProps = {
   label: string,
   value: string,
@@ -17,43 +17,41 @@ type OptionProps = {
   children?: any
 }
 @Component({
-  selector: 'app-refund-order',
-  templateUrl: './refund-order.component.html',
-  styleUrl: './refund-order.component.scss'
+  selector: 'app-cancel-order',
+  templateUrl: './cancel-order.component.html',
+  styleUrl: './cancel-order.component.scss'
 })
-
-
-export class RefundOrderComponent {
-  defaultReasonValue: string = RefundReason.Other.toString(); // Convert the enum value to a string
+export class CancelOrderComponent {
+  defaultReasonValue: string = CancellationReason.Other.toString(); // Convert the enum value to a string
 
   refundReasons: OptionProps[] = [
     {
-      label: 'Product is being delivered to a wrong address.',
-      value: RefundReason.ProductDeliveredToWrongAddress.toString(),
-      name: 'ProductDeliveredToWrongAddress',
-      desc: 'The product is not being delivered to the correct address.',
+      label: 'Delivery Date Changed',
+      value: CancellationReason.DeliveryDateChanged.toString(),
+      name: 'DeliveryDateChanged',
+      desc: 'The product is being delivered to Date Changed.',
     },
     {
-      label: 'Cheaper alternative available for lesser price.',
-      value: RefundReason.CheaperAlternativeAvailableWithLessPrice.toString(),
-      name: 'CheaperAlternativeAvailableWithLessPrice',
-      desc: 'A similar product is available at a lower price.',
+      label: 'Product Not Required Anymore.',
+      value: CancellationReason.ProductNotRequiredAnymore.toString(),
+      name: 'ProductNotRequiredAnymore',
+      desc: 'A similar product Not Required Anymore.',
     },
     {
-      label: 'Product doesn\'t match my expectation.',
-      value: RefundReason.ProductDoesNotMatchMyExpectation.toString(),
-      name: 'ProductDoesNotMatchMyExpectation',
-      desc: 'The product does not meet the quality or functionality I expected.',
+      label: 'Bad Review From Friends.',
+      value: CancellationReason.BadReviewFromFriends.toString(),
+      name: 'BadReviewFromFriends',
+      desc: 'Bad Review From Friends.',
     },
     {
       label: 'Other.',
-      value: RefundReason.Other.toString(),
+      value: CancellationReason.Other.toString(),
       name: 'Other',
       desc: 'My reason for a refund is not listed above.',
     },
   ];
   // Add a property to store the selected reason if necessary
-  selectedReason: any = RefundReason.Other.toString(); // Default to 'Other'
+  selectedReason: any = CancellationReason.Other.toString(); // Default to 'Other'
 
   constructor(private myOrdersService: MyOrdersService, private modalService: ModalService,
     private modalDataService: ModalDataService) { }
@@ -66,25 +64,24 @@ export class RefundOrderComponent {
     this.selectedReason = newValue;
     console.log(this.selectedReason);
   }
-  submitRefund() {
+  submitCancel() {
     const orderNumber = this.modalDataService.getOrderNumber(); // Example order number
-    const refundReason = Number(this.modalDataService.getSelectedReason()); // Example refund reason
+    const cancelReason = Number(this.modalDataService.getSelectedReason()); // Example refund reason
     const itemOrOrder = this.modalDataService.getItemOrOrder(); // Example refund reason
     if (itemOrOrder === 'Order') {
-      this.myOrdersService.refundOrder(orderNumber, refundReason)
+      this.myOrdersService.cancelOrder(orderNumber, cancelReason)
         .subscribe({
           next: (response) => console.log('Refund successful:', response),
           error: (error) => console.error('Refund failed:', error)
         });
     }
     if (itemOrOrder === 'Item') {
-      this.myOrdersService.refundOrderItem(orderNumber, refundReason)
+      this.myOrdersService.cancelOrderItem(orderNumber, cancelReason)
         .subscribe({
           next: (response) => console.log('Refund successful:', response),
           error: (error) => console.error('Refund failed:', error)
         });
     }
-
     this.onCloseModal();
   }
 

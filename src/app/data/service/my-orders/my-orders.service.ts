@@ -35,8 +35,26 @@ export class MyOrdersService {
   }
 
   refundOrder(orderNumber: number, refundReason: number) {
-    const url = `${this.apiEndPoint}/order/refund-orders`;
+    const url = `${this.apiEndPoint}/order/refund-order`;
     const body = { orderNumber, refundReason };
+    return this.http.post(url, body);
+  }
+
+  refundOrderItem(orderItemNumber: number, refundReason: number) {
+    const url = `${this.apiEndPoint}/order/refund-order-item`;
+    const body = { orderItemNumber, refundReason };
+    return this.http.post(url, body);
+  }
+
+  cancelOrder(orderNumber: number, refundReason: number) {
+    const url = `${this.apiEndPoint}/order/cancel-order`;
+    const body = { orderNumber, refundReason };
+    return this.http.post(url, body);
+  }
+
+  cancelOrderItem(orderItemNumber: number, refundReason: number) {
+    const url = `${this.apiEndPoint}/order/cancel-order-item`;
+    const body = { orderItemNumber, refundReason };
     return this.http.post(url, body);
   }
 }

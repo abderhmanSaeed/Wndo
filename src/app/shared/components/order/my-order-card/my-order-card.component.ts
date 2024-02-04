@@ -12,6 +12,7 @@ import { Router } from '@angular/router';
 import { ModalService } from '../../modal/modal.service';
 import { RefundOrderComponent } from '../../modals/refund-order/refund-order.component';
 import { ModalDataService } from '../../modal/modal.data.service';
+import { CancelOrderComponent } from '../../modals/cancel-order/cancel-order.component';
 
 
 @Component({
@@ -48,7 +49,7 @@ export class MyOrderCardComponent {
   indexOfItem: number = 0;
   orderNumber: any;
 
-  constructor(private orderStateService: OrderStateService, private router: Router , private modalService: ModalService
+  constructor(private orderStateService: OrderStateService, private router: Router, private modalService: ModalService
     , private modalDataService: ModalDataService) { }
 
   getTextColorClass(item: any): string {
@@ -59,11 +60,11 @@ export class MyOrderCardComponent {
     let actions = [...this.dropdownactions];
 
     // Conditionally remove the 'Cancel Order' action based on product.orderState
-    if (product.orderState !== 1) {
+    if (!product.isCancel) {
       actions = actions.filter(action => action.value !== 'cancelOrder');
     }
     // Conditionally remove the 'Refund Order' action based on product.orderState
-    if (product.orderState !== 3) {
+    if (!product.canBeRefunded) {
       actions = actions.filter(action => action.value !== 'refundOrder');
     }
 
@@ -137,16 +138,40 @@ export class MyOrderCardComponent {
     }
     if (selectedValue === 'refundOrder') {
       this.orderNumber = orderNumber;
-     this.openLoginModal();
+      this.modalDataService.setItemOrOrder('Order');
+      this.openRefundOrderModal();
+
+    }
+    if (selectedValue === 'cancelOrder') {
+      this.orderNumber = orderNumber;
+      this.modalDataService.setItemOrOrder('Order');
+      this.openLCancelOrderModal();
 
     }
     console.log("Selected Value:", selectedValue);
     console.log("Selected order Number:", orderNumber);
   }
 
-  openLoginModal() {
+  openRefundOrderModal() {
     this.modalDataService.setOrderNumber(this.orderNumber);
     this.modalService.open(RefundOrderComponent, {
+      animations: {
+        modal: {
+          enter: 'enter-slide-down 0.8s',
+        },
+        overlay: {
+          enter: 'fade-in 0.8s',
+          leave: 'fade-out 0.3s forwards',
+        },
+      },
+      size: {
+        width: '36rem',
+      },
+    });
+  }
+  openLCancelOrderModal() {
+    this.modalDataService.setOrderNumber(this.orderNumber);
+    this.modalService.open(CancelOrderComponent, {
       animations: {
         modal: {
           enter: 'enter-slide-down 0.8s',

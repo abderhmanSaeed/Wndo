@@ -7,6 +7,7 @@ export class ModalDataService {
   private data: any;
   private orderNumber: any;
   private selectedReason: any = 3;
+  private ItemOrOrder: any;
 
   setData(data: any) {
     this.data = data;
@@ -28,5 +29,12 @@ export class ModalDataService {
 
   getSelectedReason(): any {
     return this.selectedReason;
+  }
+  setItemOrOrder(data: any) {
+    this.data = data;
+  }
+
+  getItemOrOrder(): any {
+    return this.data;
   }
 }

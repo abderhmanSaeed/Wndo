@@ -4,6 +4,10 @@ import { SharedModule } from '../../../shared/shared.module';
 import { SvgIconComponent } from 'angular-svg-icon';
 import { OrderStateService } from '../../../shared/services/order-state.service';
 import { MyOrdersService } from '../../../data/service/my-orders/my-orders.service';
+import { CancelOrderComponent } from '../../../shared/components/modals/cancel-order/cancel-order.component';
+import { RefundOrderComponent } from '../../../shared/components/modals/refund-order/refund-order.component';
+import { ModalService } from '../../../shared/components/modal/modal.service';
+import { ModalDataService } from '../../../shared/components/modal/modal.data.service';
 
 @Component({
   selector: 'app-my-orders-details',
@@ -17,7 +21,8 @@ export class MyOrdersDetailsComponent implements OnInit {
   constructor(
     private route: ActivatedRoute, private orderStateService: OrderStateService,
     private myOrdersService: MyOrdersService,
-    private router: Router) { }
+    private router: Router,
+    private modalService: ModalService, private modalDataService: ModalDataService) { }
 
 
   getTextColorClass(item: any): string {
@@ -39,9 +44,66 @@ export class MyOrdersDetailsComponent implements OnInit {
     });
   }
 
-  navigateSeller(sellerId : string){
+  navigateSeller(sellerId: string) {
     this.router.navigate(['/product/productOffers', { sellerId: sellerId }]);
 
+  }
+  refundOrderItem(orderItemNumber: any) {
+    this.modalDataService.setOrderNumber(orderItemNumber);
+    this.modalDataService.setItemOrOrder('Item');
+    this.openRefundOrderModal();
+  }
+  CancelOrderItem(orderItemNumber: any) {
+    this.modalDataService.setOrderNumber(orderItemNumber);
+    this.modalDataService.setItemOrOrder('Item');
+    this.openLCancelOrderModal();
+
+  }
+  refundOrder(orderNumber: any) {
+    this.modalDataService.setOrderNumber(orderNumber);
+    this.modalDataService.setItemOrOrder('Order');
+    this.openRefundOrderModal();
+
+  }
+  CancelOrder(orderNumber: any) {
+    this.modalDataService.setOrderNumber(orderNumber);
+    this.modalDataService.setItemOrOrder('Order');
+    this.openLCancelOrderModal();
+
+  }
+  openRefundOrderModal() {
+    // this.modalDataService.setOrderNumber(this.orderNumber);
+    this.modalService.open(RefundOrderComponent, {
+      animations: {
+        modal: {
+          enter: 'enter-slide-down 0.8s',
+        },
+        overlay: {
+          enter: 'fade-in 0.8s',
+          leave: 'fade-out 0.3s forwards',
+        },
+      },
+      size: {
+        width: '36rem',
+      },
+    });
+  }
+  openLCancelOrderModal() {
+    // this.modalDataService.setOrderNumber(this.orderNumber);
+    this.modalService.open(CancelOrderComponent, {
+      animations: {
+        modal: {
+          enter: 'enter-slide-down 0.8s',
+        },
+        overlay: {
+          enter: 'fade-in 0.8s',
+          leave: 'fade-out 0.3s forwards',
+        },
+      },
+      size: {
+        width: '36rem',
+      },
+    });
   }
   products: any[] = [
     {

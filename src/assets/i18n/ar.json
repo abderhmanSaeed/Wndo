@@ -20,5 +20,10 @@
   "infringement" : "التعدي",
   "security" : "الحماية",
   "save": "حفظ",
-  "discard": "تجاهل"
+  "discard": "تجاهل",
+  "ordered": "تم الطلب",
+  "shipping": "تم الشحن",
+  "delivered": "تم الإستلام",
+  "returned": "تم الاسترجاع",
+  "cancelled": "تم الإلغاء"
 }

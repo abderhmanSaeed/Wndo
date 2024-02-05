@@ -1,7 +1,30 @@
 <app-header-of-page></app-header-of-page>
-
 <section class="content-page">
-  <app-stepper [hasActionFooter]="false">
+
+  <div class="flex justify-between mb-4">
+    <h6 class="text-base font-medium text-blue-900">Order No : {{orderDetails?.orderNumber}}</h6>
+    <p class="text-blue-900">
+      Order Statues:  <span class="val"
+            [ngClass]="{
+                'text-[#4EA3F8]': orderDetails?.orderState == orderStatsObject.ordered.key,
+                'text-[#FA0029]': orderDetails?.orderState == orderStatsObject.cancelled.key,
+                'text-[#fca908]': orderDetails?.orderState == orderStatsObject.shipping.key,
+                'text-[#F4D014]': orderDetails?.orderState == orderStatsObject.returned.key,
+                'text-[#02A207]': orderDetails?.orderState == orderStatsObject.delivered.key
+            }"
+            >
+                {{ orderDetails?.orderState == orderStatsObject.cancelled.key ? ('cancelled' | translate) : null }}
+                {{ orderDetails?.orderState == orderStatsObject.shipping.key ? ('shipping' | translate) : null }}
+                {{ orderDetails?.orderState == orderStatsObject.returned.key ? ('returned' | translate) : null }}
+                {{ orderDetails?.orderState == orderStatsObject.delivered.key ? ('delivered' | translate) : null }}
+                {{ orderDetails?.orderState == orderStatsObject.ordered.key ? ('ordered' | translate) : null }}
+            </span>
+
+    </p>
+  </div>
+
+
+<app-stepper *ngFor="let seller of orderDetails?.sellers" [hasActionFooter]="false">
     <app-step label="Order Placed" icon="order-placed" [template]="orderPlaced">
     </app-step>
     <app-step
@@ -19,76 +42,68 @@
       icon="delivered"
       [template]="delivered"
     ></app-step>
-  </app-stepper>
-</section>
-
-<ng-template #orderPlaced>
-  <div class="flex justify-between mb-4">
-    <h6 class="text-base font-medium text-blue-900">Order No : 234</h6>
-    <p class="text-blue-900">
-      Order Statues: <span class="text-lightBlue-500">Order Placed</span>
-    </p>
-  </div>
-
+    <ng-template #orderPlaced>
+      <div class="space-y-4">
+        <div >
+          <app-product-summary-with-seller
+            [seller]="seller"
+          ></app-product-summary-with-seller>
+        </div>
+      </div>
+  </ng-template>
+  <ng-template #pickedUp>
+    <div class="flex justify-between mb-4">
+      <h6 class="text-base font-medium text-blue-900">Order No : 234</h6>
+      <p class="text-blue-900">
+        Order Statues: <span class="text-orange-300">Picked up</span>
+      </p>
+    </div>
     <div class="space-y-4">
-      <div *ngFor="let product of products" >
+      <div >
         <app-product-summary-with-seller
-          [product]="product"
+          [seller]="seller"
         ></app-product-summary-with-seller>
       </div>
     </div>
-</ng-template>
+  </ng-template>
 
-<ng-template #pickedUp>
-  <div class="flex justify-between mb-4">
-    <h6 class="text-base font-medium text-blue-900">Order No : 234</h6>
-    <p class="text-blue-900">
-      Order Statues: <span class="text-orange-300">Picked up</span>
-    </p>
-  </div>
-  <div class="space-y-4">
-    <div *ngFor="let product of products" >
-      <app-product-summary-with-seller
-        [product]="product"
-      ></app-product-summary-with-seller>
+  <ng-template #outForDelivery>
+    <div class="flex justify-between mb-4">
+      <h6 class="text-base font-medium text-blue-900">Order No : 234</h6>
+      <p class="text-blue-900">
+        Order Statues: <span class="text-orange-600">Out for delivery</span>
+      </p>
     </div>
-  </div>
-</ng-template>
+    <div class="space-y-4">
+      <div >
+        <app-product-summary-with-seller
+          [seller]="seller"
+        ></app-product-summary-with-seller>
+      </div>
+    </div>
+  </ng-template>
 
-<ng-template #outForDelivery>
-  <div class="flex justify-between mb-4">
-    <h6 class="text-base font-medium text-blue-900">Order No : 234</h6>
-    <p class="text-blue-900">
-      Order Statues: <span class="text-orange-600">Out for delivery</span>
-    </p>
-  </div>
-  <div class="space-y-4">
-    <div *ngFor="let product of products" >
-      <app-product-summary-with-seller
-        [product]="product"
-      ></app-product-summary-with-seller>
+  <ng-template #delivered>
+    <div class="flex justify-between mb-4">
+      <h6 class="text-base font-medium text-blue-900">Order No : 234</h6>
+      <p class="text-blue-900">
+        Order Statues: <span class="text-green-500">Delivered</span>
+      </p>
     </div>
-  </div>
-</ng-template>
+    <div class="space-y-4">
+      <div >
+        <app-product-summary-with-seller
+          [seller]="seller"
+        ></app-product-summary-with-seller>
+      </div>
+    </div>
+  </ng-template>
+  </app-stepper>
 
-<ng-template #delivered>
-  <div class="flex justify-between mb-4">
-    <h6 class="text-base font-medium text-blue-900">Order No : 234</h6>
-    <p class="text-blue-900">
-      Order Statues: <span class="text-green-500">Delivered</span>
-    </p>
-  </div>
-  <div class="space-y-4">
-    <div *ngFor="let product of products" >
-      <app-product-summary-with-seller
-        [product]="product"
-      ></app-product-summary-with-seller>
-    </div>
-  </div>
-</ng-template>
+</section>
 
 <section class="content-page flex justify-center">
-  <button type="button" class="button button--primary rounded-full px-24">
+  <button (click)="navigateOrderDetails()" type="button" class="button button--primary rounded-full px-24">
     ORDER DETAILS
   </button>
 </section>

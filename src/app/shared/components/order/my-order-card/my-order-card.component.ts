@@ -136,6 +136,10 @@ export class MyOrderCardComponent {
       this.router.navigate(['/product/myOrdersDetails', { orderNumber }]);
 
     }
+    if (selectedValue === 'trackingOrder') {
+      this.router.navigate(['/product/orderProcess', { orderNumber }]);
+
+    }
     if (selectedValue === 'refundOrder') {
       this.orderNumber = orderNumber;
       this.modalDataService.setItemOrOrder('Order');

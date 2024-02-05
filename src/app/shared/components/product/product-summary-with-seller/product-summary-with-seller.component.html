@@ -1,28 +1,30 @@
+
 <div
   class="bg-white flex flex-col lg:flex-row gap-6 lg:gap-32 pt-3 pb-6 px-5 border-s-2 justify-between"
-  [class.border-green-500]="product.state === 6"
-  [class.border-lightBlue-500]="product.state !== 6"
+
 >
+<!-- [class.border-green-500]="seller.stateOfSellerOrder === 6"
+  [class.border-lightBlue-500]="seller.stateOfSellerOrder !== 6" -->
   <div class="">
     <h6 class="text-blueGray-400 text-sm mb-4">Seller:</h6>
-    <div class="flex items-center gap-2">
+    <div (click)="navigateSeller(seller?.sellerId)"class="pointer-div flex items-center gap-2">
       <img
-        [src]="product.seller.image"
-        alt="{{ product.seller.name }}"
+        [src]="seller?.imagePath"
+        alt="{{ seller?.imagePath }}"
         class="w-12 h-12 object-cover rounded-full object-top"
       />
-      <h6 class="font-bold text-sm text-blue-900">{{ product.seller.name }}</h6>
+      <h6 class="font-bold text-sm text-blue-900">{{ seller?.name }}</h6>
     </div>
   </div>
 
   <div class="flex-grow">
     <p class="font-medium text-sm text-blue-900 mb-2">
-      Items: {{ product.seller.items.length }}
+      Items: {{ seller?.products?.length }}
     </p>
     <ul class="bg-blue-100 rounded-sm py-1 px-2 inline-flex flex-col w-full">
       <li
-        *ngFor="let item of product.seller.items"
-        [ngClass]="getIOrderItemState(item.state)?.textColor"
+        *ngFor="let item of seller.products"
+        [ngClass]="getIOrderItemState(item.orderItemState)?.textColor"
         class="flex gap-3 items-center justify-between"
       >
         <span class="flex gap-1 items-center flex-grow">
@@ -34,13 +36,14 @@
           }"
             class="fill-current"
           ></svg-icon>
+
           <span class="text-xs text-blue-900">{{ item.name }}</span>
         </span>
         <span
           class="text-xs inline-flex"
-          [ngClass]="getIOrderItemState(item.state).textColor"
+          [ngClass]="getIOrderItemState(item.orderItemState).textColor"
         >
-          ( {{ getOrderItemStateLabel(item.state) }} )
+          ( {{ getOrderItemStateLabel(item.orderItemState) }} )
         </span>
       </li>
     </ul>
@@ -49,11 +52,11 @@
   <div class="flex lg:flex-col justify-between items-end">
     <div
       class="self-end text-white rounded py-1 px-2"
-      [ngClass]="getIOrderItemState(product.state)?.bgColor"
+      [ngClass]="getIOrderItemState(seller.stateOfSellerOrder)?.bgColor"
     >
-      {{ getOrderItemStateLabel(product.state) }}
+      {{ getOrderItemStateLabel(seller.stateOfSellerOrder) }}
     </div>
 
-    <p class="text-sm text-purple-500">{{ product.createdAt }}</p>
+    <p class="text-sm text-purple-500">{{ seller.deliveryDate  }}</p>
   </div>
 </div>

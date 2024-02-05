@@ -1,4 +1,5 @@
 import { Component, Input } from '@angular/core';
+import { Router } from '@angular/router';
 import { OrderItemState } from '../../../models';
 
 type ClassProps = {
@@ -10,12 +11,18 @@ type ClassProps = {
   styleUrl: './product-summary-with-seller.component.scss',
 })
 export class ProductSummaryWithSellerComponent {
-  @Input() product: any | null = null;
+  @Input() seller: any | null = null;
   @Input() classes?: ClassProps;
   @Input() showDesc?: boolean = false;
   @Input() borderStartColor?: string = 'border-primary-500';
 
   productQuantity: number = 0;
+
+  constructor(
+
+    private router: Router,
+    ) { }
+
 
 
   // Styles
@@ -71,5 +78,10 @@ export class ProductSummaryWithSellerComponent {
       default:
         return 'Unknown State';
     }
+  }
+
+  navigateSeller(sellerId: string) {
+    this.router.navigate(['/product/productOffers', { sellerId: sellerId }]);
+
   }
 }

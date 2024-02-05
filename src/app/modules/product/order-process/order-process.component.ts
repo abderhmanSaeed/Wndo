@@ -1,6 +1,10 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { SharedModule } from '../../../shared/shared.module';
 import { OrderItemState } from '../../../shared/models';
+import { ActivatedRoute, Router } from '@angular/router';
+import { OrderStateService } from '../../../shared/services/order-state.service';
+import { MyOrdersService } from '../../../data/service/my-orders/my-orders.service';
+import { OrderState } from '../../../shared/models';
 
 @Component({
   standalone: true,
@@ -9,10 +13,16 @@ import { OrderItemState } from '../../../shared/models';
   templateUrl: './order-process.component.html',
   styleUrl: './order-process.component.scss',
 })
-export class OrderProcessComponent {
-  orderItemState= OrderItemState;
+export class OrderProcessComponent implements OnInit {
+  orderItemState = OrderItemState;
+  orderDetails: any;
+  orderNumber: any;
+  constructor(
+    private route: ActivatedRoute, private orderStateService: OrderStateService,
+    private myOrdersService: MyOrdersService,
+    private router: Router,) { }
 
-  products =  [
+  products = [
     {
       id: 787877,
       name: "Spray Bottle For Home",
@@ -38,7 +48,7 @@ export class OrderProcessComponent {
         ]
       },
       hexColor: "f00",
-      state:  1,
+      state: 1,
       size: "xl",
       quantity: 2,
       createdAt: '28 June , 6 PM',
@@ -66,7 +76,7 @@ export class OrderProcessComponent {
       },
       hexColor: "000",
       size: "xxl",
-      state:  1,
+      state: 1,
       quantity: 3,
       totalPrice: 30,
       priceAfterDiscount: 20,
@@ -90,12 +100,12 @@ export class OrderProcessComponent {
       },
       hexColor: "877211",
       size: "xxl",
-      state:  1,
+      state: 1,
       quantity: 4,
       image: "https://m.media-amazon.com/images/I/717yp7Ut+xL._AC_SY879_.jpg",
       createdAt: '28 June , 6 PM',
     }
-,
+    ,
     {
       id: 2345342,
       name: "Spray Bottle For Home",
@@ -118,4 +128,71 @@ export class OrderProcessComponent {
       image: "https://m.media-amazon.com/images/I/717yp7Ut+xL._AC_SY879_.jpg"
     }
   ]
+  orderStatsObject = {
+    ordered: {
+      key: OrderState.OrderPlaced,
+      label: 'my-orders.ordered',
+      color: '#4EA3F8',
+    },
+    shipping: {
+      key: OrderState.Shipping,
+      label: 'my-orders.shipping',
+      color: '#fca908',
+
+    },
+    delivered: {
+      key: OrderState.Delivered,
+      label: 'my-orders.delivered',
+      color: '#02A207',
+
+    },
+    returned: {
+      key: OrderState.Returned,
+      label: 'my-orders.returned',
+      color: '#F4D014',
+
+    },
+    refund: {
+      key: OrderState.Refund,
+      label: 'my-orders.returned',
+      color: '#F4D014',
+
+    },
+    cancelled: {
+      key: OrderState.Canceled,
+      label: 'my-orders.cancelled',
+      color: '#FA0029',
+    }
+  }
+
+  ngOnInit(): void {
+    const orderNumber = this.route.snapshot.paramMap.get('orderNumber');
+    console.log(`order ditais order Number is ${orderNumber}`);
+    this.orderNumber = orderNumber;
+    if (orderNumber) {
+      console.log(`Order details for order Number: ${orderNumber}`);
+      this.trackOrder(orderNumber);
+    } else {
+      console.error('Order number is null');
+      // Handle the case where orderNumber is null, maybe redirect or show an error message
+    }
+  }
+  trackOrder(orderNumber: string): void {
+    this.myOrdersService.trackOrder(orderNumber).subscribe({
+      next: (data) => {
+        this.orderDetails = data?.responseData;
+        console.log(this.orderDetails);
+      },
+      error: (error) => {
+        console.error('There was an error!', error);
+      }
+    });
+  }
+  getTextColorClass(item: any): string {
+    return this.orderStateService.getIOrderItemState(item);
+  }
+  navigateOrderDetails() {
+    this.router.navigate(['/product/myOrdersDetails', { orderNumber: this.orderNumber }]);
+
+  }
 }

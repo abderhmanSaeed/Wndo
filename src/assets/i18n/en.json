@@ -20,5 +20,10 @@
   "infringement" : "Infringement",
   "security" : "Security",
   "save": "Save",
-  "discard": "Discard"
+  "discard": "Discard",
+  "ordered": "Ordered",
+  "shipping": "Shipping",
+  "delivered": "Delivered",
+  "returned": "Returned",
+  "cancelled": "Cancelled"
 }

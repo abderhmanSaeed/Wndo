@@ -57,4 +57,12 @@ export class MyOrdersService {
     const body = { orderItemNumber, refundReason };
     return this.http.post(url, body);
   }
+
+  trackOrder(orderNumber: string): Observable<any> {
+    // Construct the URL with the orderNumber
+    const url = `${this.apiEndPoint}/order/track-order?orderNumber=${orderNumber}`;
+
+    // Perform the GET request and return the observable
+    return this.http.get(url);
+  }
 }

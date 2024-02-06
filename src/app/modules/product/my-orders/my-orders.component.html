@@ -81,6 +81,7 @@
               <app-my-order-card
                 *ngIf="ordersState === order.orderState"
                 [product]="order"
+                [orderState]="order.orderState"
               ></app-my-order-card>
             </div>
           </div>

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { SharedModule } from '../../../shared/shared.module';
-import { OrderItemState } from '../../../shared/models';
+import { OrderItemState, OrderTrackState } from '../../../shared/models';
 import { ActivatedRoute, Router } from '@angular/router';
 import { OrderStateService } from '../../../shared/services/order-state.service';
 import { MyOrdersService } from '../../../data/service/my-orders/my-orders.service';
@@ -17,6 +17,9 @@ export class OrderProcessComponent implements OnInit {
   orderItemState = OrderItemState;
   orderDetails: any;
   orderNumber: any;
+  OrderTrackState = OrderTrackState; // Expose enum to the template
+  currentStep: number | undefined;
+
   constructor(
     private route: ActivatedRoute, private orderStateService: OrderStateService,
     private myOrdersService: MyOrdersService,
@@ -128,6 +131,68 @@ export class OrderProcessComponent implements OnInit {
       image: "https://m.media-amazon.com/images/I/717yp7Ut+xL._AC_SY879_.jpg"
     }
   ]
+
+  sellers = [
+    {
+        sellerId: "e1bccaf2-bfc9-59bd-5041-3a0216e524be",
+        name: "متجر أموله",
+        userName: "Us_472402",
+        imagePath: "https://s3.eu-west-3.amazonaws.com/wndobucket/5c9da6f7-cc96-4357-b6d4-0ca4bbab03df.jpg",
+        noOfItems: 1,
+        products: [{ name: "test", orderItemState: 1 }],
+        stateOfSellerOrder: 1,
+        overAllTrackState: 1,
+        outPickUpDate: "06/02, 10:26 AM",
+        pickUpDate: "17/11, 02:00 PM",
+        outDeliveryDate: "18/11, 02:00 PM",
+        deliveryDate: "19/11, 02:00 PM"
+    },
+    {
+        sellerId: "ecf9f54f-2307-f5b1-88e9-3a04dae44d58",
+        name: "Elegant Rose",
+        userName: "Elegant",
+        imagePath: "https://s3.eu-west-3.amazonaws.com/wndoprobucket/eb9cc3b5-7dcb-4415-9b5b-f8c178a9bb94.jpg",
+        noOfItems: 2,
+        products: [
+            { name: "باليت ايشادو ارت سكين ", orderItemState: 1 },
+            { name: "مخمريه ايمليا", orderItemState: 1 }
+        ],
+        stateOfSellerOrder: 4,
+        overAllTrackState: 1,
+        outPickUpDate: "06/02, 10:26 AM",
+        pickUpDate: "17/11, 02:00 PM",
+        outDeliveryDate: "18/11, 02:00 PM",
+        deliveryDate: "19/11, 02:00 PM"
+    },
+    {
+      sellerId: "e1bccaf2-bfc9-59bd-5041-3a0216e524be",
+      name: "متجر أموله",
+      userName: "Us_472402",
+      imagePath: "https://s3.eu-west-3.amazonaws.com/wndobucket/5c9da6f7-cc96-4357-b6d4-0ca4bbab03df.jpg",
+      noOfItems: 1,
+      products: [{ name: "test", orderItemState: 1 }],
+      stateOfSellerOrder: 5,
+      overAllTrackState: 1,
+      outPickUpDate: "06/02, 10:26 AM",
+      pickUpDate: "17/11, 02:00 PM",
+      outDeliveryDate: "18/11, 02:00 PM",
+      deliveryDate: "19/11, 02:00 PM"
+  },
+  {
+    sellerId: "e1bccaf2-bfc9-59bd-5041-3a0216e524be",
+    name: "متجر أموله",
+    userName: "Us_472402",
+    imagePath: "https://s3.eu-west-3.amazonaws.com/wndobucket/5c9da6f7-cc96-4357-b6d4-0ca4bbab03df.jpg",
+    noOfItems: 1,
+    products: [{ name: "test", orderItemState: 1 }],
+    stateOfSellerOrder: 6,
+    overAllTrackState: 1,
+    outPickUpDate: "06/02, 10:26 AM",
+    pickUpDate: "17/11, 02:00 PM",
+    outDeliveryDate: "18/11, 02:00 PM",
+    deliveryDate: "19/11, 02:00 PM"
+},
+];
   orderStatsObject = {
     ordered: {
       key: OrderState.OrderPlaced,
@@ -193,6 +258,31 @@ export class OrderProcessComponent implements OnInit {
   }
   navigateOrderDetails() {
     this.router.navigate(['/product/myOrdersDetails', { orderNumber: this.orderNumber }]);
+  }
+  shouldShowStep(sellerState: OrderTrackState, stepState: OrderTrackState): boolean {
+    return sellerState === stepState;
+  }
+  isActiveStep(sellerState: number, stepState: OrderTrackState): boolean {
+    console.log(sellerState === stepState);
+    return sellerState === stepState;
+  }
 
+  updateCurrentStep(stateOfSellerOrder: any): void {
+    switch(stateOfSellerOrder) {
+      case OrderTrackState.placed:
+        this.currentStep = OrderTrackState.placed; // Assuming the first step is 0
+        break;
+      case OrderTrackState.pickup:
+        this.currentStep = OrderTrackState.pickup;
+        break;
+      case OrderTrackState.outdelivery:
+        this.currentStep = OrderTrackState.outdelivery;
+        break;
+      case OrderTrackState.delivered:
+        this.currentStep = OrderTrackState.delivered;
+        break;
+      default:
+        this.currentStep = 0; // Default or initial step
+    }
   }
 }

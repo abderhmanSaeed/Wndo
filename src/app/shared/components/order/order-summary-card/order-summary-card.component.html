@@ -1,19 +1,23 @@
 <div class="bg-white h-full p-4 border-t border-e border-orange-400 border-s-8 border-b-8">
   <h6 class="text-blue-800 font-bold text-center mb-8 mt-2">Order Summary</h6>
-
+<!-- {{order | json}} -->
   <section >
-    <h6 class="text-sm text-blue-800 text-center mb-4">Order Items (2)</h6>
-    <ul class="mb-8">
+    <h6 class="text-sm text-blue-800 text-center mb-4">Order Items ({{order?.orderItems?.length ? order?.orderItems?.length : order.length }})</h6>
+    <ul *ngIf="order || order?.orderItems else noItems" class="mb-8">
       <li class="text-xs flex justify-between mb-2">
       <li class="text-xs flex justify-betw#0D1863een mb-2">
-      <li class="text-xs flex justify-betw#0D1863een mb-2">
+      <li *ngFor="let item of order?.orderItems"class="text-xs flex justify-betw#0D1863een mb-2">
+        <span> {{ item?.name }}</span>
+        <span>({{ item?.quantity }})</span>
+      </li>
+      <li *ngFor="let item of order"class="text-xs flex justify-betw#0D1863een mb-2">
+        <span> {{ item?.name }}</span>
+        <span>({{ item?.quantity }})</span>
+      </li>
+      <!-- <li class="text-xs flex justify-between">
         <span> Spray Bottle For Home</span>
         <span>(1)</span>
-      </li>
-      <li class="text-xs flex justify-between">
-        <span> Spray Bottle For Home</span>
-        <span>(1)</span>
-      </li>
+      </li> -->
     </ul>
   </section>
 
@@ -24,21 +28,27 @@
     <ul class="space-y-2">
       <li class="text-xs flex justify-between">
         <span class="text-blue-800"> price</span>
-        <span class="text-blue-800">3000 EGP</span>
+        <span class="text-blue-800">{{ order?.actualPrice }} EGP</span>
       </li>
       <li class="text-xs flex justify-between">
         <span class="text-blue-800"> Taxes</span>
-        <span class="text-blue-800">0 EGP</span>
+        <span class="text-blue-800">{{ order?.shippingFees }} EGP</span>
       </li>
       <li class="text-xs flex justify-between">
         <span class="text-blue-800"> Discount</span>
-        <span class="text-blue-800">0 EGP</span>
+        <span class="text-blue-800">{{ order?.voucherAmount }} EGP</span>
       </li>
 
       <li class="text-xs flex justify-between px-1 pt-4">
         <span class="text-blue-800 font-bold"> Total Price:</span>
-        <span class="text-blue-800 font-bold">3150.00 EGP</span>
+        <span class="text-blue-800 font-bold">{{ order?.totalOrderPrice }} EGP</span>
       </li>
     </ul>
   </section>
 </div>
+<!-- if the order is empaty  -->
+<ng-template #noItems>
+  <div class="text-center">
+      <span class="text-[#7A8D9C99] fw-500">{{ 'you-didnt-add-any-item-to-your-order' | translate }}</span>
+  </div>
+</ng-template>

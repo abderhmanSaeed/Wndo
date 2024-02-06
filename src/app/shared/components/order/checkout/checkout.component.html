@@ -1,6 +1,7 @@
 <div class="grid grid-cols-1 md:grid-cols-3 justify-between gap-10">
   <div class="md:col-span-2">
     <h6 class="text-blue-950 mb-6">Your Cart has ({{products.length}}) items</h6>
+    {{products | json}}
     <div class="scroll">
       <div *ngFor="let product of products" class="scroll__item">
         <div class="mb-6 ">
@@ -12,6 +13,6 @@
     </div>
   </div>
   <div class="h-full">
-    <app-order-summary-card></app-order-summary-card>
+    <app-order-summary-card [order]="products"></app-order-summary-card>
   </div>
 </div>

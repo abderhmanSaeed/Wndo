@@ -25,5 +25,7 @@
   "shipping": "تم الشحن",
   "delivered": "تم الإستلام",
   "returned": "تم الاسترجاع",
-  "cancelled": "تم الإلغاء"
+  "cancelled": "تم الإلغاء",
+  "you-didnt-add-any-item-to-your-order": "لم تضف أي عنصر لطلبك"
+
 }

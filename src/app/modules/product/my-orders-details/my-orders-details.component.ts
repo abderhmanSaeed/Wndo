@@ -48,6 +48,10 @@ export class MyOrdersDetailsComponent implements OnInit {
     this.router.navigate(['/product/productOffers', { sellerId: sellerId }]);
 
   }
+  navigateTrackOrder() {
+    this.router.navigate(['/product/orderProcess', { orderNumber: this.orderNumber }]);
+
+  }
   refundOrderItem(orderItemNumber: any) {
     this.modalDataService.setOrderNumber(orderItemNumber);
     this.modalDataService.setItemOrOrder('Item');
@@ -138,11 +142,11 @@ export class MyOrdersDetailsComponent implements OnInit {
   ];
 
   displayProducts: any[] = [];
-
+  orderNumber: any;
   ngOnInit(): void {
     const orderNumber = this.route.snapshot.paramMap.get('orderNumber');
     console.log(`order ditais order Number is ${orderNumber}`);
-
+    this.orderNumber = orderNumber;
     if (orderNumber) {
       console.log(`Order details for order Number: ${orderNumber}`);
       this.loadOrderDetails(orderNumber);

@@ -23,7 +23,7 @@
 
   <hr class="border-orange-400 mb-4border-2 mb-4" />
 
-  <section>
+  <section *ngIf="!checkout">
     <h6 class="text-sm text-blue-800 text-center mb-4">Order Price</h6>
     <ul class="space-y-2">
       <li class="text-xs flex justify-between">
@@ -42,6 +42,28 @@
       <li class="text-xs flex justify-between px-1 pt-4">
         <span class="text-blue-800 font-bold"> Total Price:</span>
         <span class="text-blue-800 font-bold">{{ order?.totalOrderPrice }} EGP</span>
+      </li>
+    </ul>
+  </section>
+  <section *ngIf="checkout">
+    <h6 class="text-sm text-blue-800 text-center mb-4">Order Price</h6>
+    <ul class="space-y-2">
+      <li class="text-xs flex justify-between">
+        <span class="text-blue-800"> price</span>
+        <span class="text-blue-800">{{ totalDetails.totalActualPrice }} EGP</span>
+      </li>
+      <li class="text-xs flex justify-between">
+        <span class="text-blue-800"> Taxes</span>
+        <span class="text-blue-800">{{ totalDetails.totalShippingFees }} EGP</span>
+      </li>
+      <li class="text-xs flex justify-between">
+        <span class="text-blue-800"> Discount</span>
+        <span class="text-blue-800">{{ totalDetails.totalVoucherAmount }} EGP</span>
+      </li>
+
+      <li class="text-xs flex justify-between px-1 pt-4">
+        <span class="text-blue-800 font-bold"> Total Price:</span>
+        <span class="text-blue-800 font-bold">{{ totalDetails.totalOrderPrice }} EGP</span>
       </li>
     </ul>
   </section>

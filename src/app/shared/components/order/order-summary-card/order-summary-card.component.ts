@@ -7,6 +7,8 @@ import { Component, Input, OnInit } from '@angular/core';
 })
 export class OrderSummaryCardComponent implements OnInit {
   @Input() order!: any
+  @Input() totalDetails!: any
+  @Input() checkout: boolean = false;
 
   constructor() { }
 

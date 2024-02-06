@@ -56,11 +56,11 @@ export class HeaderOfPageComponent implements OnInit, AfterViewInit {
         value: 'myOrders',
         startContentMenu: this.myOrdersIconTemplate,
       },
-      {
-        label: 'Tracking Orders',
-        value: 'trackingOrders',
-        startContentMenu: this.trackingOrdersIconTemplate,
-      },
+      // {
+      //   label: 'Tracking Orders',
+      //   value: 'trackingOrders',
+      //   startContentMenu: this.trackingOrdersIconTemplate,
+      // },
     ];
 
     this.guestUserDropdown = [

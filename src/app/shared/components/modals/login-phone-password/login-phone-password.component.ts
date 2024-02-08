@@ -16,12 +16,14 @@ export class LoginPhonePasswordComponent implements OnInit {
   selectedCountryCode: string | null = null;
   phoneValue: string = '';
   passwordValue: string = '';
-
+  showForgotPasswordMessage: boolean = false;
+  forgotPasswordMessage: string = ''; //
+  invalid: boolean = false;
   // Define an EventEmitter for emitting the close event
   @Output() closeEvent = new EventEmitter<void>();
   userNAme: any;
   constructor(private modalService: ModalService, private countryPhoneCodeService: CountryPhoneCodeService,
-    private sharedService: SharedService, private authService: AuthService, private loginService: LoginService , private cdr: ChangeDetectorRef) { }
+    private sharedService: SharedService, private authService: AuthService, private loginService: LoginService, private cdr: ChangeDetectorRef) { }
   ngOnInit(): void {
   }
   login() {
@@ -61,6 +63,40 @@ export class LoginPhonePasswordComponent implements OnInit {
             this.cdr.detectChanges(); // Manually trigger change detection
             this.userNAme = response.responseData.userName;
             this.close();
+          }
+          else {
+            this.forgotPasswordMessage = response?.errorMessage;
+            this.invalid = true;
+          }
+        },
+        (error) => {
+          console.error('Login failed', error);
+          // Handle errors
+        }
+      );
+    } else {
+      // Handle the case where not all required values are available
+      console.error('Please provide all required values.');
+    }
+  }
+
+  forgotPassword() {
+    // Check if all required values are available
+    if (this.selectedCountryCode && this.phoneValue) {
+      const requestBody = {
+        phone: this.phoneValue,
+        phoneCode: this.selectedCountryCode,
+      };
+
+      this.loginService.forgotPassword(requestBody).subscribe(
+        (response) => {
+          console.log('forgot Password', response);
+          // Handle the response as needed
+          if (response.isSuccess && response.responseData) {
+            // Set tokens and user information in local storage
+            this.forgotPasswordMessage = response?.responseData
+            this.showForgotPasswordMessage = true;
+            // this.close();
           }
         },
         (error) => {

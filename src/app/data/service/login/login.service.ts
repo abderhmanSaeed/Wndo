@@ -50,4 +50,16 @@ export class LoginService {
         })
       );
   }
+
+  forgotPassword(requestBody: any): Observable<any> {
+
+
+    return this.http.post(`${this.apiEndPoint}/user-web/forget-password`, requestBody)
+      .pipe(
+        catchError((error: HttpErrorResponse) => {
+          console.error('Login failed:', error);
+          return throwError('Something went wrong during login.');
+        })
+      );
+  }
 }

@@ -6,6 +6,8 @@ import { ModalService } from '../../modal/modal.service';
 import { CountryPhoneCodeService } from '../../../../data/service/country-phone/country-phone-code.service';
 import { OptionProps } from '../../../models';
 import { ChangeDetectorRef } from '@angular/core';
+import { Location } from '@angular/common'; // Import Location
+
 @Component({
   selector: 'app-login-phone-password',
   templateUrl: './login-phone-password.component.html',
@@ -25,7 +27,8 @@ export class LoginPhonePasswordComponent implements OnInit {
   @Output() closeEvent = new EventEmitter<void>();
   userNAme: any;
   constructor(private modalService: ModalService, private countryPhoneCodeService: CountryPhoneCodeService,
-    private sharedService: SharedService, private authService: AuthService, private loginService: LoginService, private cdr: ChangeDetectorRef) { }
+    private sharedService: SharedService, private authService: AuthService, private loginService: LoginService, private cdr: ChangeDetectorRef,
+    private location: Location) { }
   ngOnInit(): void {
   }
   login() {
@@ -157,7 +160,11 @@ export class LoginPhonePasswordComponent implements OnInit {
     // Notify the service that the LOGIN button is clicked
     this.sharedService.notifyLoginButtonClicked();
     this.modalService.close();
-    window.location.reload();
+    // Check if the current URL includes '/product/productOrders'
+    if (!this.location.path().includes('/product/productOrders')) {
+      // If the URL does not include '/product/productOrders', reload the page
+      window.location.reload();
+    }
     this.authService.setShowLoginMessage(true);
 
 

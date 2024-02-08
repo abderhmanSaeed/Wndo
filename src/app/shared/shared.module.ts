@@ -52,6 +52,7 @@ import { ItemOrdersDetailsComponent } from './components/product/item-orders-det
 import { ConfirmationDetailsComponent } from './components/product/confirmation-details/confirmation-details.component';
 import { RefundOrderComponent } from './components/modals/refund-order/refund-order.component';
 import { CancelOrderComponent } from './components/modals/cancel-order/cancel-order.component';
+import { IsEmptyComponent } from './components/order/is-empty/is-empty.component';
 
 register();
 
@@ -95,7 +96,8 @@ register();
     ItemOrdersDetailsComponent,
     ConfirmationDetailsComponent,
     RefundOrderComponent,
-    CancelOrderComponent
+    CancelOrderComponent,
+    IsEmptyComponent
   ],
   imports: [
     CommonModule,
@@ -152,7 +154,8 @@ register();
     ItemOrdersDetailsComponent,
     ConfirmationDetailsComponent,
     RefundOrderComponent,
-    CancelOrderComponent
+    CancelOrderComponent,
+    IsEmptyComponent
   ],
   providers: [
     TranslationService,

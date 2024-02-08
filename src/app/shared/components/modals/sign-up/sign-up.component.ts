@@ -5,6 +5,8 @@ import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { ModalService } from '../../modal/modal.service';
 import { CountryPhoneCodeService } from '../../../../data/service/country-phone/country-phone-code.service';
 import { OptionProps } from '../../../models';
+import { Location } from '@angular/common'; // Import Location
+
 @Component({
   selector: 'app-sign-up',
   templateUrl: './sign-up.component.html',
@@ -25,7 +27,8 @@ export class SignUpComponent implements OnInit {
   invalid: Boolean = false;
   notificationMessage: string = '';
   constructor(private modalService: ModalService, private countryPhoneCodeService: CountryPhoneCodeService,
-    private sharedService: SharedService, private authService: AuthService, private loginService: LoginService) { }
+    private sharedService: SharedService, private authService: AuthService, private loginService: LoginService,
+    private location: Location) { }
   ngOnInit(): void {
   }
   signUp() {
@@ -158,7 +161,11 @@ export class SignUpComponent implements OnInit {
     // Notify the service that the LOGIN button is clicked
     this.sharedService.notifyLoginButtonClicked();
     this.modalService.close();
-    window.location.reload();
+    // Check if the current URL includes '/product/productOrders'
+    if (!this.location.path().includes('/product/productOrders')) {
+      // If the URL does not include '/product/productOrders', reload the page
+      window.location.reload();
+    }
     this.authService.setShowLoginMessage(true);
   }
   onNameChanged(name: string) {

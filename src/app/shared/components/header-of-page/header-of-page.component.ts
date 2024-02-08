@@ -174,6 +174,8 @@ export class HeaderOfPageComponent implements OnInit, AfterViewInit {
     this.authService.setShowLoginMessage$.subscribe((setShowLoginMessage) => {
       if (this.isAuthenticated || setShowLoginMessage) {
         this.showLoginMessage = true;
+        this.authService.setShowLoginMessage(false);
+
 
         // Hide the message after a delay (e.g., 3 seconds)
         setTimeout(() => {

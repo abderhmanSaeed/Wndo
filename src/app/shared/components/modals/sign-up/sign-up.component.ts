@@ -20,6 +20,8 @@ export class SignUpComponent implements OnInit {
   // Define an EventEmitter for emitting the close event
   @Output() closeEvent = new EventEmitter<void>();
   showNotification: boolean = false;
+  showInvaildMassage: boolean = false;
+
   invalid: Boolean = false;
   notificationMessage: string = '';
   constructor(private modalService: ModalService, private countryPhoneCodeService: CountryPhoneCodeService,
@@ -43,6 +45,8 @@ export class SignUpComponent implements OnInit {
             // Set tokens and user information in local storage
             this.notificationMessage = response?.responseData?.message
             this.showNotification = true;
+            this.showInvaildMassage = true;
+
             // this.close();
           }
         },
@@ -60,6 +64,9 @@ export class SignUpComponent implements OnInit {
   login() {
     // Check if all required values are available
     if (this.selectedCountryCode && this.phoneValue && this.passwordValue) {
+      if (this.showInvaildMassage) {
+        this.showInvaildMassage = false;
+      }
       const requestBody = {
         phone: this.phoneValue,
         phoneCode: this.selectedCountryCode,
@@ -95,6 +102,7 @@ export class SignUpComponent implements OnInit {
           }
           else {
             this.notificationMessage = response?.errorMessage;
+            this.showInvaildMassage = true;;
             this.invalid = true;
           }
         },

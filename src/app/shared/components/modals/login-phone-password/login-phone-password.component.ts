@@ -17,8 +17,10 @@ export class LoginPhonePasswordComponent implements OnInit {
   phoneValue: string = '';
   passwordValue: string = '';
   showForgotPasswordMessage: boolean = false;
-  forgotPasswordMessage: string = ''; //
+  InvalidMessage: string = ''; //
   invalid: boolean = false;
+  showInvalidMessage: boolean = false;
+
   // Define an EventEmitter for emitting the close event
   @Output() closeEvent = new EventEmitter<void>();
   userNAme: any;
@@ -29,6 +31,10 @@ export class LoginPhonePasswordComponent implements OnInit {
   login() {
     // Check if all required values are available
     if (this.selectedCountryCode && this.phoneValue && this.passwordValue) {
+      if (this.showInvalidMessage) {
+        this.showInvalidMessage = false;
+      }
+
       const requestBody = {
         phone: this.phoneValue,
         phoneCode: this.selectedCountryCode,
@@ -65,7 +71,8 @@ export class LoginPhonePasswordComponent implements OnInit {
             this.close();
           }
           else {
-            this.forgotPasswordMessage = response?.errorMessage;
+            this.InvalidMessage = response?.errorMessage;
+            this.showInvalidMessage = true;
             this.invalid = true;
           }
         },
@@ -81,6 +88,8 @@ export class LoginPhonePasswordComponent implements OnInit {
   }
 
   forgotPassword() {
+    this.showInvalidMessage = false;
+    this.invalid = false;
     // Check if all required values are available
     if (this.selectedCountryCode && this.phoneValue) {
       const requestBody = {
@@ -94,8 +103,10 @@ export class LoginPhonePasswordComponent implements OnInit {
           // Handle the response as needed
           if (response.isSuccess && response.responseData) {
             // Set tokens and user information in local storage
-            this.forgotPasswordMessage = response?.responseData
+            this.InvalidMessage = response?.responseData
             this.showForgotPasswordMessage = true;
+            this.showInvalidMessage = true;
+
             // this.close();
           }
         },

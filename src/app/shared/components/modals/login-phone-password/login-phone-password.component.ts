@@ -5,7 +5,7 @@ import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { ModalService } from '../../modal/modal.service';
 import { CountryPhoneCodeService } from '../../../../data/service/country-phone/country-phone-code.service';
 import { OptionProps } from '../../../models';
-
+import { ChangeDetectorRef } from '@angular/core';
 @Component({
   selector: 'app-login-phone-password',
   templateUrl: './login-phone-password.component.html',
@@ -19,8 +19,9 @@ export class LoginPhonePasswordComponent implements OnInit {
 
   // Define an EventEmitter for emitting the close event
   @Output() closeEvent = new EventEmitter<void>();
+  userNAme: any;
   constructor(private modalService: ModalService, private countryPhoneCodeService: CountryPhoneCodeService,
-    private sharedService: SharedService, private authService: AuthService, private loginService: LoginService) { }
+    private sharedService: SharedService, private authService: AuthService, private loginService: LoginService , private cdr: ChangeDetectorRef) { }
   ngOnInit(): void {
   }
   login() {
@@ -57,6 +58,8 @@ export class LoginPhonePasswordComponent implements OnInit {
             this.authService.setUserName(response.responseData.userName);
             this.authService.setPhoneNumber(response.responseData.phoneNumber);
             this.authService.setPhoneCode(response.responseData.phoneCode);
+            this.cdr.detectChanges(); // Manually trigger change detection
+            this.userNAme = response.responseData.userName;
             this.close();
           }
         },
@@ -107,6 +110,10 @@ export class LoginPhonePasswordComponent implements OnInit {
     // Notify the service that the LOGIN button is clicked
     this.sharedService.notifyLoginButtonClicked();
     this.modalService.close();
+    window.location.reload();
+    this.authService.setShowLoginMessage(true);
+
+
   }
   onNameChanged(name: string) {
     console.log('Name changed:', name);

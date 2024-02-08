@@ -7,12 +7,16 @@ import { BehaviorSubject } from 'rxjs';
 export class AuthService {
 
   private isAuthenticatedSubject = new BehaviorSubject<boolean>(false);
+  private setShowLoginMessageSubject = new BehaviorSubject<boolean>(false);
+
   private userNameSubject = new BehaviorSubject<string | null>(null);
   private phoneNumberSubject = new BehaviorSubject<string | null>(null);
   private phoneCodeSubject = new BehaviorSubject<string | null>(null);
   private tokenSubject = new BehaviorSubject<string | null>(null);
 
   isAuthenticated$ = this.isAuthenticatedSubject.asObservable();
+  setShowLoginMessage$ = this.setShowLoginMessageSubject.asObservable();
+
   userName$ = this.userNameSubject.asObservable();
   phoneNumber$ = this.phoneNumberSubject.asObservable();
   phoneCode$ = this.phoneCodeSubject.asObservable();
@@ -26,6 +30,9 @@ export class AuthService {
 
   setUserName(userName: string | null): void {
     this.userNameSubject.next(userName);
+  }
+  setShowLoginMessage(setShowLoginMessage: boolean): void {
+    this.setShowLoginMessageSubject.next(setShowLoginMessage);
   }
   setPhoneNumber(phoneName: string | null): void {
     this.phoneNumberSubject.next(phoneName);
@@ -88,7 +95,7 @@ export class AuthService {
     return !!accessToken;
   }
 
-  getCurrentLanguage(): string | null  {
+  getCurrentLanguage(): string | null {
     try {
       const currentLang = localStorage.getItem('lang');
       return currentLang || 'en';

@@ -2,9 +2,7 @@
   <div class="modal__body p-6">
   <label *ngIf="!showNotification" >For registration please enter your phone number.and will
     ‘send you the password to your mobile via SMS</label>
-    <label *ngIf="showNotification">{{notificationMessage}}</label>
-{{showNotification | json}}
-
+    <label *ngIf="showNotification" [ngClass]="{'danger': invalid}">{{notificationMessage}}</label>
       <app-input-filed *ngIf="!showNotification"
       [required]="true"
       label="Your Name"
@@ -63,6 +61,15 @@
     [disabled]="!(selectedCountryCode && phoneValue && NameValue)"
   >
     SignUp
+  </button>
+
+  <button *ngIf="showNotification"
+    type="button"
+    (click)="login()"
+    class="button button--primary rounded-full w-full"
+    [disabled]="!(selectedCountryCode && phoneValue && passwordValue)"
+  >
+    LOGIN
   </button>
 
 

@@ -25,5 +25,10 @@
   "shipping": "Shipping",
   "delivered": "Delivered",
   "returned": "Returned",
-  "cancelled": "Cancelled"
+  "cancelled": "Cancelled",
+  "addtoCart" : "Add To Cart",
+  "buyNow" : "BUY NOW",
+  "additionalInfo" : "Additional Info",
+  "youMayalsolike" : "You may also like",
+  "thisOffer" : "This Offer Will Expire in 3 Days"
 }

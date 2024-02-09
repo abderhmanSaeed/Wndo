@@ -25,5 +25,11 @@
   "shipping": "تم الشحن",
   "delivered": "تم الإستلام",
   "returned": "تم الاسترجاع",
-  "cancelled": "تم الإلغاء"
+  "cancelled": "تم الإلغاء",
+  "addtoCart" : "أضف إلى السلة",
+  "buyNow" : "اشتري الآن",
+  "additionalInfo" : "معلومات أخرى",
+ "youMayalsolike" : "ربما يعجبك أيضاً",
+ "thisOffer" : "سينتهي هذا العرض خلال 3 أيام"
+
 }

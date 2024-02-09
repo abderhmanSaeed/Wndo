@@ -11,7 +11,7 @@
       <button (click)="closeNotification()">Close</button>
     </div>
     <div>
-      <h6 class="mb-4">Additional Info</h6>
+      <h6 class="mb-4">{{"additionalInfo" | translate}}</h6>
       <ul class="flex flex-col">
         <li *ngFor="let lookup of product?.lookups"
             class="inline-flex items-center gap-x-2 py-3 px-4 text-sm font-medium odd:bg-gray-100 bg-white text-gray-800 -mt-px first:mt-0 rounded"
@@ -41,7 +41,7 @@
             <h4 class="text-gray-900 line-through" *ngIf="product?.discount">${{ product?.discount }}</h4>
           </span>
           <span class="bg-orange-500 text-black rounded py-1 px-2">
-            This Offer Will Expire in 3 Days
+            {{"thisOffer" | translate}}
           </span>
         </div>
       </div>
@@ -146,7 +146,7 @@
             [disabled]="productQuantity === 0"
             (click)="storeProductInLocalStorage(product)"
           >
-            BUY NOW
+           {{"buyNow" | translate}}
           </button>
 
           <button
@@ -155,7 +155,7 @@
             [disabled]="productQuantity === 0"
             (click)="storeProductInLocalStorageWithoutNavigate(product)"
           >
-            ADD TO CART
+          {{"addtoCart" | translate}}
           </button>
         </div>
         <p

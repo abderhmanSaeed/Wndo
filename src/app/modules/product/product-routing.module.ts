@@ -6,6 +6,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { ProductDetailsComponent } from './product-details/product-details.component';
 import { ProductOrdersComponent } from './product-orders/product-orders.component';
 import { ProductOffersComponent } from './product-offers/product-offers.component';
+import { AuthGuard } from '../../core/guard/auth.guard';
 
 const productRoutes: Routes = [
   {
@@ -15,10 +16,10 @@ const productRoutes: Routes = [
   },
   { path: 'productDetails', component: ProductDetailsComponent },
   { path: 'productOrders', component: ProductOrdersComponent },
-  { path: 'orderProcess', component: OrderProcessComponent },
+  { path: 'orderProcess', component: OrderProcessComponent, canActivate: [AuthGuard] },
   { path: 'productOffers', component: ProductOffersComponent },
-  { path: 'myOrders', component: MyOrdersComponent },
-  { path: 'myOrdersDetails', component: MyOrdersDetailsComponent },
+  { path: 'myOrders', component: MyOrdersComponent , canActivate: [AuthGuard]},
+  { path: 'myOrdersDetails', component: MyOrdersDetailsComponent , canActivate: [AuthGuard]},
   { path: '**', redirectTo: 'productDetails', pathMatch: 'full' } // Default route for /product
 ];
 

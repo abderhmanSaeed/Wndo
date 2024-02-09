@@ -22,7 +22,8 @@ export class LoginPhonePasswordComponent implements OnInit {
   InvalidMessage: string = ''; //
   invalid: boolean = false;
   showInvalidMessage: boolean = false;
-
+  enterYourMessage: string = 'Plase Enter Your Phone'; //
+  enterMessage: boolean = false;
   // Define an EventEmitter for emitting the close event
   @Output() closeEvent = new EventEmitter<void>();
   userNAme: any;
@@ -34,6 +35,8 @@ export class LoginPhonePasswordComponent implements OnInit {
   login() {
     // Check if all required values are available
     if (this.selectedCountryCode && this.phoneValue && this.passwordValue) {
+      this.enterMessage = false;
+
       if (this.showInvalidMessage) {
         this.showInvalidMessage = false;
       }
@@ -95,6 +98,8 @@ export class LoginPhonePasswordComponent implements OnInit {
     this.invalid = false;
     // Check if all required values are available
     if (this.selectedCountryCode && this.phoneValue) {
+      this.enterMessage = false;
+
       const requestBody = {
         phone: this.phoneValue,
         phoneCode: this.selectedCountryCode,
@@ -112,6 +117,11 @@ export class LoginPhonePasswordComponent implements OnInit {
 
             // this.close();
           }
+          else{
+            this.InvalidMessage = response?.errorMessage;
+            this.showInvalidMessage = true;
+            this.invalid = true;
+          }
         },
         (error) => {
           console.error('Login failed', error);
@@ -119,6 +129,7 @@ export class LoginPhonePasswordComponent implements OnInit {
         }
       );
     } else {
+      this.enterMessage = true;
       // Handle the case where not all required values are available
       console.error('Please provide all required values.');
     }

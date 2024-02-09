@@ -2,6 +2,7 @@ import { Component, OnInit, TemplateRef, ViewChild, ViewContainerRef } from '@an
 import { ModalService } from '../../modal/modal.service';
 import { OptionProps } from '../../../models';
 import { CountryPhoneCodeService } from '../../../../data/service/country-phone/country-phone-code.service';
+import { AuthService } from '../../../../data/service/auth/auth.service';
 
 @Component({
   selector: 'app-shipping-payment',
@@ -12,15 +13,18 @@ export class ShippingPaymentComponent implements OnInit {
   countriesCode: OptionProps[] = [];
   products: any[] = []; // Assuming your products have a certain structure
 
-  constructor(private modalService: ModalService, private countryPhoneCodeService: CountryPhoneCodeService) { }
+  constructor(private modalService: ModalService, private countryPhoneCodeService: CountryPhoneCodeService, private authService: AuthService) { }
   ngOnInit(): void {
-    this.getCountryPhoneCodes();
-     // Retrieve products from localStorage
-     const storedProductsString = localStorage.getItem('products');
+    const auth = this.authService.isAuth();
+    if (!auth) {
+      this.getCountryPhoneCodes();
+    }
+    // Retrieve products from localStorage
+    const storedProductsString = localStorage.getItem('products');
 
-     if (storedProductsString) {
-       this.products = JSON.parse(storedProductsString);
-     }
+    if (storedProductsString) {
+      this.products = JSON.parse(storedProductsString);
+    }
   }
   getCountryPhoneCodes(): void {
     this.countryPhoneCodeService.getCountryPhoneCodes()

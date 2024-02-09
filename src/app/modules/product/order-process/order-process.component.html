@@ -4,100 +4,82 @@
   <div class="flex justify-between mb-4">
     <h6 class="text-base font-medium text-blue-900">Order No : {{orderDetails?.orderNumber}}</h6>
     <p class="text-blue-900">
-      Order Statues:  <span class="val"
-            [ngClass]="{
+      Order Statues: <span class="val" [ngClass]="{
                 'text-[#4EA3F8]': orderDetails?.orderState == orderStatsObject.ordered.key,
                 'text-[#FA0029]': orderDetails?.orderState == orderStatsObject.cancelled.key,
                 'text-[#fca908]': orderDetails?.orderState == orderStatsObject.shipping.key,
                 'text-[#F4D014]': orderDetails?.orderState == orderStatsObject.returned.key,
                 'text-[#02A207]': orderDetails?.orderState == orderStatsObject.delivered.key
-            }"
-            >
-                {{ orderDetails?.orderState == orderStatsObject.cancelled.key ? ('cancelled' | translate) : null }}
-                {{ orderDetails?.orderState == orderStatsObject.shipping.key ? ('shipping' | translate) : null }}
-                {{ orderDetails?.orderState == orderStatsObject.returned.key ? ('returned' | translate) : null }}
-                {{ orderDetails?.orderState == orderStatsObject.delivered.key ? ('delivered' | translate) : null }}
-                {{ orderDetails?.orderState == orderStatsObject.ordered.key ? ('ordered' | translate) : null }}
-            </span>
+            }">
+        {{ orderDetails?.orderState == orderStatsObject.cancelled.key ? ('cancelled' | translate) : null }}
+        {{ orderDetails?.orderState == orderStatsObject.shipping.key ? ('shipping' | translate) : null }}
+        {{ orderDetails?.orderState == orderStatsObject.returned.key ? ('returned' | translate) : null }}
+        {{ orderDetails?.orderState == orderStatsObject.delivered.key ? ('delivered' | translate) : null }}
+        {{ orderDetails?.orderState == orderStatsObject.ordered.key ? ('ordered' | translate) : null }}
+      </span>
 
     </p>
   </div>
 
 
-<app-stepper *ngFor="let seller of orderDetails?.sellers" [hasActionFooter]="false">
+  <app-stepper *ngFor="let seller of orderDetails?.sellers" [hasActionFooter]="false"
+    [stateOfSellerOrder]="seller.stateOfSellerOrder">
     <app-step label="Order Placed" icon="order-placed" [template]="orderPlaced">
     </app-step>
-    <app-step
-      label="Picked up"
-      icon="picked-up"
-      [template]="pickedUp"
-    ></app-step>
-    <app-step
-      label="Out for delivery"
-      icon="out-for-delivery"
-      [template]="outForDelivery"
-    ></app-step>
-    <app-step
-      label="Delivered"
-      icon="delivered"
-      [template]="delivered"
-    ></app-step>
+    <app-step label="Picked up" icon="picked-up" [template]="pickedUp">
+    </app-step>
+    <app-step label="Out for delivery" icon="out-for-delivery" [template]="outForDelivery">
+    </app-step>
+    <app-step label="Delivered" icon="delivered" [template]="delivered">
+    </app-step>
     <ng-template #orderPlaced>
       <div class="space-y-4">
-        <div >
-          <app-product-summary-with-seller
-            [seller]="seller"
-          ></app-product-summary-with-seller>
+        <div>
+          <app-product-summary-with-seller [seller]="seller"></app-product-summary-with-seller>
         </div>
       </div>
-  </ng-template>
-  <ng-template #pickedUp>
-    <div class="flex justify-between mb-4">
-      <h6 class="text-base font-medium text-blue-900">Order No : 234</h6>
-      <p class="text-blue-900">
-        Order Statues: <span class="text-orange-300">Picked up</span>
-      </p>
-    </div>
-    <div class="space-y-4">
-      <div >
-        <app-product-summary-with-seller
-          [seller]="seller"
-        ></app-product-summary-with-seller>
+    </ng-template>
+    <ng-template #pickedUp>
+      <div class="flex justify-between mb-4">
+        <h6 class="text-base font-medium text-blue-900">Order No : 234</h6>
+        <p class="text-blue-900">
+          Order Statues: <span class="text-orange-300">Picked up</span>
+        </p>
       </div>
-    </div>
-  </ng-template>
+      <div class="space-y-4">
+        <div>
+          <app-product-summary-with-seller [seller]="seller"></app-product-summary-with-seller>
+        </div>
+      </div>
+    </ng-template>
 
-  <ng-template #outForDelivery>
-    <div class="flex justify-between mb-4">
-      <h6 class="text-base font-medium text-blue-900">Order No : 234</h6>
-      <p class="text-blue-900">
-        Order Statues: <span class="text-orange-600">Out for delivery</span>
-      </p>
-    </div>
-    <div class="space-y-4">
-      <div >
-        <app-product-summary-with-seller
-          [seller]="seller"
-        ></app-product-summary-with-seller>
+    <ng-template #outForDelivery>
+      <div class="flex justify-between mb-4">
+        <h6 class="text-base font-medium text-blue-900">Order No : 234</h6>
+        <p class="text-blue-900">
+          Order Statues: <span class="text-orange-600">Out for delivery</span>
+        </p>
       </div>
-    </div>
-  </ng-template>
+      <div class="space-y-4">
+        <div>
+          <app-product-summary-with-seller [seller]="seller"></app-product-summary-with-seller>
+        </div>
+      </div>
+    </ng-template>
 
-  <ng-template #delivered>
-    <div class="flex justify-between mb-4">
-      <h6 class="text-base font-medium text-blue-900">Order No : 234</h6>
-      <p class="text-blue-900">
-        Order Statues: <span class="text-green-500">Delivered</span>
-      </p>
-    </div>
-    <div class="space-y-4">
-      <div >
-        <app-product-summary-with-seller
-          [seller]="seller"
-        ></app-product-summary-with-seller>
+    <ng-template #delivered>
+      <div class="flex justify-between mb-4">
+        <h6 class="text-base font-medium text-blue-900">Order No : 234</h6>
+        <p class="text-blue-900">
+          Order Statues: <span class="text-green-500">Delivered</span>
+        </p>
       </div>
-    </div>
-  </ng-template>
+      <div class="space-y-4">
+        <div>
+          <app-product-summary-with-seller [seller]="seller"></app-product-summary-with-seller>
+        </div>
+      </div>
+    </ng-template>
   </app-stepper>
 
 </section>

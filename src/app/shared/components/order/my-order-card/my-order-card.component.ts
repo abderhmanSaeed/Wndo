@@ -26,6 +26,7 @@ export class MyOrderCardComponent {
   index = 0;
 
   @Input() product: any;
+  @Input() orderState: any;
 
   dropdownactions: any = [
     {
@@ -66,6 +67,9 @@ export class MyOrderCardComponent {
     // Conditionally remove the 'Refund Order' action based on product.orderState
     if (!product.canBeRefunded) {
       actions = actions.filter(action => action.value !== 'refundOrder');
+    }
+    if (this.orderState ===  4 || this.orderState ===  5) {
+      actions = actions.filter(action => action.value !== 'trackingOrder');
     }
 
     return actions;

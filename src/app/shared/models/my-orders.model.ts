@@ -24,6 +24,13 @@ export enum OrderState {
   Returned = 6,
 }
 
+export enum OrderTrackState {
+  placed = 1,
+  pickup = 4,
+  outdelivery = 5,
+  delivered = 6,
+}
+
 export enum OrderItemState {
   OrderPlaced = 1,
   Shipping = 2,

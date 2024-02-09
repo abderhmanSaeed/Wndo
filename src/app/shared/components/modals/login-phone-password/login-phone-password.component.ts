@@ -5,6 +5,8 @@ import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { ModalService } from '../../modal/modal.service';
 import { CountryPhoneCodeService } from '../../../../data/service/country-phone/country-phone-code.service';
 import { OptionProps } from '../../../models';
+import { ChangeDetectorRef } from '@angular/core';
+import { Location } from '@angular/common'; // Import Location
 
 @Component({
   selector: 'app-login-phone-password',
@@ -16,16 +18,29 @@ export class LoginPhonePasswordComponent implements OnInit {
   selectedCountryCode: string | null = null;
   phoneValue: string = '';
   passwordValue: string = '';
-
+  showForgotPasswordMessage: boolean = false;
+  InvalidMessage: string = ''; //
+  invalid: boolean = false;
+  showInvalidMessage: boolean = false;
+  enterYourMessage: string = 'Plase Enter Your Phone'; //
+  enterMessage: boolean = false;
   // Define an EventEmitter for emitting the close event
   @Output() closeEvent = new EventEmitter<void>();
+  userNAme: any;
   constructor(private modalService: ModalService, private countryPhoneCodeService: CountryPhoneCodeService,
-    private sharedService: SharedService, private authService: AuthService, private loginService: LoginService) { }
+    private sharedService: SharedService, private authService: AuthService, private loginService: LoginService, private cdr: ChangeDetectorRef,
+    private location: Location) { }
   ngOnInit(): void {
   }
   login() {
     // Check if all required values are available
     if (this.selectedCountryCode && this.phoneValue && this.passwordValue) {
+      this.enterMessage = false;
+
+      if (this.showInvalidMessage) {
+        this.showInvalidMessage = false;
+      }
+
       const requestBody = {
         phone: this.phoneValue,
         phoneCode: this.selectedCountryCode,
@@ -57,7 +72,14 @@ export class LoginPhonePasswordComponent implements OnInit {
             this.authService.setUserName(response.responseData.userName);
             this.authService.setPhoneNumber(response.responseData.phoneNumber);
             this.authService.setPhoneCode(response.responseData.phoneCode);
+            this.cdr.detectChanges(); // Manually trigger change detection
+            this.userNAme = response.responseData.userName;
             this.close();
+          }
+          else {
+            this.InvalidMessage = response?.errorMessage;
+            this.showInvalidMessage = true;
+            this.invalid = true;
           }
         },
         (error) => {
@@ -66,6 +88,48 @@ export class LoginPhonePasswordComponent implements OnInit {
         }
       );
     } else {
+      // Handle the case where not all required values are available
+      console.error('Please provide all required values.');
+    }
+  }
+
+  forgotPassword() {
+    this.showInvalidMessage = false;
+    this.invalid = false;
+    // Check if all required values are available
+    if (this.selectedCountryCode && this.phoneValue) {
+      this.enterMessage = false;
+
+      const requestBody = {
+        phone: this.phoneValue,
+        phoneCode: this.selectedCountryCode,
+      };
+
+      this.loginService.forgotPassword(requestBody).subscribe(
+        (response) => {
+          console.log('forgot Password', response);
+          // Handle the response as needed
+          if (response.isSuccess && response.responseData) {
+            // Set tokens and user information in local storage
+            this.InvalidMessage = response?.responseData
+            this.showForgotPasswordMessage = true;
+            this.showInvalidMessage = true;
+
+            // this.close();
+          }
+          else{
+            this.InvalidMessage = response?.errorMessage;
+            this.showInvalidMessage = true;
+            this.invalid = true;
+          }
+        },
+        (error) => {
+          console.error('Login failed', error);
+          // Handle errors
+        }
+      );
+    } else {
+      this.enterMessage = true;
       // Handle the case where not all required values are available
       console.error('Please provide all required values.');
     }
@@ -107,6 +171,14 @@ export class LoginPhonePasswordComponent implements OnInit {
     // Notify the service that the LOGIN button is clicked
     this.sharedService.notifyLoginButtonClicked();
     this.modalService.close();
+    // Check if the current URL includes '/product/productOrders'
+    if (!this.location.path().includes('/product/productOrders')) {
+      // If the URL does not include '/product/productOrders', reload the page
+      window.location.reload();
+    }
+    this.authService.setShowLoginMessage(true);
+
+
   }
   onNameChanged(name: string) {
     console.log('Name changed:', name);

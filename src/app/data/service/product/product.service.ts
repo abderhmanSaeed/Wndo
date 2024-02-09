@@ -44,6 +44,20 @@ export class ProductService {
       );
   }
 
+  getProductByIds(ids: string[]): Observable<any> {
+    // Set the request headers (optional, depending on your API requirements)
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json'
+    });
+
+    // Prepare the request body
+    const requestBody = JSON.stringify(ids);
+    const url = `${this.apiEndPoint}/product-web/product-by-ids`;
+
+    // Make the HTTP POST request
+    return this.http.post(url, requestBody, { headers });
+  }
+
   private handleSuccess(response: any): any {
     if (response.isSuccess && response.statusCode === 200) {
       return response;
@@ -64,4 +78,5 @@ export class ProductService {
       return throwError('Unknown error occurred.');
     }
   }
+
 }

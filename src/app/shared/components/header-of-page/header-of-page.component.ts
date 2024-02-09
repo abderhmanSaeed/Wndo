@@ -5,6 +5,7 @@ import {
   TemplateRef,
   AfterViewInit,
   ViewChild,
+  ChangeDetectorRef,
 } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { SharedService } from '../../services/shared.service';
@@ -42,12 +43,16 @@ export class HeaderOfPageComponent implements OnInit, AfterViewInit {
   isAuthenticated: boolean = false;
   userName: string | null = null;
   products: any[] = [];
+
+  showLoginMessage: boolean = false;
+  successfullyMessage: string = 'Successfully logged in. Welcome';
+
   constructor(private modalService: ModalService,
     private route: ActivatedRoute,
     private router: Router,
     private sharedService: SharedService,
-    private authService: AuthService)
-    { }
+    private authService: AuthService,
+    private changeDetectorRef: ChangeDetectorRef) { }
 
   ngAfterViewInit(): void {
     this.authUserDropdown = [
@@ -56,11 +61,11 @@ export class HeaderOfPageComponent implements OnInit, AfterViewInit {
         value: 'myOrders',
         startContentMenu: this.myOrdersIconTemplate,
       },
-      {
-        label: 'Tracking Orders',
-        value: 'trackingOrders',
-        startContentMenu: this.trackingOrdersIconTemplate,
-      },
+      // {
+      //   label: 'Tracking Orders',
+      //   value: 'trackingOrders',
+      //   startContentMenu: this.trackingOrdersIconTemplate,
+      // },
     ];
 
     this.guestUserDropdown = [
@@ -118,13 +123,13 @@ export class HeaderOfPageComponent implements OnInit, AfterViewInit {
 
   onValueChanged(value: string) {
     console.log('Value changed:', value);
-    if(value === "LogIn") {
+    if (value === "LogIn") {
       this.handleLogin()
     }
-    else if(value === "SignUp") {
+    else if (value === "SignUp") {
       this.handleSignUp()
     }
-    else if(value === "myOrders") {
+    else if (value === "myOrders") {
       this.router.navigate(['/product/myOrders']);
 
     }
@@ -166,12 +171,30 @@ export class HeaderOfPageComponent implements OnInit, AfterViewInit {
       this.isAuthenticated = isAuthenticated;
     });
 
+    this.authService.setShowLoginMessage$.subscribe((setShowLoginMessage) => {
+      if (this.isAuthenticated || setShowLoginMessage) {
+        this.showLoginMessage = true;
+        // this.authService.setShowLoginMessage(false);
+
+
+        // Hide the message after a delay (e.g., 3 seconds)
+        setTimeout(() => {
+          this.showLoginMessage = false;
+        }, 3000);
+      }
+    });
+
+
     this.authService.userName$.subscribe((userName) => {
       this.userName = userName;
+      this.changeDetectorRef.detectChanges(); // Manually trigger change detection
+      // Show the copied message
+
     });
 
     // Check if the user is authenticated when the component is initialized
     this.checkAuthenticationStatus();
+
   }
   private checkAuthenticationStatus(): void {
     const isAuthenticated = this.authService.isAuth();
@@ -193,6 +216,8 @@ export class HeaderOfPageComponent implements OnInit, AfterViewInit {
     // Reset component variables
     this.isAuthenticated = false;
     this.userName = null;
+    window.location.reload();
+
   }
   logSellerId() {
     let sellerId = this.seller?.id;
@@ -202,4 +227,5 @@ export class HeaderOfPageComponent implements OnInit, AfterViewInit {
       this.router.navigate(['/product/productOffers', { sellerId: sellerId }]);
     }
   }
+
 }

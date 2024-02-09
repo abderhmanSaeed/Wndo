@@ -13,6 +13,7 @@ import { LoginPhonePasswordComponent } from '../modals/login-phone-password/logi
 import { ModalService } from '../modal/modal.service';
 import { SharedService } from '../../services/shared.service';
 import { AuthService } from '../../../data/service/auth/auth.service';
+import { OrderTrackState } from '../../models';
 
 
 @Component({
@@ -24,6 +25,7 @@ export class StepperComponent implements AfterContentInit {
   @Input() btnLabel: string = 'Next';
   @Input() disabledNextButton: boolean = false;
   @Input() hasActionFooter: boolean = true;
+  @Input() stateOfSellerOrder: any;
 
   constructor(private renderer: Renderer2, private modalService: ModalService,
     private sharedService: SharedService, private authService: AuthService) { }
@@ -51,6 +53,25 @@ export class StepperComponent implements AfterContentInit {
       this.currentStep++;
       this.updateCurrentStepTemplate();
     });
+
+    if(this.stateOfSellerOrder){
+      switch(this.stateOfSellerOrder) {
+        case OrderTrackState.pickup:
+          this.currentStep++;
+          this.updateCurrentStepTemplate();
+          break;
+        case OrderTrackState.outdelivery:
+          this.currentStep += 2;
+          this.updateCurrentStepTemplate();
+          break;
+        case OrderTrackState.delivered:
+          this.currentStep += 3;
+          this.updateCurrentStepTemplate();
+          break;
+        default:
+          this.currentStep = 0; // Default or initial step
+      }
+    }
   }
 
   nextStep() {
@@ -133,6 +154,25 @@ export class StepperComponent implements AfterContentInit {
           }
         }
       });
+    }
+  }
+
+  updateCurrentStep(stateOfSellerOrder: any): void {
+    switch(stateOfSellerOrder) {
+      case OrderTrackState.placed:
+        this.currentStep = OrderTrackState.placed; // Assuming the first step is 0
+        break;
+      case OrderTrackState.pickup:
+        this.currentStep = OrderTrackState.pickup;
+        break;
+      case OrderTrackState.outdelivery:
+        this.currentStep = OrderTrackState.outdelivery;
+        break;
+      case OrderTrackState.delivered:
+        this.currentStep = OrderTrackState.delivered;
+        break;
+      default:
+        this.currentStep = 0; // Default or initial step
     }
   }
 

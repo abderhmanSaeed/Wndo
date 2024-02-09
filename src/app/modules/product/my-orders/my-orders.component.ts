@@ -33,7 +33,6 @@ export class MyOrdersComponent implements OnInit {
   selectedSeller: boolean = false;
   ngOnInit(): void {
     this.getMyOrders();
-    this.getOrderStatistics();
     this.getSeller();
   }
 

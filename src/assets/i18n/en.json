@@ -30,5 +30,7 @@
   "buyNow" : "BUY NOW",
   "additionalInfo" : "Additional Info",
   "youMayalsolike" : "You may also like",
-  "thisOffer" : "This Offer Will Expire in 3 Days"
+  "thisOffer" : "This Offer Will Expire in 3 Days",
+  "you-didnt-add-any-item-to-your-order": "You didn't add any item to your order"
+
 }

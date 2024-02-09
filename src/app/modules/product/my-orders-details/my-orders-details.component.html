@@ -72,13 +72,13 @@
             class="flex-auto button rounded-full button--primary button--bordered">
             Refund ALL
           </button>
-          <button type="button" class="flex-auto button rounded-full button--primary">
+          <button *ngIf="orderDetails.orderState !== 4 && orderDetails.orderState !== 5" (click)="navigateTrackOrder()"type="button" class="flex-auto button rounded-full button--primary">
             TRACK THE ORDER
           </button>
         </div>
       </div>
       <div class="h-full md:col-span-2">
-        <app-order-summary-card></app-order-summary-card>
+        <app-order-summary-card [order]="orderDetails"></app-order-summary-card>
       </div>
     </div>
   </div>

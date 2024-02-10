@@ -18,7 +18,7 @@ export class ProductDetailsCardComponent implements OnInit {
   @Input() productColorAndSizesResponse: any;
 
   @Input() responseData: any;
-
+  showAddTocardMessage: boolean = false;
   productQuantity: number = 0;
   userSelectedQuantity!: number;
   colorWithSizesSelected: any;
@@ -266,6 +266,7 @@ export class ProductDetailsCardComponent implements OnInit {
 
         // Push the new product to the existing array
         existingProducts.push(newProduct);
+        this.showAddTocardMessage = true
       } else {
         // Show a snackbar error message with detailed information
         this.showCustomNotification();

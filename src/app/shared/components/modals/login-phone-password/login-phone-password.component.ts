@@ -1,3 +1,4 @@
+import { SignUpComponent } from './../sign-up/sign-up.component';
 import { AuthService } from './../../../../data/service/auth/auth.service';
 import { LoginService } from './../../../../data/service/login/login.service';
 import { SharedService } from './../../../services/shared.service';
@@ -117,7 +118,7 @@ export class LoginPhonePasswordComponent implements OnInit {
 
             // this.close();
           }
-          else{
+          else {
             this.InvalidMessage = response?.errorMessage;
             this.showInvalidMessage = true;
             this.invalid = true;
@@ -152,6 +153,28 @@ export class LoginPhonePasswordComponent implements OnInit {
           // Handle HTTP errors
         }
       );
+  }
+  NavigateToSignup() {
+    this.modalService.close();
+    this.handleSignUp()
+
+  }
+  handleSignUp() {
+    console.log("SignUp")
+    this.modalService.open(SignUpComponent, {
+      animations: {
+        modal: {
+          enter: 'enter-slide-down 0.8s',
+        },
+        overlay: {
+          enter: 'fade-in 0.8s',
+          leave: 'fade-out 0.3s forwards',
+        },
+      },
+      size: {
+        width: '36rem',
+      },
+    });
   }
   handleSelectedOption(selectedCountryCode: string): void {
     this.selectedCountryCode = selectedCountryCode;

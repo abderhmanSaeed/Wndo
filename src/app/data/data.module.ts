@@ -5,7 +5,8 @@ import { SellerProductsOffersService } from './service/seller-products-offers/se
 
 
 @NgModule({
-  declarations: [],
+  declarations: [
+  ],
   imports: [
     CommonModule
   ],

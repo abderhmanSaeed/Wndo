@@ -1,3 +1,4 @@
+import { ShippingAddressService } from './../../../../data/service/shipping-address/shipping-address.service';
 import { Component, OnInit, TemplateRef, ViewChild, ViewContainerRef } from '@angular/core';
 import { ModalService } from '../../modal/modal.service';
 import { OptionProps } from '../../../models';
@@ -12,8 +13,10 @@ import { AuthService } from '../../../../data/service/auth/auth.service';
 export class ShippingPaymentComponent implements OnInit {
   countriesCode: OptionProps[] = [];
   products: any[] = []; // Assuming your products have a certain structure
-
-  constructor(private modalService: ModalService, private countryPhoneCodeService: CountryPhoneCodeService, private authService: AuthService) { }
+  cities: any[] = [];
+  selectedCity!: string; // Non-null assertion
+  districtsAndZones: any[] = [];
+  constructor(private shippingAddressService: ShippingAddressService, private countryPhoneCodeService: CountryPhoneCodeService, private authService: AuthService) { }
   ngOnInit(): void {
     const auth = this.authService.isAuth();
     if (!auth) {
@@ -25,6 +28,7 @@ export class ShippingPaymentComponent implements OnInit {
     if (storedProductsString) {
       this.products = JSON.parse(storedProductsString);
     }
+    this.getCities();
   }
   getCountryPhoneCodes(): void {
     this.countryPhoneCodeService.getCountryPhoneCodes()
@@ -44,6 +48,33 @@ export class ShippingPaymentComponent implements OnInit {
         }
       );
   }
+  getCities(): void {
+    this.shippingAddressService.getCities().subscribe(data => {
+      this.cities = data;
+    }, error => {
+      console.error('There was an error!', error);
+    });
+  }
+  getDistrictsAndZones(cityId: number) {
+    this.shippingAddressService.getDistrictsAndZones(cityId).subscribe({
+      next: (data) => {
+        this.districtsAndZones = data;
+      },
+      error: (error) => {
+        console.error('There was an error!', error);
+      }
+    });
+  }
+  onCityChange(newValue: any) {
+    this.selectedCity = newValue;
+    if (newValue === '0') {
+      this.districtsAndZones = [];
+    } else {
+
+      this.getDistrictsAndZones(newValue);
+    }
+    // Additional logic when city changes, if needed
+  }
   handleSelectedOption(selectedOption: string) {
     console.log('Selected option:', selectedOption);
     // Do whatever you need to do with the selected option in the parent component
@@ -52,10 +83,10 @@ export class ShippingPaymentComponent implements OnInit {
     console.log('Name changed:', name);
     // You can perform any other actions with the emitted 'name' value here
   }
-  cities = [
-    { label: 'Cairo', value: 'cairo' },
-    { label: 'Alex', value: 'alex' },
-  ];
+  // cities = [
+  //   { label: 'Cairo', value: 'cairo' },
+  //   { label: 'Alex', value: 'alex' },
+  // ];
 
   paymentMethods = [
     {

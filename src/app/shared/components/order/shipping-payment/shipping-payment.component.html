@@ -46,15 +46,31 @@
             }"></app-input-filed>
         </div>
         <div>
-          <app-select [options]="cities" placeholder="Enter your city" label="City" [required]="true" name="cities"
+          <!-- <app-select [options]="cities" placeholder="Enter your city" label="City" [required]="true" name="cities"
             [classes]="{
               label:
                 'peer-focus:text-base peer-focus:font-medium font-medium text-base',
               labelColor: 'peer-focus:text-purple-500'
-            }" [isFloating]="true"></app-select>
+            }" [isFloating]="true"></app-select> -->
+
+            <app-select
+            [options]="cities"
+            placeholder="Enter your city"
+            label="City"
+            [required]="true"
+            name="cities"
+            [classes]="{
+              label: 'peer-focus:text-base peer-focus:font-medium font-medium text-base',
+              labelColor: 'peer-focus:text-purple-500'
+            }"
+            [isFloating]="true"
+            (valueChange)="onCityChange($event)"> <!-- This line handles the emitted value -->
+           </app-select>
+
+
         </div>
         <div>
-          <app-select [options]="cities" placeholder="Enter your district name" label="District" [required]="true"
+          <app-select [options]="districtsAndZones" placeholder="Enter your district name" label="District" [required]="true"
             name="district" [classes]="{
               label:
                 'peer-focus:text-base peer-focus:font-medium font-medium text-base',

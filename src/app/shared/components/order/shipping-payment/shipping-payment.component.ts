@@ -16,7 +16,9 @@ export class ShippingPaymentComponent implements OnInit, OnDestroy {
   countriesCode: OptionProps[] = [];
   products: any[] = []; // Assuming your products have a certain structure
   cities: any[] = [];
+  addresses: any[] = [];
   selectedCity!: string; // Non-null assertion
+  selectedAddresses!: string; // Non-null assertion
   selectedDistrict!: string; // Non-null assertion
 
   districtsAndZones: any[] = [];
@@ -35,6 +37,7 @@ export class ShippingPaymentComponent implements OnInit, OnDestroy {
     if (storedProductsString) {
       this.products = JSON.parse(storedProductsString);
     }
+    this.getAddresses();
     this.getCities();
 
     this.subscriptions.add(
@@ -43,7 +46,7 @@ export class ShippingPaymentComponent implements OnInit, OnDestroy {
         this.updateProductQuantities(products);
       })
     );
-    
+
   }
   getCountryPhoneCodes(): void {
     this.countryPhoneCodeService.getCountryPhoneCodes()
@@ -62,6 +65,13 @@ export class ShippingPaymentComponent implements OnInit, OnDestroy {
           // Handle HTTP errors
         }
       );
+  }
+  getAddresses(): void {
+    this.shippingAddressService.getAddresses().subscribe(data => {
+      this.addresses = data;
+    }, error => {
+      console.error('There was an error!', error);
+    });
   }
   getCities(): void {
     this.shippingAddressService.getCities().subscribe(data => {
@@ -88,6 +98,18 @@ export class ShippingPaymentComponent implements OnInit, OnDestroy {
 
       this.getDistrictsAndZones(newValue);
     }
+    // Additional logic when city changes, if needed
+  }
+
+  onAddressesChange(newValue: any) {
+    this.selectedAddresses = newValue;
+    this.shippingFessService.updateAddressId(newValue);
+    // if (newValue === '0') {
+    //   this.districtsAndZones = [];
+    // } else {
+
+    //   this.getDistrictsAndZones(newValue);
+    // }
     // Additional logic when city changes, if needed
   }
 

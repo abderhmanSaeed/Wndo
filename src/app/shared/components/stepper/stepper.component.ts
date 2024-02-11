@@ -13,7 +13,9 @@ import { LoginPhonePasswordComponent } from '../modals/login-phone-password/logi
 import { ModalService } from '../modal/modal.service';
 import { SharedService } from '../../services/shared.service';
 import { AuthService } from '../../../data/service/auth/auth.service';
-import { OrderTrackState } from '../../models';
+import { OrderTrackState, ShippingFeeRequest } from '../../models';
+import { Location } from '@angular/common'; // Import Location
+import { ShippingFessService } from '../../../data/service/shippeng-fees/shipping-fess.service';
 
 
 @Component({
@@ -26,9 +28,11 @@ export class StepperComponent implements AfterContentInit {
   @Input() disabledNextButton: boolean = false;
   @Input() hasActionFooter: boolean = true;
   @Input() stateOfSellerOrder: any;
+  shippingFee: any;
 
   constructor(private renderer: Renderer2, private modalService: ModalService,
-    private sharedService: SharedService, private authService: AuthService) { }
+    private sharedService: SharedService, private authService: AuthService,
+    private location: Location, private shippingFessService: ShippingFessService) { }
 
   @ContentChildren(StepComponent) steps: QueryList<StepComponent> | undefined;
   currentStep: number = 0;
@@ -54,8 +58,8 @@ export class StepperComponent implements AfterContentInit {
       this.updateCurrentStepTemplate();
     });
 
-    if(this.stateOfSellerOrder){
-      switch(this.stateOfSellerOrder) {
+    if (this.stateOfSellerOrder) {
+      switch (this.stateOfSellerOrder) {
         case OrderTrackState.pickup:
           this.currentStep++;
           this.updateCurrentStepTemplate();
@@ -82,12 +86,34 @@ export class StepperComponent implements AfterContentInit {
       if (this.currentStep === 0 && !auth) {
         // If the current step is the "Check Out" step, call the openLoginModal method
         this.openLoginModal();
-      } else {
+      }
+      else if (this.currentStep === 1 && this.location.path().includes('/product/productOrders')) {
+        // If the current step is the "Shipping & Payment" step, call the get Shipping Fees method
+        this.fetchShippingFees();
+      }
+      else {
         // Otherwise, proceed to the next step
         this.currentStep++;
         this.updateCurrentStepTemplate();
       }
     }
+  }
+
+  fetchShippingFees(): void {
+      const request = this.shippingFessService.getShippingFeeRequest();
+    this.shippingFessService.getShippingFees(request)
+      .subscribe({
+        next: (response) => {
+          this.shippingFee = response;
+          this.shippingFessService.updateShippingFee(response.responseData);
+          this.currentStep++;
+          this.updateCurrentStepTemplate();
+          console.log('Shipping fee fetched successfully:', response);
+        },
+        error: (error) => {
+          console.error('Error fetching shipping fees:', error);
+        }
+      });
   }
   openLoginModal() {
     this.modalService.open(LoginPhonePasswordComponent, {
@@ -158,7 +184,7 @@ export class StepperComponent implements AfterContentInit {
   }
 
   updateCurrentStep(stateOfSellerOrder: any): void {
-    switch(stateOfSellerOrder) {
+    switch (stateOfSellerOrder) {
       case OrderTrackState.placed:
         this.currentStep = OrderTrackState.placed; // Assuming the first step is 0
         break;

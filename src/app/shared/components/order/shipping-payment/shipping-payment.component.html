@@ -36,21 +36,35 @@
       </p>
     </section>
     <section class="bg-white rounded p-4">
+
+      <app-select
+            [options]="addresses"
+            placeholder="Enter your city"
+            label="City"
+            [required]="true"
+            name="cities"
+            [classes]="{
+              label: 'peer-focus:text-base peer-focus:font-medium font-medium text-base',
+              labelColor: 'peer-focus:text-purple-500'
+            }"
+            [isFloating]="true"
+            (valueChange)="onAddressesChange($event)"> <!-- This line handles the emitted value -->
+           </app-select>
       <h6 class="text-sm text-blue-900">Shipping Address</h6>
       <div class="grid sm:grid-cols-2 p-5 gap-6">
         <div>
-          <!-- <app-input-filed [required]="true" label="Address Name" [isFloating]="true" placeholder="Enter Your Address"
+          <app-input-filed [required]="true" label="Address Name" [isFloating]="true" placeholder="Enter Your Address"
             name="address" [classes]="{
               label: 'peer-focus:text-base peer-focus:font-medium',
               labelColor: 'peer-focus:text-purple-500'
-            }"></app-input-filed> -->
+            }"></app-input-filed>
 
-<app-select [options]="districtsAndZones" placeholder="Enter your Shipping Address" label="Address Name" [required]="true"
+<!-- <app-select [options]="districtsAndZones" placeholder="Enter your Shipping Address" label="Address Name" [required]="true"
 name="Address Name" [classes]="{
   label:
     'peer-focus:text-base peer-focus:font-medium font-medium text-base',
   labelColor: 'peer-focus:text-purple-500'
-}" [isFloating]="true"></app-select>
+}" [isFloating]="true"></app-select> -->
         </div>
         <div>
           <!-- <app-select [options]="cities" placeholder="Enter your city" label="City" [required]="true" name="cities"
@@ -99,6 +113,14 @@ name="Address Name" [classes]="{
               labelColor: 'peer-focus:text-purple-500'
             }"></app-input-filed>
         </div>
+        <div>
+          <app-input-filed label="Zone" [isFloating]="true" placeholder="Enter Your Zone"
+            name="Address" [classes]="{
+              label: 'peer-focus:text-base',
+              labelColor: 'peer-focus:text-purple-500'
+            }"></app-input-filed>
+        </div>
+
       </div>
     </section>
   </form>

@@ -13,8 +13,9 @@ export class ShippingFessService {
 
   private productRecordsSource = new BehaviorSubject<productRecords[]>([]);
 
-  
+
   private addressIdSource = new BehaviorSubject<number>(0);
+  private shippingFee = new BehaviorSubject<number>(0);
 
   constructor(private http: HttpClient) {
     this.apiEndPoint = environment.apiEndPoint;
@@ -39,7 +40,29 @@ export class ShippingFessService {
 
   updateAddressId(addressId: number): void {
     this.addressIdSource.next(addressId);
+    console.log(addressId);
+
   }
+
+  updateShippingFee(shippingFee: number): void {
+    this.shippingFee.next(shippingFee);
+
+  }
+
+  getShippingFee(): Observable<number> {
+    return this.shippingFee.asObservable();
+  }
+
+  getShippingFeeRequest(): ShippingFeeRequest {
+    const productRecords = this.productRecordsSource.getValue();
+    const addressId = this.addressIdSource.getValue();
+
+    return {
+      productRecords,
+      addressId
+    };
+  }
+
 
   getShippingFees(requestBody: ShippingFeeRequest): Observable<apiResponse> {
     const url = `${this.apiEndPoint}/product-web/shipping-fees`;

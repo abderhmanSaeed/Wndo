@@ -28,6 +28,7 @@ export class LoginPhonePasswordComponent implements OnInit {
   // Define an EventEmitter for emitting the close event
   @Output() closeEvent = new EventEmitter<void>();
   userNAme: any;
+  showLoginMessage: boolean = false;
   constructor(private modalService: ModalService, private countryPhoneCodeService: CountryPhoneCodeService,
     private sharedService: SharedService, private authService: AuthService, private loginService: LoginService, private cdr: ChangeDetectorRef,
     private location: Location) { }
@@ -76,6 +77,10 @@ export class LoginPhonePasswordComponent implements OnInit {
             this.cdr.detectChanges(); // Manually trigger change detection
             this.userNAme = response.responseData.userName;
             this.close();
+            this.showLoginMessage = true;
+            setTimeout(() => {
+              this.showLoginMessage = false;
+            }, 3000);
           }
           else {
             this.InvalidMessage = response?.errorMessage;

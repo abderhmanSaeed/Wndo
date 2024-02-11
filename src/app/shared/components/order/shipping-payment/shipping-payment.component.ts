@@ -1,22 +1,29 @@
 import { ShippingAddressService } from './../../../../data/service/shipping-address/shipping-address.service';
-import { Component, OnInit, TemplateRef, ViewChild, ViewContainerRef } from '@angular/core';
+import { Component, OnDestroy, OnInit, TemplateRef, ViewChild, ViewContainerRef } from '@angular/core';
 import { ModalService } from '../../modal/modal.service';
 import { OptionProps } from '../../../models';
 import { CountryPhoneCodeService } from '../../../../data/service/country-phone/country-phone-code.service';
 import { AuthService } from '../../../../data/service/auth/auth.service';
+import { Subscription } from 'rxjs';
+import { ShippingFessService } from '../../../../data/service/shippeng-fees/shipping-fess.service';
 
 @Component({
   selector: 'app-shipping-payment',
   templateUrl: './shipping-payment.component.html',
   styleUrl: './shipping-payment.component.scss',
 })
-export class ShippingPaymentComponent implements OnInit {
+export class ShippingPaymentComponent implements OnInit, OnDestroy {
   countriesCode: OptionProps[] = [];
   products: any[] = []; // Assuming your products have a certain structure
   cities: any[] = [];
   selectedCity!: string; // Non-null assertion
+  selectedDistrict!: string; // Non-null assertion
+
   districtsAndZones: any[] = [];
-  constructor(private shippingAddressService: ShippingAddressService, private countryPhoneCodeService: CountryPhoneCodeService, private authService: AuthService) { }
+  private subscriptions = new Subscription();
+
+  constructor(private shippingAddressService: ShippingAddressService, private countryPhoneCodeService: CountryPhoneCodeService, private authService: AuthService,
+    private shippingFessService: ShippingFessService) { }
   ngOnInit(): void {
     const auth = this.authService.isAuth();
     if (!auth) {
@@ -29,6 +36,12 @@ export class ShippingPaymentComponent implements OnInit {
       this.products = JSON.parse(storedProductsString);
     }
     this.getCities();
+
+    this.subscriptions.add(
+      this.shippingFessService.productRecords$.subscribe(products => {
+        console.log(products);
+      })
+    );
   }
   getCountryPhoneCodes(): void {
     this.countryPhoneCodeService.getCountryPhoneCodes()
@@ -74,6 +87,11 @@ export class ShippingPaymentComponent implements OnInit {
       this.getDistrictsAndZones(newValue);
     }
     // Additional logic when city changes, if needed
+  }
+
+  onDistrictChange(newValue: any) {
+    this.selectedDistrict = newValue;
+    console.log(this.selectedDistrict);
   }
   handleSelectedOption(selectedOption: string) {
     console.log('Selected option:', selectedOption);
@@ -124,7 +142,10 @@ export class ShippingPaymentComponent implements OnInit {
       value: 'evening',
     },
   ];
-
+  ngOnDestroy() {
+    // Unsubscribe to prevent memory leaks
+    this.subscriptions.unsubscribe();
+  }
   // //Modal
   //   @ViewChild('temporaryPasswordModal',  { static: true, read: ViewContainerRef })
   //   vcr!: ViewContainerRef;

@@ -14,6 +14,7 @@ import { ModalService } from '../modal/modal.service';
 import { LoginModalComponent } from '../modals/login-modal/login-modal.component';
 import { LoginPhonePasswordComponent } from '../modals/login-phone-password/login-phone-password.component';
 import { SignUpComponent } from '../modals/sign-up/sign-up.component';
+import { Location } from '@angular/common'; // Import Location
 
 @Component({
   selector: 'app-header-of-page',
@@ -52,7 +53,8 @@ export class HeaderOfPageComponent implements OnInit, AfterViewInit {
     private router: Router,
     private sharedService: SharedService,
     private authService: AuthService,
-    private changeDetectorRef: ChangeDetectorRef) { }
+    private changeDetectorRef: ChangeDetectorRef,
+    private location: Location) { }
 
   ngAfterViewInit(): void {
     this.authUserDropdown = [
@@ -173,14 +175,18 @@ export class HeaderOfPageComponent implements OnInit, AfterViewInit {
 
     this.authService.setShowLoginMessage$.subscribe((setShowLoginMessage) => {
       if (this.isAuthenticated || setShowLoginMessage) {
-        this.showLoginMessage = true;
+        if (this.location.path().includes('/product/productDetails')) {
+
+          this.showLoginMessage = true;
+          setTimeout(() => {
+            this.showLoginMessage = false;
+          }, 3000);
+        }
         // this.authService.setShowLoginMessage(false);
 
 
         // Hide the message after a delay (e.g., 3 seconds)
-        setTimeout(() => {
-          this.showLoginMessage = false;
-        }, 3000);
+
       }
     });
 

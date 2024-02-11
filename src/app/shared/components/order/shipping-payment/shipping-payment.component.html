@@ -39,11 +39,18 @@
       <h6 class="text-sm text-blue-900">Shipping Address</h6>
       <div class="grid sm:grid-cols-2 p-5 gap-6">
         <div>
-          <app-input-filed [required]="true" label="Address Name" [isFloating]="true" placeholder="Enter Your Address"
+          <!-- <app-input-filed [required]="true" label="Address Name" [isFloating]="true" placeholder="Enter Your Address"
             name="address" [classes]="{
               label: 'peer-focus:text-base peer-focus:font-medium',
               labelColor: 'peer-focus:text-purple-500'
-            }"></app-input-filed>
+            }"></app-input-filed> -->
+
+<app-select [options]="districtsAndZones" placeholder="Enter your Shipping Address" label="Address Name" [required]="true"
+name="Address Name" [classes]="{
+  label:
+    'peer-focus:text-base peer-focus:font-medium font-medium text-base',
+  labelColor: 'peer-focus:text-purple-500'
+}" [isFloating]="true"></app-select>
         </div>
         <div>
           <!-- <app-select [options]="cities" placeholder="Enter your city" label="City" [required]="true" name="cities"
@@ -75,7 +82,7 @@
               label:
                 'peer-focus:text-base peer-focus:font-medium font-medium text-base',
               labelColor: 'peer-focus:text-purple-500'
-            }" [isFloating]="true"></app-select>
+            }" [isFloating]="true" (valueChange)="onDistrictChange($event)"></app-select>
         </div>
         <div>
           <app-input-filed [required]="true" label="Street Address" [isFloating]="true"

@@ -15,6 +15,15 @@ export class ShippingAddressService {
   }
 
 
+  getAddresses(): Observable<any> {
+    return this.http.get<{responseData: { items: any[] }}>(`${this.apiEndPoint}/address`).pipe(
+      map(response => response.responseData.items.map(item => ({
+        label: item.name,
+        value: item.id,
+      })))
+    );
+  }
+
   getCities(): Observable<any> {
     return this.http.get<{responseData: { items: any[] }}>(`${this.apiEndPoint}/city/cities`).pipe(
       map(response => response.responseData.items.map(item => ({

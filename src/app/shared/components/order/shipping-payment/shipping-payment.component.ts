@@ -40,8 +40,10 @@ export class ShippingPaymentComponent implements OnInit, OnDestroy {
     this.subscriptions.add(
       this.shippingFessService.productRecords$.subscribe(products => {
         console.log(products);
+        this.updateProductQuantities(products);
       })
     );
+    
   }
   getCountryPhoneCodes(): void {
     this.countryPhoneCodeService.getCountryPhoneCodes()
@@ -105,6 +107,22 @@ export class ShippingPaymentComponent implements OnInit, OnDestroy {
   //   { label: 'Cairo', value: 'cairo' },
   //   { label: 'Alex', value: 'alex' },
   // ];
+
+  updateProductQuantities(updates: any[]) {
+    // Retrieve the products array from local storage
+    let products = JSON.parse(localStorage.getItem('products') || '[]');
+
+    // Update the quantities of the products based on the updates
+    updates.forEach(update => {
+      const productIndex = products.findIndex((product: any) => product.id === update.productId);
+      if (productIndex !== -1) {
+        products[productIndex].quantity = update.quantity;
+      }
+    });
+
+    // Save the updated products array back to local storage
+    localStorage.setItem('products', JSON.stringify(products));
+  }
 
   paymentMethods = [
     {

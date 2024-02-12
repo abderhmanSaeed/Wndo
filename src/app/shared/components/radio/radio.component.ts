@@ -35,6 +35,8 @@ export class RadioComponent  {
   @Input() isFloating: boolean = false;
   @Input() name: string = "";
   @Input() value: string = "";
+  @Input() valueCheked!: number;
+
   @Input() classes?: ClassesProps;
   @Input() error: string = "";
   @Input() color: 'primary' | 'warning' | 'danger' = "primary";

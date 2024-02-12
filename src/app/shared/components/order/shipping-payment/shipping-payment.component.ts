@@ -21,12 +21,13 @@ export class ShippingPaymentComponent implements OnInit, OnDestroy {
   selectedCity!: string; // Non-null assertion
   selectedAddresses!: string; // Non-null assertion
   selectedDistrict!: string; // Non-null assertion
-
+  currentPaymentMethod: any;
+  currentShippingTime: any;
   districtsAndZones: any[] = [];
   private subscriptions = new Subscription();
 
   constructor(private shippingAddressService: ShippingAddressService, private countryPhoneCodeService: CountryPhoneCodeService, private authService: AuthService,
-    private shippingFessService: ShippingFessService , private orderService: OrderService) { }
+    private shippingFessService: ShippingFessService, private orderService: OrderService) { }
   ngOnInit(): void {
     const auth = this.authService.isAuth();
     if (!auth) {
@@ -47,6 +48,21 @@ export class ShippingPaymentComponent implements OnInit, OnDestroy {
         this.updateProductQuantities(products);
       })
     );
+    this.subscriptions.add(
+      this.orderService.getOrder().subscribe(order => {
+        console.log(order);
+        if (order)
+        {
+          this.currentPaymentMethod = order.paymentMethod;
+          this.currentShippingTime = order.pickUpTime;
+        }
+
+      })
+    );
+    // this.subscriptions.add(this.orderService.getOrder().subscribe(
+    //   order => console.log(order) // Logs the current order
+    //   this.currentPaymentMethod = order.paymentMethod;
+    // ));
 
   }
   getCountryPhoneCodes(): void {
@@ -222,6 +238,7 @@ export class ShippingPaymentComponent implements OnInit, OnDestroy {
     if (typeof selectedValue === 'number') {
       console.log('Selected payment method:', selectedValue);
       this.orderService.setPaymentMethod(selectedValue);
+      this.currentPaymentMethod = selectedValue;
 
       // Handle the payment method change
       // Possibly convert selectedValue to the enum value if needed

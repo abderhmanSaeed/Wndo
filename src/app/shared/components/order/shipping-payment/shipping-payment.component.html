@@ -129,7 +129,7 @@ name="Address Name" [classes]="{
     <div class="bg-white px-6 py-5.5">
       <h6 class="text-purple-500 mb-6 font-normal">Choose Payment Method</h6>
       <!-- <app-radio [options]="paymentMethods"> </app-radio> -->
-      <app-radio [options]="paymentMethods" (change)="onPaymentMethodChange($event)"></app-radio>
+      <app-radio [options]="paymentMethods" (change)="onPaymentMethodChange($event)" [value]="currentPaymentMethod"></app-radio>
 
       <p class="text-orange-400 text-xs mt-2 flex items-center gap-1">
         <svg-icon src="../../../../../assets/icons/gift.svg"> </svg-icon>
@@ -146,7 +146,7 @@ name="Address Name" [classes]="{
     <div class="bg-white px-6 py-5.5">
       <h6 class="text-purple-500 mb-6 font-normal">Choose Shipping Time</h6>
       <!-- <app-radio [options]="shippingTimes"> </app-radio> -->
-      <app-radio [options]="shippingTimes" (change)="onShippingTimeChange($event)"></app-radio>
+      <app-radio [options]="shippingTimes" (change)="onShippingTimeChange($event)" [value]="currentShippingTime"></app-radio>
 
 
     </div>

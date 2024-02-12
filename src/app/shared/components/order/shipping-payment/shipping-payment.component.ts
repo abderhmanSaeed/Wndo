@@ -1,11 +1,12 @@
 import { ShippingAddressService } from './../../../../data/service/shipping-address/shipping-address.service';
 import { Component, OnDestroy, OnInit, TemplateRef, ViewChild, ViewContainerRef } from '@angular/core';
 import { ModalService } from '../../modal/modal.service';
-import { OptionProps } from '../../../models';
+import { OptionProps, PaymentType, PickUpTime } from '../../../models';
 import { CountryPhoneCodeService } from '../../../../data/service/country-phone/country-phone-code.service';
 import { AuthService } from '../../../../data/service/auth/auth.service';
 import { Subscription } from 'rxjs';
 import { ShippingFessService } from '../../../../data/service/shippeng-fees/shipping-fess.service';
+import { OrderService } from '../../../../data/service/order/order.service';
 
 @Component({
   selector: 'app-shipping-payment',
@@ -25,7 +26,7 @@ export class ShippingPaymentComponent implements OnInit, OnDestroy {
   private subscriptions = new Subscription();
 
   constructor(private shippingAddressService: ShippingAddressService, private countryPhoneCodeService: CountryPhoneCodeService, private authService: AuthService,
-    private shippingFessService: ShippingFessService) { }
+    private shippingFessService: ShippingFessService , private orderService: OrderService) { }
   ngOnInit(): void {
     const auth = this.authService.isAuth();
     if (!auth) {
@@ -104,6 +105,8 @@ export class ShippingPaymentComponent implements OnInit, OnDestroy {
   onAddressesChange(newValue: any) {
     this.selectedAddresses = newValue;
     this.shippingFessService.updateAddressId(newValue);
+    this.orderService.setAddressId(newValue);
+
     // if (newValue === '0') {
     //   this.districtsAndZones = [];
     // } else {
@@ -146,42 +149,84 @@ export class ShippingPaymentComponent implements OnInit, OnDestroy {
     localStorage.setItem('products', JSON.stringify(products));
   }
 
+  // paymentMethods = [
+  //   {
+  //     label: 'Cash on Delievery',
+  //     name: 'cash',
+  //     value: 'cash',
+  //     desc: 'Extra fee will be applied',
+  //     children: '<i class="fa-solid fa-wallet"></i>',
+  //   },
+  //   {
+  //     label: 'Credit Card',
+  //     name: 'creditCard',
+  //     value: 'creditCard',
+  //     desc: '',
+  //     children: '<i class="fa-regular fa-credit-card"></i>',
+  //   },
+  // ];
+
   paymentMethods = [
     {
-      label: 'Cash on Delievery',
+      label: 'Cash on Delivery',
       name: 'cash',
-      value: 'cash',
+      value: PaymentType.Cash,
       desc: 'Extra fee will be applied',
       children: '<i class="fa-solid fa-wallet"></i>',
     },
     {
       label: 'Credit Card',
       name: 'creditCard',
-      value: 'creditCard',
+      value: PaymentType.CreditCard,
       desc: '',
       children: '<i class="fa-regular fa-credit-card"></i>',
     },
   ];
 
 
+
   shippingTimes = [
     {
       label: 'Any time',
       name: 'anyTime',
-      value: 'any',
-
+      value: PickUpTime.Any,
+      desc: '',
+      children: '',
     },
     {
       label: 'Morning 9 am - 2 pm',
       name: 'morning',
-      value: 'morning',
+      value: PickUpTime.Morning9am2pm,
+      desc: '',
+      children: '',
     },
     {
       label: 'Evening 2 pm - 8 pm',
       name: 'evening',
-      value: 'evening',
+      value: PickUpTime.Evening2pm8pm,
+      desc: '',
+      children: '',
     },
   ];
+
+  onShippingTimeChange(selectedValue: any): void {
+    if (typeof selectedValue === 'number') {
+      console.log('Selected shipping time:', selectedValue);
+      this.orderService.setPickUpTime(selectedValue);
+      // Convert selectedValue to the enum value if needed
+      // And handle the shipping time change as needed
+    }
+  }
+
+  onPaymentMethodChange(selectedValue: any): void {
+    if (typeof selectedValue === 'number') {
+      console.log('Selected payment method:', selectedValue);
+      this.orderService.setPaymentMethod(selectedValue);
+
+      // Handle the payment method change
+      // Possibly convert selectedValue to the enum value if needed
+    }
+  }
   ngOnDestroy() {
     // Unsubscribe to prevent memory leaks
     this.subscriptions.unsubscribe();

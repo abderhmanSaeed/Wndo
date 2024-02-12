@@ -1,3 +1,4 @@
+import { OrderService } from './../../../data/service/order/order.service';
 import {
   Component,
   AfterContentInit,
@@ -7,6 +8,7 @@ import {
   Renderer2,
   ViewChild,
   ElementRef,
+  OnDestroy,
 } from '@angular/core';
 import { StepComponent } from './step/step.component';
 import { LoginPhonePasswordComponent } from '../modals/login-phone-password/login-phone-password.component';
@@ -16,6 +18,7 @@ import { AuthService } from '../../../data/service/auth/auth.service';
 import { OrderTrackState, ShippingFeeRequest } from '../../models';
 import { Location } from '@angular/common'; // Import Location
 import { ShippingFessService } from '../../../data/service/shippeng-fees/shipping-fess.service';
+import { Subscription } from 'rxjs';
 
 
 @Component({
@@ -23,16 +26,18 @@ import { ShippingFessService } from '../../../data/service/shippeng-fees/shippin
   templateUrl: './stepper.component.html',
   styleUrls: ['./stepper.component.scss'],
 })
-export class StepperComponent implements AfterContentInit {
+export class StepperComponent implements AfterContentInit , OnDestroy  {
   @Input() btnLabel: string = 'Next';
   @Input() disabledNextButton: boolean = false;
   @Input() hasActionFooter: boolean = true;
   @Input() stateOfSellerOrder: any;
   shippingFee: any;
+  private subscription: Subscription = new Subscription();
 
   constructor(private renderer: Renderer2, private modalService: ModalService,
     private sharedService: SharedService, private authService: AuthService,
-    private location: Location, private shippingFessService: ShippingFessService) { }
+    private location: Location, private shippingFessService: ShippingFessService ,
+    private orderService: OrderService) { }
 
   @ContentChildren(StepComponent) steps: QueryList<StepComponent> | undefined;
   currentStep: number = 0;
@@ -90,6 +95,12 @@ export class StepperComponent implements AfterContentInit {
       else if (this.currentStep === 1 && this.location.path().includes('/product/productOrders')) {
         // If the current step is the "Shipping & Payment" step, call the get Shipping Fees method
         this.fetchShippingFees();
+        this.orderService.getOrder();
+
+
+      }
+      else if (this.currentStep === 2 && this.location.path().includes('/product/productOrders')) {
+        // If the current step is the "Shipping & Payment" step, call the get Shipping Fees method
       }
       else {
         // Otherwise, proceed to the next step
@@ -97,6 +108,15 @@ export class StepperComponent implements AfterContentInit {
         this.updateCurrentStepTemplate();
       }
     }
+  }
+  private subscribeToOrder() {
+
+    this.subscription.add(
+      this.orderService.getOrder().subscribe(order => {
+        // Handle the order update here
+        console.log(order);
+      })
+    );
   }
 
   fetchShippingFees(): void {
@@ -201,5 +221,8 @@ export class StepperComponent implements AfterContentInit {
         this.currentStep = 0; // Default or initial step
     }
   }
-
+  ngOnDestroy() {
+    // Unsubscribe to prevent memory leaks
+    this.subscription.unsubscribe();
+  }
 }

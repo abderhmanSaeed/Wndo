@@ -5,3 +5,4 @@ export * from './option-props.model';
 export * from './my-orders.model';
 export * from './api-response.modal';
 export * from './shipping-fees.models';
+export * from './lookups.enum';

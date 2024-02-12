@@ -1,6 +1,7 @@
 import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { ShippingFessService } from '../../../../data/service/shippeng-fees/shipping-fess.service';
 import { Subscription } from 'rxjs';
+import { OrderService } from '../../../../data/service/order/order.service';
 
 @Component({
   selector: 'app-order-summary-card',
@@ -15,7 +16,7 @@ export class OrderSummaryCardComponent implements OnInit , OnDestroy{
   private subscriptions = new Subscription();
 
 
-  constructor(private shippingFessService: ShippingFessService) { }
+  constructor(private shippingFessService: ShippingFessService, private orderService: OrderService) { }
 
   ngOnInit(): void {
     this.subscriptions.add(
@@ -23,6 +24,9 @@ export class OrderSummaryCardComponent implements OnInit , OnDestroy{
         this.shippingFee = fee;
       })
     );
+    this.subscriptions.add(this.orderService.getOrder().subscribe(
+      order => console.log(order) // Logs the current order
+    ));
   }
   ngOnDestroy() {
     // Unsubscribe to prevent memory leaks

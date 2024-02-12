@@ -61,7 +61,7 @@
         <span class="text-blue-800">{{ totalDetails.totalVoucherAmount }} EGP</span>
       </li>
 
-      <li class="text-xs flex justify-between">
+      <li *ngIf="shippingFee" class="text-xs flex justify-between">
         <span class="text-blue-800"> Shipping fee </span>
         <span class="text-blue-800">{{ shippingFee }} EGP</span>
       </li>
@@ -69,7 +69,7 @@
 
       <li class="text-xs flex justify-between px-1 pt-4">
         <span class="text-blue-800 font-bold"> Total Price:</span>
-        <span class="text-blue-800 font-bold">{{ totalDetails.totalOrderPrice }} EGP</span>
+        <span class="text-blue-800 font-bold">{{ totalDetails.totalOrderPrice + shippingFee }} EGP</span>
       </li>
     </ul>
   </section>

@@ -49,7 +49,6 @@ export class OrderService {
       // You may need to adjust this according to how your Order constructor is defined
       // or how you want to initialize the default state of an Order
       const defaultOrder = new Order(
-        'default-id', // Example default ID, adjust as needed
         0, // Default pickUpTime
         0, // Default paymentMethod
         0, // Default addressId

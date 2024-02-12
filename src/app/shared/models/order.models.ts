@@ -1,5 +1,4 @@
 export class Order {
-  id: string;
   pickUpTime: number;
   paymentMethod: number;
   addressId: number;
@@ -9,7 +8,6 @@ export class Order {
   orderItems: OrderItem[];
 
   constructor(
-    id: string,
     pickUpTime: number,
     paymentMethod: number,
     addressId: number,
@@ -18,7 +16,6 @@ export class Order {
     shippingFees: number,
     orderItems: OrderItem[]
   ) {
-    this.id = id;
     this.pickUpTime = pickUpTime;
     this.paymentMethod = paymentMethod;
     this.addressId = addressId;

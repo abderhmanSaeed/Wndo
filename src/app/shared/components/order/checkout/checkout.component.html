@@ -5,7 +5,7 @@
       <div *ngFor="let product of products" class="scroll__item">
         <div class="mb-6 ">
           <app-visual-product-summary
-            [product]="product"
+            [product]="product" [productsBackEnd]="productsBackEnd"
           ></app-visual-product-summary>
         </div>
       </div>

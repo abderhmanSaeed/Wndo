@@ -9,6 +9,7 @@ import { ProductService } from '../../../../data/service/product/product.service
 })
 export class CheckoutComponent implements OnInit {
   products: any[] = []; // Assuming your products have a certain structure
+  productsBackEnd: any[] = [];
   totalDetails = {
     totalActualPrice: 0,
     totalShippingFees: 0,
@@ -72,6 +73,7 @@ export class CheckoutComponent implements OnInit {
       (response) => {
         // Handle the response from the API
         console.log(response);
+        this.productsBackEnd =response.responseData;
         this.aggregateProductDetails(response.responseData);
       },
       (error) => {

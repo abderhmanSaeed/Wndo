@@ -10,7 +10,6 @@
     class="w-36 h-36 object-cover rounded"
     alt="{{ product.name }}"
   />
-
   <div class="flex flex-col flex-grow items-baseline justify-between">
     <h6>{{ product.name }}</h6>
 
@@ -61,7 +60,7 @@
         <app-dropdown
         [id]="'actionDropdown' + product.id"
         [showSelectedValue]="false"
-        [options]="dropdownactions"
+        [options]="getDropdownActions(product)"
         dropdownIcon="fa-ellipsis-vertical"
         [classes]="{
           label: 'bg-primary-100',

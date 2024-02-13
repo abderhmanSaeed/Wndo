@@ -25,6 +25,8 @@ type ClassProps = {
 })
 export class VisualProductSummaryComponent {
   @Input() product: any | null = null;
+  @Input() productsBackEnd: any | null = null;
+
   @Input() classes?: ClassProps;
   @Input() showDesc?: boolean = false;
   @Input() hasCustomBorderColor?: boolean = false;
@@ -53,6 +55,24 @@ export class VisualProductSummaryComponent {
   // }
 
   // In VisualProductSummaryComponent
+
+  getDropdownActions(product: any) {
+    // Clone the original dropdown actions to avoid modifying the original array
+    let actions = [...this.dropdownactions];
+    this.productsBackEnd.forEach((element: any) => {
+      if (element.id === product.id) {
+        if (element.quantity !== -1) {
+          // Conditionally remove the 'Edit ptoduct' action based on product.quantity
+          actions = actions.filter(action => action.value !== 'Edit');
+        }
+      }
+
+    });
+
+
+
+    return actions;
+  }
 
   onQuantityChange(event: { quantity: number; productId: string }): void {
     const { quantity, productId } = event;

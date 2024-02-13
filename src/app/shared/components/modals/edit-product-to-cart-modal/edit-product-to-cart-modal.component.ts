@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { ModalService } from '../../modal/modal.service';
 import { ModalDataService } from '../../modal/modal.data.service';
+import { ShippingFessService } from '../../../../data/service/shippeng-fees/shipping-fess.service';
 @Component({
   selector: 'app-edit-product-to-cart-modal',
   templateUrl: './edit-product-to-cart-modal.component.html',
@@ -8,7 +9,7 @@ import { ModalDataService } from '../../modal/modal.data.service';
 })
 export class EditPRoductToCartModalComponent implements OnInit {
 
-  constructor(private modalService: ModalService, private modalDataService: ModalDataService) { }
+  constructor(private modalService: ModalService, private modalDataService: ModalDataService, private shippingFessService: ShippingFessService) { }
   product: any;
   productSelected: any;
   showNotification: boolean = false;
@@ -43,7 +44,6 @@ export class EditPRoductToCartModalComponent implements OnInit {
             if (element.sizes.id === this.productSelected.sizeId) {
               this.selectedSizeStore = true;
             }
-
           }
         });
         console.log(this.productSelected);
@@ -54,6 +54,13 @@ export class EditPRoductToCartModalComponent implements OnInit {
       }
     }
 
+  }
+
+  onQuantityChange(event: { quantity: number; productId: string }): void {
+    const { quantity, productId } = event;
+    this.userSelectedQuantity = quantity;
+    // Assuming you have a service method to handle the update
+    this.shippingFessService.updateProductQuantity(productId, quantity);
   }
 
   logColor(colorWithSizes: any): void {
@@ -77,11 +84,11 @@ export class EditPRoductToCartModalComponent implements OnInit {
     this.sizeQuantities = size.quantity;
   }
 
-  onQuantityChange(newQuantity: number): void {
-    // Update your logic here based on the new quantity
-    // For example, you can check if newQuantity > sizeQuantities and update accordingly
-    this.userSelectedQuantity = newQuantity;
-  }
+  // onQuantityChange(newQuantity: number): void {
+  //   // Update your logic here based on the new quantity
+  //   // For example, you can check if newQuantity > sizeQuantities and update accordingly
+  //   this.userSelectedQuantity = newQuantity;
+  // }
 
   onCloseModal() {
     console.log("close")

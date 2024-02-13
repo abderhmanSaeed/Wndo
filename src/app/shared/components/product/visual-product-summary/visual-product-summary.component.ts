@@ -4,6 +4,9 @@ import { ProductResponse, productRecords } from '../../../models';
 import { ModalService } from '../../modal/modal.service';
 import { ConfirmationModalComponent } from '../../modals/confirmation-modal/confirmation-modal.component';
 import { ModalDataService } from '../../modal/modal.data.service';
+import { AddProductToCardModalComponent } from '../../modals/add-product-to-card-modal/add-product-to-card-modal.component';
+import { ProductService } from '../../../../data/service/product/product.service';
+import { EditPRoductToCartModalComponent } from '../../modals/edit-product-to-cart-modal/edit-product-to-cart-modal.component';
 type Product = {
   name: string;
   hexColor: string;
@@ -38,8 +41,10 @@ export class VisualProductSummaryComponent {
       value: 'Delete',
     },
   ];
+  productDetails: ProductResponse | null = null; // Initialize to null or default value
 
-  constructor(private shippingFessService: ShippingFessService, private modalService: ModalService, private modalDataService: ModalDataService) { }
+  constructor(private shippingFessService: ShippingFessService, private modalService: ModalService,
+    private modalDataService: ModalDataService, private productService: ProductService,) { }
 
   // onQuantityChange(quantity: number): void {
   //   if (this.product && this.product.id) {
@@ -55,19 +60,56 @@ export class VisualProductSummaryComponent {
     this.shippingFessService.updateProductQuantity(productId, quantity);
   }
 
-  onDropdownChange(selectedValue: string, id: any) {
+  onDropdownChange(selectedValue: string, productId: any) {
     if (selectedValue === 'Edit') {
+      this.getProductDetails(productId);
+
 
     }
     if (selectedValue === 'Delete') {
-      this.handleConfirm(id);
+      this.handleDelete(productId);
     }
     console.log("Selected Value:", selectedValue);
-    console.log("Selected order Number:", id);
+    console.log("Selected order Number:", productId);
   }
 
-  handleConfirm(id: any) {
-    this.modalDataService.setProductId({ productId: id });
+  getProductDetails(productId: any): void {
+    this.productService.getProductDetails(productId)
+      .subscribe(
+        (data: ProductResponse) => {
+          console.log('Product Details:', data);
+          this.productDetails = data; // Assign the response to the variable
+          this.handleEdit();
+          this.modalDataService.setData({ product: data?.responseData });
+
+        },
+        error => {
+          console.error('Error:', error);
+          // Optionally handle error, e.g., display an error message
+        }
+      );
+  }
+
+  handleEdit() {
+
+    this.modalService.open(EditPRoductToCartModalComponent, {
+      animations: {
+        modal: {
+          enter: 'enter-slide-down 0.8s',
+        },
+        overlay: {
+          enter: 'fade-in 0.8s',
+          leave: 'fade-out 0.3s forwards',
+        },
+      },
+      size: {
+        width: '36rem',
+      },
+    });
+  }
+
+  handleDelete(productId: any) {
+    this.modalDataService.setProductId({ productId: productId });
 
     this.modalService.open(ConfirmationModalComponent, {
       animations: {

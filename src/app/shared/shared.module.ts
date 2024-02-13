@@ -55,6 +55,7 @@ import { RefundOrderComponent } from './components/modals/refund-order/refund-or
 import { CancelOrderComponent } from './components/modals/cancel-order/cancel-order.component';
 import { IsEmptyComponent } from './components/order/is-empty/is-empty.component';
 import { ConfirmationModalComponent } from './components/modals/confirmation-modal/confirmation-modal.component';
+import { EditPRoductToCartModalComponent } from './components/modals/edit-product-to-cart-modal/edit-product-to-cart-modal.component';
 
 register();
 
@@ -100,7 +101,8 @@ register();
     RefundOrderComponent,
     CancelOrderComponent,
     IsEmptyComponent,
-    ConfirmationModalComponent
+    ConfirmationModalComponent,
+    EditPRoductToCartModalComponent
   ],
   imports: [
     CommonModule,

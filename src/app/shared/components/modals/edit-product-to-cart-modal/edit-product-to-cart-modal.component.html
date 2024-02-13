@@ -4,7 +4,6 @@
       <h6 class="mb-4 text-lg">{{'chooseColor' | translate}}</h6>
       <ul class="flex flex-wrap gap-2" role="list" aria-label="Show color and Sizes of product">
         <li role="listitem">
-          {{product?.colorWithSizes | json}}
           <button *ngFor="let colorWithSizes of product?.colorWithSizes" type="button"
         class="capitalize leading-0 product-color-button hover:text-white border h-6 px-3 bg-white border-gray-150 rounded-[3px] text-xxs"
         [style.--hover-color]="'#' + colorWithSizes?.color?.hexaCode"

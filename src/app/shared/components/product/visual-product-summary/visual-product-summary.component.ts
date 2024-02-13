@@ -1,6 +1,9 @@
 import { ShippingFessService } from './../../../../data/service/shippeng-fees/shipping-fess.service';
 import { Component, Input } from '@angular/core';
 import { ProductResponse, productRecords } from '../../../models';
+import { ModalService } from '../../modal/modal.service';
+import { ConfirmationModalComponent } from '../../modals/confirmation-modal/confirmation-modal.component';
+import { ModalDataService } from '../../modal/modal.data.service';
 type Product = {
   name: string;
   hexColor: string;
@@ -24,7 +27,19 @@ export class VisualProductSummaryComponent {
   @Input() hasCustomBorderColor?: boolean = false;
   @Input() hasQuantity?: boolean = true;
   productQuantity: number = 0;
-  constructor(private shippingFessService: ShippingFessService) { }
+
+  dropdownactions: any = [
+    {
+      label: 'Edit',
+      value: 'Edit',
+    },
+    {
+      label: 'Delete',
+      value: 'Delete',
+    },
+  ];
+
+  constructor(private shippingFessService: ShippingFessService, private modalService: ModalService, private modalDataService: ModalDataService) { }
 
   // onQuantityChange(quantity: number): void {
   //   if (this.product && this.product.id) {
@@ -40,6 +55,35 @@ export class VisualProductSummaryComponent {
     this.shippingFessService.updateProductQuantity(productId, quantity);
   }
 
+  onDropdownChange(selectedValue: string, id: any) {
+    if (selectedValue === 'Edit') {
+
+    }
+    if (selectedValue === 'Delete') {
+      this.handleConfirm(id);
+    }
+    console.log("Selected Value:", selectedValue);
+    console.log("Selected order Number:", id);
+  }
+
+  handleConfirm(id: any) {
+    this.modalDataService.setProductId({ productId: id });
+
+    this.modalService.open(ConfirmationModalComponent, {
+      animations: {
+        modal: {
+          enter: 'enter-slide-down 0.8s',
+        },
+        overlay: {
+          enter: 'fade-in 0.8s',
+          leave: 'fade-out 0.3s forwards',
+        },
+      },
+      size: {
+        width: '36rem',
+      },
+    });
+  }
 
 
 }

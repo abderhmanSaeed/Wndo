@@ -177,6 +177,7 @@ export class ProductDetailsCardComponent implements OnInit {
           id: product.id,
           name: product.name,
           hexColor: this.colorWithSizesSelected.color.hexaCode,
+          colorId: this.colorWithSizesSelected.color.id,
           size: this.size.name,
           sizeQuantity: this.size.quantity,
           quantity: this.productQuantity,

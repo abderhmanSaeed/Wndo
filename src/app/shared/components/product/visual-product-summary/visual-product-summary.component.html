@@ -36,6 +36,7 @@
 
 
     <div *ngIf="hasQuantity" class="flex flex-wrap justify-between w-full">
+
       <p class="flex-grow">
         <span class="line-through me-2 text-xs" *ngIf="product.totalPrice > 0"
           >{{ product.totalPrice }} EGP</span
@@ -55,6 +56,27 @@
                      [maxQuantity]="product.sizeQuantity">
 </app-quantity-button>
     </div>
+    <div class="flex lg:flex-col justify-between">
+      <section class="flex-grow self-end">
+        <app-dropdown
+        [id]="'actionDropdown' + product.id"
+        [showSelectedValue]="false"
+        [options]="dropdownactions"
+        dropdownIcon="fa-ellipsis-vertical"
+        [classes]="{
+          label: 'bg-primary-100',
+          toggleBtn: 'outline-none w-8 h-8 rounded-full hover:bg-gray-200',
+          list: 'w-[220px] lg:w-auto shadow px-4 space-y-3',
+          base: '!h-auto',
+          listItem: 'bg-primary-100',
+          dropdownMenu:'lg:!w-[220px] before:!-end-3 lg:before:!end-2 ',
+          menuBtn:'bg-primary-100'
+        }"
+        (valueChanged)="onDropdownChange($event, product.id)">
+      </app-dropdown>
+
+      </section>
+      </div>
 
     <ng-content></ng-content>
   </div>

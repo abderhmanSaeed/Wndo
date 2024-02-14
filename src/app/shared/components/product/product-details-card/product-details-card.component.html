@@ -122,7 +122,7 @@
       } -->
 
       <div
-        *ngIf="sizeQuantities || product?.quantity !== -1"
+        *ngIf="sizeQuantities || product?.quantity !== -1 || (colorWithSizes?.color?.quantity !== -1 && colorWithSizes)"
         class="mb-8 flex flex-wrap gap-8 items-center"
       >
         <h6>Quantity:</h6>

@@ -43,8 +43,16 @@
         ></app-step>
       </ng-container>
     </div>
-
     <div class="stepper__footer" *ngIf="hasActionFooter">
+      <button
+      type="button"
+      *ngIf="currentStep === 0 && addMoreProduct"
+      (click)="addMore()"
+      class="button button--primary !py-0 button--bordered rounded-full flex-auto xl:flex-initial xl:px-24"
+    >
+    ADD MORE PRODUCT
+    </button>
+
       <button
         type="button"
         *ngIf="currentStep >= 1"

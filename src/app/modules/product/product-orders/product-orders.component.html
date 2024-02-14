@@ -1,14 +1,15 @@
 <app-header-of-page></app-header-of-page>
 <section class="content-page">
 
-  <app-stepper>
+
+  <app-stepper [addMoreProduct]="true">
     <app-step
       label="Check Out"
       icon="bag-coloring"
       [template]="checkout"
       nextButtonLabel="CHECK OUT"
-      additionalAction='<a (click)="addMore()" routerLink="/product/productDetails" class="button button--primary button--bordered rounded-full px-24">ADD MORE PRODUCT</a>'
-    >
+      >
+      <!-- additionalAction='<a (click)="addMore()" routerLink="/product/productDetails" class="button button--primary button--bordered rounded-full px-24">ADD MORE PRODUCT</a>' -->
     </app-step>
     <app-step
       label="Shipping & Payment"

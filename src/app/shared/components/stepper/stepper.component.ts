@@ -19,6 +19,7 @@ import { OrderTrackState, ShippingFeeRequest } from '../../models';
 import { Location } from '@angular/common'; // Import Location
 import { ShippingFessService } from '../../../data/service/shippeng-fees/shipping-fess.service';
 import { Subscription } from 'rxjs';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -29,6 +30,7 @@ import { Subscription } from 'rxjs';
 export class StepperComponent implements AfterContentInit , OnDestroy  {
   @Input() btnLabel: string = 'Next';
   @Input() disabledNextButton: boolean = false;
+  @Input() addMoreProduct: boolean = false;
   @Input() hasActionFooter: boolean = true;
   @Input() stateOfSellerOrder: any;
   shippingFee: any;
@@ -37,7 +39,7 @@ export class StepperComponent implements AfterContentInit , OnDestroy  {
   constructor(private renderer: Renderer2, private modalService: ModalService,
     private sharedService: SharedService, private authService: AuthService,
     private location: Location, private shippingFessService: ShippingFessService ,
-    private orderService: OrderService) { }
+    private orderService: OrderService , private router: Router) { }
 
   @ContentChildren(StepComponent) steps: QueryList<StepComponent> | undefined;
   currentStep: number = 0;
@@ -221,6 +223,12 @@ export class StepperComponent implements AfterContentInit , OnDestroy  {
         this.currentStep = 0; // Default or initial step
     }
   }
+
+  addMore(): void {
+    console.log('addMore is called');
+    this.router.navigate(['/product/productDetails']);
+  }
+
   ngOnDestroy() {
     // Unsubscribe to prevent memory leaks
     this.subscription.unsubscribe();

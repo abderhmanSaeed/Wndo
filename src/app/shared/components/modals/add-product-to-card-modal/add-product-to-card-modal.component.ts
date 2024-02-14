@@ -176,6 +176,7 @@ export class AddProductToCardModalComponent implements OnInit {
           name: product.name,
           sizeQuantity: product.quantity,
           quantity: this.productQuantity,
+          sellerId: product?.seller?.id,
           totalPrice: product.price.price,
           priceAfterDiscount: product.price.priceAfterOffer,
           image: (product.images && product.images.length > 0) ? product.images[0].urlPreview : (product.image ? product.image.urlPreview : null)
@@ -194,6 +195,7 @@ export class AddProductToCardModalComponent implements OnInit {
           colorId: this.colorWithSizesSelected.color.id,
           size: this.size.name,
           sizeQuantity: this.size.quantity,
+          sellerId: product?.seller?.id,
           quantity: this.productQuantity,
           totalPrice: product.price.price,
           priceAfterDiscount: product.price.priceAfterOffer,
@@ -213,6 +215,7 @@ export class AddProductToCardModalComponent implements OnInit {
           size: this.size?.name,
           sizeQuantity: this.size?.quantity,
           quantity: this.productQuantity,
+          sellerId: product?.seller?.id,
           totalPrice: product.price.price,
           priceAfterDiscount: product.price.priceAfterOffer,
           image: (product.images && product.images.length > 0) ? product.images[0].urlPreview : (product.image ? product.image.urlPreview : null)

@@ -179,8 +179,9 @@ export class ProductDetailsCardComponent implements OnInit {
           hexColor: this.colorWithSizesSelected.color.hexaCode,
           colorId: this.colorWithSizesSelected.color.id,
           size: this.size.name,
-          sizeId : this.size.id,
+          sizeId: this.size.id,
           sizeQuantity: this.size.quantity,
+          sellerId: product?.seller?.id,
           quantity: this.productQuantity,
           totalPrice: product.price.price,
           priceAfterDiscount: product.price.priceAfterOffer,
@@ -251,8 +252,24 @@ export class ProductDetailsCardComponent implements OnInit {
         // );
       }
     } else {
+      if (product.quantity !== -1 && product.quantity >= this.productQuantity) {
+        // Add a new product
+        const newProduct = {
+          id: product.id,
+          name: product.name,
+          sizeQuantity: product.quantity,
+          quantity: this.productQuantity,
+          sellerId: product?.seller?.id,
+          totalPrice: product.price.price,
+          priceAfterDiscount: product.price.priceAfterOffer,
+          image: product.images[0].urlPreview
+        };
+
+        // Push the new product to the existing array
+        existingProducts.push(newProduct);
+      }
       // If the product does not exist, check if a new product can be added
-      if (this.size.quantity >= this.productQuantity) {
+      else if (product.colorWithSizes && this.size.quantity >= this.productQuantity) {
         // Add a new product
         const newProduct = {
           id: product.id,
@@ -260,8 +277,9 @@ export class ProductDetailsCardComponent implements OnInit {
           hexColor: this.colorWithSizesSelected.color.hexaCode,
           colorId: this.colorWithSizesSelected.color.id,
           size: this.size.name,
-          sizeId : this.size.id,
+          sizeId: this.size.id,
           sizeQuantity: this.size.quantity,
+          sellerId: product?.seller?.id,
           quantity: this.productQuantity,
           totalPrice: product.price.price,
           priceAfterDiscount: product.price.priceAfterOffer,
@@ -271,6 +289,26 @@ export class ProductDetailsCardComponent implements OnInit {
         // Push the new product to the existing array
         existingProducts.push(newProduct);
         this.showAddTocardMessage = true
+      }
+      else if (product.sizes && this.size.quantity >= this.productQuantity) {
+        // Add a new product
+        const newProduct = {
+          id: product.id,
+          name: product.name,
+          size: this.size?.name,
+          sizeQuantity: this.size?.quantity,
+          quantity: this.productQuantity,
+          sellerId: product?.seller?.id,
+          totalPrice: product.price.price,
+          priceAfterDiscount: product.price.priceAfterOffer,
+          image: product.images[0].urlPreview
+        };
+
+        // Push the new product to the existing array
+        existingProducts.push(newProduct);
+        this.showAddTocardMessage = true
+
+
       } else {
         // Show a snackbar error message with detailed information
         this.showCustomNotification();
@@ -308,9 +346,17 @@ export class ProductDetailsCardComponent implements OnInit {
 
   logColor(colorWithSizes: any): void {
     console.log(colorWithSizes);
-    this.selectedColor = colorWithSizes?.color?.id
-      ;
-    this.colorWithSizesSelected = colorWithSizes;
+    this.selectedColor = colorWithSizes?.color?.id;
+    if (colorWithSizes?.color?.quantity !== -1) {
+      // Check if the size already exists in sizeQuantities, if not, initialize it to 0
+      if (this.sizeQuantities > colorWithSizes?.color?.quantity && this.userSelectedQuantity > colorWithSizes?.color?.quantity) {
+        this.productQuantity = colorWithSizes?.color?.quantity;
+
+      }
+      this.sizeQuantities = colorWithSizes?.color?.quantity;
+    } else {
+      this.colorWithSizesSelected = colorWithSizes;
+    }
   }
   logSize(size: any): void {
     this.size = size;

@@ -20,6 +20,7 @@ import { Location } from '@angular/common'; // Import Location
 import { ShippingFessService } from '../../../data/service/shippeng-fees/shipping-fess.service';
 import { Subscription } from 'rxjs';
 import { Router } from '@angular/router';
+import { OrderConfirmedModal } from '../modals/order-confirmed-modal/order-confirmed-modall.component';
 
 
 @Component({
@@ -27,7 +28,7 @@ import { Router } from '@angular/router';
   templateUrl: './stepper.component.html',
   styleUrls: ['./stepper.component.scss'],
 })
-export class StepperComponent implements AfterContentInit , OnDestroy  {
+export class StepperComponent implements AfterContentInit, OnDestroy {
   @Input() btnLabel: string = 'Next';
   @Input() disabledNextButton: boolean = false;
   @Input() addMoreProduct: boolean = false;
@@ -38,8 +39,8 @@ export class StepperComponent implements AfterContentInit , OnDestroy  {
 
   constructor(private renderer: Renderer2, private modalService: ModalService,
     private sharedService: SharedService, private authService: AuthService,
-    private location: Location, private shippingFessService: ShippingFessService ,
-    private orderService: OrderService , private router: Router) { }
+    private location: Location, private shippingFessService: ShippingFessService,
+    private orderService: OrderService, private router: Router) { }
 
   @ContentChildren(StepComponent) steps: QueryList<StepComponent> | undefined;
   currentStep: number = 0;
@@ -101,16 +102,59 @@ export class StepperComponent implements AfterContentInit , OnDestroy  {
 
 
       }
-      else if (this.currentStep === 2 && this.location.path().includes('/product/productOrders')) {
-        // If the current step is the "Shipping & Payment" step, call the get Shipping Fees method
-      }
+      // else if (this.currentStep === 2 && this.location.path().includes('/product/productOrders')) {
+      //   // If the current step is the "Shipping & Payment" step, call the get Shipping Fees method
+      // }
       else {
         // Otherwise, proceed to the next step
         this.currentStep++;
         this.updateCurrentStepTemplate();
       }
     }
+    else {
+      if (this.currentStep === 2 && this.location.path().includes('/product/productOrders')) {
+        this.submitOrder();
+      }
+    }
   }
+  submitOrder() {
+    this.orderService.getOrder().subscribe(order => {
+      if (order) { // Check if the order is not null
+        // Use the dynamically obtained order data
+        const orderData = {
+          pickUpTime: order.pickUpTime,
+          paymentMethod: order.paymentMethod,
+          addressId: order.addressId,
+          voucherCode: order.voucherCode,
+          totalOrderPrice: order.totalOrderPrice,
+          shippingFees: order.shippingFees,
+          orderItems: order.orderItems.map(item => ({
+            productId: item.productId,
+            sellerId: item.sellerId,
+            sizeId: item.sizeId,
+            colorId: item.colorId,
+            quantity: item.quantity,
+          })),
+        };
+
+        this.orderService.placeOrder(orderData).subscribe({
+          next: (response: any) => {
+            if (response.statusCode === 200 && response.responseData?.orderNumber) {
+              this.orderService.setOrderNumber(response.responseData.orderNumber);
+              this.openOrderConfirmedModal();
+            }
+
+            console.log('Order placed successfully', response)
+          },
+          error: (error) => console.error('Error placing order:', error),
+        });
+      } else {
+        console.error('No order data available');
+        // Handle the case where there is no order data (maybe redirect the user or show a message)
+      }
+    });
+  }
+
   private subscribeToOrder() {
 
     this.subscription.add(
@@ -122,12 +166,13 @@ export class StepperComponent implements AfterContentInit , OnDestroy  {
   }
 
   fetchShippingFees(): void {
-      const request = this.shippingFessService.getShippingFeeRequest();
+    const request = this.shippingFessService.getShippingFeeRequest();
     this.shippingFessService.getShippingFees(request)
       .subscribe({
         next: (response) => {
           this.shippingFee = response;
           this.shippingFessService.updateShippingFee(response.responseData);
+          this.orderService.setShippingFees(response.responseData);
           this.currentStep++;
           this.updateCurrentStepTemplate();
           console.log('Shipping fee fetched successfully:', response);
@@ -136,6 +181,22 @@ export class StepperComponent implements AfterContentInit , OnDestroy  {
           console.error('Error fetching shipping fees:', error);
         }
       });
+  }
+  openOrderConfirmedModal() {
+    this.modalService.open(OrderConfirmedModal, {
+      animations: {
+        modal: {
+          enter: 'enter-slide-down 0.8s',
+        },
+        overlay: {
+          enter: 'fade-in 0.8s',
+          leave: 'fade-out 0.3s forwards',
+        },
+      },
+      size: {
+        width: '36rem',
+      },
+    });
   }
   openLoginModal() {
     this.modalService.open(LoginPhonePasswordComponent, {

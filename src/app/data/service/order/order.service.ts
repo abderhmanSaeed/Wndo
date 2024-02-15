@@ -8,7 +8,8 @@ import { BehaviorSubject } from 'rxjs';
   providedIn: 'root'
 })
 export class OrderService {
-  private order = new BehaviorSubject<Order|null>(null);
+  private order = new BehaviorSubject<Order | null>(null);
+  private orderNumberSource = new BehaviorSubject<number | null>(null);
 
   private apiEndPoint = '';
 
@@ -17,7 +18,7 @@ export class OrderService {
     this.apiEndPoint = environment.apiEndPoint;
   }
 
-  addOrder(orderData: any) {
+  placeOrder(orderData: any) {
     const url = `${this.apiEndPoint}/order`;
 
     // Define headers
@@ -42,7 +43,15 @@ export class OrderService {
       this.order.next(currentOrder);
     }
   }
+  // Getter to expose the orderNumber as an observable for components to subscribe
+  getOrderNumber() {
+    return this.orderNumberSource.asObservable();
+  }
 
+  // Method to update the orderNumber
+  setOrderNumber(orderNumber: number) {
+    this.orderNumberSource.next(orderNumber);
+  }
   private initializeOrderIfNeeded() {
     if (!this.order.value) {
       // Initialize a new Order object with default values

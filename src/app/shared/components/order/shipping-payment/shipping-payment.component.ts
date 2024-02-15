@@ -51,8 +51,7 @@ export class ShippingPaymentComponent implements OnInit, OnDestroy {
     this.subscriptions.add(
       this.orderService.getOrder().subscribe(order => {
         console.log(order);
-        if (order)
-        {
+        if (order) {
           this.currentPaymentMethod = order.paymentMethod;
           this.currentShippingTime = order.pickUpTime;
         }
@@ -122,14 +121,15 @@ export class ShippingPaymentComponent implements OnInit, OnDestroy {
     this.selectedAddresses = newValue;
     this.shippingFessService.updateAddressId(newValue);
     this.orderService.setAddressId(newValue);
+    // Find the address object with matching ID
+    const matchedAddress = this.addresses.find((address) => address.value === newValue);
 
-    // if (newValue === '0') {
-    //   this.districtsAndZones = [];
-    // } else {
+    if (matchedAddress) {
+      // Use the matched address object for shippingFessService.setAddress
+      this.shippingFessService.setAddress(matchedAddress);
+    }
+    // this.shippingFessService.setAddress(newValue);
 
-    //   this.getDistrictsAndZones(newValue);
-    // }
-    // Additional logic when city changes, if needed
   }
 
   onDistrictChange(newValue: any) {

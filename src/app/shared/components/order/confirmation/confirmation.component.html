@@ -6,13 +6,19 @@
       <li class="flex-1">
         <h6 class="text-blue-800 text-start mb-4">Shipping Address</h6>
         <p class="text-purple-500 text-sm">
-          12, Bay Brook, Sharps Rd, Keilor East, Melbourne, Australia
+          {{address?.label}}
         </p>
       </li>
       <li class="flex-1 lg:ms-4 lg:ps-6 pt-4 lg:pt-0">
         <h6 class="text-blue-800 text-start mb-4">Payment</h6>
-        <p class="text-sm text-purple-500">
-          <i class="fa-solid fa-door-open text-primary"></i> Cash on Delievery
+        <p *ngIf="order?.paymentMethod === 0" class="text-sm text-purple-500">
+          <i  class="fa-solid fa-door-open text-primary"></i>
+
+          Cash on Delievery
+        </p>
+        <p *ngIf="order?.paymentMethod === 1" class="text-sm text-purple-500">
+          <i  class="fa-solid fa-door-open text-primary"></i>
+          card
         </p>
       </li>
     </ul>
@@ -39,5 +45,6 @@
     <button type="button" class="ms-auto button text-xs button--primary button--bordered">
       ADD VOUCHER
     </button>
+
   </div>
 </div>

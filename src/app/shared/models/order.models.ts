@@ -4,7 +4,7 @@ export class Order {
   addressId: number;
   voucherCode: string;
   totalOrderPrice: number;
-  shippingFees: number;
+  shippingFees: any;
   orderItems: OrderItem[];
 
   constructor(
@@ -13,7 +13,7 @@ export class Order {
     addressId: number,
     voucherCode: string,
     totalOrderPrice: number,
-    shippingFees: number,
+    shippingFees: any,
     orderItems: OrderItem[]
   ) {
     this.pickUpTime = pickUpTime;

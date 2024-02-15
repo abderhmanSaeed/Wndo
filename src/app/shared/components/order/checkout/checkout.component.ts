@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ProductResponse } from '../../../models';
 import { ProductService } from '../../../../data/service/product/product.service';
+import { OrderService } from '../../../../data/service/order/order.service';
 
 @Component({
   selector: 'app-checkout',
@@ -53,7 +54,7 @@ export class CheckoutComponent implements OnInit {
   //     image: "https://m.media-amazon.com/images/I/717yp7Ut+xL._AC_SY879_.jpg"
   //   }
   // ]
-  constructor(private productService: ProductService) { }
+  constructor(private productService: ProductService, private orderService: OrderService) { }
 
   ngOnInit(): void {
     // Retrieve products from localStorage
@@ -73,7 +74,7 @@ export class CheckoutComponent implements OnInit {
       (response) => {
         // Handle the response from the API
         console.log(response);
-        this.productsBackEnd =response.responseData;
+        this.productsBackEnd = response.responseData;
         this.aggregateProductDetails(response.responseData);
       },
       (error) => {
@@ -94,9 +95,9 @@ export class CheckoutComponent implements OnInit {
       // Assuming totalVoucherAmount is the sum of all voucher amounts (placeholder here)
       this.totalDetails.totalVoucherAmount += voucherAmount;
     });
-
     // Assuming totalOrderPrice is the sum of all actual prices and shipping fees minus voucher amounts
     this.totalDetails.totalOrderPrice = this.totalDetails.totalActualPrice + this.totalDetails.totalShippingFees - this.totalDetails.totalVoucherAmount;
+    this.orderService.setTotalOrderPrice(this.totalDetails.totalOrderPrice);
   }
 
 }

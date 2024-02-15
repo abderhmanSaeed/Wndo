@@ -10,6 +10,8 @@ import { ShippingFeeRequest, apiResponse, productRecords } from '../../../shared
 })
 export class ShippingFessService {
   private apiEndPoint = '';
+  private address: any = {}; // This can be a more specific address type
+  private addressSource = new BehaviorSubject<any>(null); // Initialize with a default value if necessary
 
   private productRecordsSource = new BehaviorSubject<productRecords[]>([]);
 
@@ -44,7 +46,7 @@ export class ShippingFessService {
 
   }
 
-  updateShippingFee(shippingFee: number): void {
+  updateShippingFee(shippingFee: any): void {
     this.shippingFee.next(shippingFee);
 
   }
@@ -63,7 +65,13 @@ export class ShippingFessService {
     };
   }
 
+  setAddress(address: any) {
+    this.addressSource.next(address);
+  }
 
+  getAddress() {
+    return this.addressSource.asObservable();
+  }
   getShippingFees(requestBody: ShippingFeeRequest): Observable<apiResponse> {
     const url = `${this.apiEndPoint}/product-web/shipping-fees`;
 

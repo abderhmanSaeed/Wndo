@@ -12,9 +12,6 @@
   <div class="content-page">
     <section class="flex justify-between items-center">
       <div class="flex items-end w-32 h-32 mt-12">
-        <!-- <img class="rounded-full h-full w-full" [src]="sellerProfile?.cover " alt="{{ seller?.id }}"
-          [class.cursor-pointer]="!isProductOffersRoute" (click)="logSellerId()"
-          *ngIf="(!isProductOffersRoute && this.seller) || sellerProfile" /> -->
         <img class="rounded-full h-full w-full" [src]="seller?.imagePath ?seller?.imagePath :sellerProfile?.photo " alt="{{ seller?.id }}"
           [class.cursor-pointer]="!isProductOffersRoute" (click)="logSellerId()"
           *ngIf="ShowSeler" />

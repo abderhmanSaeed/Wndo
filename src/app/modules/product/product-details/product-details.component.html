@@ -1,6 +1,6 @@
 <!-- <button (click)="getProductDetails()">Get Product Details</button> -->
 
-<app-header-of-page [seller]="productDetails?.responseData?.seller"></app-header-of-page>
+<app-header-of-page [seller]="productDetails?.responseData?.seller" [sellerProfile]="sellerProfile"></app-header-of-page>
 
 <section aria-label="product-details" class="content-page">
   <app-product-details-card [product]="productDetails?.responseData"

@@ -4,6 +4,7 @@ import { ProductService } from './../../../data/service/product/product.service'
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
+import { SellerProductsOffersService } from './../../../data/service/seller-products-offers/seller-products-offers.service';
 
 
 @Component({
@@ -18,9 +19,11 @@ export class ProductDetailsComponent implements OnInit {
   productDetails: ProductResponse | null = null; // Initialize to null or default value
   responseData: ProductApiAlsoResponse | null = null; // Initialize to null or default value
   productColorAndSizesResponse: ProductColorAndSizesResponse | undefined;
+  sellerProfile: any;
 
   // productId: any = '7a734dd3-3cf8-4ec1-b7ad-7a8912d0a03b';
-  constructor(private productService: ProductService, private route: ActivatedRoute,) {
+  constructor(private productService: ProductService, private route: ActivatedRoute,
+    private SellerProductsOffersService: SellerProductsOffersService) {
 
   }
   ngOnInit(): void {
@@ -54,6 +57,8 @@ export class ProductDetailsComponent implements OnInit {
             if (!currentSellerId || currentSellerId !== newSellerId) {
               // Set the new sellerId in local storage
               localStorage.setItem('sellerId', newSellerId);
+              this.fetchSellerProfile(newSellerId);
+
             }
           } else {
             // Handle the case where newSellerId is undefined or null
@@ -93,5 +98,16 @@ export class ProductDetailsComponent implements OnInit {
         },
         error => console.error('Error:', error)
       );
+  }
+
+  fetchSellerProfile(sellerId: string): void {
+    this.SellerProductsOffersService.getSellerProfile(sellerId).subscribe({
+      next: (data) => {
+        this.sellerProfile = data?.responseData;
+      },
+      error: (error) => {
+        console.error('There was an error!', error);
+      }
+    });
   }
 }

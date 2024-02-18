@@ -1,17 +1,15 @@
 <app-header-of-page></app-header-of-page>
 <section class="content-page">
 
-  <!-- label="Check Out" -->
-  <app-stepper>
+
+  <app-stepper [addMoreProduct]="true">
     <app-step
       [label]="'checkOut' | translate"
       icon="bag-coloring"
       [template]="checkout"
-      [nextButtonLabel]="'checkOut' | translate"
-      additionalAction='<a (click)="addMore()" routerLink="/product/productDetails" class="button button--primary button--bordered rounded-full px-24">{{"addMoreProduct" | translate}}</a>'
-    >
+      nextButtonLabel="CHECK OUT"
+      >
     </app-step>
-
     <app-step
       [label]="'shipping&Pyament' | translate"
       icon="shipping"

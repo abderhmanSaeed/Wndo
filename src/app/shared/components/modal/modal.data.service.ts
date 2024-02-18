@@ -5,6 +5,7 @@ import { Injectable } from '@angular/core';
 })
 export class ModalDataService {
   private data: any;
+  private ProductId: any;
   private orderNumber: any;
   private selectedReason: any = 3;
   private ItemOrOrder: any;
@@ -15,6 +16,14 @@ export class ModalDataService {
 
   getData(): any {
     return this.data;
+  }
+
+  setProductId(ProductId: any) {
+    this.ProductId = ProductId;
+  }
+
+  getProductId(): any {
+    return this.ProductId;
   }
   setOrderNumber(orderNumber: any) {
     this.orderNumber = orderNumber;

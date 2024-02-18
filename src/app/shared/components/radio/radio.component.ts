@@ -1,13 +1,15 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { ModalDataService } from '../modal/modal.data.service';
+import { PaymentType, PickUpTime } from '../../models';
 
 type OptionProps = {
   label: string,
-  value: string,
+  value: any; // Union type for value
   name: string,
   desc?: string,
   children?: any
 }
+
 
 type ClassesProps = {
   label?: string,
@@ -33,6 +35,8 @@ export class RadioComponent  {
   @Input() isFloating: boolean = false;
   @Input() name: string = "";
   @Input() value: string = "";
+  @Input() valueCheked!: number;
+
   @Input() classes?: ClassesProps;
   @Input() error: string = "";
   @Input() color: 'primary' | 'warning' | 'danger' = "primary";
@@ -60,4 +64,5 @@ export class RadioComponent  {
     }
 
   }
+
 }

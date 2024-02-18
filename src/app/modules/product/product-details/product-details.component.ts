@@ -4,6 +4,7 @@ import { ProductService } from './../../../data/service/product/product.service'
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
+import { SellerProductsOffersService } from './../../../data/service/seller-products-offers/seller-products-offers.service';
 
 
 @Component({
@@ -18,9 +19,11 @@ export class ProductDetailsComponent implements OnInit {
   productDetails: ProductResponse | null = null; // Initialize to null or default value
   responseData: ProductApiAlsoResponse | null = null; // Initialize to null or default value
   productColorAndSizesResponse: ProductColorAndSizesResponse | undefined;
+  sellerProfile: any;
 
   // productId: any = '7a734dd3-3cf8-4ec1-b7ad-7a8912d0a03b';
-  constructor(private productService: ProductService, private route: ActivatedRoute,) {
+  constructor(private productService: ProductService, private route: ActivatedRoute,
+    private SellerProductsOffersService: SellerProductsOffersService) {
 
   }
   ngOnInit(): void {
@@ -42,6 +45,26 @@ export class ProductDetailsComponent implements OnInit {
         (data: ProductResponse) => {
           console.log('Product Details:', data);
           this.productDetails = data; // Assign the response to the variable
+          // Assume data is the object you've received
+          const newSellerId = data?.responseData?.seller?.id;
+
+          // Check if newSellerId has a value
+          if (newSellerId) {
+            // Retrieve the current sellerId from local storage
+            const currentSellerId = localStorage.getItem('sellerId');
+
+            // Check if currentSellerId does not exist or if it is different from the newSellerId
+            if (!currentSellerId || currentSellerId !== newSellerId) {
+              // Set the new sellerId in local storage
+              localStorage.setItem('sellerId', newSellerId);
+              this.fetchSellerProfile(newSellerId);
+
+            }
+          } else {
+            // Handle the case where newSellerId is undefined or null
+            console.error('No seller ID present in the data response.');
+          }
+
         },
         error => {
           console.error('Error:', error);
@@ -75,5 +98,16 @@ export class ProductDetailsComponent implements OnInit {
         },
         error => console.error('Error:', error)
       );
+  }
+
+  fetchSellerProfile(sellerId: string): void {
+    this.SellerProductsOffersService.getSellerProfile(sellerId).subscribe({
+      next: (data) => {
+        this.sellerProfile = data?.responseData;
+      },
+      error: (error) => {
+        console.error('There was an error!', error);
+      }
+    });
   }
 }

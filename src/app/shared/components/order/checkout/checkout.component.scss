@@ -1,0 +1,18 @@
+/* In your CSS file (e.g., styles.css or component.css) */
+.remove-all-items {
+  background-color: transparent;
+  border: none;
+  color: red;
+  // text-transform: uppercase;
+  cursor: pointer;
+  padding: 8px 16px;
+  font-size: 16px;
+  outline: none;
+  font-weight: bold;
+  /* Add additional styling such as font-family, hover effects, etc. as needed */
+}
+
+.remove-all-items:hover {
+  /* Style for hover state, for example changing the color slightly */
+  color: darkred;
+}

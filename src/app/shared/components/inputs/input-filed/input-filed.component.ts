@@ -19,6 +19,8 @@ export class InputFiledComponent implements OnInit {
   @Input() required: boolean = false;
   @Input() isFloating: boolean = false;
   @Input() name: string = "";
+  @Input() DefaultName: boolean = false;
+
   @Input() value: string = "";
   @Input() classes?: ClassesProps;
   @Input() error: string = "";
@@ -35,7 +37,7 @@ export class InputFiledComponent implements OnInit {
       // Subscribe to the userName$ observable
       this.authService.userName$.subscribe((userName) => {
         this.isUserNameAvailable = !!userName; // Set isUserNameAvailable based on the presence of userName
-        if (userName) {
+        if (userName && this.DefaultName) {
           this.value = userName;
         }
       });

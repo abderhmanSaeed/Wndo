@@ -114,7 +114,7 @@ export class ProductOrdersComponent implements OnInit {
 
 
   addMore(): void {
+    console.log('addMore is called');
     this.router.navigate(['/product/productDetails']);
-    console.log('any thing');
   }
 }

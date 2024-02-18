@@ -32,4 +32,10 @@ export class SellerProductsOffersService {
     // Make the GET request and return the observable
     return this.http.get(endpointUrl);
   }
+
+  getSellerProfile(sellerId: string): Observable<any> {
+    const endpointUrl = `${this.apiEndPoint}/buyer/seller-profile/${sellerId}`;
+
+    return this.http.get(endpointUrl);
+  }
 }

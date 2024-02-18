@@ -8,6 +8,7 @@
           [required]="true"
           [label]='"yourName" | translate'
           [isFloating]="true"
+          [DefaultName]="true"
           [placeholder]='"addName" | translate'
           name="name"
           [classes]="{
@@ -35,6 +36,20 @@
       </p>
     </section>
     <section class="bg-white rounded p-4">
+
+      <app-select
+            [options]="addresses"
+            placeholder="Enter your city"
+            label="City"
+            [required]="true"
+            name="cities"
+            [classes]="{
+              label: 'peer-focus:text-base peer-focus:font-medium font-medium text-base',
+              labelColor: 'peer-focus:text-purple-500'
+            }"
+            [isFloating]="true"
+            (valueChange)="onAddressesChange($event)"> <!-- This line handles the emitted value -->
+           </app-select>
       <h6 class="text-sm text-blue-900">Shipping Address</h6>
       <div class="grid sm:grid-cols-2 p-5 gap-6">
         <div>
@@ -43,22 +58,45 @@
               label: 'peer-focus:text-base peer-focus:font-medium',
               labelColor: 'peer-focus:text-purple-500'
             }"></app-input-filed>
+
+<!-- <app-select [options]="districtsAndZones" placeholder="Enter your Shipping Address" label="Address Name" [required]="true"
+name="Address Name" [classes]="{
+  label:
+    'peer-focus:text-base peer-focus:font-medium font-medium text-base',
+  labelColor: 'peer-focus:text-purple-500'
+}" [isFloating]="true"></app-select> -->
         </div>
         <div>
-          <app-select [options]="cities" placeholder="Enter your city" label="City" [required]="true" name="cities"
+          <!-- <app-select [options]="cities" placeholder="Enter your city" label="City" [required]="true" name="cities"
             [classes]="{
               label:
                 'peer-focus:text-base peer-focus:font-medium font-medium text-base',
               labelColor: 'peer-focus:text-purple-500'
-            }" [isFloating]="true"></app-select>
+            }" [isFloating]="true"></app-select> -->
+
+            <app-select
+            [options]="cities"
+            placeholder="Enter your city"
+            label="City"
+            [required]="true"
+            name="cities"
+            [classes]="{
+              label: 'peer-focus:text-base peer-focus:font-medium font-medium text-base',
+              labelColor: 'peer-focus:text-purple-500'
+            }"
+            [isFloating]="true"
+            (valueChange)="onCityChange($event)"> <!-- This line handles the emitted value -->
+           </app-select>
+
+
         </div>
         <div>
-          <app-select [options]="cities" placeholder="Enter your district name" label="District" [required]="true"
+          <app-select [options]="districtsAndZones" placeholder="Enter your district name" label="District" [required]="true"
             name="district" [classes]="{
               label:
                 'peer-focus:text-base peer-focus:font-medium font-medium text-base',
               labelColor: 'peer-focus:text-purple-500'
-            }" [isFloating]="true"></app-select>
+            }" [isFloating]="true" (valueChange)="onDistrictChange($event)"></app-select>
         </div>
         <div>
           <app-input-filed [required]="true" label="Street Address" [isFloating]="true"
@@ -75,6 +113,14 @@
               labelColor: 'peer-focus:text-purple-500'
             }"></app-input-filed>
         </div>
+        <div>
+          <app-input-filed label="Zone" [isFloating]="true" placeholder="Enter Your Zone"
+            name="Address" [classes]="{
+              label: 'peer-focus:text-base',
+              labelColor: 'peer-focus:text-purple-500'
+            }"></app-input-filed>
+        </div>
+
       </div>
     </section>
   </form>
@@ -82,7 +128,9 @@
   <div class="">
     <div class="bg-white px-6 py-5.5">
       <h6 class="text-purple-500 mb-6 font-normal">Choose Payment Method</h6>
-      <app-radio [options]="paymentMethods"> </app-radio>
+      <!-- <app-radio [options]="paymentMethods"> </app-radio> -->
+      <app-radio [options]="paymentMethods" (change)="onPaymentMethodChange($event)" [value]="currentPaymentMethod"></app-radio>
+
       <p class="text-orange-400 text-xs mt-2 flex items-center gap-1">
         <svg-icon src="../../../../../assets/icons/gift.svg"> </svg-icon>
         Additional discount if you pay by credit card
@@ -97,7 +145,9 @@
 
     <div class="bg-white px-6 py-5.5">
       <h6 class="text-purple-500 mb-6 font-normal">Choose Shipping Time</h6>
-      <app-radio [options]="shippingTimes"> </app-radio>
+      <!-- <app-radio [options]="shippingTimes"> </app-radio> -->
+      <app-radio [options]="shippingTimes" (change)="onShippingTimeChange($event)" [value]="currentShippingTime"></app-radio>
+
 
     </div>
   </div>

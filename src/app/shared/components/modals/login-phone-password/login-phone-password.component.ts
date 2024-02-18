@@ -1,3 +1,4 @@
+import { SignUpComponent } from './../sign-up/sign-up.component';
 import { AuthService } from './../../../../data/service/auth/auth.service';
 import { LoginService } from './../../../../data/service/login/login.service';
 import { SharedService } from './../../../services/shared.service';
@@ -27,6 +28,7 @@ export class LoginPhonePasswordComponent implements OnInit {
   // Define an EventEmitter for emitting the close event
   @Output() closeEvent = new EventEmitter<void>();
   userNAme: any;
+  showLoginMessage: boolean = false;
   constructor(private modalService: ModalService, private countryPhoneCodeService: CountryPhoneCodeService,
     private sharedService: SharedService, private authService: AuthService, private loginService: LoginService, private cdr: ChangeDetectorRef,
     private location: Location) { }
@@ -75,6 +77,10 @@ export class LoginPhonePasswordComponent implements OnInit {
             this.cdr.detectChanges(); // Manually trigger change detection
             this.userNAme = response.responseData.userName;
             this.close();
+            this.showLoginMessage = true;
+            setTimeout(() => {
+              this.showLoginMessage = false;
+            }, 3000);
           }
           else {
             this.InvalidMessage = response?.errorMessage;
@@ -117,7 +123,7 @@ export class LoginPhonePasswordComponent implements OnInit {
 
             // this.close();
           }
-          else{
+          else {
             this.InvalidMessage = response?.errorMessage;
             this.showInvalidMessage = true;
             this.invalid = true;
@@ -152,6 +158,28 @@ export class LoginPhonePasswordComponent implements OnInit {
           // Handle HTTP errors
         }
       );
+  }
+  NavigateToSignup() {
+    this.modalService.close();
+    this.handleSignUp()
+
+  }
+  handleSignUp() {
+    console.log("SignUp")
+    this.modalService.open(SignUpComponent, {
+      animations: {
+        modal: {
+          enter: 'enter-slide-down 0.8s',
+        },
+        overlay: {
+          enter: 'fade-in 0.8s',
+          leave: 'fade-out 0.3s forwards',
+        },
+      },
+      size: {
+        width: '36rem',
+      },
+    });
   }
   handleSelectedOption(selectedCountryCode: string): void {
     this.selectedCountryCode = selectedCountryCode;

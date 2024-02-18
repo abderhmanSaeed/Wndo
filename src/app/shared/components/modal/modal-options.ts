@@ -17,4 +17,8 @@ export interface Options {
     height?: string;
     maxHeight?: string;
   };
+  // Add a context property that can be of any type. You can also specify a more specific type if desired.
+  context?: {
+    [key: string]: any;
+  };
 }

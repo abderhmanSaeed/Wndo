@@ -90,17 +90,59 @@ export class AddProductToCardModalComponent implements OnInit {
     if (existingProductsString) {
       existingProducts = JSON.parse(existingProductsString);
     }
+    let existingProductIndex = -1;
+    if (product.quantity !== -1) {
+      // Check if the product with the same ID and hexaCode already exists
+       existingProductIndex = existingProducts.findIndex(existingProduct =>
+        existingProduct.id === product.id);
+    }
+    if (product.colorWithSizes.length > 0) {
+      // Check if the product with the same ID and hexaCode already exists
+       existingProductIndex = existingProducts.findIndex(existingProduct =>
+        existingProduct.id === product.id && existingProduct.hexColor === this.colorWithSizesSelected.color.hexaCode
+      );
+    }
+    if (product.sizes.length > 0) {
+      // Check if the product with the same ID and hexaCode already exists
+       existingProductIndex = existingProducts.findIndex(existingProduct =>
+        existingProduct.id === product.id && existingProduct.hexColor === this.colorWithSizesSelected.color.hexaCode
+      );
+    }
 
-    // Check if the product with the same ID and hexaCode already exists
-    const existingProductIndex = existingProducts.findIndex(existingProduct =>
-      existingProduct.id === product.id && existingProduct.hexColor === this.colorWithSizesSelected.color.hexaCode
-    );
 
     if (existingProductIndex !== -1) {
       // If the product already exists, check if quantity update is allowed
       const existingProduct = existingProducts[existingProductIndex];
       this.existingProductStore = existingProduct;
-      if (this.size.quantity >= existingProduct.quantity + this.productQuantity) {
+      if (product.quantity !== -1 && product.quantity >= existingProduct.quantity + this.productQuantity) {
+        // Update the existing product quantity
+        existingProducts[existingProductIndex] = {
+          ...existingProduct,
+          // size: this.size.name,
+          // sizeQuantity: this.size.quantity,
+          quantity: existingProduct.quantity + this.productQuantity,
+          // totalPrice: product.price.price,
+          // priceAfterDiscount: product.price.priceAfterOffer,
+
+        };
+        this.onCloseModal();
+
+      }
+      else if (product.colorWithSizes && this.size.quantity >= existingProduct.quantity + this.productQuantity) {
+        // Update the existing product quantity
+        existingProducts[existingProductIndex] = {
+          ...existingProduct,
+          // size: this.size.name,
+          // sizeQuantity: this.size.quantity,
+          quantity: existingProduct.quantity + this.productQuantity,
+          // totalPrice: product.price.price,
+          // priceAfterDiscount: product.price.priceAfterOffer,
+
+        };
+        this.onCloseModal();
+
+      }
+      else if (product.sizes && product.sizes >= existingProduct.quantity + this.productQuantity) {
         // Update the existing product quantity
         existingProducts[existingProductIndex] = {
           ...existingProduct,
@@ -127,15 +169,53 @@ export class AddProductToCardModalComponent implements OnInit {
       }
     } else {
       // If the product does not exist, check if a new product can be added
-      if (this.size.quantity >= this.productQuantity) {
+      if (product.quantity !== -1 && product.quantity >= this.productQuantity) {
+        // Add a new product
+        const newProduct = {
+          id: product.id,
+          name: product.name,
+          sizeQuantity: product.quantity,
+          quantity: this.productQuantity,
+          sellerId: product?.seller?.id,
+          totalPrice: product.price.price,
+          priceAfterDiscount: product.price.priceAfterOffer,
+          image: (product.images && product.images.length > 0) ? product.images[0].urlPreview : (product.image ? product.image.urlPreview : null)
+        };
+
+        // Push the new product to the existing array
+        existingProducts.push(newProduct);
+        this.onCloseModal();
+      }
+      else if (product.colorWithSizes && this.size.quantity >= this.productQuantity) {
         // Add a new product
         const newProduct = {
           id: product.id,
           name: product.name,
           hexColor: this.colorWithSizesSelected.color.hexaCode,
+          colorId: this.colorWithSizesSelected.color.id,
           size: this.size.name,
           sizeQuantity: this.size.quantity,
+          sellerId: product?.seller?.id,
           quantity: this.productQuantity,
+          totalPrice: product.price.price,
+          priceAfterDiscount: product.price.priceAfterOffer,
+          image: (product.images && product.images.length > 0) ? product.images[0].urlPreview : (product.image ? product.image.urlPreview : null)
+        };
+
+        // Push the new product to the existing array
+        existingProducts.push(newProduct);
+        this.onCloseModal();
+
+      }
+      else if (product.sizes && product.sizes >= this.productQuantity) {
+        // Add a new product
+        const newProduct = {
+          id: product.id,
+          name: product.name,
+          size: this.size?.name,
+          sizeQuantity: this.size?.quantity,
+          quantity: this.productQuantity,
+          sellerId: product?.seller?.id,
           totalPrice: product.price.price,
           priceAfterDiscount: product.price.priceAfterOffer,
           image: (product.images && product.images.length > 0) ? product.images[0].urlPreview : (product.image ? product.image.urlPreview : null)

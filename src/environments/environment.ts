@@ -9,6 +9,8 @@ export const environment = {
   production: false,
   version: env.npm_package_version + '-dev',
   serverUrl: '/api',
+  mobileAppIosUrl: 'https://apps.apple.com/eg/app/wndo/id1588238250',
+  mobileAppGooglePlayUrl: 'https://play.google.com/store/apps/details?id=com.window.wndo',
   envName: 'DEV',
   middleware: '',
   apiEndPoint: 'https://wndo.net:8090/api/app',

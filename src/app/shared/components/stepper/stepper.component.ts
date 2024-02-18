@@ -1,3 +1,4 @@
+import { OrderService } from './../../../data/service/order/order.service';
 import {
   Component,
   AfterContentInit,
@@ -7,13 +8,20 @@ import {
   Renderer2,
   ViewChild,
   ElementRef,
+  OnDestroy,
 } from '@angular/core';
 import { StepComponent } from './step/step.component';
 import { LoginPhonePasswordComponent } from '../modals/login-phone-password/login-phone-password.component';
 import { ModalService } from '../modal/modal.service';
 import { SharedService } from '../../services/shared.service';
 import { AuthService } from '../../../data/service/auth/auth.service';
-import { OrderTrackState } from '../../models';
+import { OrderTrackState, ShippingFeeRequest } from '../../models';
+import { Location } from '@angular/common'; // Import Location
+import { ShippingFessService } from '../../../data/service/shippeng-fees/shipping-fess.service';
+import { Subscription } from 'rxjs';
+import { Router, ActivatedRoute } from '@angular/router';
+import { OrderConfirmedModal } from '../modals/order-confirmed-modal/order-confirmed-modall.component';
+import { DomSanitizer } from '@angular/platform-browser';
 
 
 @Component({
@@ -21,14 +29,30 @@ import { OrderTrackState } from '../../models';
   templateUrl: './stepper.component.html',
   styleUrls: ['./stepper.component.scss'],
 })
-export class StepperComponent implements AfterContentInit {
+export class StepperComponent implements AfterContentInit, OnDestroy {
+  showPaymentIframe = false;
+  paymentUrl: string = '';
   @Input() btnLabel: string = 'Next';
   @Input() disabledNextButton: boolean = false;
+  @Input() addMoreProduct: boolean = false;
   @Input() hasActionFooter: boolean = true;
   @Input() stateOfSellerOrder: any;
+  shippingFee: any;
+  private subscription: Subscription = new Subscription();
 
   constructor(private renderer: Renderer2, private modalService: ModalService,
-    private sharedService: SharedService, private authService: AuthService) { }
+    private sharedService: SharedService, private authService: AuthService,
+    private location: Location, private shippingFessService: ShippingFessService,
+    private orderService: OrderService, private router: Router, private sanitizer: DomSanitizer,
+    private route: ActivatedRoute) {
+    this.route.queryParams.subscribe(params => {
+      const orderNumber = params['orderNumber'];
+      if (orderNumber) {
+        // Navigate to the order process page
+        this.router.navigate(['/product/orderProcess', { orderNumber: orderNumber }]);
+      }
+    });
+  }
 
   @ContentChildren(StepComponent) steps: QueryList<StepComponent> | undefined;
   currentStep: number = 0;
@@ -54,8 +78,8 @@ export class StepperComponent implements AfterContentInit {
       this.updateCurrentStepTemplate();
     });
 
-    if(this.stateOfSellerOrder){
-      switch(this.stateOfSellerOrder) {
+    if (this.stateOfSellerOrder) {
+      switch (this.stateOfSellerOrder) {
         case OrderTrackState.pickup:
           this.currentStep++;
           this.updateCurrentStepTemplate();
@@ -82,12 +106,115 @@ export class StepperComponent implements AfterContentInit {
       if (this.currentStep === 0 && !auth) {
         // If the current step is the "Check Out" step, call the openLoginModal method
         this.openLoginModal();
-      } else {
+      }
+      else if (this.currentStep === 1 && this.location.path().includes('/product/productOrders')) {
+        // If the current step is the "Shipping & Payment" step, call the get Shipping Fees method
+        this.fetchShippingFees();
+        this.orderService.getOrder();
+
+
+      }
+      // else if (this.currentStep === 2 && this.location.path().includes('/product/productOrders')) {
+      //   // If the current step is the "Shipping & Payment" step, call the get Shipping Fees method
+      // }
+      else {
         // Otherwise, proceed to the next step
         this.currentStep++;
         this.updateCurrentStepTemplate();
       }
     }
+    else {
+      if (this.currentStep === 2 && this.location.path().includes('/product/productOrders')) {
+        this.submitOrder();
+      }
+    }
+  }
+  submitOrder() {
+    this.orderService.getOrder().subscribe(order => {
+      if (order) { // Check if the order is not null
+        // Use the dynamically obtained order data
+        const orderData = {
+          pickUpTime: order.pickUpTime,
+          paymentMethod: order.paymentMethod,
+          addressId: order.addressId,
+          voucherCode: order.voucherCode,
+          totalOrderPrice: order.totalOrderPrice,
+          shippingFees: order.shippingFees,
+          orderItems: order.orderItems.map(item => ({
+            productId: item.productId,
+            sellerId: item.sellerId,
+            sizeId: item.sizeId,
+            colorId: item.colorId,
+            quantity: item.quantity,
+          })),
+        };
+
+        this.orderService.placeOrder(orderData).subscribe({
+          next: (response: any) => {
+            if (response.statusCode === 200 && response.responseData?.orderNumber) {
+              this.orderService.setOrderNumber(response.responseData.orderNumber);
+              this.openOrderConfirmedModal();
+              // Remove products from localStorage
+              localStorage.removeItem('products');
+            }
+            if (response.statusCode === 200 && response.responseData?.orderNumber === 0 && response.responseData?.redirectUrl) {
+              // Redirect to the payment page
+              window.location.href = response.responseData.redirectUrl;
+            }
+
+            console.log('Order placed successfully', response)
+          },
+          error: (error) => console.error('Error placing order:', error),
+        });
+      } else {
+        console.error('No order data available');
+        // Handle the case where there is no order data (maybe redirect the user or show a message)
+      }
+    });
+  }
+
+  private subscribeToOrder() {
+
+    this.subscription.add(
+      this.orderService.getOrder().subscribe(order => {
+        // Handle the order update here
+        console.log(order);
+      })
+    );
+  }
+
+  fetchShippingFees(): void {
+    const request = this.shippingFessService.getShippingFeeRequest();
+    this.shippingFessService.getShippingFees(request)
+      .subscribe({
+        next: (response) => {
+          this.shippingFee = response;
+          this.shippingFessService.updateShippingFee(response.responseData);
+          this.orderService.setShippingFees(response.responseData);
+          this.currentStep++;
+          this.updateCurrentStepTemplate();
+          console.log('Shipping fee fetched successfully:', response);
+        },
+        error: (error) => {
+          console.error('Error fetching shipping fees:', error);
+        }
+      });
+  }
+  openOrderConfirmedModal() {
+    this.modalService.open(OrderConfirmedModal, {
+      animations: {
+        modal: {
+          enter: 'enter-slide-down 0.8s',
+        },
+        overlay: {
+          enter: 'fade-in 0.8s',
+          leave: 'fade-out 0.3s forwards',
+        },
+      },
+      size: {
+        width: '36rem',
+      },
+    });
   }
   openLoginModal() {
     this.modalService.open(LoginPhonePasswordComponent, {
@@ -158,7 +285,7 @@ export class StepperComponent implements AfterContentInit {
   }
 
   updateCurrentStep(stateOfSellerOrder: any): void {
-    switch(stateOfSellerOrder) {
+    switch (stateOfSellerOrder) {
       case OrderTrackState.placed:
         this.currentStep = OrderTrackState.placed; // Assuming the first step is 0
         break;
@@ -176,4 +303,23 @@ export class StepperComponent implements AfterContentInit {
     }
   }
 
+  addMore(): void {
+    // Retrieve the seller ID from local storage
+    const sellerId = localStorage.getItem('sellerId');
+
+    // Check if the sellerId is not null before calling the service
+    if (sellerId) {
+      this.router.navigate(['/product/productOffers', { sellerId: sellerId }]);
+
+    } else {
+      // Handle the case where sellerId is not found in local storage
+      console.error('Seller ID not found in local storage');
+    }
+
+  }
+
+  ngOnDestroy() {
+    // Unsubscribe to prevent memory leaks
+    this.subscription.unsubscribe();
+  }
 }

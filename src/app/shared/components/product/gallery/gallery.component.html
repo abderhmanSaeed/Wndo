@@ -10,7 +10,7 @@
         [config]="swiperConfig"
         controller-control=".swiperThumbs"
       >
-        <swiper-slide *ngFor="let item of images.concat(videos)" class="h-full">
+        <swiper-slide *ngFor="let item of images?.concat(videos)" class="h-full">
           <div class="slider__image">
             <img
               *ngIf="item.imageId; else videoTemplatePreview"
@@ -31,7 +31,7 @@
     </div>
 
     <div class="justify-center flex flex-col gap-y-2">
-      <button type="button" class="slider__prev hidden md:flex" *ngIf="images.length > 3">
+      <button type="button" class="slider__prev hidden md:flex" *ngIf="images && images.length > 3">
         {{'Prev' | translate}}
       </button>
       <div class="slider__thumbs">
@@ -57,7 +57,7 @@
             </div>
           </swiper-slide> -->
 
-          <ng-container *ngFor="let item of images.concat(videos); let i = index">
+          <ng-container *ngFor="let item of images?.concat(videos); let i = index">
             <swiper-slide  class="slider__slide" [class.swiper-slide-active]="index === i">
               <div class="slider__image">
                 <ng-container *ngIf="item.imageId; else videoTemplate">
@@ -70,6 +70,7 @@
                 <ng-template #videoTemplate>
                   <video (click)="slideChange(item)" [poster]="item.urlThumbnail">
                     <source [src]="item.urlPreview" type="video/mp4" />
+
                     Your browser does not support the video tag.
                   </video>
                 </ng-template>

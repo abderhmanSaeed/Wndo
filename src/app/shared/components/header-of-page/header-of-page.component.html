@@ -1,10 +1,21 @@
-<section class="header-page mb-24" [class.mb-40]="isShowDetails" [ngClass]="{ flex: isProductOffersRoute }">
+<!-- <section class="header-page mb-24" [class.mb-40]="isShowDetails" [ngClass]="{ flex: isProductOffersRoute }"> -->
+
+  <section class="header-page mb-24"
+         [class.mb-40]="isShowDetails"
+         [ngClass]="{ 'flex': isProductOffersRoute }"
+         [ngStyle]="{'background-image': 'url(' + sellerProfile?.cover + ')',
+                     'background-repeat': 'no-repeat',
+                     'background-size': 'cover',
+                     'height': '125px',
+                     'background-position': 'center'}">
+
   <div class="content-page">
     <section class="flex justify-between items-center">
       <div class="flex items-end w-32 h-32 mt-12">
-        <img class="rounded-full h-full w-full" [src]="seller?.imagePath" alt="{{ seller?.id }}"
+        <img class="rounded-full h-full w-full" [src]="seller?.imagePath ?seller?.imagePath :sellerProfile?.photo " alt="{{ seller?.id }}"
           [class.cursor-pointer]="!isProductOffersRoute" (click)="logSellerId()"
-          *ngIf="!isProductOffersRoute && this.seller" />
+          *ngIf="ShowSeler" />
+          <!-- (!isProductOffersRoute && this.seller) || sellerProfile -->
       </div>
 
       <ul class="flex gap-5">
@@ -17,9 +28,9 @@
             [routerLink]="['/product/productOrders']">
             <svg-icon src="../../../../assets/icons/cart.svg"
               [svgStyle]="{ 'width.px': 22, fill: '#4E4E78' }"></svg-icon>
-            <span
+            <span *ngIf="products.length > 0 "
               class="inline-flex items-center justify-center w-4 h-4 text-xxs text-white bg-primary rounded-full -mt-2">
-              {{ products.length }}
+              {{  products.length  }}
             </span>
           </button>
 
@@ -29,19 +40,18 @@
 
     <section class="flex items-baseline justify-between gap-y-3 ms-32 -mt-10 flex-wrap">
       <div *ngIf="isShowDetails">
-        <h5 class="text-lg text-blue-700 font-medium mb-3">More Beauty</h5>
+        <h5 class="text-lg text-blue-700 font-medium mb-3">{{sellerProfile?.name}}</h5>
         <p class="text-sm font-normal text-blueGray-400 mb-2">
-          Lorem Ipsum is simply dummy text of the printing and typesetting
-          industry.
+          {{sellerProfile?.bio}}
         </p>
         <ul class="flex gap-2">
-          <li *ngFor="let item of socialMedia">
+          <!-- <li *ngFor="let item of socialMedia">
             <a [href]="item.href" class="hover:opacity-80">
               <svg-icon [src]="'../../../../assets/icons/' + item.icon + '.svg'"
                 [svgStyle]="{ 'width.px': 20 }"></svg-icon>
               <span class="sr-only">social meida</span>
             </a>
-          </li>
+          </li> -->
         </ul>
       </div>
       <div class="ms-auto">

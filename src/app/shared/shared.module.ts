@@ -1,3 +1,5 @@
+import { SafeUrlPipe } from './pipes/safeUrl.pipe';
+import { AuthInterceptorService } from './../core/interceptors/response-interceptor/auth-interceptor.service';
 import { LoaderInterceptor } from './../core/interceptors/loader-interceptor/loader.interceptor';
 import { FilterByPipe } from './pipes/filter-by.pipe';
 import { TokenInterceptor } from '../core/interceptors/auth-interceptor/token.interceptor';
@@ -53,6 +55,8 @@ import { ConfirmationDetailsComponent } from './components/product/confirmation-
 import { RefundOrderComponent } from './components/modals/refund-order/refund-order.component';
 import { CancelOrderComponent } from './components/modals/cancel-order/cancel-order.component';
 import { IsEmptyComponent } from './components/order/is-empty/is-empty.component';
+import { ConfirmationModalComponent } from './components/modals/confirmation-modal/confirmation-modal.component';
+import { EditPRoductToCartModalComponent } from './components/modals/edit-product-to-cart-modal/edit-product-to-cart-modal.component';
 
 register();
 
@@ -97,7 +101,10 @@ register();
     ConfirmationDetailsComponent,
     RefundOrderComponent,
     CancelOrderComponent,
-    IsEmptyComponent
+    IsEmptyComponent,
+    ConfirmationModalComponent,
+    EditPRoductToCartModalComponent,
+    SafeUrlPipe
   ],
   imports: [
     CommonModule,
@@ -155,7 +162,8 @@ register();
     ConfirmationDetailsComponent,
     RefundOrderComponent,
     CancelOrderComponent,
-    IsEmptyComponent
+    IsEmptyComponent,
+    SafeUrlPipe
   ],
   providers: [
     TranslationService,
@@ -164,7 +172,8 @@ register();
       useClass: TokenInterceptor,
       multi: true
     },
-    { provide: HTTP_INTERCEPTORS, useClass: LoaderInterceptor, multi: true }
+    { provide: HTTP_INTERCEPTORS, useClass: LoaderInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptorService, multi: true },
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })

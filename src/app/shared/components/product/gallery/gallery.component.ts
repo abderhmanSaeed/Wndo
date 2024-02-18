@@ -13,46 +13,47 @@ import { VideoModalComponent } from '../video-modal/video-modal.component';
 })
 export class GalleryComponent implements OnInit {
   @Input() videoUrl: string = '';
-  // @Input() images: Image[] = [];
-  images: any[] = [
-    {
-      id: 45084,
-      imageId: '53453',
-      urlPreview: 'https://swiperjs.com/demos/images/nature-1.jpg',
-      urlThumbnail: 'https://swiperjs.com/demos/images/nature-1.jpg',
-    },
-    {
-      id: 45085,
-      imageId: '53453',
-      urlPreview: 'https://swiperjs.com/demos/images/nature-2.jpg',
-      urlThumbnail: 'https://swiperjs.com/demos/images/nature-2.jpg',
-    },
-    {
-      id: 45086,
-      imageId: '4353',
-      urlPreview: 'https://swiperjs.com/demos/images/nature-3.jpg',
-      urlThumbnail: 'https://swiperjs.com/demos/images/nature-3.jpg',
-    },
-    {
-      id: 45087,
-      imageId: '453',
-      urlPreview: 'https://swiperjs.com/demos/images/nature-4.jpg',
-      urlThumbnail: 'https://swiperjs.com/demos/images/nature-4.jpg',
-    },
-  ];
-  videos: any[] = [
-    {
-      id: 17203,
-      videoId: '9e1097f7-111e-4cf3-b2ff-d4bcbf82c87d',
-      urlThumbnail:
-        'https://wndoprobucket.s3.eu-west-3.amazonaws.com/a6ad2173-f649-4c7c-abc5-5f71d0b48e13.png',
-      urlPreview:
-        'https://wndovodstack-source71e471f1-12o7ase9r16a7.s3.eu-west-3.amazonaws.com/assets01/9e1097f7-111e-4cf3-b2ff-d4bcbf82c87d.3gp',
-      isMain: true,
-      name: 'Main',
-      description: 'Main',
-    },
-  ];
+  @Input() images: any[] = [];
+  @Input() videos: any[] = [];
+  // images: any[] = [
+  //   {
+  //     id: 45084,
+  //     imageId: '53453',
+  //     urlPreview: 'https://swiperjs.com/demos/images/nature-1.jpg',
+  //     urlThumbnail: 'https://swiperjs.com/demos/images/nature-1.jpg',
+  //   },
+  //   {
+  //     id: 45085,
+  //     imageId: '53453',
+  //     urlPreview: 'https://swiperjs.com/demos/images/nature-2.jpg',
+  //     urlThumbnail: 'https://swiperjs.com/demos/images/nature-2.jpg',
+  //   },
+  //   {
+  //     id: 45086,
+  //     imageId: '4353',
+  //     urlPreview: 'https://swiperjs.com/demos/images/nature-3.jpg',
+  //     urlThumbnail: 'https://swiperjs.com/demos/images/nature-3.jpg',
+  //   },
+  //   {
+  //     id: 45087,
+  //     imageId: '453',
+  //     urlPreview: 'https://swiperjs.com/demos/images/nature-4.jpg',
+  //     urlThumbnail: 'https://swiperjs.com/demos/images/nature-4.jpg',
+  //   },
+  // ];
+  // videos: any[] = [
+  //   {
+  //     id: 17203,
+  //     videoId: '9e1097f7-111e-4cf3-b2ff-d4bcbf82c87d',
+  //     urlThumbnail:
+  //       'https://wndoprobucket.s3.eu-west-3.amazonaws.com/a6ad2173-f649-4c7c-abc5-5f71d0b48e13.png',
+  //     urlPreview:
+  //       'https://wndovodstack-source71e471f1-12o7ase9r16a7.s3.eu-west-3.amazonaws.com/assets01/9e1097f7-111e-4cf3-b2ff-d4bcbf82c87d.3gp',
+  //     isMain: true,
+  //     name: 'Main',
+  //     description: 'Main',
+  //   },
+  // ];
   @ViewChild('swiper') swiper!: ElementRef<SwiperContainer>;
   @ViewChild('swiperThumbs') swiperThumbs!: ElementRef<SwiperContainer>;
   urlPreview: any;
@@ -104,9 +105,11 @@ export class GalleryComponent implements OnInit {
   // }
   constructor(private modalService: BsModalService) {}
   ngOnInit(): void {
-    this.urlPreview = this.images[0].urlPreview;
+    // this.urlPreview = this.images[0]?.urlPreview;
   }
   ngAfterViewInit() {
+    this.urlPreview = this.images[0]?.urlPreview;
+
     if (this.swiper && this.swiperThumbs) {
       this.swiper.nativeElement.swiper.controller.control =
         this.swiperThumbs.nativeElement.swiper;
@@ -116,22 +119,12 @@ export class GalleryComponent implements OnInit {
     console.log(this.index);
   }
 
-  // closeModal() {
-  //   this.bsModalRef.hide();
-  // }
-  // slideChange(swiperRef: any) {
-  //   this.index = swiperRef.detail[0].activeIndex;
-  // }
-
   slideChange(swiperRef: any) {
     console.log('🫠slideChange', swiperRef);
     this.urlPreview = swiperRef.urlPreview;
     this.index = this.images
       .concat(this.videos)
       .findIndex((item) => item.id === swiperRef.id);
-    // if(this.swiperThumbs){
-    //   console.log(this.images.concat(this.videos).findIndex((item) => item.id === swiperRef.id))
-    // }
   }
 
   currentIframe: HTMLIFrameElement | null = null;

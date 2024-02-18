@@ -8,5 +8,7 @@ export const environment = {
   envName: 'PROD',
   middleware: '',
   apiEndPoint: '',
+  mobileAppIosUrl: 'https://apps.apple.com/eg/app/wndo/id1588238250',
+  mobileAppGooglePlayUrl: 'https://play.google.com/store/apps/details?id=com.window.wndo',
 
 };

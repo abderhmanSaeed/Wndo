@@ -87,4 +87,9 @@
       </button>
     </div>
   </div>
+  <!-- In your component's template -->
+<div *ngIf="showPaymentIframe">
+  <iframe [src]="paymentUrl | safeUrl" width="100%" height="600px"></iframe>
+</div>
+
 </div>

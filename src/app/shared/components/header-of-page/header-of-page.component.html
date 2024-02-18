@@ -2,9 +2,13 @@
   <div class="content-page">
     <section class="flex justify-between items-center">
       <div class="flex items-end w-32 h-32 mt-12">
-        <img class="rounded-full h-full w-full" [src]="seller?.imagePath" alt="{{ seller?.id }}"
+        <!-- <img class="rounded-full h-full w-full" [src]="sellerProfile?.cover " alt="{{ seller?.id }}"
           [class.cursor-pointer]="!isProductOffersRoute" (click)="logSellerId()"
-          *ngIf="!isProductOffersRoute && this.seller" />
+          *ngIf="(!isProductOffersRoute && this.seller) || sellerProfile" /> -->
+        <img class="rounded-full h-full w-full" [src]="seller?.imagePath ?seller?.imagePath :sellerProfile?.photo " alt="{{ seller?.id }}"
+          [class.cursor-pointer]="!isProductOffersRoute" (click)="logSellerId()"
+          *ngIf="ShowSeler" />
+          <!-- (!isProductOffersRoute && this.seller) || sellerProfile -->
       </div>
 
       <ul class="flex gap-5">
@@ -29,19 +33,18 @@
 
     <section class="flex items-baseline justify-between gap-y-3 ms-32 -mt-10 flex-wrap">
       <div *ngIf="isShowDetails">
-        <h5 class="text-lg text-blue-700 font-medium mb-3">More Beauty</h5>
+        <h5 class="text-lg text-blue-700 font-medium mb-3">{{sellerProfile?.name}}</h5>
         <p class="text-sm font-normal text-blueGray-400 mb-2">
-          Lorem Ipsum is simply dummy text of the printing and typesetting
-          industry.
+          {{sellerProfile?.bio}}
         </p>
         <ul class="flex gap-2">
-          <li *ngFor="let item of socialMedia">
+          <!-- <li *ngFor="let item of socialMedia">
             <a [href]="item.href" class="hover:opacity-80">
               <svg-icon [src]="'../../../../assets/icons/' + item.icon + '.svg'"
                 [svgStyle]="{ 'width.px': 20 }"></svg-icon>
               <span class="sr-only">social meida</span>
             </a>
-          </li>
+          </li> -->
         </ul>
       </div>
       <div class="ms-auto">

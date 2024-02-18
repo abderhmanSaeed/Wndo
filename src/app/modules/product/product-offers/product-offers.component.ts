@@ -15,6 +15,7 @@ export class ProductOffersComponent implements OnInit {
   sellerProducts: any;
   sellerOffers: any;
   selectedTab: string = 'all-products'; // Initial selected tab
+  sellerProfile: any;
 
   constructor(private route: ActivatedRoute, private SellerProductsOffersService: SellerProductsOffersService) {
 
@@ -25,6 +26,18 @@ export class ProductOffersComponent implements OnInit {
     console.log('Seller ID in ProductOffersComponent:', sellerId);
     this.getSellerProducts(sellerId, false);
     this.getSellerOffers(sellerId, true);
+    // this.fetchSellerProfile(sellerId);
+  }
+
+  fetchSellerProfile(sellerId: any): void {
+    this.SellerProductsOffersService.getSellerProfile(sellerId).subscribe({
+      next: (data) => {
+        this.sellerProfile = data?.responseData;
+      },
+      error: (error) => {
+        console.error('There was an error!', error);
+      }
+    });
   }
 
   // Example method to call Seller Products

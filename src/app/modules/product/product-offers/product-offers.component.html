@@ -1,4 +1,4 @@
-<app-header-of-page [isShowDetails]="true"></app-header-of-page>
+<app-header-of-page [isShowDetails]="true" [sellerProfile]="sellerProfile"></app-header-of-page>
 <section aria-label="product-offers" class="content-page mt-6 lg:mt-0">
   <ng-container
     *ngIf="sellerProducts && sellerProducts?.items?.length > 0; else noProducts"

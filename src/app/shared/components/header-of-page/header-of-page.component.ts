@@ -15,6 +15,7 @@ import { LoginModalComponent } from '../modals/login-modal/login-modal.component
 import { LoginPhonePasswordComponent } from '../modals/login-phone-password/login-phone-password.component';
 import { SignUpComponent } from '../modals/sign-up/sign-up.component';
 import { Location } from '@angular/common'; // Import Location
+import { SellerProductsOffersService } from './../../../data/service/seller-products-offers/seller-products-offers.service';
 
 @Component({
   selector: 'app-header-of-page',
@@ -31,6 +32,7 @@ export class HeaderOfPageComponent implements OnInit, AfterViewInit {
   @ViewChild('logoutIcon', { read: TemplateRef })
   logoutIconTemplate!: TemplateRef<any>;
 
+  @Input() sellerProfile!: any;
   @Input() seller!: any;
   @Input() isShowDetails: boolean = false;
 
@@ -45,8 +47,11 @@ export class HeaderOfPageComponent implements OnInit, AfterViewInit {
   userName: string | null = null;
   products: any[] = [];
 
+  sellerId: string | null = '';
+
   showLoginMessage: boolean = false;
   successfullyMessage: string = 'Successfully logged in. Welcome';
+  ShowSeler: boolean = false;
 
   constructor(private modalService: ModalService,
     private route: ActivatedRoute,
@@ -54,7 +59,8 @@ export class HeaderOfPageComponent implements OnInit, AfterViewInit {
     private sharedService: SharedService,
     private authService: AuthService,
     private changeDetectorRef: ChangeDetectorRef,
-    private location: Location) { }
+    private location: Location,
+    private SellerProductsOffersService: SellerProductsOffersService) { }
 
   ngAfterViewInit(): void {
     this.authUserDropdown = [
@@ -158,6 +164,16 @@ export class HeaderOfPageComponent implements OnInit, AfterViewInit {
   ];
 
   ngOnInit(): void {
+    // Retrieve the seller ID from local storage
+    const sellerId = localStorage.getItem('sellerId');
+
+    // Check if the sellerId is not null before calling the service
+    if (sellerId) {
+      this.fetchSellerProfile(sellerId);
+    } else {
+      // Handle the case where sellerId is not found in local storage
+      console.error('Seller ID not found in local storage');
+    }
     const productsLocalStorage = localStorage.getItem('products');
     if (productsLocalStorage) {
       this.products = JSON.parse(productsLocalStorage);
@@ -200,7 +216,21 @@ export class HeaderOfPageComponent implements OnInit, AfterViewInit {
 
     // Check if the user is authenticated when the component is initialized
     this.checkAuthenticationStatus();
+    if (this.location.path().includes('/product/productDetails') || this.location.path().includes('/product/productOffers')) {
+      this.ShowSeler = true
+    }
 
+  }
+
+  fetchSellerProfile(sellerId: string): void {
+    this.SellerProductsOffersService.getSellerProfile(sellerId).subscribe({
+      next: (data) => {
+        this.sellerProfile = data?.responseData;
+      },
+      error: (error) => {
+        console.error('There was an error!', error);
+      }
+    });
   }
   private checkAuthenticationStatus(): void {
     const isAuthenticated = this.authService.isAuth();

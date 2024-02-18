@@ -19,8 +19,9 @@ import { OrderTrackState, ShippingFeeRequest } from '../../models';
 import { Location } from '@angular/common'; // Import Location
 import { ShippingFessService } from '../../../data/service/shippeng-fees/shipping-fess.service';
 import { Subscription } from 'rxjs';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { OrderConfirmedModal } from '../modals/order-confirmed-modal/order-confirmed-modall.component';
+import { DomSanitizer } from '@angular/platform-browser';
 
 
 @Component({
@@ -29,6 +30,8 @@ import { OrderConfirmedModal } from '../modals/order-confirmed-modal/order-confi
   styleUrls: ['./stepper.component.scss'],
 })
 export class StepperComponent implements AfterContentInit, OnDestroy {
+  showPaymentIframe = false;
+  paymentUrl: string = '';
   @Input() btnLabel: string = 'Next';
   @Input() disabledNextButton: boolean = false;
   @Input() addMoreProduct: boolean = false;
@@ -40,7 +43,16 @@ export class StepperComponent implements AfterContentInit, OnDestroy {
   constructor(private renderer: Renderer2, private modalService: ModalService,
     private sharedService: SharedService, private authService: AuthService,
     private location: Location, private shippingFessService: ShippingFessService,
-    private orderService: OrderService, private router: Router) { }
+    private orderService: OrderService, private router: Router, private sanitizer: DomSanitizer,
+    private route: ActivatedRoute) {
+    this.route.queryParams.subscribe(params => {
+      const orderNumber = params['orderNumber'];
+      if (orderNumber) {
+        // Navigate to the order process page
+        this.router.navigate(['/product/orderProcess', { orderNumber: orderNumber }]);
+      }
+    });
+  }
 
   @ContentChildren(StepComponent) steps: QueryList<StepComponent> | undefined;
   currentStep: number = 0;
@@ -142,6 +154,12 @@ export class StepperComponent implements AfterContentInit, OnDestroy {
             if (response.statusCode === 200 && response.responseData?.orderNumber) {
               this.orderService.setOrderNumber(response.responseData.orderNumber);
               this.openOrderConfirmedModal();
+              // Remove products from localStorage
+              localStorage.removeItem('products');
+            }
+            if (response.statusCode === 200 && response.responseData?.orderNumber === 0 && response.responseData?.redirectUrl) {
+              // Redirect to the payment page
+              window.location.href = response.responseData.redirectUrl;
             }
 
             console.log('Order placed successfully', response)
@@ -286,8 +304,18 @@ export class StepperComponent implements AfterContentInit, OnDestroy {
   }
 
   addMore(): void {
-    console.log('addMore is called');
-    this.router.navigate(['/product/productDetails']);
+    // Retrieve the seller ID from local storage
+    const sellerId = localStorage.getItem('sellerId');
+
+    // Check if the sellerId is not null before calling the service
+    if (sellerId) {
+      this.router.navigate(['/product/productOffers', { sellerId: sellerId }]);
+
+    } else {
+      // Handle the case where sellerId is not found in local storage
+      console.error('Seller ID not found in local storage');
+    }
+
   }
 
   ngOnDestroy() {

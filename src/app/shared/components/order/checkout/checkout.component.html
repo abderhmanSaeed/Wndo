@@ -1,6 +1,7 @@
 <div class="grid grid-cols-1 md:grid-cols-3 justify-between gap-10">
   <div class="md:col-span-2">
     <h6 class="text-blue-950 mb-6">Your Cart has ({{products.length}}) items</h6>
+      <button type="button" class="remove-all-items" (click)="removeAllItems()">{{ 'removeAllItems' | translate }}</button>
     <div class="scroll" *ngIf="products.length else isEmpty">
       <div *ngFor="let product of products" class="scroll__item">
         <div class="mb-6 ">

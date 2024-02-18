@@ -99,5 +99,12 @@ export class CheckoutComponent implements OnInit {
     this.totalDetails.totalOrderPrice = this.totalDetails.totalActualPrice + this.totalDetails.totalShippingFees - this.totalDetails.totalVoucherAmount;
     this.orderService.setTotalOrderPrice(this.totalDetails.totalOrderPrice);
   }
+  removeAllItems(): void {
+    // Remove products from localStorage
+    localStorage.removeItem('products');
+    window.location.reload();
+
+    // Implement the removal logic here
+  }
 
 }

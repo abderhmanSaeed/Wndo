@@ -42,6 +42,24 @@ export class ProductDetailsComponent implements OnInit {
         (data: ProductResponse) => {
           console.log('Product Details:', data);
           this.productDetails = data; // Assign the response to the variable
+          // Assume data is the object you've received
+          const newSellerId = data?.responseData?.seller?.id;
+
+          // Check if newSellerId has a value
+          if (newSellerId) {
+            // Retrieve the current sellerId from local storage
+            const currentSellerId = localStorage.getItem('sellerId');
+
+            // Check if currentSellerId does not exist or if it is different from the newSellerId
+            if (!currentSellerId || currentSellerId !== newSellerId) {
+              // Set the new sellerId in local storage
+              localStorage.setItem('sellerId', newSellerId);
+            }
+          } else {
+            // Handle the case where newSellerId is undefined or null
+            console.error('No seller ID present in the data response.');
+          }
+
         },
         error => {
           console.error('Error:', error);

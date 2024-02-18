@@ -1,3 +1,4 @@
+import { SafeUrlPipe } from './pipes/safeUrl.pipe';
 import { AuthInterceptorService } from './../core/interceptors/response-interceptor/auth-interceptor.service';
 import { LoaderInterceptor } from './../core/interceptors/loader-interceptor/loader.interceptor';
 import { FilterByPipe } from './pipes/filter-by.pipe';
@@ -102,7 +103,8 @@ register();
     CancelOrderComponent,
     IsEmptyComponent,
     ConfirmationModalComponent,
-    EditPRoductToCartModalComponent
+    EditPRoductToCartModalComponent,
+    SafeUrlPipe
   ],
   imports: [
     CommonModule,
@@ -160,7 +162,8 @@ register();
     ConfirmationDetailsComponent,
     RefundOrderComponent,
     CancelOrderComponent,
-    IsEmptyComponent
+    IsEmptyComponent,
+    SafeUrlPipe
   ],
   providers: [
     TranslationService,

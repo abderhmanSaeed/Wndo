@@ -269,7 +269,7 @@ export class ProductDetailsCardComponent implements OnInit {
         existingProducts.push(newProduct);
       }
       // If the product does not exist, check if a new product can be added
-      else if (product.colorWithSizes && this.size.quantity >= this.productQuantity) {
+      else if (product.colorWithSizes && this.size?.quantity >= this.productQuantity) {
         // Add a new product
         const newProduct = {
           id: product.id,
@@ -290,7 +290,27 @@ export class ProductDetailsCardComponent implements OnInit {
         existingProducts.push(newProduct);
         this.showAddTocardMessage = true
       }
-      else if (product.sizes && this.size.quantity >= this.productQuantity) {
+      // If the product does not exist, check if a new product can be added
+      else if (product.colorWithSizes && this.colorWithSizes.quantity >= this.productQuantity) {
+        // Add a new product
+        const newProduct = {
+          id: product.id,
+          name: product.name,
+          hexColor: this.colorWithSizes.hexaCode,
+          colorId: this.colorWithSizes.id,
+          sizeQuantity: this.colorWithSizes.quantity,
+          sellerId: product?.seller?.id,
+          quantity: this.productQuantity,
+          totalPrice: product.price.price,
+          priceAfterDiscount: product.price.priceAfterOffer,
+          image: product.images[0].urlPreview
+        };
+
+        // Push the new product to the existing array
+        existingProducts.push(newProduct);
+        this.showAddTocardMessage = true
+      }
+      else if (product.sizes && this.size?.quantity >= this.productQuantity) {
         // Add a new product
         const newProduct = {
           id: product.id,
@@ -346,6 +366,7 @@ export class ProductDetailsCardComponent implements OnInit {
 
   logColor(colorWithSizes: any): void {
     console.log(colorWithSizes);
+    this.colorWithSizes = colorWithSizes?.color;
     this.selectedColor = colorWithSizes?.color?.id;
     if (colorWithSizes?.color?.quantity !== -1) {
       // Check if the size already exists in sizeQuantities, if not, initialize it to 0
@@ -353,7 +374,10 @@ export class ProductDetailsCardComponent implements OnInit {
         this.productQuantity = colorWithSizes?.color?.quantity;
 
       }
-      this.sizeQuantities = colorWithSizes?.color?.quantity;
+      else{
+
+        this.sizeQuantities = colorWithSizes?.color?.quantity;
+      }
     } else {
       this.colorWithSizesSelected = colorWithSizes;
     }

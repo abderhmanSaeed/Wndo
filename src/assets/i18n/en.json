@@ -34,6 +34,9 @@
   "you-didnt-add-any-item-to-your-order": "You didn't add any item to your order",
   "copyright": "Wndo Business Solutions  All Rights Reserved.",
   "cartEmpty": "Your Cart is empty",
-  "successfullyAddCart":"Your Product Added to cart"
+  "successfullyAddCart":"Your Product Added to cart",
+  "outOfStock": "Out of Stock",
+  "removeAllItems":"Remove All Items"
+
 
 }

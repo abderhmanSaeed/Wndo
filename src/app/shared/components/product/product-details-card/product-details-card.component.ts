@@ -82,7 +82,7 @@ export class ProductDetailsCardComponent implements OnInit {
       ]
     }
   ]
-  colorWithSizes: any;
+  colorWithQuantity: any;
   constructor(private router: Router) {
     // Your constructor logic here
   }
@@ -291,14 +291,14 @@ export class ProductDetailsCardComponent implements OnInit {
         this.showAddTocardMessage = true
       }
       // If the product does not exist, check if a new product can be added
-      else if (product.colorWithSizes && this.colorWithSizes.quantity >= this.productQuantity) {
+      else if (product.colorWithSizes && this.colorWithQuantity.quantity >= this.productQuantity) {
         // Add a new product
         const newProduct = {
           id: product.id,
           name: product.name,
-          hexColor: this.colorWithSizes.hexaCode,
-          colorId: this.colorWithSizes.id,
-          sizeQuantity: this.colorWithSizes.quantity,
+          hexColor: this.colorWithQuantity.hexaCode,
+          colorId: this.colorWithQuantity.id,
+          sizeQuantity: this.colorWithQuantity.quantity,
           sellerId: product?.seller?.id,
           quantity: this.productQuantity,
           totalPrice: product.price.price,
@@ -366,7 +366,7 @@ export class ProductDetailsCardComponent implements OnInit {
 
   logColor(colorWithSizes: any): void {
     console.log(colorWithSizes);
-    this.colorWithSizes = colorWithSizes?.color;
+    this.colorWithQuantity = colorWithSizes?.color;
     this.selectedColor = colorWithSizes?.color?.id;
     if (colorWithSizes?.color?.quantity !== -1) {
       // Check if the size already exists in sizeQuantities, if not, initialize it to 0

@@ -21,6 +21,7 @@ export class AddProductToCardModalComponent implements OnInit {
   sizeQuantities: any;
   productQuantity: number = 0;
   userSelectedQuantity!: number;
+  colorWithQuantity: any;
 
   ngOnInit() {
     const modalData = this.modalDataService.getData();
@@ -49,10 +50,29 @@ export class AddProductToCardModalComponent implements OnInit {
     // };
   }
 
+  // logColor(colorWithSizes: any): void {
+  //   console.log(colorWithSizes);
+  //   this.selectedColor = colorWithSizes?.color?.id;
+  //   this.colorWithSizesSelected = colorWithSizes;
+  // }
+
   logColor(colorWithSizes: any): void {
     console.log(colorWithSizes);
+    this.colorWithQuantity = colorWithSizes?.color;
     this.selectedColor = colorWithSizes?.color?.id;
-    this.colorWithSizesSelected = colorWithSizes;
+    if (colorWithSizes?.color?.quantity !== -1) {
+      // Check if the size already exists in sizeQuantities, if not, initialize it to 0
+      if (this.sizeQuantities > colorWithSizes?.color?.quantity && this.userSelectedQuantity > colorWithSizes?.color?.quantity) {
+        this.productQuantity = colorWithSizes?.color?.quantity;
+
+      }
+      else{
+
+        this.sizeQuantities = colorWithSizes?.color?.quantity;
+      }
+    } else {
+      this.colorWithSizesSelected = colorWithSizes;
+    }
   }
 
   logSize(size: any): void {
@@ -99,7 +119,7 @@ export class AddProductToCardModalComponent implements OnInit {
     if (product.colorWithSizes.length > 0) {
       // Check if the product with the same ID and hexaCode already exists
        existingProductIndex = existingProducts.findIndex(existingProduct =>
-        existingProduct.id === product.id && existingProduct.hexColor === this.colorWithSizesSelected.color.hexaCode
+        existingProduct.id === product.id && existingProduct.hexColor === this.colorWithQuantity.hexaCode
       );
     }
     if (product.sizes.length > 0) {
@@ -128,7 +148,7 @@ export class AddProductToCardModalComponent implements OnInit {
         this.onCloseModal();
 
       }
-      else if (product.colorWithSizes && this.size.quantity >= existingProduct.quantity + this.productQuantity) {
+      else if (product.colorWithSizes && this.size?.quantity >= existingProduct.quantity + this.productQuantity) {
         // Update the existing product quantity
         existingProducts[existingProductIndex] = {
           ...existingProduct,
@@ -142,7 +162,21 @@ export class AddProductToCardModalComponent implements OnInit {
         this.onCloseModal();
 
       }
-      else if (product.sizes && product.sizes >= existingProduct.quantity + this.productQuantity) {
+      else if (product.colorWithSizes && this.colorWithQuantity.quantity >= existingProduct.quantity + this.productQuantity) {
+        // Update the existing product quantity
+        existingProducts[existingProductIndex] = {
+          ...existingProduct,
+          // size: this.size.name,
+          // sizeQuantity: this.size.quantity,
+          quantity: existingProduct.quantity + this.productQuantity,
+          // totalPrice: product.price.price,
+          // priceAfterDiscount: product.price.priceAfterOffer,
+
+        };
+        this.onCloseModal();
+
+      }
+      else if (product.sizes && product.sizes.quantity >= existingProduct.quantity + this.productQuantity) {
         // Update the existing product quantity
         existingProducts[existingProductIndex] = {
           ...existingProduct,
@@ -186,7 +220,7 @@ export class AddProductToCardModalComponent implements OnInit {
         existingProducts.push(newProduct);
         this.onCloseModal();
       }
-      else if (product.colorWithSizes && this.size.quantity >= this.productQuantity) {
+      else if (product.colorWithSizes && this.size?.quantity >= this.productQuantity) {
         // Add a new product
         const newProduct = {
           id: product.id,
@@ -207,7 +241,28 @@ export class AddProductToCardModalComponent implements OnInit {
         this.onCloseModal();
 
       }
-      else if (product.sizes && product.sizes >= this.productQuantity) {
+       // If the product does not exist, check if a new product can be added
+       else if (product.colorWithSizes && this.colorWithQuantity.quantity >= this.productQuantity) {
+        // Add a new product
+        const newProduct = {
+          id: product.id,
+          name: product.name,
+          hexColor: this.colorWithQuantity.hexaCode,
+          colorId: this.colorWithQuantity.id,
+          sizeQuantity: this.colorWithQuantity.quantity,
+          sellerId: product?.seller?.id,
+          quantity: this.productQuantity,
+          totalPrice: product.price.price,
+          priceAfterDiscount: product.price.priceAfterOffer,
+          image: (product.images && product.images.length > 0) ? product.images[0].urlPreview : (product.image ? product.image.urlPreview : null)
+        };
+
+        // Push the new product to the existing array
+        existingProducts.push(newProduct);
+        this.onCloseModal();
+
+      }
+      else if (product.sizes && product.sizes.quantity >= this.productQuantity) {
         // Add a new product
         const newProduct = {
           id: product.id,
@@ -235,6 +290,7 @@ export class AddProductToCardModalComponent implements OnInit {
     // Store the updated products array in localStorage
     localStorage.setItem('products', JSON.stringify(existingProducts));
   }
+
   // Method to show the notification
   showCustomNotification() {
     this.showNotification = true;

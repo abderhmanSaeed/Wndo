@@ -121,7 +121,7 @@
       </p>
       } -->
       <div
-        *ngIf="sizeQuantities|| product?.quantity !== -1 || (colorWithSizes?.quantity !== -1 && colorWithSizes)"
+        *ngIf="sizeQuantities|| product?.quantity !== -1 || (colorWithQuantity?.quantity !== -1 && colorWithQuantity)"
         class="mb-8 flex flex-wrap gap-8 items-center"
       >
         <h6>{{"quantity" | translate}}</h6>

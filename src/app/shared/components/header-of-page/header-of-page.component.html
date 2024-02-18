@@ -1,4 +1,14 @@
-<section class="header-page mb-24" [class.mb-40]="isShowDetails" [ngClass]="{ flex: isProductOffersRoute }">
+<!-- <section class="header-page mb-24" [class.mb-40]="isShowDetails" [ngClass]="{ flex: isProductOffersRoute }"> -->
+
+  <section class="header-page mb-24"
+         [class.mb-40]="isShowDetails"
+         [ngClass]="{ 'flex': isProductOffersRoute }"
+         [ngStyle]="{'background-image': 'url(' + sellerProfile?.cover + ')',
+                     'background-repeat': 'no-repeat',
+                     'background-size': 'cover',
+                     'height': '125px',
+                     'background-position': 'center'}">
+
   <div class="content-page">
     <section class="flex justify-between items-center">
       <div class="flex items-end w-32 h-32 mt-12">

@@ -1,8 +1,8 @@
 <div class="bg-white h-full p-4 border-t border-e border-orange-400 border-s-8 border-b-8">
-  <h6 class="text-blue-800 font-bold text-center mb-8 mt-2">Order Summary</h6>
+  <h6 class="text-blue-800 font-bold text-center mb-8 mt-2"> {{"orderSummary" | translate}}</h6>
 <!-- {{order | json}} -->
   <section >
-    <h6 class="text-sm text-blue-800 text-center mb-4">Order Items ({{order?.orderItems?.length ? order?.orderItems?.length : order.length }})</h6>
+    <h6 class="text-sm text-blue-800 text-center mb-4"> {{"orderItems" | translate}} ({{order?.orderItems?.length ? order?.orderItems?.length : order.length }})</h6>
     <ul *ngIf="order || order?.orderItems else noItems" class="mb-8">
       <li class="text-xs flex justify-between mb-2">
       <li class="text-xs flex justify-betw#0D1863een mb-2">
@@ -24,45 +24,45 @@
   <hr class="border-orange-400 mb-4border-2 mb-4" />
 
   <section *ngIf="!checkout">
-    <h6 class="text-sm text-blue-800 text-center mb-4">Order Price</h6>
+    <h6 class="text-sm text-blue-800 text-center mb-4"> {{"orderPrice" | translate}}</h6>
     <ul class="space-y-2">
       <li class="text-xs flex justify-between">
-        <span class="text-blue-800"> price</span>
+        <span class="text-blue-800"> {{"price" |translate}}</span>
         <span class="text-blue-800">{{ order?.actualPrice }} EGP</span>
       </li>
       <li class="text-xs flex justify-between">
-        <span class="text-blue-800"> Taxes</span>
+        <span class="text-blue-800"> {{"taxes" | translate}}</span>
         <span class="text-blue-800">{{ order?.shippingFees }} EGP</span>
       </li>
       <li class="text-xs flex justify-between">
-        <span class="text-blue-800"> Discount</span>
+        <span class="text-blue-800"> {{"discount" | translate}} </span>
         <span class="text-blue-800">{{ order?.voucherAmount }} EGP</span>
       </li>
 
       <li class="text-xs flex justify-between px-1 pt-4">
-        <span class="text-blue-800 font-bold"> Total Price:</span>
+        <span class="text-blue-800 font-bold"> {{"totalPrice"|translate}}:</span>
         <span class="text-blue-800 font-bold">{{ order?.totalOrderPrice }} EGP</span>
       </li>
     </ul>
   </section>
   <section *ngIf="checkout">
-    <h6 class="text-sm text-blue-800 text-center mb-4">Order Price</h6>
+    <h6 class="text-sm text-blue-800 text-center mb-4">{{"orderPrice" | translate}}</h6>
     <ul class="space-y-2">
       <li class="text-xs flex justify-between">
-        <span class="text-blue-800"> price</span>
+        <span class="text-blue-800"> {{"price" |translate}}</span>
         <span class="text-blue-800">{{ totalDetails.totalActualPrice }} EGP</span>
       </li>
       <li class="text-xs flex justify-between">
-        <span class="text-blue-800"> Taxes</span>
+        <span class="text-blue-800"> {{"taxes" | translate}}</span>
         <span class="text-blue-800">{{ totalDetails.totalShippingFees }} EGP</span>
       </li>
       <li class="text-xs flex justify-between">
-        <span class="text-blue-800"> Discount</span>
+        <span class="text-blue-800"> {{"discount" | translate}}</span>
         <span class="text-blue-800">{{ totalDetails.totalVoucherAmount }} EGP</span>
       </li>
 
       <li class="text-xs flex justify-between px-1 pt-4">
-        <span class="text-blue-800 font-bold"> Total Price:</span>
+        <span class="text-blue-800 font-bold"> {{"totalPrice"|translate}}:</span>
         <span class="text-blue-800 font-bold">{{ totalDetails.totalOrderPrice }} EGP</span>
       </li>
     </ul>

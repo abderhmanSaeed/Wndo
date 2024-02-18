@@ -45,7 +45,7 @@
         </ul>
       </div>
       <div class="ms-auto">
-        <app-dropdown [id]="'userDropdown'" [label]="isAuthenticated ? userName || 'Guest' : 'Guest'" [classes]="{
+        <app-dropdown [id]="'userDropdown'" [label]="isAuthenticated ? userName || ('guest' | translate) : ('guest' | translate)" [classes]="{
             label: '!text-red-400 !font-bold !text-base',
             toggleBtn:
               'text-blue-1000 font-bold text-base px-4 h-[34px] border border-blueGray-30 rounded-full flex items-center gap-2 bg-white',

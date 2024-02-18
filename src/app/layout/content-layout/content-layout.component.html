@@ -8,26 +8,26 @@
         <button [@expandContract]="showText ? 'expanded' : 'contracted'" (click)="openHelpMenu()" type="button" class="button bg-blue-800 rounded-ss-full rounded-es-full" >
           <i class="fa-regular fa-circle-question"></i>
           <span [@fadeInOut]="showText ? 'in' : 'out'"  [class.sr-only]="!showText" class="text-sm text-white ms-2 text-nowrap"
-          >Need Help</span>
+          >{{"needHelp" | translate}}</span>
         </button>
 
         <ul [@toggleMenu]="menuState" class="bg-white flex-col p-2.5 mt-4 gap-3 absolute end-0 w-[200px] z-10 space-y-3"  >
           <li class="border border-gray-10 rounded">
            <a href="#" class="flex gap-2 text-blue-800 py-1 px-2.5 hover:bg-gray-10">
             <img width="10" height="10" src="../../../assets/icons/contact-us.svg" alt="Contact Us icon" />
-            Contact Us
+            {{"contactUs" | translate}}
           </a>
           </li>
           <li class="border border-gray-10 rounded">
             <a href="#" class="flex gap-2 text-blue-800 py-1 px-2.5 hover:bg-gray-10">
               <img width="10" height="10" src="../../../assets/icons/head-phone.svg" alt="Help Center icon" />
-              Help Center
+              {{"helpCenter" | translate}}
             </a>
           </li>
           <li class="border border-gray-10 rounded">
             <a href="#" class="flex gap-2 text-blue-800 py-1 px-2.5 hover:bg-gray-10">
               <img width="10" height="10" src="../../../assets/icons/faq.svg" alt="faq icon" />
-              FAQ
+              {{"faQ" |translate}}
             </a>
           </li>
         </ul>

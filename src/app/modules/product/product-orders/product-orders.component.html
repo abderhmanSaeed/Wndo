@@ -1,27 +1,28 @@
 <app-header-of-page></app-header-of-page>
 <section class="content-page">
 
+  <!-- label="Check Out" -->
   <app-stepper>
     <app-step
-      label="Check Out"
+      [label]="'checkOut' | translate"
       icon="bag-coloring"
       [template]="checkout"
-      nextButtonLabel="CHECK OUT"
-      additionalAction='<a (click)="addMore()" routerLink="/product/productDetails" class="button button--primary button--bordered rounded-full px-24">ADD MORE PRODUCT</a>'
+      [nextButtonLabel]="'checkOut' | translate"
+      additionalAction='<a (click)="addMore()" routerLink="/product/productDetails" class="button button--primary button--bordered rounded-full px-24">{{"addMoreProduct" | translate}}</a>'
     >
     </app-step>
 
     <app-step
-      label="Shipping & Payment"
+      [label]="'shipping&Pyament' | translate"
       icon="shipping"
       [template]="shippingAndPayment"
       nextButtonLabel="CONTINUE"
     ></app-step>
     <app-step
-      label="Confirmation"
+      [label]='"confirmation" | translate'
       icon="bag-coloring"
       [template]="confirmation"
-      nextButtonLabel="CONFIRM"
+      [nextButtonLabel]= ' "confirm" | translate'
     ></app-step>
   </app-stepper>
 </section>

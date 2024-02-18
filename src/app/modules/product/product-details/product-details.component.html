@@ -8,6 +8,6 @@
     [responseData]="responseData?.responseData"></app-product-details-card>
 </section>
 
-<section class="content-page space-y-6" aria-label= "you may also like">
+<section class="content-page space-y-6" [attr.aria-label]="('youMayAlsoLike' | translate)">
   <app-product-may-like [items]="responseData?.responseData?.items || []"></app-product-may-like>
 </section>

@@ -6,9 +6,9 @@
         <div class="flex-auto">
           <app-input-filed
           [required]="true"
-          label="Your Name"
+          [label]='"yourName" | translate'
           [isFloating]="true"
-          placeholder="You Didn't Add Your Name"
+          [placeholder]='"addName" | translate'
           name="name"
           [classes]="{
             label: 'peer-focus:text-base',
@@ -22,7 +22,7 @@
           <app-input-phone [countriesCode]="countriesCode" [classes]="{
               label: 'peer-focus:text-base',
               labelColor: 'peer-focus:text-purple-500'
-            }" label="Phone Number" [isFloating]="true" placeholder="You Didn't Add Your Phone Number"
+            }" [label]='"yourPhone" | translate' [isFloating]="true" [placeholder]='"phoneNumberMsg" | translate'
             (selectedOption)="handleSelectedOption($event)">
           </app-input-phone>
 
@@ -31,7 +31,7 @@
       <p class="text-blue-900 text-xs p-4">
         <i
           class="fa-solid text-xs me-1 fa-info rounded-full w-5 h-5 border-2 border-blue-900 inline-flex items-center justify-center"></i>
-        Your Name And Phone Are Mandatory To Proceed Your Order.
+        {{"phoneAndNameMandatory" | translate}}
       </p>
     </section>
     <section class="bg-white rounded p-4">

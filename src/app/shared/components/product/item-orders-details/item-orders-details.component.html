@@ -23,14 +23,14 @@
       class="bg-gray-100 inline-flex text-gray-350 text-xs rounded divide-x p-2 gap-2 items-center"
     >
       <span class="px-2"
-        >color:
+        >{{"color" | translate}}:
         <i
           class="fa-solid fa-circle text-xxs"
           [style]="{ color: '#' + order.hexColor }"
         ></i
       ></span>
       <span class="px-2" *ngIf="order.size">size: {{ order.size }}</span>
-      <span class="px-2">QTY: {{ order.quantity }}</span>
+      <span class="px-2">{{"qty" | translate}}: {{ order.quantity }}</span>
     </div>
 
 

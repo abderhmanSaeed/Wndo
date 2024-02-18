@@ -1,13 +1,12 @@
-<app-modal-content title="Hello!" subtitle="Welcome on Wndo">
+<app-modal-content [title]='"hello" | translate ' [subtitle]='"welcomeWndo"| translate'>
   <div class="modal__body p-6">
-  <label *ngIf="!showNotification" >For registration please enter your phone number.and will
-    ‘send you the password to your mobile via SMS</label>
+  <label *ngIf="!showNotification" >{{"registerationMsg"|translate}}</label>
     <label *ngIf="showInvaildMassage" [ngClass]="{'danger': invalid}">{{notificationMessage}}</label>
       <app-input-filed *ngIf="!showNotification"
       [required]="true"
-      label="Your Name"
+      [label]='"yourName" | translate'
       [isFloating]="true"
-      placeholder="You Didn't Add Your Name"
+      [placeholder]= '"addName"| translate'
       name="name"
       [classes]="{
         label: 'peer-focus:text-base',
@@ -23,8 +22,8 @@
         label: 'peer-focus:text-base text-start',
         labelColor: 'peer-focus:text-purple-500'
       }"
-      label="Phone Number"
-      placeholder="You Didn't Add Your Phone Number"
+      [label]='"yourPhone"| translate'
+      [placeholder]='"phoneNumberMsg" | translate'
       (selectedOption)="handleSelectedOption($event)"
       (valueChange)="handleInputValueChange($event)"
     >
@@ -60,7 +59,7 @@
     class="button button--primary rounded-full w-full"
     [disabled]="!(selectedCountryCode && phoneValue && NameValue)"
   >
-    SignUp
+    {{"signUp" | translate}}
   </button>
 
   <button *ngIf="showNotification"
@@ -69,7 +68,7 @@
     class="button button--primary rounded-full w-full"
     [disabled]="!(selectedCountryCode && phoneValue && passwordValue)"
   >
-    LOGIN
+  {{"login" |translate}}
   </button>
 
 

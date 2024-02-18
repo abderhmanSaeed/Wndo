@@ -18,7 +18,7 @@
     </div>
 
     <div *ngIf="colorWithSizesSelected?.sizes.length > 0 || product?.sizes.length > 0 ">
-      <h6 class="mb-4 text-lg">Choose Size</h6>
+      <h6 class="mb-4 text-lg">{{"chooseSize" | translate}}</h6>
       <ul class="flex flex-wrap gap-2">
         <li *ngFor="let size of colorWithSizesSelected?.sizes ? colorWithSizesSelected?.sizes : product?.sizes">
           <button type="button"
@@ -32,7 +32,7 @@
 
 
     <div *ngIf="sizeQuantities || product?.quantity !== -1" class="mb-8 flex flex-wrap gap-8 items-center">
-      <h6>Quantity:</h6>
+      <h6> {{"quantity" | translate}}</h6>
       <!-- <app-quantity-button [(quantity)]="productQuantity" [disabledAddQuantity]="productQuantity === sizeQuantities"
         [maxQuantity]="sizeQuantities" (quantityChange)="onQuantityChange($event)">
       </app-quantity-button> -->

@@ -41,7 +41,7 @@ class="bg-white grid grid-cols-1 xl:grid-cols-3 gap-6 pt-3 pb-6 px-5 border-s-2 
     <h6 class="font-medium text-blue-900">
       Order No :{{ product.orderNumber }}
     </h6>
-    <h6 class="text-sm font-semibold">Price: {{ product.price }} EGP</h6>
+    <h6 class="text-sm font-semibold">{{"price" |translate}}: {{ product.price }} EGP</h6>
     <h6 *ngFor="let item of product.items" class="text-xs font-semibold">
       Order Statues <span class="text-blue-900/60">({{ item.name }}) :</span>
       <!-- <span *ngFor="let item of product?.items" [ngClass]="getIOrderItemState(item)">{{item.itemState}}</span> -->

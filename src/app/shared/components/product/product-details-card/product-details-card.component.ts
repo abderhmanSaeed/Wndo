@@ -374,10 +374,8 @@ export class ProductDetailsCardComponent implements OnInit {
         this.productQuantity = colorWithSizes?.color?.quantity;
 
       }
-      else{
+      this.sizeQuantities = colorWithSizes?.color?.quantity;
 
-        this.sizeQuantities = colorWithSizes?.color?.quantity;
-      }
     } else {
       this.colorWithSizesSelected = colorWithSizes;
     }
@@ -439,4 +437,23 @@ export class ProductDetailsCardComponent implements OnInit {
     }
   ]
 
+  // Method to check if a string is a valid date
+  isValidDate(dateString: string): boolean {
+    if (!dateString) {
+      return false; // Returns false if the string is empty or undefined
+    }
+    const date = new Date(dateString);
+    return !isNaN(date.getTime()); // Checks if the date is valid
+  }
+
+  // Method to calculate days until expiry, given an expiry date
+  calculateDaysUntilExpiry(expiryDate: string): number {
+    if (!expiryDate) return 0; // Return 0 if no expiry date is provided
+
+    const currentDate = new Date();
+    const expiry = new Date(expiryDate);
+    const timeDiff = expiry.getTime() - currentDate.getTime();
+    const daysUntilExpiry = Math.ceil(timeDiff / (1000 * 3600 * 24));
+    return daysUntilExpiry;
+  }
 }

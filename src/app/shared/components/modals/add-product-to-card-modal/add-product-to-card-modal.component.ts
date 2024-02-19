@@ -66,10 +66,7 @@ export class AddProductToCardModalComponent implements OnInit {
         this.productQuantity = colorWithSizes?.color?.quantity;
 
       }
-      else{
-
-        this.sizeQuantities = colorWithSizes?.color?.quantity;
-      }
+      this.sizeQuantities = colorWithSizes?.color?.quantity;
     } else {
       this.colorWithSizesSelected = colorWithSizes;
     }
@@ -113,18 +110,18 @@ export class AddProductToCardModalComponent implements OnInit {
     let existingProductIndex = -1;
     if (product.quantity !== -1) {
       // Check if the product with the same ID and hexaCode already exists
-       existingProductIndex = existingProducts.findIndex(existingProduct =>
+      existingProductIndex = existingProducts.findIndex(existingProduct =>
         existingProduct.id === product.id);
     }
     if (product.colorWithSizes.length > 0) {
       // Check if the product with the same ID and hexaCode already exists
-       existingProductIndex = existingProducts.findIndex(existingProduct =>
+      existingProductIndex = existingProducts.findIndex(existingProduct =>
         existingProduct.id === product.id && existingProduct.hexColor === this.colorWithQuantity.hexaCode
       );
     }
     if (product.sizes.length > 0) {
       // Check if the product with the same ID and hexaCode already exists
-       existingProductIndex = existingProducts.findIndex(existingProduct =>
+      existingProductIndex = existingProducts.findIndex(existingProduct =>
         existingProduct.id === product.id && existingProduct.hexColor === this.colorWithSizesSelected.color.hexaCode
       );
     }
@@ -241,8 +238,8 @@ export class AddProductToCardModalComponent implements OnInit {
         this.onCloseModal();
 
       }
-       // If the product does not exist, check if a new product can be added
-       else if (product.colorWithSizes && this.colorWithQuantity.quantity >= this.productQuantity) {
+      // If the product does not exist, check if a new product can be added
+      else if (product.colorWithSizes && this.colorWithQuantity.quantity >= this.productQuantity) {
         // Add a new product
         const newProduct = {
           id: product.id,

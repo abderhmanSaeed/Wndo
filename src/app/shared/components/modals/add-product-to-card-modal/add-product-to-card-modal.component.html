@@ -30,8 +30,9 @@
       </ul>
     </div>
 
-
-    <div *ngIf="sizeQuantities|| product?.quantity !== -1 || (colorWithQuantity?.quantity !== -1 && colorWithQuantity)" class="mb-8 flex flex-wrap gap-8 items-center">
+{{productQuantity}}
+{{sizeQuantities}}
+    <div class="mb-8 flex flex-wrap gap-8 items-center">
       <h6> {{"quantity" | translate}}</h6>
       <!-- <app-quantity-button [(quantity)]="productQuantity" [disabledAddQuantity]="productQuantity === sizeQuantities"
         [maxQuantity]="sizeQuantities" (quantityChange)="onQuantityChange($event)">
@@ -44,6 +45,8 @@
           (quantityChange)="onQuantityChange($event)"
         >
         </app-quantity-button>
+        <span *ngIf="product?.isOutOfStock" class="text-[#FFA90A] fw-500 mx-3
+        ">{{ 'outOfStock' | translate }}</span>
     </div>
   </div>
 

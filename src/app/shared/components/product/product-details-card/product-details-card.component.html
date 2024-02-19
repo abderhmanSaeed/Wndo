@@ -40,9 +40,13 @@
             <h2 class="text-primary" *ngIf="responseData?.totalCount">${{ responseData?.totalCount }}</h2>
             <h4 class="text-gray-900 line-through" *ngIf="product?.discount">${{ product?.discount }}</h4>
           </span>
-          <span class="bg-orange-500 text-black rounded py-1 px-2">
-            {{"thisOffer" | translate}}
+          <!-- <span class="bg-orange-500 text-black rounded py-1 px-2">
+            {{"thisOffer" | translate}}  {{ product?.price?.expiryDate }} {{"Days" | translate}}
+          </span> -->
+          <span *ngIf="isValidDate(product?.price?.expiryDate)" class="bg-orange-500 text-black rounded py-1 px-2">
+            {{"thisOffer" | translate}}  {{ calculateDaysUntilExpiry(product?.price?.expiryDate) }} {{"Days" | translate}}
           </span>
+
         </div>
       </div>
 
@@ -120,19 +124,35 @@
         }}
       </p>
       } -->
-      <div
-        *ngIf="sizeQuantities|| product?.quantity !== -1 || (colorWithQuantity?.quantity !== -1 && colorWithQuantity)"
+      <!-- {{productQuantity }}
+      {{productQuantity <= (product?.quantity !== -1 ? product?.quantity : sizeQuantities)}} -->
+      <!-- <div
+
         class="mb-8 flex flex-wrap gap-8 items-center"
       >
         <h6>{{"quantity" | translate}}</h6>
         <app-quantity-button
           [(quantity)]="productQuantity"
-          [disabledAddQuantity]="productQuantity >= (product?.quantity !== -1 ? product?.quantity : sizeQuantities)"
+          [disabledAddQuantity]="!(product?.quantity !== -1 ? product?.quantity : sizeQuantities) ? true : productQuantity >= (product?.quantity !== -1 ? product?.quantity : sizeQuantities)"
           [maxQuantity]="sizeQuantities ?  sizeQuantities : product?.quantity"
           (quantityChange)="onQuantityChange($event)"
         >
         </app-quantity-button>
-        <span *ngIf="sizeQuantities === 0 || product?.quantity === 0" class="text-[#FFA90A] fw-500 mx-3
+      </div> -->
+      <!-- *ngIf="sizeQuantities|| product?.quantity !== -1 || (colorWithQuantity?.quantity !== -1 && colorWithQuantity)" -->
+
+      <div
+        class="mb-8 flex flex-wrap gap-8 items-center"
+      >
+        <h6>{{"quantity" | translate}}</h6>
+        <app-quantity-button
+          [(quantity)]="productQuantity"
+          [disabledAddQuantity]="!(product?.quantity !== -1 ? product?.quantity : sizeQuantities) ? true : productQuantity >= (product?.quantity !== -1 ? product?.quantity : sizeQuantities)"
+          [maxQuantity]="sizeQuantities ?  sizeQuantities : product?.quantity"
+          (quantityChange)="onQuantityChange($event)"
+        >
+        </app-quantity-button>
+        <span *ngIf="product?.isOutOfStock" class="text-[#FFA90A] fw-500 mx-3
         ">{{ 'outOfStock' | translate }}</span>
       </div>
 

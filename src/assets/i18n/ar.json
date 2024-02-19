@@ -79,5 +79,11 @@
   "forgotpasswordMsg" : "تم إرسال كلمة المرور المؤقتة إلى هاتفك المحمول عبر الرسائل القصيرة.",
   "confirm" : "تأكيد",
   "guest" : "زائر",
-  "signUp" : "اشتراك"
+  "signUp" : "اشتراك",
+  "orderConfirmed": "تم تأكيد الطلب",
+  "yourOrderNo": "طلبك رقم.#",
+  "hasBeenPlaced": "تم الطلب",
+  "trackTheOrder":  "تتبع الطلب"
+
+
 }

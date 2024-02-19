@@ -12,6 +12,7 @@ const routes: Routes = [
     children: [
       { path: CONFIG.dashboard.children.home.name.toLowerCase(), loadChildren: () => import('./modules/home/home-routing.module').then(m => m.HomeRoutingModule) },
       { path: CONFIG.product.name.toLowerCase(), loadChildren: () => import('./modules/product/product-routing.module').then(m => m.ProductRoutingModule) },
+      { path: CONFIG.payment.name.toLowerCase(), loadChildren: () => import('./modules/payment/payment.module').then(m => m.PaymentModule) },
       {
         path: CONFIG.contact.name,
         loadChildren: () => import('./modules/contact/contact-routing.module').then(m => m.ContactRoutingModule)

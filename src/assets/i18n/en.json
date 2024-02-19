@@ -79,6 +79,11 @@
   "forgotpasswordMsg" : "A temporary password has been sent to your mobile via SMS.",
   "confirm" : "Confirm",
   "guest" : "Guest",
-  "signUp" : "SignUp"
+  "signUp" : "SignUp",
+  "orderConfirmed": "Order Confirmed",
+  "yourOrderNo": "Your Order No. #",
+  "hasBeenPlaced": "has been placed",
+  "trackTheOrder": "TRACK THE ORDER"
+
 
 }

@@ -83,7 +83,9 @@
   "orderConfirmed": "Order Confirmed",
   "yourOrderNo": "Your Order No. #",
   "hasBeenPlaced": "has been placed",
-  "trackTheOrder": "TRACK THE ORDER"
+  "trackTheOrder": "TRACK THE ORDER",
+  "youWantDeleteOrder": "Are you sure you want to remove this item from our cart?"
+
 
 
 }

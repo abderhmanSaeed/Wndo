@@ -83,7 +83,9 @@
   "orderConfirmed": "تم تأكيد الطلب",
   "yourOrderNo": "طلبك رقم.#",
   "hasBeenPlaced": "تم الطلب",
-  "trackTheOrder":  "تتبع الطلب"
+  "trackTheOrder":  "تتبع الطلب",
+  "youWantDeleteOrder": "هل ترغب في حذف هذا العنصر من طلبك؟"
+
 
 
 }

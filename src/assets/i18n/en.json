@@ -26,6 +26,8 @@
   "delivered": "Delivered",
   "returned": "Returned",
   "cancelled": "Cancelled",
+  "cancel": "Cancel",
+  "refund": "Refund",
   "addtoCart" : "Add To Cart",
   "buyNow" : "BUY NOW",
   "additionalInfo" : "Additional Info",
@@ -82,9 +84,16 @@
   "signUp" : "SignUp",
   "orderConfirmed": "Order Confirmed",
   "yourOrderNo": "Your Order No. #",
+  "yourOrderNoDetails": "Order No. Details",
   "hasBeenPlaced": "has been placed",
   "trackTheOrder": "TRACK THE ORDER",
-  "youWantDeleteOrder": "Are you sure you want to remove this item from our cart?"
+  "youWantDeleteOrder": "Are you sure you want to remove this item from our cart?",
+  "cancelAll": "CANCEL ALL",
+  "refundAll": "REFUND ALL",
+  "summaryOrder": "Summary : ORDER #",
+  "overallStatus": "Overall Status:",
+  "placedOn": "Placed On:",
+  "YourOrder": "Your order"
 
 
 

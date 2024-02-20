@@ -26,6 +26,8 @@
   "delivered": "تم الإستلام",
   "returned": "تم الاسترجاع",
   "cancelled": "تم الإلغاء",
+  "cancel": "الغاء",
+  "refund": "استرجاع",
   "addtoCart" : "أضف إلى السلة",
   "buyNow" : "اشتري الآن",
   "additionalInfo" : "معلومات أخرى",
@@ -82,9 +84,16 @@
   "signUp" : "اشتراك",
   "orderConfirmed": "تم تأكيد الطلب",
   "yourOrderNo": "طلبك رقم.#",
+  "yourOrderNoDetails": "تفاصيل طلبك",
   "hasBeenPlaced": "تم الطلب",
   "trackTheOrder":  "تتبع الطلب",
-  "youWantDeleteOrder": "هل ترغب في حذف هذا العنصر من طلبك؟"
+  "youWantDeleteOrder": "هل ترغب في حذف هذا العنصر من طلبك؟",
+  "cancelAll": "الغاء الكل",
+  "refundAll": "استرجاع الكل",
+  "summaryOrder": "ملخص : الطلب رقم #",
+  "overallStatus": "الحالة العامة:",
+  "placedOn": "تم وضع في:",
+  "YourOrder": "طلبك"
 
 
 

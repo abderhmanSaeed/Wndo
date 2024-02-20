@@ -25,6 +25,7 @@ export class ShippingPaymentComponent implements OnInit, OnDestroy {
   currentShippingTime: any;
   districtsAndZones: any[] = [];
   private subscriptions = new Subscription();
+   currentLang = this.authService.getCurrentLanguage();
 
   constructor(private shippingAddressService: ShippingAddressService, private countryPhoneCodeService: CountryPhoneCodeService, private authService: AuthService,
     private shippingFessService: ShippingFessService, private orderService: OrderService) { }
@@ -184,14 +185,14 @@ export class ShippingPaymentComponent implements OnInit, OnDestroy {
 
   paymentMethods = [
     {
-      label: 'Cash on Delivery',
+      label: this.currentLang === 'en' ? 'Cash on Delivery' : 'الدفع عند الإستلام',
       name: 'cash',
       value: PaymentType.Cash,
-      desc: 'Extra fee will be applied',
+      desc: this.currentLang === 'en' ?  'Extra fee will be applied' : 'سيتم تطبيق مصاريف إضافية',
       children: '<i class="fa-solid fa-wallet"></i>',
     },
     {
-      label: 'Credit Card',
+      label: this.currentLang === 'en' ? 'Credit Card' : 'بطاقة الإئتمان',
       name: 'creditCard',
       value: PaymentType.CreditCard,
       desc: '',
@@ -203,21 +204,21 @@ export class ShippingPaymentComponent implements OnInit, OnDestroy {
 
   shippingTimes = [
     {
-      label: 'Any time',
+      label: this.currentLang === 'en' ? 'Any time' : 'أي وقت',
       name: 'anyTime',
       value: PickUpTime.Any,
       desc: '',
       children: '',
     },
     {
-      label: 'Morning 9 am - 2 pm',
+      label:  this.currentLang === 'en' ?'Morning 9 am - 2 pm' : 'صباحًا من 9ص-2م',
       name: 'morning',
       value: PickUpTime.Morning9am2pm,
       desc: '',
       children: '',
     },
     {
-      label: 'Evening 2 pm - 8 pm',
+      label:  this.currentLang === 'en' ? 'Evening 2 pm - 8 pm' : 'مساءً من 2م-8م',
       name: 'evening',
       value: PickUpTime.Evening2pm8pm,
       desc: '',

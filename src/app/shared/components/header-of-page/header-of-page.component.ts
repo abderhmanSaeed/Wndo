@@ -76,15 +76,16 @@ export class HeaderOfPageComponent implements OnInit, AfterViewInit {
       //   startContentMenu: this.trackingOrdersIconTemplate,
       // },
     ];
+    const currentLang = this.authService.getCurrentLanguage();
 
     this.guestUserDropdown = [
       {
-        label: 'LogIn',
+        label: currentLang === 'en' ? 'LogIn' : 'تسجيل دخول',
         value: 'LogIn',
         startContentMenu: this.loginIconTemplate,
       },
       {
-        label: 'SignUp',
+        label: currentLang === 'en' ? 'SignUp' : 'اشتراك',
         value: 'SignUp',
         startContentMenu: this.logoutIconTemplate,
       },

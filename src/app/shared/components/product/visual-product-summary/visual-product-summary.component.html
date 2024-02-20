@@ -51,13 +51,14 @@
                      [productId]="product.id"
                      [quantity]="product.quantity"
                      (quantityChangeObject)="onQuantityChange($event)"
-                     [disabledAddQuantity]="product.quantity === product.sizeQuantity"
+                     [disabledAddQuantity]="editOrdelete === true ? true : product.quantity === product.sizeQuantity"
                      [maxQuantity]="product.sizeQuantity">
 </app-quantity-button>
     </div>
     <div class="flex lg:flex-col justify-between">
       <section class="flex-grow self-end">
         <app-dropdown
+         *ngIf="!editOrdelete"
         [id]="'actionDropdown' + product.id"
         [showSelectedValue]="false"
         [options]="getDropdownActions(product)"

@@ -93,7 +93,15 @@
   "summaryOrder": "ملخص : الطلب رقم #",
   "overallStatus": "الحالة العامة:",
   "placedOn": "تم وضع في:",
-  "YourOrder": "طلبك"
+  "YourOrder": "طلبك",
+  "cashOnDelievery": "الدفع عند الإستلام",
+  "extraFeeWillBeApplied": "سيتم تطبيق مصاريف إضافية",
+  "creditCard": "بطاقة الإئتمان",
+  "choosePaymentMethod": "إختر طريقة الدفع",
+  "ChooseShippingTime" : "إختر وقت التسليم",
+  "AdditionalDiscountIfYouPayByCreditCard" : "خصم إضافي إذا كنت تدفع عن طريق بطاقة الائتمان",
+  "YouWillBeAbleToAddAVoucherInTheNextStep": "ستتمكن من إضافة قسيمة في الخطوة التالية"
+
 
 
 

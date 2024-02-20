@@ -164,7 +164,6 @@
           <button
             type="button"
             class="button button--primary md:w-[250px] w-full button--bordered button--rounded-bill"
-            [disabled]="productQuantity === 0"
             (click)="storeProductInLocalStorage(product)"
           >
            {{"buyNow" | translate}}
@@ -173,7 +172,6 @@
           <button
             type="button"
             class="button button--primary md:w-[250px] w-full button--rounded-bill"
-            [disabled]="productQuantity === 0"
             (click)="storeProductInLocalStorageWithoutNavigate(product)"
           >
           {{"addtoCart" | translate}}

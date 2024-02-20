@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ProductResponse } from '../../../models';
 import { ProductService } from '../../../../data/service/product/product.service';
 import { OrderService } from '../../../../data/service/order/order.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-checkout',
@@ -54,7 +55,20 @@ export class CheckoutComponent implements OnInit {
   //     image: "https://m.media-amazon.com/images/I/717yp7Ut+xL._AC_SY879_.jpg"
   //   }
   // ]
-  constructor(private productService: ProductService, private orderService: OrderService) { }
+  private subscription = new Subscription();
+  order: any;
+  editOrdelete: boolean = false;
+  constructor(private productService: ProductService, private orderService: OrderService) {
+
+    this.subscription.add(this.orderService.getOrder().subscribe(
+      (order: any) => {
+        this.order = order;
+        if (order.orderItems.length > 0) {
+          this.editOrdelete = true;
+        }
+      }
+    ));
+  }
 
   ngOnInit(): void {
     // Retrieve products from localStorage

@@ -138,10 +138,24 @@ export class ProductDetailsCardComponent implements OnInit {
       existingProducts = JSON.parse(existingProductsString);
     }
 
-    // Check if the product with the same ID and hexaCode already exists
-    const existingProductIndex = existingProducts.findIndex(existingProduct =>
-      existingProduct.id === product.id && existingProduct.hexColor === this.colorWithSizesSelected.color.hexaCode
-    );
+    let existingProductIndex = -1;
+    if (product.quantity !== -1) {
+      // Check if the product with the same ID and hexaCode already exists
+      existingProductIndex = existingProducts.findIndex(existingProduct =>
+        existingProduct.id === product.id);
+    }
+    if (product.colorWithSizes.length > 0) {
+      // Check if the product with the same ID and hexaCode already exists
+      existingProductIndex = existingProducts.findIndex(existingProduct =>
+        existingProduct.id === product.id && existingProduct.hexColor === this.colorWithQuantity.hexaCode
+      );
+    }
+    if (product.sizes.length > 0) {
+      // Check if the product with the same ID and hexaCode already exists
+      existingProductIndex = existingProducts.findIndex(existingProduct =>
+        existingProduct.id === product.id && existingProduct.hexColor === this.colorWithSizesSelected.color.hexaCode
+      );
+    }
 
     if (existingProductIndex !== -1) {
       // If the product already exists, check if quantity update is allowed
@@ -220,10 +234,24 @@ export class ProductDetailsCardComponent implements OnInit {
       existingProducts = JSON.parse(existingProductsString);
     }
 
-    // Check if the product with the same ID and hexaCode already exists
-    const existingProductIndex = existingProducts.findIndex(existingProduct =>
-      existingProduct.id === product.id && existingProduct.hexColor === this.colorWithSizesSelected.color.hexaCode
-    );
+    let existingProductIndex = -1;
+    if (product.quantity !== -1) {
+      // Check if the product with the same ID and hexaCode already exists
+      existingProductIndex = existingProducts.findIndex(existingProduct =>
+        existingProduct.id === product.id);
+    }
+    if (product.colorWithSizes.length > 0) {
+      // Check if the product with the same ID and hexaCode already exists
+      existingProductIndex = existingProducts.findIndex(existingProduct =>
+        existingProduct.id === product.id && existingProduct.hexColor === this.colorWithQuantity.hexaCode
+      );
+    }
+    if (product.sizes.length > 0) {
+      // Check if the product with the same ID and hexaCode already exists
+      existingProductIndex = existingProducts.findIndex(existingProduct =>
+        existingProduct.id === product.id && existingProduct.hexColor === this.colorWithSizesSelected.color.hexaCode
+      );
+    }
 
     if (existingProductIndex !== -1) {
       // If the product already exists, check if quantity update is allowed

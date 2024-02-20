@@ -37,7 +37,7 @@
     </section>
     <section class="bg-white rounded p-4">
 
-      <app-select
+      <app-select *ngIf="addresses.length > 0"
             [options]="addresses"
             placeholder="Enter your city"
             label="City"
@@ -127,24 +127,24 @@ name="Address Name" [classes]="{
 
   <div class="">
     <div class="bg-white px-6 py-5.5">
-      <h6 class="text-purple-500 mb-6 font-normal">Choose Payment Method</h6>
+      <h6 class="text-purple-500 mb-6 font-normal">{{"choosePaymentMethod" | translate}}</h6>
       <!-- <app-radio [options]="paymentMethods"> </app-radio> -->
       <app-radio [options]="paymentMethods" (change)="onPaymentMethodChange($event)" [value]="currentPaymentMethod"></app-radio>
 
       <p class="text-orange-400 text-xs mt-2 flex items-center gap-1">
         <svg-icon src="../../../../../assets/icons/gift.svg"> </svg-icon>
-        Additional discount if you pay by credit card
+        {{"AdditionalDiscountIfYouPayByCreditCard" | translate}}
       </p>
     </div>
 
     <p class="text-xs font-semibold text-blue-900 px-6 py-5.5">
       <i
         class="fa-solid text-xs me-1 fa-info rounded-full w-5 h-5 border-2 border-blue-900 inline-flex items-center justify-center"></i>
-      You Will Be Able To Add A Voucher In The Next Step
+      {{"YouWillBeAbleToAddAVoucherInTheNextStep" | translate}}
     </p>
 
     <div class="bg-white px-6 py-5.5">
-      <h6 class="text-purple-500 mb-6 font-normal">Choose Shipping Time</h6>
+      <h6 class="text-purple-500 mb-6 font-normal">{{"ChooseShippingTime" | translate}}</h6>
       <!-- <app-radio [options]="shippingTimes"> </app-radio> -->
       <app-radio [options]="shippingTimes" (change)="onShippingTimeChange($event)" [value]="currentShippingTime"></app-radio>
 

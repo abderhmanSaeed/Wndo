@@ -14,11 +14,12 @@
         <p *ngIf="order?.paymentMethod === 0" class="text-sm text-purple-500">
           <i  class="fa-solid fa-door-open text-primary"></i>
 
-          Cash on Delievery
+          {{"cashOnDelievery" | translate}}
         </p>
         <p *ngIf="order?.paymentMethod === 1" class="text-sm text-purple-500">
           <i  class="fa-solid fa-door-open text-primary"></i>
-          card
+          {{"creditCard" | translate}}
+
         </p>
       </li>
     </ul>

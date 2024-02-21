@@ -156,6 +156,10 @@ export class StepperComponent implements AfterContentInit, OnDestroy {
           this.orderService.setAddressId(response.responseData?.id);
           this.fetchShippingFees();
 
+            // Use the matched address object for shippingFessService.setAddress
+            this.shippingFessService.setAddress(response.responseData);
+
+
         }
 
       },

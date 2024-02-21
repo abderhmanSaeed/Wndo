@@ -9,10 +9,24 @@
           {{address?.name}}
         </p>
       </li>
-      <li class="flex-1 lg:ms-4 lg:ps-6 pt-4 lg:pt-0">
-        <h6 class="text-blue-800 text-start mb-4">Payment</h6>
+      <!-- <li class="flex-1 lg:ms-4 lg:ps-6 pt-4 lg:pt-0">
+        <h6 class="text-blue-800 text-start mb-4">Payment</h6> {{orderDetails | json}}
         <p class="text-sm text-purple-500">
           <i class="fa-solid fa-door-open text-primary"></i> Cash on Delievery
+        </p>
+      </li> -->
+
+      <li class="flex-1 lg:ms-4 lg:ps-6 pt-4 lg:pt-0">
+        <h6 class="text-blue-800 text-start mb-4">Payment</h6>
+        <p *ngIf="orderDetails?.paymentMethod === 0" class="text-sm text-purple-500">
+          <i  class="fa-solid fa-door-open text-primary"></i>
+
+          {{"cashOnDelievery" | translate}}
+        </p>
+        <p *ngIf="orderDetails?.paymentMethod === 1" class="text-sm text-purple-500">
+          <i  class="fa-solid fa-door-open text-primary"></i>
+          {{"creditCard" | translate}}
+
         </p>
       </li>
     </ul>

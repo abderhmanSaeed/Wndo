@@ -10,5 +10,6 @@ type ClassesProps = {
 export class ConfirmationDetailsComponent {
   @Input() haveACoupon: boolean = false;
   @Input() address: any;
+  @Input() orderDetails: any;
   @Input() classes?: ClassesProps;
 }

@@ -6,7 +6,7 @@
       <li class="flex-1">
         <h6 class="text-blue-800 text-start mb-4">Shipping Address</h6>
         <p class="text-purple-500 text-sm">
-          {{address?.label}}
+          {{address?.label ? address?.label : address?.name}}
         </p>
       </li>
       <li class="flex-1 lg:ms-4 lg:ps-6 pt-4 lg:pt-0">

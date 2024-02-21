@@ -22,6 +22,8 @@ import { Subscription } from 'rxjs';
 import { Router, ActivatedRoute } from '@angular/router';
 import { OrderConfirmedModal } from '../modals/order-confirmed-modal/order-confirmed-modall.component';
 import { DomSanitizer } from '@angular/platform-browser';
+import { AddAddressService } from '../../../data/service/add-address/add-address.service';
+import { ShippingAddressService } from '../../../data/service/shipping-address/shipping-address.service';
 
 
 @Component({
@@ -38,13 +40,22 @@ export class StepperComponent implements AfterContentInit, OnDestroy {
   @Input() hasActionFooter: boolean = true;
   @Input() stateOfSellerOrder: any;
   shippingFee: any;
+  addressData!: {
+    name: string;
+    street: string;
+    buildingNo: number;
+    cityId: number;
+    icon: number;
+    districtId: number;
+    zoneId: number;
+  }
   private subscription: Subscription = new Subscription();
 
   constructor(private renderer: Renderer2, private modalService: ModalService,
     private sharedService: SharedService, private authService: AuthService,
     private location: Location, private shippingFessService: ShippingFessService,
     private orderService: OrderService, private router: Router, private sanitizer: DomSanitizer,
-    private route: ActivatedRoute) {
+    private route: ActivatedRoute, private addAddressService: AddAddressService, private shippingAddressService: ShippingAddressService) {
     this.route.queryParams.subscribe(params => {
       const orderNumber = params['orderNumber'];
       if (orderNumber) {
@@ -110,8 +121,8 @@ export class StepperComponent implements AfterContentInit, OnDestroy {
       else if (this.currentStep === 1 && this.location.path().includes('/product/productOrders')) {
         // If the current step is the "Shipping & Payment" step, call the get Shipping Fees method
         this.fetchShippingFees();
-        this.orderService.getOrder();
-
+       const order =  this.orderService.getOrder();
+        this.addressData = this.addAddressService.getAddressData();
 
       }
       // else if (this.currentStep === 2 && this.location.path().includes('/product/productOrders')) {
@@ -128,6 +139,18 @@ export class StepperComponent implements AfterContentInit, OnDestroy {
         this.submitOrder();
       }
     }
+  }
+  submitAddress() {
+    this.shippingAddressService.postAddress(this.addressData).subscribe({
+      next: (response: any) => {
+        if (response.statusCode === 200 && response.responseData?.id) {
+          this.orderService.setAddressId(response.responseData?.id);
+
+        }
+
+      },
+      error: (error) => console.error('Error submitting address:', error),
+    });
   }
   submitOrder() {
     this.orderService.getOrder().subscribe(order => {

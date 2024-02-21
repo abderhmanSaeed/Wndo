@@ -24,6 +24,18 @@ export class ShippingAddressService {
     );
   }
 
+  postAddress(data: {
+    name: string;
+    street: string;
+    buildingNo: any;
+    cityId: number;
+    icon: number;
+    districtId: number;
+    zoneId: number;
+  }) {
+    return this.http.post(`${this.apiEndPoint}/address`, data);
+  }
+
   getCities(): Observable<any> {
     return this.http.get<{responseData: { items: any[] }}>(`${this.apiEndPoint}/city/cities`).pipe(
       map(response => response.responseData.items.map(item => ({
@@ -34,11 +46,20 @@ export class ShippingAddressService {
   }
 
   getDistrictsAndZones(cityId: number): Observable<any> {
-    return this.http.get<{responseData: { districts: any[] }}>(`${this.apiEndPoint}/city/districts-and-zones/${cityId}`).pipe(
-      map(response => response.responseData.districts.map(item => ({
-        label: item.name,
-        value: item.id,
-      })))
+    return this.http.get<{responseData: { districts: any[], zones: any[] }}>(`${this.apiEndPoint}/city/districts-and-zones/${cityId}`).pipe(
+      map(response => {
+        const districts = response.responseData.districts.map(item => ({
+          label: item.name,
+          value: item.id,
+          type: 'district'
+        }));
+        const zones = response.responseData.zones.map(item => ({
+          label: item.name,
+          value: item.id,
+          type: 'zone'
+        }));
+        return { districts, zones };
+      })
     );
   }
 

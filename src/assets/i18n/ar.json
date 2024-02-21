@@ -100,7 +100,9 @@
   "choosePaymentMethod": "إختر طريقة الدفع",
   "ChooseShippingTime" : "إختر وقت التسليم",
   "AdditionalDiscountIfYouPayByCreditCard" : "خصم إضافي إذا كنت تدفع عن طريق بطاقة الائتمان",
-  "YouWillBeAbleToAddAVoucherInTheNextStep": "ستتمكن من إضافة قسيمة في الخطوة التالية"
+  "YouWillBeAbleToAddAVoucherInTheNextStep": "ستتمكن من إضافة قسيمة في الخطوة التالية",
+  "addNewAddress": "إضافة عنوان جديد"
+
 
 
 

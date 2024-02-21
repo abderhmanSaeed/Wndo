@@ -1,7 +1,8 @@
 <div class="grid grid-cols-1 md:grid-cols-3 justify-between gap-10">
   <form class="md:col-span-2">
     <section class="mb-4">
-      <h6 class="text-sm text-blue-900 mb-3">Your Cart has ({{products.length}}) items</h6>
+      <h6 class="text-sm text-blue-900 mb-3">{{"yourCarthas" | translate}} ({{products.length}}) {{"items" | translate}}
+      </h6>
       <div class="bg-white rounded flex flex-wrap p-4 gap-6">
         <div class="flex-auto">
           <app-input-filed [required]="true" [label]='"yourName" | translate' [isFloating]="true" [DefaultName]="true"
@@ -28,40 +29,33 @@
       </p>
     </section>
     <section class="bg-white rounded p-4">
+      <h6 class="text-sm text-blue-900">{{("shippingAddress"|translate)}}</h6>
 
-      <app-select *ngIf="addresses.length > 0" [options]="addresses" placeholder="Enter your city" label="City"
-        [required]="true" name="cities" [classes]="{
+      <app-select *ngIf="addresses.length > 0" [options]="addresses" [placeholder]="('enterYourAddress' | translate)"
+        [label]="('addressName' | translate)" [required]="true" name="cities" [classes]="{
               label: 'peer-focus:text-base peer-focus:font-medium font-medium text-base',
               labelColor: 'peer-focus:text-purple-500'
             }" [isFloating]="true" (valueChange)="onAddressesChange($event)">
         <!-- This line handles the emitted value -->
       </app-select>
-      <h6 class="text-sm text-blue-900">Shipping Address</h6>
-      <div class="grid sm:grid-cols-2 p-5 gap-6">
+      <button *ngIf="!showAddNewAddress" type="button" class="add-new-address" (click)="addNewAddress()">{{
+        'addNewAddress' | translate }}</button>
+
+      <h6 *ngIf="addresses.length === 0 || showAddNewAddress" class="text-sm text-blue-900">
+        {{("shippingAddress"|translate)}}</h6>
+      <div *ngIf="addresses.length === 0 || showAddNewAddress" class="grid sm:grid-cols-2 p-5 gap-6">
         <div>
-          <app-input-filed [required]="true" label="Address Name" [isFloating]="true" placeholder="Enter Your Address"
-            name="address" [classes]="{
+          <app-input-filed [required]="true" [label]="('addressName' | translate)" [isFloating]="true"
+            [placeholder]="('enterYourAddress' | translate)" name="address" [classes]="{
               label: 'peer-focus:text-base peer-focus:font-medium',
               labelColor: 'peer-focus:text-purple-500'
             }" (nameChanged)="onAdressNameChanged($event)"></app-input-filed>
 
-          <!-- <app-select [options]="districtsAndZones" placeholder="Enter your Shipping Address" label="Address Name" [required]="true"
-name="Address Name" [classes]="{
-  label:
-    'peer-focus:text-base peer-focus:font-medium font-medium text-base',
-  labelColor: 'peer-focus:text-purple-500'
-}" [isFloating]="true"></app-select> -->
         </div>
         <div>
-          <!-- <app-select [options]="cities" placeholder="Enter your city" label="City" [required]="true" name="cities"
-            [classes]="{
-              label:
-                'peer-focus:text-base peer-focus:font-medium font-medium text-base',
-              labelColor: 'peer-focus:text-purple-500'
-            }" [isFloating]="true"></app-select> -->
 
-          <app-select [options]="cities" placeholder="Enter your city" label="City" [required]="true" name="cities"
-            [classes]="{
+          <app-select [options]="cities" [placeholder]="('enterYourCity' | translate)" [label]="('city' | translate)"
+            [required]="true" name="cities" [classes]="{
               label: 'peer-focus:text-base peer-focus:font-medium font-medium text-base',
               labelColor: 'peer-focus:text-purple-500'
             }" [isFloating]="true" (valueChange)="onCityChange($event)"> <!-- This line handles the emitted value -->
@@ -70,38 +64,32 @@ name="Address Name" [classes]="{
 
         </div>
         <div>
-          <app-select [options]="districts" placeholder="Enter your district name" label="District" [required]="true"
-            name="district" [classes]="{
+          <app-select [options]="districts" [placeholder]="('enterYourDestrict' | translate)"
+            [label]="('destrict' | translate)" [required]="true" name="district" [classes]="{
               label:
                 'peer-focus:text-base peer-focus:font-medium font-medium text-base',
               labelColor: 'peer-focus:text-purple-500'
             }" [isFloating]="true" (valueChange)="onDistrictChange($event)"></app-select>
         </div>
         <div>
-          <app-input-filed [required]="true" label="Street Address" [isFloating]="true"
-            placeholder="Enter your street address" name="adress" [classes]="{
+          <app-input-filed [required]="true" [label]="('streetAddress' | translate)" [isFloating]="true"
+            [placeholder]="('enterYourStreet' | translate)" name="adress" [classes]="{
               label: 'peer-focus:text-base',
               labelColor: 'peer-focus:text-purple-500'
             }" (nameChanged)="onStreetAddressChanged($event)"></app-input-filed>
         </div>
 
         <div>
-          <app-input-filed label="Building No." [isFloating]="true" placeholder="Enter Your Building Number"
-            name="Address" [classes]="{
+          <app-input-filed [label]="('buildingNo' | translate)" [isFloating]="true"
+            [placeholder]="('enterYourBuilding' | translate)" name="Address" [classes]="{
               label: 'peer-focus:text-base',
               labelColor: 'peer-focus:text-purple-500'
             }" (nameChanged)="onBuildingChanged($event)"></app-input-filed>
         </div>
         <div>
-          <!-- <app-input-filed label="Zone" [isFloating]="true" placeholder="Enter Your Zone"
-            name="Address" [classes]="{
-              label: 'peer-focus:text-base',
-              labelColor: 'peer-focus:text-purple-500'
-            }"></app-input-filed> -->
 
-
-          <app-select [options]="zones" placeholder="Enter your Zone name" label="Zone" [required]="true" name="Zone"
-            [classes]="{
+          <app-select [options]="zones" [label]="('zone' | translate)" [isFloating]="true"
+            [placeholder]="('enterYourZone' | translate)" [classes]="{
           label:
            'peer-focus:text-base peer-focus:font-medium font-medium text-base',
                   labelColor: 'peer-focus:text-purple-500'

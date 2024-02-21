@@ -100,7 +100,8 @@
   "choosePaymentMethod": "Choose Payment Method",
   "ChooseShippingTime" : "Choose Shipping Time",
   "AdditionalDiscountIfYouPayByCreditCard" : "Additional discount if you pay by credit card",
-  "YouWillBeAbleToAddAVoucherInTheNextStep": "You Will Be Able To Add A Voucher In The Next Step"
+  "YouWillBeAbleToAddAVoucherInTheNextStep": "You Will Be Able To Add A Voucher In The Next Step",
+  "addNewAddress": "Add New Address"
 
 
 

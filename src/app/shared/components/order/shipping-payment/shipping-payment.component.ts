@@ -24,6 +24,8 @@ export class ShippingPaymentComponent implements OnInit, OnDestroy {
   selectedDistrict!: string; // Non-null assertion
   selectedZone!: string; // Non-null assertion
 
+  showAddNewAddress: boolean = false; // Non
+
   currentPaymentMethod: any;
   currentShippingTime: any;
   districtsAndZones: any[] = [];
@@ -87,6 +89,9 @@ export class ShippingPaymentComponent implements OnInit, OnDestroy {
           // Handle HTTP errors
         }
       );
+  }
+  addNewAddress(){
+    this.showAddNewAddress = true;
   }
   getAddresses(): void {
     this.shippingAddressService.getAddresses().subscribe(data => {

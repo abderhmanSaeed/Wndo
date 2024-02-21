@@ -50,7 +50,7 @@
       (click)="addMore()"
       class="button button--primary !py-0 button--bordered rounded-full flex-auto xl:flex-initial xl:px-24"
     >
-    ADD MORE PRODUCT
+    {{"addMoreProduct" | translate}}
     </button>
 
       <button
@@ -59,7 +59,7 @@
         (click)="backStep()"
         class="button button--primary !py-0 button--bordered rounded-full flex-auto xl:flex-initial xl:px-24"
       >
-        Back
+        {{"back" | translate}}
       </button>
 
       <ng-container *ngFor="let step of steps; let i = index">

@@ -7,14 +7,14 @@
       [label]="'checkOut' | translate"
       icon="bag-coloring"
       [template]="checkout"
-      nextButtonLabel="CHECK OUT"
+      [nextButtonLabel]="('checkOut' |translate)"
       >
     </app-step>
     <app-step
       [label]="'shipping&Pyament' | translate"
       icon="shipping"
       [template]="shippingAndPayment"
-      nextButtonLabel="CONTINUE"
+      [nextButtonLabel]="('continue' | translate)"
     ></app-step>
     <app-step
       [label]='"confirmation" | translate'

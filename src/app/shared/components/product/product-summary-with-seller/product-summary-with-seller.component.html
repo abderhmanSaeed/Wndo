@@ -6,7 +6,7 @@
 <!-- [class.border-green-500]="seller.stateOfSellerOrder === 6"
   [class.border-lightBlue-500]="seller.stateOfSellerOrder !== 6" -->
   <div class="">
-    <h6 class="text-blueGray-400 text-sm mb-4">Seller:</h6>
+    <h6 class="text-blueGray-400 text-sm mb-4">{{"seller" | translate}}</h6>
     <div (click)="navigateSeller(seller?.sellerId)"class="pointer-div flex items-center gap-2">
       <img
         [src]="seller?.imagePath"
@@ -19,7 +19,7 @@
 
   <div class="flex-grow">
     <p class="font-medium text-sm text-blue-900 mb-2">
-      Items: {{ seller?.products?.length }}
+      {{"items" | translate}} {{ seller?.products?.length }}
     </p>
     <ul class="bg-blue-100 rounded-sm py-1 px-2 inline-flex flex-col w-full">
       <li

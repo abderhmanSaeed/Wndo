@@ -4,13 +4,13 @@
       class="bg-white divide-gray-20 rounded flex flex-col lg:flex-row lg:items-center justify-between gap-8 divide-y lg:divide-x p-4"
     >
       <li class="flex-1">
-        <h6 class="text-blue-800 text-start mb-4">Shipping Address</h6>
+        <h6 class="text-blue-800 text-start mb-4">{{"shippingAddress" | translate}}</h6>
         <p class="text-purple-500 text-sm">
           {{address?.label}}
         </p>
       </li>
       <li class="flex-1 lg:ms-4 lg:ps-6 pt-4 lg:pt-0">
-        <h6 class="text-blue-800 text-start mb-4">Payment</h6>
+        <h6 class="text-blue-800 text-start mb-4">{{"payment" | translate}}</h6>
         <p *ngIf="order?.paymentMethod === 0" class="text-sm text-purple-500">
           <i  class="fa-solid fa-door-open text-primary"></i>
 
@@ -35,15 +35,15 @@
 
   <div *ngIf="haveACoupon">
     <app-input-filed
-      label="Do You Have A Voucher?"
-      placeholder="Enter Coupon Code"
+      [label]="('doYouHaveVoucher' | translate)"
+      [placeholder]="('enterCode' | translate)"
       [classes]="{
         label: 'text-sm text-purple-500',
         input: 'placeholder: !text-xs !px-2 placeholder:!text-gray-250'
       }"
     ></app-input-filed>
     <button type="button" class="ms-auto button text-xs button--primary button--bordered">
-      ADD VOUCHER
+      {{"addVoucher" | translate}}
     </button>
 
   </div>

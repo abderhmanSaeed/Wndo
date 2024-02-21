@@ -2,9 +2,9 @@
 <section class="content-page">
 
   <div class="flex justify-between mb-4">
-    <h6 class="text-base font-medium text-blue-900">Order No : {{orderDetails?.orderNumber}}</h6>
+    <h6 class="text-base font-medium text-blue-900"> {{"orderNo" | translate}} {{orderDetails?.orderNumber}}</h6>
     <p class="text-blue-900">
-      Order Statues: <span class="val" [ngClass]="{
+      {{"orderStatues" | translate}} <span class="val" [ngClass]="{
                 'text-[#4EA3F8]': orderDetails?.orderState == orderStatsObject.ordered.key,
                 'text-[#FA0029]': orderDetails?.orderState == orderStatsObject.cancelled.key,
                 'text-[#fca908]': orderDetails?.orderState == orderStatsObject.shipping.key,
@@ -24,13 +24,13 @@
 
   <app-stepper *ngFor="let seller of orderDetails?.sellers" [hasActionFooter]="false"
     [stateOfSellerOrder]="seller.stateOfSellerOrder">
-    <app-step label="Order Placed" icon="order-placed" [template]="orderPlaced">
+    <app-step [label]="('orderPlaced' | translate)" icon="order-placed" [template]="orderPlaced">
     </app-step>
-    <app-step label="Picked up" icon="picked-up" [template]="pickedUp">
+    <app-step [label]="('pickedUp' |translate)" icon="picked-up" [template]="pickedUp">
     </app-step>
-    <app-step label="Out for delivery" icon="out-for-delivery" [template]="outForDelivery">
+    <app-step [label]="('outForDelivery' | translate)" icon="out-for-delivery" [template]="outForDelivery">
     </app-step>
-    <app-step label="Delivered" icon="delivered" [template]="delivered">
+    <app-step [label]="('delivered' | translate)" icon="delivered" [template]="delivered">
     </app-step>
     <ng-template #orderPlaced>
       <div class="space-y-4">
@@ -41,9 +41,9 @@
     </ng-template>
     <ng-template #pickedUp>
       <div class="flex justify-between mb-4">
-        <h6 class="text-base font-medium text-blue-900">Order No : 234</h6>
+        <h6 class="text-base font-medium text-blue-900">{{"orderNo" | translate}} {{orderDetails?.orderNumber}}</h6>
         <p class="text-blue-900">
-          Order Statues: <span class="text-orange-300">Picked up</span>
+          {{"orderStatues" | translate}}  <span class="text-orange-300">{{"pickedUp" | translate }}</span>
         </p>
       </div>
       <div class="space-y-4">
@@ -55,10 +55,11 @@
 
     <ng-template #outForDelivery>
       <div class="flex justify-between mb-4">
-        <h6 class="text-base font-medium text-blue-900">Order No : 234</h6>
+        <h6 class="text-base font-medium text-blue-900">{{"orderNo" | translate}} {{orderDetails?.orderNumber}}</h6>
         <p class="text-blue-900">
-          Order Statues: <span class="text-orange-600">Out for delivery</span>
+          {{"orderStatues" | translate}}  <span class="text-orange-600">{{"outForDelivery" | translate}}</span>
         </p>
+
       </div>
       <div class="space-y-4">
         <div>
@@ -69,9 +70,9 @@
 
     <ng-template #delivered>
       <div class="flex justify-between mb-4">
-        <h6 class="text-base font-medium text-blue-900">Order No : 234</h6>
+        <h6 class="text-base font-medium text-blue-900">{{"orderNo" | translate}} {{orderDetails?.orderNumber}}</h6>
         <p class="text-blue-900">
-          Order Statues: <span class="text-green-500">Delivered</span>
+          {{"orderStatues" | translate}} <span class="text-green-500">{{"delivered" | translate}}</span>
         </p>
       </div>
       <div class="space-y-4">
@@ -86,6 +87,6 @@
 
 <section class="content-page flex justify-center">
   <button (click)="navigateOrderDetails()" type="button" class="button button--primary rounded-full px-24">
-    ORDER DETAILS
+    {{"orderDetails" | translate }}
   </button>
 </section>

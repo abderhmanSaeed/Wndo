@@ -120,9 +120,17 @@ export class StepperComponent implements AfterContentInit, OnDestroy {
       }
       else if (this.currentStep === 1 && this.location.path().includes('/product/productOrders')) {
         // If the current step is the "Shipping & Payment" step, call the get Shipping Fees method
-        this.fetchShippingFees();
-       const order =  this.orderService.getOrder();
-        this.addressData = this.addAddressService.getAddressData();
+        // Assuming orderService has a BehaviorSubject named 'order'
+        const currentOrder = this.orderService.order.getValue();
+
+        if (currentOrder && currentOrder.addressId === 0) {
+          this.addressData = this.addAddressService.getAddressData();
+          this.submitAddress();
+        } else {
+          this.fetchShippingFees();
+
+        }
+        // if(order.addressId)
 
       }
       // else if (this.currentStep === 2 && this.location.path().includes('/product/productOrders')) {
@@ -144,7 +152,9 @@ export class StepperComponent implements AfterContentInit, OnDestroy {
     this.shippingAddressService.postAddress(this.addressData).subscribe({
       next: (response: any) => {
         if (response.statusCode === 200 && response.responseData?.id) {
+          this.shippingFessService.updateAddressId(response.responseData?.id);
           this.orderService.setAddressId(response.responseData?.id);
+          this.fetchShippingFees();
 
         }
 

@@ -8,7 +8,7 @@ import { BehaviorSubject } from 'rxjs';
   providedIn: 'root'
 })
 export class OrderService {
-  private order = new BehaviorSubject<Order | null>(null);
+   order = new BehaviorSubject<Order | null>(null);
   private orderNumberSource = new BehaviorSubject<number | null>(null);
 
   private apiEndPoint = '';

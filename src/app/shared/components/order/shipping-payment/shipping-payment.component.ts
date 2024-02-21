@@ -1,3 +1,4 @@
+import { AddAddressService } from './../../../../data/service/add-address/add-address.service';
 import { ShippingAddressService } from './../../../../data/service/shipping-address/shipping-address.service';
 import { Component, OnDestroy, OnInit, TemplateRef, ViewChild, ViewContainerRef } from '@angular/core';
 import { ModalService } from '../../modal/modal.service';
@@ -21,13 +22,20 @@ export class ShippingPaymentComponent implements OnInit, OnDestroy {
   selectedCity!: string; // Non-null assertion
   selectedAddresses!: string; // Non-null assertion
   selectedDistrict!: string; // Non-null assertion
+  selectedZone!: string; // Non-null assertion
+
+  showAddNewAddress: boolean = false; // Non
+
   currentPaymentMethod: any;
   currentShippingTime: any;
   districtsAndZones: any[] = [];
+  districts: any[] = [];
+  zones: any[] = [];
   private subscriptions = new Subscription();
+  currentLang = this.authService.getCurrentLanguage();
 
   constructor(private shippingAddressService: ShippingAddressService, private countryPhoneCodeService: CountryPhoneCodeService, private authService: AuthService,
-    private shippingFessService: ShippingFessService, private orderService: OrderService) { }
+    private shippingFessService: ShippingFessService, private orderService: OrderService, private addAddressService: AddAddressService) { }
   ngOnInit(): void {
     const auth = this.authService.isAuth();
     if (!auth) {
@@ -82,6 +90,9 @@ export class ShippingPaymentComponent implements OnInit, OnDestroy {
         }
       );
   }
+  addNewAddress(){
+    this.showAddNewAddress = true;
+  }
   getAddresses(): void {
     this.shippingAddressService.getAddresses().subscribe(data => {
       this.addresses = data;
@@ -96,23 +107,37 @@ export class ShippingPaymentComponent implements OnInit, OnDestroy {
       console.error('There was an error!', error);
     });
   }
+  // getDistrictsAndZones(cityId: number) {
+  //   this.shippingAddressService.getDistrictsAndZones(cityId).subscribe({
+  //     next: (data) => {
+  //       this.districtsAndZones = data;
+  //     },
+  //     error: (error) => {
+  //       console.error('There was an error!', error);
+  //     }
+  //   });
+  // }
+
   getDistrictsAndZones(cityId: number) {
     this.shippingAddressService.getDistrictsAndZones(cityId).subscribe({
       next: (data) => {
-        this.districtsAndZones = data;
+        // Assigning districts and zones from the fetched data to component properties
+        this.districts = data.districts;
+        this.zones = data.zones;
       },
       error: (error) => {
         console.error('There was an error!', error);
       }
     });
   }
+
   onCityChange(newValue: any) {
     this.selectedCity = newValue;
     if (newValue === '0') {
       this.districtsAndZones = [];
     } else {
-
       this.getDistrictsAndZones(newValue);
+      this.addAddressService.setCityId(newValue);
     }
     // Additional logic when city changes, if needed
   }
@@ -134,8 +159,18 @@ export class ShippingPaymentComponent implements OnInit, OnDestroy {
 
   onDistrictChange(newValue: any) {
     this.selectedDistrict = newValue;
-    console.log(this.selectedDistrict);
+    this.addAddressService.setDistrictId(newValue);
+
+    // console.log(this.selectedDistrict);
   }
+
+  onZoneChange(newValue: any) {
+    this.selectedZone = newValue;
+    this.addAddressService.setZoneId(newValue);
+    // console.log(this.selectedZone);
+  }
+
+
   handleSelectedOption(selectedOption: string) {
     console.log('Selected option:', selectedOption);
     // Do whatever you need to do with the selected option in the parent component
@@ -143,6 +178,18 @@ export class ShippingPaymentComponent implements OnInit, OnDestroy {
   onNameChanged(name: string) {
     console.log('Name changed:', name);
     // You can perform any other actions with the emitted 'name' value here
+  }
+  onAdressNameChanged(name: string) {
+    console.log('Adress Name:', name);
+    this.addAddressService.setName(name);
+  }
+  onStreetAddressChanged(name: string) {
+    console.log('Street Address:', name);
+    this.addAddressService.setStreet(name);
+  }
+  onBuildingChanged(name: any) {
+    console.log('Building:', name);
+    this.addAddressService.setBuildingNo(name);
   }
   // cities = [
   //   { label: 'Cairo', value: 'cairo' },
@@ -184,14 +231,14 @@ export class ShippingPaymentComponent implements OnInit, OnDestroy {
 
   paymentMethods = [
     {
-      label: 'Cash on Delivery',
+      label: this.currentLang === 'en' ? 'Cash on Delivery' : 'الدفع عند الإستلام',
       name: 'cash',
       value: PaymentType.Cash,
-      desc: 'Extra fee will be applied',
+      desc: this.currentLang === 'en' ? 'Extra fee will be applied' : 'سيتم تطبيق مصاريف إضافية',
       children: '<i class="fa-solid fa-wallet"></i>',
     },
     {
-      label: 'Credit Card',
+      label: this.currentLang === 'en' ? 'Credit Card' : 'بطاقة الإئتمان',
       name: 'creditCard',
       value: PaymentType.CreditCard,
       desc: '',
@@ -203,21 +250,21 @@ export class ShippingPaymentComponent implements OnInit, OnDestroy {
 
   shippingTimes = [
     {
-      label: 'Any time',
+      label: this.currentLang === 'en' ? 'Any time' : 'أي وقت',
       name: 'anyTime',
       value: PickUpTime.Any,
       desc: '',
       children: '',
     },
     {
-      label: 'Morning 9 am - 2 pm',
+      label: this.currentLang === 'en' ? 'Morning 9 am - 2 pm' : 'صباحًا من 9ص-2م',
       name: 'morning',
       value: PickUpTime.Morning9am2pm,
       desc: '',
       children: '',
     },
     {
-      label: 'Evening 2 pm - 8 pm',
+      label: this.currentLang === 'en' ? 'Evening 2 pm - 8 pm' : 'مساءً من 2م-8م',
       name: 'evening',
       value: PickUpTime.Evening2pm8pm,
       desc: '',

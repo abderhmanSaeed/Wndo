@@ -52,6 +52,7 @@ export class HeaderOfPageComponent implements OnInit, AfterViewInit {
   showLoginMessage: boolean = false;
   successfullyMessage: string = 'Successfully logged in. Welcome';
   ShowSeler: boolean = false;
+  sellerCover: any;
 
   constructor(private modalService: ModalService,
     private route: ActivatedRoute,
@@ -75,15 +76,16 @@ export class HeaderOfPageComponent implements OnInit, AfterViewInit {
       //   startContentMenu: this.trackingOrdersIconTemplate,
       // },
     ];
+    const currentLang = this.authService.getCurrentLanguage();
 
     this.guestUserDropdown = [
       {
-        label: 'LogIn',
+        label: currentLang === 'en' ? 'LogIn' : 'تسجيل دخول',
         value: 'LogIn',
         startContentMenu: this.loginIconTemplate,
       },
       {
-        label: 'SignUp',
+        label: currentLang === 'en' ? 'SignUp' : 'اشتراك',
         value: 'SignUp',
         startContentMenu: this.logoutIconTemplate,
       },
@@ -164,15 +166,17 @@ export class HeaderOfPageComponent implements OnInit, AfterViewInit {
   ];
 
   ngOnInit(): void {
-    // Retrieve the seller ID from local storage
-    const sellerId = localStorage.getItem('sellerId');
+    // Retrieve the current seller data from local storage and parse it
+    const sellerDataString = localStorage.getItem('seller');
+    const sellerData = sellerDataString ? JSON.parse(sellerDataString) : {};
 
+    const auth = this.authService.isAuth();
     // Check if the sellerId is not null before calling the service
-    if (sellerId) {
-      this.fetchSellerProfile(sellerId);
-    } else {
-      // Handle the case where sellerId is not found in local storage
-      console.error('Seller ID not found in local storage');
+    if (sellerData.sellerId && auth && !this.seller?.cover) {
+      this.fetchSellerProfile(sellerData.sellerId);
+    }
+    if (!auth && (this.location.path().includes('/product/productOrders') || this.location.path().includes('/product/productOffers')) ) {
+      this.sellerCover = sellerData.sellerCover;
     }
     const productsLocalStorage = localStorage.getItem('products');
     if (productsLocalStorage) {
@@ -221,7 +225,6 @@ export class HeaderOfPageComponent implements OnInit, AfterViewInit {
     }
 
   }
-
   fetchSellerProfile(sellerId: string): void {
     this.SellerProductsOffersService.getSellerProfile(sellerId).subscribe({
       next: (data) => {

@@ -82,7 +82,7 @@ export class ProductDetailsCardComponent implements OnInit {
       ]
     }
   ]
-  colorWithSizes: any;
+  colorWithQuantity: any;
   constructor(private router: Router) {
     // Your constructor logic here
   }
@@ -138,10 +138,24 @@ export class ProductDetailsCardComponent implements OnInit {
       existingProducts = JSON.parse(existingProductsString);
     }
 
-    // Check if the product with the same ID and hexaCode already exists
-    const existingProductIndex = existingProducts.findIndex(existingProduct =>
-      existingProduct.id === product.id && existingProduct.hexColor === this.colorWithSizesSelected.color.hexaCode
-    );
+    let existingProductIndex = -1;
+    if (product.quantity !== -1) {
+      // Check if the product with the same ID and hexaCode already exists
+      existingProductIndex = existingProducts.findIndex(existingProduct =>
+        existingProduct.id === product.id);
+    }
+    if (product.colorWithSizes.length > 0) {
+      // Check if the product with the same ID and hexaCode already exists
+      existingProductIndex = existingProducts.findIndex(existingProduct =>
+        existingProduct.id === product.id && existingProduct.hexColor === this.colorWithQuantity.hexaCode
+      );
+    }
+    if (product.sizes.length > 0) {
+      // Check if the product with the same ID and hexaCode already exists
+      existingProductIndex = existingProducts.findIndex(existingProduct =>
+        existingProduct.id === product.id && existingProduct.hexColor === this.colorWithSizesSelected.color.hexaCode
+      );
+    }
 
     if (existingProductIndex !== -1) {
       // If the product already exists, check if quantity update is allowed
@@ -220,10 +234,24 @@ export class ProductDetailsCardComponent implements OnInit {
       existingProducts = JSON.parse(existingProductsString);
     }
 
-    // Check if the product with the same ID and hexaCode already exists
-    const existingProductIndex = existingProducts.findIndex(existingProduct =>
-      existingProduct.id === product.id && existingProduct.hexColor === this.colorWithSizesSelected.color.hexaCode
-    );
+    let existingProductIndex = -1;
+    if (product.quantity !== -1) {
+      // Check if the product with the same ID and hexaCode already exists
+      existingProductIndex = existingProducts.findIndex(existingProduct =>
+        existingProduct.id === product.id);
+    }
+    if (product.colorWithSizes.length > 0) {
+      // Check if the product with the same ID and hexaCode already exists
+      existingProductIndex = existingProducts.findIndex(existingProduct =>
+        existingProduct.id === product.id && existingProduct.hexColor === this.colorWithQuantity.hexaCode
+      );
+    }
+    if (product.sizes.length > 0) {
+      // Check if the product with the same ID and hexaCode already exists
+      existingProductIndex = existingProducts.findIndex(existingProduct =>
+        existingProduct.id === product.id && existingProduct.hexColor === this.colorWithSizesSelected.color.hexaCode
+      );
+    }
 
     if (existingProductIndex !== -1) {
       // If the product already exists, check if quantity update is allowed
@@ -291,14 +319,14 @@ export class ProductDetailsCardComponent implements OnInit {
         this.showAddTocardMessage = true
       }
       // If the product does not exist, check if a new product can be added
-      else if (product.colorWithSizes && this.colorWithSizes.quantity >= this.productQuantity) {
+      else if (product.colorWithSizes && this.colorWithQuantity.quantity >= this.productQuantity) {
         // Add a new product
         const newProduct = {
           id: product.id,
           name: product.name,
-          hexColor: this.colorWithSizes.hexaCode,
-          colorId: this.colorWithSizes.id,
-          sizeQuantity: this.colorWithSizes.quantity,
+          hexColor: this.colorWithQuantity.hexaCode,
+          colorId: this.colorWithQuantity.id,
+          sizeQuantity: this.colorWithQuantity.quantity,
           sellerId: product?.seller?.id,
           quantity: this.productQuantity,
           totalPrice: product.price.price,
@@ -366,7 +394,7 @@ export class ProductDetailsCardComponent implements OnInit {
 
   logColor(colorWithSizes: any): void {
     console.log(colorWithSizes);
-    this.colorWithSizes = colorWithSizes?.color;
+    this.colorWithQuantity = colorWithSizes?.color;
     this.selectedColor = colorWithSizes?.color?.id;
     if (colorWithSizes?.color?.quantity !== -1) {
       // Check if the size already exists in sizeQuantities, if not, initialize it to 0
@@ -374,10 +402,8 @@ export class ProductDetailsCardComponent implements OnInit {
         this.productQuantity = colorWithSizes?.color?.quantity;
 
       }
-      else{
+      this.sizeQuantities = colorWithSizes?.color?.quantity;
 
-        this.sizeQuantities = colorWithSizes?.color?.quantity;
-      }
     } else {
       this.colorWithSizesSelected = colorWithSizes;
     }
@@ -439,4 +465,23 @@ export class ProductDetailsCardComponent implements OnInit {
     }
   ]
 
+  // Method to check if a string is a valid date
+  isValidDate(dateString: string): boolean {
+    if (!dateString) {
+      return false; // Returns false if the string is empty or undefined
+    }
+    const date = new Date(dateString);
+    return !isNaN(date.getTime()); // Checks if the date is valid
+  }
+
+  // Method to calculate days until expiry, given an expiry date
+  calculateDaysUntilExpiry(expiryDate: string): number {
+    if (!expiryDate) return 0; // Return 0 if no expiry date is provided
+
+    const currentDate = new Date();
+    const expiry = new Date(expiryDate);
+    const timeDiff = expiry.getTime() - currentDate.getTime();
+    const daysUntilExpiry = Math.ceil(timeDiff / (1000 * 3600 * 24));
+    return daysUntilExpiry;
+  }
 }

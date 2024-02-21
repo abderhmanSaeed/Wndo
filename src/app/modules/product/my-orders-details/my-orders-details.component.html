@@ -2,18 +2,18 @@
   <app-header-of-page></app-header-of-page>
   <div class="content-page">
     <h5 class="text-blue-900 mb-11">
-      {{"yourOrder" | translate}} ({{orderDetails?.orderItems.length}})<span class="text-blue-100">></span>
-      <span class="text-sm text-blue-950">{{"orderNoDetails" | translate}}</span>
+      {{"YourOrder" | translate}} ({{orderDetails?.orderItems.length}})<span class="text-blue-100">></span>
+      <span class="text-sm text-blue-950">{{"yourOrderNoDetails" | translate}}</span>
     </h5>
     <div class="grid grid-cols-1 md:grid-cols-7 justify-between gap-10">
       <div class="md:col-span-5">
         <h6 class="text-blue-950 mb-6">{{"summmary" | translate }} {{"order" | translate}} #{{orderDetails?.orderNumber}}</h6>
         <div class="flex items-center justify-between mb-8">
           <p class="text-sm font-medium text-blueGray-200">
-            Placed On: <span>{{orderDetails?.createdAt | date}}</span>
+            {{"placedOn" | translate}} <span>{{orderDetails?.createdAt | date}}</span>
           </p>
           <p class="text-sm font-medium text-blueGray-200">
-            Overall Status:
+           {{"overallStatus" | translate}}
             <span [ngClass]="getTextColorClass(orderDetails?.orderState)">Placed</span>
           </p>
         </div>
@@ -38,11 +38,11 @@
                       order.priceAfterOffer }} EGP</span>
                     <button *ngIf="order?.isCancel" (click)="CancelOrderItem(order.orderItemNumber)" type="button"
                       class="border rounded py-1 px-5 border-gray-200 text-gray-200 hover:bg-gray-100 uppercase text-sm">
-                      cancel
+                      {{"cancel" | translate}}
                     </button>
                     <button *ngIf="order?.canBeRefunded" (click)="refundOrderItem(order.orderItemNumber)" type="button"
                       class="border rounded py-1 px-5 border-gray-200 text-gray-200 hover:bg-gray-100 uppercase text-sm">
-                      refund
+                      {{"refund" | translate}}
                     </button>
                   </div>
                 </div>
@@ -58,23 +58,22 @@
           </div>
       </div> -->
 
-        <app-confirmation-details [address]="orderDetails?.address"
+        <app-confirmation-details [address]="orderDetails?.address" [orderDetails]="orderDetails"
           [classes]="{ base: '!grid-cols-1 mb-4' }"></app-confirmation-details>
 
         <div class="flex flex-wrap gap-4 items-center lg:px-14">
           <button *ngIf="orderDetails?.isCancel" (click)="CancelOrder(orderDetails.orderNumber)"
           type="button"
             class="flex-auto button rounded-full button--primary button--bordered">
-            CANCEL ALL
+            {{"cancelAll" | translate}}
           </button>
           <button *ngIf="orderDetails?.canBeRefunded" (click)="refundOrder(orderDetails.orderNumber)"
            type="button"
             class="flex-auto button rounded-full button--primary button--bordered">
-            Refund ALL
+            {{"refundAll" | translate}}
           </button>
           <button *ngIf="orderDetails.orderState !== 4 && orderDetails.orderState !== 5" (click)="navigateTrackOrder()"type="button" class="flex-auto button rounded-full button--primary">
-            TRACK THE ORDER
-          </button>
+            {{"trackTheOrder" | translate}}          </button>
         </div>
       </div>
       <div class="h-full md:col-span-2">

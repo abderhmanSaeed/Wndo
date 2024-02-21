@@ -47,20 +47,31 @@ export class ProductDetailsComponent implements OnInit {
           this.productDetails = data; // Assign the response to the variable
           // Assume data is the object you've received
           const newSellerId = data?.responseData?.seller?.id;
+          const sellerCover = data?.responseData?.seller?.cover;
 
           // Check if newSellerId has a value
           if (newSellerId) {
-            // Retrieve the current sellerId from local storage
-            const currentSellerId = localStorage.getItem('sellerId');
+            // Retrieve the current seller data from local storage and parse it
+            const sellerDataString = localStorage.getItem('seller');
+            const sellerData = sellerDataString ? JSON.parse(sellerDataString) : {};
 
             // Check if currentSellerId does not exist or if it is different from the newSellerId
-            if (!currentSellerId || currentSellerId !== newSellerId) {
-              // Set the new sellerId in local storage
-              localStorage.setItem('sellerId', newSellerId);
-              this.fetchSellerProfile(newSellerId);
+            if (!sellerData.sellerId || sellerData.sellerId !== newSellerId) {
+              // Update the seller data object
+              const updatedSellerData = {
+                sellerId: newSellerId,
+                sellerCover: sellerCover
+              };
 
+              // Serialize updatedSellerData object to a JSON string and store it in localStorage
+              localStorage.setItem('seller', JSON.stringify(updatedSellerData));
+
+              // This line assumes you have a method to fetch the seller profile, you might need to uncomment it
+              // and ensure it's defined elsewhere in your code.
+              // this.fetchSellerProfile(newSellerId);
             }
-          } else {
+          }
+          else {
             // Handle the case where newSellerId is undefined or null
             console.error('No seller ID present in the data response.');
           }

@@ -5,9 +5,11 @@ export class Seller {
   name: string = '';
   email: string = '';
   imagePath: string = '';
+  cover: string = '';
   isRemoved: boolean = false;
   numberOfItems: number | null = null;
   shareUrl: string = '';
+
 }
 
 export class Image {

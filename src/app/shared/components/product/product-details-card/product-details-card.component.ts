@@ -19,6 +19,12 @@ export class ProductDetailsCardComponent implements OnInit {
 
   @Input() responseData: any;
   showAddTocardMessage: boolean = false;
+
+  colorNotselect: boolean = false;
+  sizeNotselect: boolean = false;
+  quantityNotselect: boolean = false;
+
+
   productQuantity: number = 0;
   userSelectedQuantity!: number;
   colorWithSizesSelected: any;
@@ -130,250 +136,675 @@ export class ProductDetailsCardComponent implements OnInit {
 
   // Method to handle the button click and store productId in localStorage
   storeProductInLocalStorage(product: any): void {
-    // Retrieve the existing products array from localStorage
-    const existingProductsString = localStorage.getItem('products');
-    let existingProducts: any[] = [];
-
-    if (existingProductsString) {
-      existingProducts = JSON.parse(existingProductsString);
+    if (product.quantity !== -1 && this.productQuantity === 0) {
+      this.quantityNotselect = true;
     }
-
-    let existingProductIndex = -1;
-    if (product.quantity !== -1) {
-      // Check if the product with the same ID and hexaCode already exists
-      existingProductIndex = existingProducts.findIndex(existingProduct =>
-        existingProduct.id === product.id);
-    }
-    if (product.colorWithSizes.length > 0) {
-      // Check if the product with the same ID and hexaCode already exists
-      existingProductIndex = existingProducts.findIndex(existingProduct =>
-        existingProduct.id === product.id && existingProduct.hexColor === this.colorWithQuantity.hexaCode
-      );
-    }
-    if (product.sizes.length > 0) {
-      // Check if the product with the same ID and hexaCode already exists
-      existingProductIndex = existingProducts.findIndex(existingProduct =>
-        existingProduct.id === product.id && existingProduct.hexColor === this.colorWithSizesSelected.color.hexaCode
-      );
-    }
-
-    if (existingProductIndex !== -1) {
-      // If the product already exists, check if quantity update is allowed
-      const existingProduct = existingProducts[existingProductIndex];
-      this.existingProductStore = existingProduct;
-
-      if (this.size.quantity >= existingProduct.quantity + this.productQuantity) {
-        // Update the existing product quantity
-        existingProducts[existingProductIndex] = {
-          ...existingProduct,
-          // size: this.size.name,
-          // sizeQuantity: this.size.quantity,
-          quantity: existingProduct.quantity + this.productQuantity,
-          // totalPrice: product.price.price,
-          // priceAfterDiscount: product.price.priceAfterOffer,
-        };
-      } else {
-        // Show a snackbar error message with detailed information
-        // this.snackBar.open(
-        //   `Cannot update quantity. Available quantity: ${this.size.quantity}. You selected ${this.productQuantity}
-        // + in your store ${existingProduct.quantity}`,
-        //   'Close',
-        //   {
-        //     duration: 5000, // Display duration in milliseconds
-        //   }
-        // );
+    else if (product.colorWithSizes.length > 0) {
+      if (!this.colorWithQuantity) {
+        this.colorNotselect = true;
       }
-    } else {
-      // If the product does not exist, check if a new product can be added
-      if (this.size.quantity >= this.productQuantity) {
-        // Add a new product
-        const newProduct = {
-          id: product.id,
-          name: product.name,
-          hexColor: this.colorWithSizesSelected.color.hexaCode,
-          colorId: this.colorWithSizesSelected.color.id,
-          size: this.size.name,
-          sizeId: this.size.id,
-          sizeQuantity: this.size.quantity,
-          sellerId: product?.seller?.id,
-          quantity: this.productQuantity,
-          totalPrice: product.price.price,
-          priceAfterDiscount: product.price.priceAfterOffer,
-          image: product.images[0].urlPreview
-        };
+      else if (this.colorWithSizesSelected.sizes) {
+        if (!this.size) {
+          this.sizeNotselect = true;
+        }
+        else if (this.userSelectedQuantity === 0) {
+          this.quantityNotselect = true;
 
-        // Push the new product to the existing array
-        existingProducts.push(newProduct);
-      } else {
-        // Show a snackbar error message with detailed information
-        // this.snackBar.open(
-        //   `Cannot add new product. Available quantity: ${this.size.quantity}. You selected ${this.productQuantity}.`,
-        //   'Close',
-        //   {
-        //     duration: 5000, // Display duration in milliseconds
-        //   }
-        // );
-        // console.log('Cannot add new product. Not enough available.');
+        }
+        else {
+
+          // Retrieve the existing products array from localStorage
+          const existingProductsString = localStorage.getItem('products');
+          let existingProducts: any[] = [];
+
+          if (existingProductsString) {
+            existingProducts = JSON.parse(existingProductsString);
+          }
+
+          let existingProductIndex = -1;
+          if (product.quantity !== -1) {
+            // Check if the product with the same ID and hexaCode already exists
+            existingProductIndex = existingProducts.findIndex(existingProduct =>
+              existingProduct.id === product.id);
+          }
+          if (product.colorWithSizes.length > 0) {
+            // Check if the product with the same ID and hexaCode already exists
+            existingProductIndex = existingProducts.findIndex(existingProduct =>
+              existingProduct.id === product.id && existingProduct.hexColor === this.colorWithQuantity.hexaCode
+            );
+          }
+          if (product.sizes.length > 0) {
+            // Check if the product with the same ID and hexaCode already exists
+            existingProductIndex = existingProducts.findIndex(existingProduct =>
+              existingProduct.id === product.id && existingProduct.hexColor === this.colorWithSizesSelected.color.hexaCode
+            );
+          }
+
+          if (existingProductIndex !== -1) {
+            // If the product already exists, check if quantity update is allowed
+            const existingProduct = existingProducts[existingProductIndex];
+            this.existingProductStore = existingProduct;
+            if (this.size.quantity >= existingProduct.quantity + this.productQuantity) {
+              // Update the existing product quantity
+              existingProducts[existingProductIndex] = {
+                ...existingProduct,
+                // size: this.size.name,
+                // sizeQuantity: this.size.quantity,
+                quantity: existingProduct.quantity + this.productQuantity,
+                // totalPrice: product.price.price,
+                // priceAfterDiscount: product.price.priceAfterOffer,
+              };
+            } else {
+              // Show a snackbar error message with detailed information
+              this.showCustomNotification();
+              // this.snackBar.open(
+              //   `Cannot update quantity. Available quantity: ${this.size.quantity}. You selected ${this.productQuantity}
+              //   + in your store ${existingProduct.quantity}`,
+              //   'Close',
+              //   {
+              //     duration: 5000, // Display duration in milliseconds
+              //   }
+              // );
+            }
+          } else {
+            if (product.quantity !== -1 && product.quantity >= this.productQuantity) {
+              // Add a new product
+              const newProduct = {
+                id: product.id,
+                name: product.name,
+                sizeQuantity: product.quantity,
+                quantity: this.productQuantity,
+                sellerId: product?.seller?.id,
+                totalPrice: product.price.price,
+                priceAfterDiscount: product.price.priceAfterOffer,
+                image: product.images[0].urlPreview
+              };
+
+              // Push the new product to the existing array
+              existingProducts.push(newProduct);
+            }
+            // If the product does not exist, check if a new product can be added
+            else if (product.colorWithSizes && this.size?.quantity >= this.productQuantity) {
+              // Add a new product
+              const newProduct = {
+                id: product.id,
+                name: product.name,
+                hexColor: this.colorWithSizesSelected.color.hexaCode,
+                colorId: this.colorWithSizesSelected.color.id,
+                size: this.size.name,
+                sizeId: this.size.id,
+                sizeQuantity: this.size.quantity,
+                sellerId: product?.seller?.id,
+                quantity: this.productQuantity,
+                totalPrice: product.price.price,
+                priceAfterDiscount: product.price.priceAfterOffer,
+                image: product.images[0].urlPreview
+              };
+
+              // Push the new product to the existing array
+              existingProducts.push(newProduct);
+              this.showAddTocardMessage = true
+            }
+            // If the product does not exist, check if a new product can be added
+            else if (product.colorWithSizes && this.colorWithQuantity.quantity >= this.productQuantity) {
+              // Add a new product
+              const newProduct = {
+                id: product.id,
+                name: product.name,
+                hexColor: this.colorWithQuantity.hexaCode,
+                colorId: this.colorWithQuantity.id,
+                sizeQuantity: this.colorWithQuantity.quantity,
+                sellerId: product?.seller?.id,
+                quantity: this.productQuantity,
+                totalPrice: product.price.price,
+                priceAfterDiscount: product.price.priceAfterOffer,
+                image: product.images[0].urlPreview
+              };
+
+              // Push the new product to the existing array
+              existingProducts.push(newProduct);
+              this.showAddTocardMessage = true
+            }
+            else if (product.sizes && this.size?.quantity >= this.productQuantity) {
+              // Add a new product
+              const newProduct = {
+                id: product.id,
+                name: product.name,
+                size: this.size?.name,
+                sizeQuantity: this.size?.quantity,
+                quantity: this.productQuantity,
+                sellerId: product?.seller?.id,
+                totalPrice: product.price.price,
+                priceAfterDiscount: product.price.priceAfterOffer,
+                image: product.images[0].urlPreview
+              };
+
+              // Push the new product to the existing array
+              existingProducts.push(newProduct);
+              this.showAddTocardMessage = true
+
+
+            } else {
+              // Show a snackbar error message with detailed information
+              this.showCustomNotification();
+
+              // this.snackBar.open(
+              //   `Cannot add new product. Available quantity: ${this.size.quantity}. You selected ${this.productQuantity}.`,
+              //   'Close',
+              //   {
+              //     duration: 5000, // Display duration in milliseconds
+              //   }
+              // );
+              // console.log('Cannot add new product. Not enough available.');
+            }
+          }
+
+          // Store the updated products array in localStorage
+          localStorage.setItem('products', JSON.stringify(existingProducts));
+
+          // Navigate to the 'product/productOrders' URL
+          this.router.navigate(['/product/productOrders']);
+
+        }
+
+      }
+      else if (this.colorWithQuantity?.quantity !== -1 && this.productQuantity === 0) {
+        this.quantityNotselect = true;
+      }
+
+      else {
+        console.log("aa");
       }
     }
+    else {
 
-    // Store the updated products array in localStorage
-    localStorage.setItem('products', JSON.stringify(existingProducts));
+      // Retrieve the existing products array from localStorage
+      const existingProductsString = localStorage.getItem('products');
+      let existingProducts: any[] = [];
 
-    // Navigate to the 'product/productOrders' URL
-    this.router.navigate(['/product/productOrders']);
+      if (existingProductsString) {
+        existingProducts = JSON.parse(existingProductsString);
+      }
+
+      let existingProductIndex = -1;
+      if (product.quantity !== -1) {
+        // Check if the product with the same ID and hexaCode already exists
+        existingProductIndex = existingProducts.findIndex(existingProduct =>
+          existingProduct.id === product.id);
+      }
+      if (product.colorWithSizes.length > 0) {
+        // Check if the product with the same ID and hexaCode already exists
+        existingProductIndex = existingProducts.findIndex(existingProduct =>
+          existingProduct.id === product.id && existingProduct.hexColor === this.colorWithQuantity.hexaCode
+        );
+      }
+      if (product.sizes.length > 0) {
+        // Check if the product with the same ID and hexaCode already exists
+        existingProductIndex = existingProducts.findIndex(existingProduct =>
+          existingProduct.id === product.id && existingProduct.hexColor === this.colorWithSizesSelected.color.hexaCode
+        );
+      }
+
+      if (existingProductIndex !== -1) {
+        // If the product already exists, check if quantity update is allowed
+        const existingProduct = existingProducts[existingProductIndex];
+        this.existingProductStore = existingProduct;
+        if (this.size.quantity >= existingProduct.quantity + this.productQuantity) {
+          // Update the existing product quantity
+          existingProducts[existingProductIndex] = {
+            ...existingProduct,
+            // size: this.size.name,
+            // sizeQuantity: this.size.quantity,
+            quantity: existingProduct.quantity + this.productQuantity,
+            // totalPrice: product.price.price,
+            // priceAfterDiscount: product.price.priceAfterOffer,
+          };
+        } else {
+          // Show a snackbar error message with detailed information
+          this.showCustomNotification();
+          // this.snackBar.open(
+          //   `Cannot update quantity. Available quantity: ${this.size.quantity}. You selected ${this.productQuantity}
+          //   + in your store ${existingProduct.quantity}`,
+          //   'Close',
+          //   {
+          //     duration: 5000, // Display duration in milliseconds
+          //   }
+          // );
+        }
+      } else {
+        if (product.quantity !== -1 && product.quantity >= this.productQuantity) {
+          // Add a new product
+          const newProduct = {
+            id: product.id,
+            name: product.name,
+            sizeQuantity: product.quantity,
+            quantity: this.productQuantity,
+            sellerId: product?.seller?.id,
+            totalPrice: product.price.price,
+            priceAfterDiscount: product.price.priceAfterOffer,
+            image: product.images[0].urlPreview
+          };
+
+          // Push the new product to the existing array
+          existingProducts.push(newProduct);
+        }
+        // If the product does not exist, check if a new product can be added
+        else if (product.colorWithSizes && this.size?.quantity >= this.productQuantity) {
+          // Add a new product
+          const newProduct = {
+            id: product.id,
+            name: product.name,
+            hexColor: this.colorWithSizesSelected.color.hexaCode,
+            colorId: this.colorWithSizesSelected.color.id,
+            size: this.size.name,
+            sizeId: this.size.id,
+            sizeQuantity: this.size.quantity,
+            sellerId: product?.seller?.id,
+            quantity: this.productQuantity,
+            totalPrice: product.price.price,
+            priceAfterDiscount: product.price.priceAfterOffer,
+            image: product.images[0].urlPreview
+          };
+
+          // Push the new product to the existing array
+          existingProducts.push(newProduct);
+          this.showAddTocardMessage = true
+        }
+        // If the product does not exist, check if a new product can be added
+        else if (product.colorWithSizes && this.colorWithQuantity.quantity >= this.productQuantity) {
+          // Add a new product
+          const newProduct = {
+            id: product.id,
+            name: product.name,
+            hexColor: this.colorWithQuantity.hexaCode,
+            colorId: this.colorWithQuantity.id,
+            sizeQuantity: this.colorWithQuantity.quantity,
+            sellerId: product?.seller?.id,
+            quantity: this.productQuantity,
+            totalPrice: product.price.price,
+            priceAfterDiscount: product.price.priceAfterOffer,
+            image: product.images[0].urlPreview
+          };
+
+          // Push the new product to the existing array
+          existingProducts.push(newProduct);
+          this.showAddTocardMessage = true
+        }
+        else if (product.sizes && this.size?.quantity >= this.productQuantity) {
+          // Add a new product
+          const newProduct = {
+            id: product.id,
+            name: product.name,
+            size: this.size?.name,
+            sizeQuantity: this.size?.quantity,
+            quantity: this.productQuantity,
+            sellerId: product?.seller?.id,
+            totalPrice: product.price.price,
+            priceAfterDiscount: product.price.priceAfterOffer,
+            image: product.images[0].urlPreview
+          };
+
+          // Push the new product to the existing array
+          existingProducts.push(newProduct);
+          this.showAddTocardMessage = true
+
+
+        } else {
+          // Show a snackbar error message with detailed information
+          this.showCustomNotification();
+
+          // this.snackBar.open(
+          //   `Cannot add new product. Available quantity: ${this.size.quantity}. You selected ${this.productQuantity}.`,
+          //   'Close',
+          //   {
+          //     duration: 5000, // Display duration in milliseconds
+          //   }
+          // );
+          // console.log('Cannot add new product. Not enough available.');
+        }
+      }
+
+      // Store the updated products array in localStorage
+      localStorage.setItem('products', JSON.stringify(existingProducts));
+      // Navigate to the 'product/productOrders' URL
+      this.router.navigate(['/product/productOrders']);
+
+    }
+
+
   }
 
   // Method to handle the button click and store productId in localStorage
   storeProductInLocalStorageWithoutNavigate(product: any): void {
-    // Retrieve the existing products array from localStorage
-    const existingProductsString = localStorage.getItem('products');
-    let existingProducts: any[] = [];
+    if (product.quantity !== -1 && this.productQuantity === 0) {
+      this.quantityNotselect = true;
+    }
+    else if (product.colorWithSizes.length > 0) {
+      if (!this.colorWithQuantity) {
+        this.colorNotselect = true;
+      }
+      else if (this.colorWithSizesSelected.sizes) {
+        if (!this.size) {
+          this.sizeNotselect = true;
+        }
+        else if (this.userSelectedQuantity === 0) {
+          this.quantityNotselect = true;
 
-    if (existingProductsString) {
-      existingProducts = JSON.parse(existingProductsString);
-    }
+        }
+        else {
 
-    let existingProductIndex = -1;
-    if (product.quantity !== -1) {
-      // Check if the product with the same ID and hexaCode already exists
-      existingProductIndex = existingProducts.findIndex(existingProduct =>
-        existingProduct.id === product.id);
-    }
-    if (product.colorWithSizes.length > 0) {
-      // Check if the product with the same ID and hexaCode already exists
-      existingProductIndex = existingProducts.findIndex(existingProduct =>
-        existingProduct.id === product.id && existingProduct.hexColor === this.colorWithQuantity.hexaCode
-      );
-    }
-    if (product.sizes.length > 0) {
-      // Check if the product with the same ID and hexaCode already exists
-      existingProductIndex = existingProducts.findIndex(existingProduct =>
-        existingProduct.id === product.id && existingProduct.hexColor === this.colorWithSizesSelected.color.hexaCode
-      );
-    }
+          // Retrieve the existing products array from localStorage
+          const existingProductsString = localStorage.getItem('products');
+          let existingProducts: any[] = [];
 
-    if (existingProductIndex !== -1) {
-      // If the product already exists, check if quantity update is allowed
-      const existingProduct = existingProducts[existingProductIndex];
-      this.existingProductStore = existingProduct;
-      if (this.size.quantity >= existingProduct.quantity + this.productQuantity) {
-        // Update the existing product quantity
-        existingProducts[existingProductIndex] = {
-          ...existingProduct,
-          // size: this.size.name,
-          // sizeQuantity: this.size.quantity,
-          quantity: existingProduct.quantity + this.productQuantity,
-          // totalPrice: product.price.price,
-          // priceAfterDiscount: product.price.priceAfterOffer,
-        };
+          if (existingProductsString) {
+            existingProducts = JSON.parse(existingProductsString);
+          }
+
+          let existingProductIndex = -1;
+          if (product.quantity !== -1) {
+            // Check if the product with the same ID and hexaCode already exists
+            existingProductIndex = existingProducts.findIndex(existingProduct =>
+              existingProduct.id === product.id);
+          }
+          if (product.colorWithSizes.length > 0) {
+            // Check if the product with the same ID and hexaCode already exists
+            existingProductIndex = existingProducts.findIndex(existingProduct =>
+              existingProduct.id === product.id && existingProduct.hexColor === this.colorWithQuantity.hexaCode
+            );
+          }
+          if (product.sizes.length > 0) {
+            // Check if the product with the same ID and hexaCode already exists
+            existingProductIndex = existingProducts.findIndex(existingProduct =>
+              existingProduct.id === product.id && existingProduct.hexColor === this.colorWithSizesSelected.color.hexaCode
+            );
+          }
+
+          if (existingProductIndex !== -1) {
+            // If the product already exists, check if quantity update is allowed
+            const existingProduct = existingProducts[existingProductIndex];
+            this.existingProductStore = existingProduct;
+            if (this.size.quantity >= existingProduct.quantity + this.productQuantity) {
+              // Update the existing product quantity
+              existingProducts[existingProductIndex] = {
+                ...existingProduct,
+                // size: this.size.name,
+                // sizeQuantity: this.size.quantity,
+                quantity: existingProduct.quantity + this.productQuantity,
+                // totalPrice: product.price.price,
+                // priceAfterDiscount: product.price.priceAfterOffer,
+              };
+            } else {
+              // Show a snackbar error message with detailed information
+              this.showCustomNotification();
+              // this.snackBar.open(
+              //   `Cannot update quantity. Available quantity: ${this.size.quantity}. You selected ${this.productQuantity}
+              //   + in your store ${existingProduct.quantity}`,
+              //   'Close',
+              //   {
+              //     duration: 5000, // Display duration in milliseconds
+              //   }
+              // );
+            }
+          } else {
+            if (product.quantity !== -1 && product.quantity >= this.productQuantity) {
+              // Add a new product
+              const newProduct = {
+                id: product.id,
+                name: product.name,
+                sizeQuantity: product.quantity,
+                quantity: this.productQuantity,
+                sellerId: product?.seller?.id,
+                totalPrice: product.price.price,
+                priceAfterDiscount: product.price.priceAfterOffer,
+                image: product.images[0].urlPreview
+              };
+
+              // Push the new product to the existing array
+              existingProducts.push(newProduct);
+            }
+            // If the product does not exist, check if a new product can be added
+            else if (product.colorWithSizes && this.size?.quantity >= this.productQuantity) {
+              // Add a new product
+              const newProduct = {
+                id: product.id,
+                name: product.name,
+                hexColor: this.colorWithSizesSelected.color.hexaCode,
+                colorId: this.colorWithSizesSelected.color.id,
+                size: this.size.name,
+                sizeId: this.size.id,
+                sizeQuantity: this.size.quantity,
+                sellerId: product?.seller?.id,
+                quantity: this.productQuantity,
+                totalPrice: product.price.price,
+                priceAfterDiscount: product.price.priceAfterOffer,
+                image: product.images[0].urlPreview
+              };
+
+              // Push the new product to the existing array
+              existingProducts.push(newProduct);
+              this.showAddTocardMessage = true
+            }
+            // If the product does not exist, check if a new product can be added
+            else if (product.colorWithSizes && this.colorWithQuantity.quantity >= this.productQuantity) {
+              // Add a new product
+              const newProduct = {
+                id: product.id,
+                name: product.name,
+                hexColor: this.colorWithQuantity.hexaCode,
+                colorId: this.colorWithQuantity.id,
+                sizeQuantity: this.colorWithQuantity.quantity,
+                sellerId: product?.seller?.id,
+                quantity: this.productQuantity,
+                totalPrice: product.price.price,
+                priceAfterDiscount: product.price.priceAfterOffer,
+                image: product.images[0].urlPreview
+              };
+
+              // Push the new product to the existing array
+              existingProducts.push(newProduct);
+              this.showAddTocardMessage = true
+            }
+            else if (product.sizes && this.size?.quantity >= this.productQuantity) {
+              // Add a new product
+              const newProduct = {
+                id: product.id,
+                name: product.name,
+                size: this.size?.name,
+                sizeQuantity: this.size?.quantity,
+                quantity: this.productQuantity,
+                sellerId: product?.seller?.id,
+                totalPrice: product.price.price,
+                priceAfterDiscount: product.price.priceAfterOffer,
+                image: product.images[0].urlPreview
+              };
+
+              // Push the new product to the existing array
+              existingProducts.push(newProduct);
+              this.showAddTocardMessage = true
+
+
+            } else {
+              // Show a snackbar error message with detailed information
+              this.showCustomNotification();
+
+              // this.snackBar.open(
+              //   `Cannot add new product. Available quantity: ${this.size.quantity}. You selected ${this.productQuantity}.`,
+              //   'Close',
+              //   {
+              //     duration: 5000, // Display duration in milliseconds
+              //   }
+              // );
+              // console.log('Cannot add new product. Not enough available.');
+            }
+          }
+
+          // Store the updated products array in localStorage
+          localStorage.setItem('products', JSON.stringify(existingProducts));
+
+        }
+
+      }
+      else if (this.colorWithQuantity?.quantity !== -1 && this.productQuantity === 0) {
+        this.quantityNotselect = true;
+      }
+
+      else {
+        console.log("aa");
+      }
+    }
+    else {
+
+      // Retrieve the existing products array from localStorage
+      const existingProductsString = localStorage.getItem('products');
+      let existingProducts: any[] = [];
+
+      if (existingProductsString) {
+        existingProducts = JSON.parse(existingProductsString);
+      }
+
+      let existingProductIndex = -1;
+      if (product.quantity !== -1) {
+        // Check if the product with the same ID and hexaCode already exists
+        existingProductIndex = existingProducts.findIndex(existingProduct =>
+          existingProduct.id === product.id);
+      }
+      if (product.colorWithSizes.length > 0) {
+        // Check if the product with the same ID and hexaCode already exists
+        existingProductIndex = existingProducts.findIndex(existingProduct =>
+          existingProduct.id === product.id && existingProduct.hexColor === this.colorWithQuantity.hexaCode
+        );
+      }
+      if (product.sizes.length > 0) {
+        // Check if the product with the same ID and hexaCode already exists
+        existingProductIndex = existingProducts.findIndex(existingProduct =>
+          existingProduct.id === product.id && existingProduct.hexColor === this.colorWithSizesSelected.color.hexaCode
+        );
+      }
+
+      if (existingProductIndex !== -1) {
+        // If the product already exists, check if quantity update is allowed
+        const existingProduct = existingProducts[existingProductIndex];
+        this.existingProductStore = existingProduct;
+        if (this.size.quantity >= existingProduct.quantity + this.productQuantity) {
+          // Update the existing product quantity
+          existingProducts[existingProductIndex] = {
+            ...existingProduct,
+            // size: this.size.name,
+            // sizeQuantity: this.size.quantity,
+            quantity: existingProduct.quantity + this.productQuantity,
+            // totalPrice: product.price.price,
+            // priceAfterDiscount: product.price.priceAfterOffer,
+          };
+        } else {
+          // Show a snackbar error message with detailed information
+          this.showCustomNotification();
+          // this.snackBar.open(
+          //   `Cannot update quantity. Available quantity: ${this.size.quantity}. You selected ${this.productQuantity}
+          //   + in your store ${existingProduct.quantity}`,
+          //   'Close',
+          //   {
+          //     duration: 5000, // Display duration in milliseconds
+          //   }
+          // );
+        }
       } else {
-        // Show a snackbar error message with detailed information
-        this.showCustomNotification();
-        // this.snackBar.open(
-        //   `Cannot update quantity. Available quantity: ${this.size.quantity}. You selected ${this.productQuantity}
-        //   + in your store ${existingProduct.quantity}`,
-        //   'Close',
-        //   {
-        //     duration: 5000, // Display duration in milliseconds
-        //   }
-        // );
+        if (product.quantity !== -1 && product.quantity >= this.productQuantity) {
+          // Add a new product
+          const newProduct = {
+            id: product.id,
+            name: product.name,
+            sizeQuantity: product.quantity,
+            quantity: this.productQuantity,
+            sellerId: product?.seller?.id,
+            totalPrice: product.price.price,
+            priceAfterDiscount: product.price.priceAfterOffer,
+            image: product.images[0].urlPreview
+          };
+
+          // Push the new product to the existing array
+          existingProducts.push(newProduct);
+        }
+        // If the product does not exist, check if a new product can be added
+        else if (product.colorWithSizes && this.size?.quantity >= this.productQuantity) {
+          // Add a new product
+          const newProduct = {
+            id: product.id,
+            name: product.name,
+            hexColor: this.colorWithSizesSelected.color.hexaCode,
+            colorId: this.colorWithSizesSelected.color.id,
+            size: this.size.name,
+            sizeId: this.size.id,
+            sizeQuantity: this.size.quantity,
+            sellerId: product?.seller?.id,
+            quantity: this.productQuantity,
+            totalPrice: product.price.price,
+            priceAfterDiscount: product.price.priceAfterOffer,
+            image: product.images[0].urlPreview
+          };
+
+          // Push the new product to the existing array
+          existingProducts.push(newProduct);
+          this.showAddTocardMessage = true
+        }
+        // If the product does not exist, check if a new product can be added
+        else if (product.colorWithSizes && this.colorWithQuantity.quantity >= this.productQuantity) {
+          // Add a new product
+          const newProduct = {
+            id: product.id,
+            name: product.name,
+            hexColor: this.colorWithQuantity.hexaCode,
+            colorId: this.colorWithQuantity.id,
+            sizeQuantity: this.colorWithQuantity.quantity,
+            sellerId: product?.seller?.id,
+            quantity: this.productQuantity,
+            totalPrice: product.price.price,
+            priceAfterDiscount: product.price.priceAfterOffer,
+            image: product.images[0].urlPreview
+          };
+
+          // Push the new product to the existing array
+          existingProducts.push(newProduct);
+          this.showAddTocardMessage = true
+        }
+        else if (product.sizes && this.size?.quantity >= this.productQuantity) {
+          // Add a new product
+          const newProduct = {
+            id: product.id,
+            name: product.name,
+            size: this.size?.name,
+            sizeQuantity: this.size?.quantity,
+            quantity: this.productQuantity,
+            sellerId: product?.seller?.id,
+            totalPrice: product.price.price,
+            priceAfterDiscount: product.price.priceAfterOffer,
+            image: product.images[0].urlPreview
+          };
+
+          // Push the new product to the existing array
+          existingProducts.push(newProduct);
+          this.showAddTocardMessage = true
+
+
+        } else {
+          // Show a snackbar error message with detailed information
+          this.showCustomNotification();
+
+          // this.snackBar.open(
+          //   `Cannot add new product. Available quantity: ${this.size.quantity}. You selected ${this.productQuantity}.`,
+          //   'Close',
+          //   {
+          //     duration: 5000, // Display duration in milliseconds
+          //   }
+          // );
+          // console.log('Cannot add new product. Not enough available.');
+        }
       }
-    } else {
-      if (product.quantity !== -1 && product.quantity >= this.productQuantity) {
-        // Add a new product
-        const newProduct = {
-          id: product.id,
-          name: product.name,
-          sizeQuantity: product.quantity,
-          quantity: this.productQuantity,
-          sellerId: product?.seller?.id,
-          totalPrice: product.price.price,
-          priceAfterDiscount: product.price.priceAfterOffer,
-          image: product.images[0].urlPreview
-        };
 
-        // Push the new product to the existing array
-        existingProducts.push(newProduct);
-      }
-      // If the product does not exist, check if a new product can be added
-      else if (product.colorWithSizes && this.size?.quantity >= this.productQuantity) {
-        // Add a new product
-        const newProduct = {
-          id: product.id,
-          name: product.name,
-          hexColor: this.colorWithSizesSelected.color.hexaCode,
-          colorId: this.colorWithSizesSelected.color.id,
-          size: this.size.name,
-          sizeId: this.size.id,
-          sizeQuantity: this.size.quantity,
-          sellerId: product?.seller?.id,
-          quantity: this.productQuantity,
-          totalPrice: product.price.price,
-          priceAfterDiscount: product.price.priceAfterOffer,
-          image: product.images[0].urlPreview
-        };
+      // Store the updated products array in localStorage
+      localStorage.setItem('products', JSON.stringify(existingProducts));
 
-        // Push the new product to the existing array
-        existingProducts.push(newProduct);
-        this.showAddTocardMessage = true
-      }
-      // If the product does not exist, check if a new product can be added
-      else if (product.colorWithSizes && this.colorWithQuantity.quantity >= this.productQuantity) {
-        // Add a new product
-        const newProduct = {
-          id: product.id,
-          name: product.name,
-          hexColor: this.colorWithQuantity.hexaCode,
-          colorId: this.colorWithQuantity.id,
-          sizeQuantity: this.colorWithQuantity.quantity,
-          sellerId: product?.seller?.id,
-          quantity: this.productQuantity,
-          totalPrice: product.price.price,
-          priceAfterDiscount: product.price.priceAfterOffer,
-          image: product.images[0].urlPreview
-        };
-
-        // Push the new product to the existing array
-        existingProducts.push(newProduct);
-        this.showAddTocardMessage = true
-      }
-      else if (product.sizes && this.size?.quantity >= this.productQuantity) {
-        // Add a new product
-        const newProduct = {
-          id: product.id,
-          name: product.name,
-          size: this.size?.name,
-          sizeQuantity: this.size?.quantity,
-          quantity: this.productQuantity,
-          sellerId: product?.seller?.id,
-          totalPrice: product.price.price,
-          priceAfterDiscount: product.price.priceAfterOffer,
-          image: product.images[0].urlPreview
-        };
-
-        // Push the new product to the existing array
-        existingProducts.push(newProduct);
-        this.showAddTocardMessage = true
-
-
-      } else {
-        // Show a snackbar error message with detailed information
-        this.showCustomNotification();
-
-        // this.snackBar.open(
-        //   `Cannot add new product. Available quantity: ${this.size.quantity}. You selected ${this.productQuantity}.`,
-        //   'Close',
-        //   {
-        //     duration: 5000, // Display duration in milliseconds
-        //   }
-        // );
-        // console.log('Cannot add new product. Not enough available.');
-      }
     }
-
-    // Store the updated products array in localStorage
-    localStorage.setItem('products', JSON.stringify(existingProducts));
 
   }
 
@@ -393,6 +824,7 @@ export class ProductDetailsCardComponent implements OnInit {
   }
 
   logColor(colorWithSizes: any): void {
+    this.colorNotselect = false;
     console.log(colorWithSizes);
     this.colorWithQuantity = colorWithSizes?.color;
     this.selectedColor = colorWithSizes?.color?.id;
@@ -409,6 +841,8 @@ export class ProductDetailsCardComponent implements OnInit {
     }
   }
   logSize(size: any): void {
+    this.sizeNotselect = false;
+
     this.size = size;
     console.log(size);
 
@@ -423,6 +857,9 @@ export class ProductDetailsCardComponent implements OnInit {
     // You can add more logic or use this data as needed
   }
   onQuantityChange(newQuantity: number): void {
+    if (newQuantity > 0)
+      this.quantityNotselect = false;
+
     // Update your logic here based on the new quantity
     // For example, you can check if newQuantity > sizeQuantities and update accordingly
     this.userSelectedQuantity = newQuantity;

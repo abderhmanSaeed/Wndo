@@ -2,6 +2,8 @@ import { Component, Input } from '@angular/core';
 import { AddProductToCardModalComponent } from '../../modals/add-product-to-card-modal/add-product-to-card-modal.component';
 import { ModalService } from '../../modal/modal.service';
 import { ModalDataService } from '../../modal/modal.data.service';
+import { Router } from '@angular/router';
+import { Location } from '@angular/common'; // Import Location
 
 @Component({
   selector: 'app-product-snapshot-card',
@@ -14,7 +16,9 @@ export class ProductSnapshotCardComponent {
   // Variable to control the visibility of the copied message
   showCopiedMessage: boolean = false;
 
-  constructor(private modalService: ModalService, private modalDataService: ModalDataService) { }
+  constructor(private modalService: ModalService, private modalDataService: ModalDataService, private router: Router,
+    private location: Location,
+  ) { }
 
   // Method to copy the share URL and additional product information to the clipboard and show the message
   shareProduct() {
@@ -69,5 +73,8 @@ export class ProductSnapshotCardComponent {
       },
     });
   }
+ navigateToProductDetails(productId: any) {
+  this.router.navigate(['/product/productDetails', { productId: productId }]);
+}
 
 }

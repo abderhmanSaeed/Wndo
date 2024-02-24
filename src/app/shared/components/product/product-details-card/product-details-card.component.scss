@@ -41,3 +41,9 @@
   border-radius: 5px;
   // display: none; /* Initially hide the message */
 }
+
+.danger {
+  color: red; // Makes the text color red
+  font-weight: bold; // Optionally make the text bold
+  // Add any other styles you want for the danger class
+}

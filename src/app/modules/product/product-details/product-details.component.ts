@@ -5,6 +5,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
 import { SellerProductsOffersService } from './../../../data/service/seller-products-offers/seller-products-offers.service';
+import { Location } from '@angular/common'; // Import Location
 
 
 @Component({
@@ -20,19 +21,59 @@ export class ProductDetailsComponent implements OnInit {
   responseData: ProductApiAlsoResponse | null = null; // Initialize to null or default value
   productColorAndSizesResponse: ProductColorAndSizesResponse | undefined;
   sellerProfile: any;
+  productId!: any;
 
   // productId: any = '7a734dd3-3cf8-4ec1-b7ad-7a8912d0a03b';
   constructor(private productService: ProductService, private route: ActivatedRoute,
-    private SellerProductsOffersService: SellerProductsOffersService) {
+    private SellerProductsOffersService: SellerProductsOffersService,
+    private location: Location) {
 
   }
+
+  // ngOnInit(): void {
+  //   // Listen for changes in the productId parameter
+  //   this.route.params.subscribe(params => {
+  //     const productId = params['productId'];
+  //     console.log('Current Product ID:', productId);
+  //     // Initialize your component with the new productId
+  //     this.productId = productId;
+  //     this.init(productId);
+  //   });
+  // }
+
+  // init(productId: string): void {
+  //   if ((this.location.path().includes('/product/productDetails'))) {
+  //     window.location.reload();
+  //   }
+  //   // Your initialization code here, using the new productId
+  //   console.log('Initializing ProductDetailsComponent with productId:', productId);
+  //   this.getProductDetails(productId);
+  //   this.getProductAlsoDetails(productId);
+  //   this.getProductColorAndSizes(productId);
+  // }
+
   ngOnInit(): void {
-    this.init();
+    this.productId = this.route.snapshot.paramMap.get('productId');
+    this.route.params.subscribe(params => {
+      const productId = params['productId'];
+      console.log('Current Product ID:', productId);
+      // Initialize your component with the new productId
+      this.init(productId);
+    });
+
+    // this.init();
 
   }
-  init(): void {
+  init(productId: any): void {
+
+
+    if (this.productId !== productId) {
+      this.getProductDetails(this.productId);
+      this.getProductAlsoDetails(this.productId);
+      this.getProductColorAndSizes(this.productId);
+      window.location.reload();
+    }
     // Retrieve seller ID from route parameters
-    const productId = this.route.snapshot.paramMap.get('productId');
     console.log('Seller ID in ProductOffersComponent:', productId);
     // Your initialization code here
     this.getProductDetails(productId);

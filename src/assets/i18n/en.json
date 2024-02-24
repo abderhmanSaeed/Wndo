@@ -133,5 +133,8 @@
   "summary": "Summary :",
   "order": "Order" ,
   "products" : "Products",
-  "offers" : "Offers"
+  "offers" : "Offers",
+  "colorNotSelected" : "Color Not Selected",
+  "sizeNotSelected" : "Size Not Selected",
+  "quantityNotSelected" : "Quantity Not Selected"
 }

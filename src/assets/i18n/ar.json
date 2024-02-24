@@ -134,5 +134,8 @@
   "summary" : "ملخص :",
   "order" : "طلب",
   "products" : "منتجات",
-  "offers" : "عروض"
+  "offers" : "عروض",
+  "colorNotSelected" : "لم يتم إختيار لون",
+  "sizeNotSelected" : "لم يتم إختيار مقاس",
+  "quantityNotSelected" : "لم يتم إختيار الكمية"
 }

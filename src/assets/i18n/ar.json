@@ -132,5 +132,7 @@
   "orderStatues" : "حالة الطلب:",
   "yourOrder" : "طلبك",
   "summary" : "ملخص :",
-  "order" : "طلب"
+  "order" : "طلب",
+  "products" : "منتجات",
+  "offers" : "عروض"
 }

@@ -105,10 +105,11 @@ export class GalleryComponent implements OnInit {
   // }
   constructor(private modalService: BsModalService) {}
   ngOnInit(): void {
-    // this.urlPreview = this.images[0]?.urlPreview;
+    if(this.images)
+    this.urlPreview = this.images[0]?.urlPreview;
   }
   ngAfterViewInit() {
-    this.urlPreview = this.images[0]?.urlPreview;
+    // this.urlPreview = this.images[0]?.urlPreview;
 
     if (this.swiper && this.swiperThumbs) {
       this.swiper.nativeElement.swiper.controller.control =

@@ -1,9 +1,8 @@
-<section
-  class="bg-white md:grid lg:grid-cols-9 3xl:grid-cols-5 gap-16 rounded py-10 md:px-14 px-6"
->
+<section class="bg-white md:grid lg:grid-cols-9 3xl:grid-cols-5 gap-16 rounded py-10 md:px-14 px-6">
   <div class="lg:col-span-4 xxl:col-span-3 3xl:col-span-2 mb-8 md:mb-0">
     <div class="mb-5">
-      <app-gallery [images]="product?.images" [videos]="product?.videos"></app-gallery>
+      <app-gallery *ngIf="product?.images || product?.videos" [images]="product?.images"
+        [videos]="product?.videos"></app-gallery>
     </div>
     <div *ngIf="showNotification" class="custom-notification">
       Cannot add new product. Available quantity: {{ size.quantity }}. You selected {{ productQuantity }}
@@ -14,10 +13,10 @@
       <h6 class="mb-4">{{"additionalInfo" | translate}}</h6>
       <ul class="flex flex-col">
         <li *ngFor="let lookup of product?.lookups"
-            class="inline-flex items-center gap-x-2 py-3 px-4 text-sm font-medium odd:bg-gray-100 bg-white text-gray-800 -mt-px first:mt-0 rounded"
-        >
+          class="inline-flex items-center gap-x-2 py-3 px-4 text-sm font-medium odd:bg-gray-100 bg-white text-gray-800 -mt-px first:mt-0 rounded">
           <span class="text-base text-purple-400">{{ lookup?.displayName }}</span>
-          <span class="text-gray-950 text-base" *ngIf="!lookup?.isMultiChoice">{{ lookup?.lookupValues[0]?.displayName }}</span>
+          <span class="text-gray-950 text-base" *ngIf="!lookup?.isMultiChoice">{{ lookup?.lookupValues[0]?.displayName
+            }}</span>
           <span class="text-gray-950 text-base" *ngIf="lookup?.isMultiChoice">
             <ng-container *ngFor="let value of lookup?.lookupValues">
               {{ value.displayName }}
@@ -44,7 +43,8 @@
             {{"thisOffer" | translate}}  {{ product?.price?.expiryDate }} {{"Days" | translate}}
           </span> -->
           <span *ngIf="isValidDate(product?.price?.expiryDate)" class="bg-orange-500 text-black rounded py-1 px-2">
-            {{"thisOffer" | translate}}  {{ calculateDaysUntilExpiry(product?.price?.expiryDate) }} {{"Days" | translate}}
+            {{"thisOffer" | translate}} {{ calculateDaysUntilExpiry(product?.price?.expiryDate) }} {{"Days" |
+            translate}}
           </span>
 
         </div>
@@ -54,35 +54,31 @@
         <div *ngIf="product?.colorWithSizes.length > 0">
           <h6 class="mb-2">{{'chooseColor' | translate}}</h6>
           <ul class="flex flex-wrap gap-2">
-            <button
-              *ngFor="let colorWithSizes of product?.colorWithSizes"
-              type="button"
+            <button *ngFor="let colorWithSizes of product?.colorWithSizes" type="button"
               class="capitalize leading-0 product-color-button hover:bg-primary hover:text-white border h-6 px-3 bg-white border-gray-150 rounded-[3px] text-xxs"
               style="--hover-color: #{{ colorWithSizes?.color?.hexaCode }};
-              --selected-color:  #{{ colorWithSizes?.color?.hexaCode }}"
-              (click)="logColor(colorWithSizes)"
-              [ngClass]="{
+              --selected-color:  #{{ colorWithSizes?.color?.hexaCode }}" (click)="logColor(colorWithSizes)" [ngClass]="{
                 'product-color-button--selected text-white':
                   colorWithSizes?.color?.id === selectedColor
-              }"
-            >
+              }">
               {{ colorWithSizes?.color?.name }}
             </button>
+            <span *ngIf="colorNotselect" class="danger fw-500 mx-3">Color not selected</span>
           </ul>
         </div>
 
         <div>
-          <h6 *ngIf="colorWithSizesSelected?.sizes.length > 0 || product?.sizes.length > 0 " class="mb-2">{{"chooseSize" |translate}}</h6>
+          <h6 *ngIf="colorWithSizesSelected?.sizes.length > 0 || product?.sizes.length > 0 " class="mb-2">{{"chooseSize"
+            |translate}}</h6>
           <ul class="flex flex-wrap gap-2">
             <li *ngFor="let size of colorWithSizesSelected?.sizes ? colorWithSizesSelected?.sizes : product?.sizes">
-              <button
-                type="button"
+              <button type="button"
                 class="capitalize hover:bg-primary leading-0 hover:text-white border h-6 px-3 bg-white border-gray-150 rounded-[3px] text-xxs"
-                (click)="logSize(size)"
-                [ngClass]="{ 'selected !bg-primary !text-white': size?.id === selectedSize }"
-              >
+                (click)="logSize(size)" [ngClass]="{ 'selected !bg-primary !text-white': size?.id === selectedSize }">
                 {{ size?.name }}
               </button>
+              <span *ngIf="sizeNotselect" class="danger fw-500 mx-3">Size not selected</span>
+
             </li>
           </ul>
         </div>
@@ -141,17 +137,15 @@
       </div> -->
       <!-- *ngIf="sizeQuantities|| product?.quantity !== -1 || (colorWithQuantity?.quantity !== -1 && colorWithQuantity)" -->
 
-      <div
-        class="mb-8 flex flex-wrap gap-8 items-center"
-      >
+      <div class="mb-8 flex flex-wrap gap-8 items-center">
         <h6>{{"quantity" | translate}}</h6>
-        <app-quantity-button
-          [(quantity)]="productQuantity"
+        <app-quantity-button [(quantity)]="productQuantity"
           [disabledAddQuantity]="!(product?.quantity !== -1 ? product?.quantity : sizeQuantities) ? true : productQuantity >= (product?.quantity !== -1 ? product?.quantity : sizeQuantities)"
           [maxQuantity]="sizeQuantities ?  sizeQuantities : product?.quantity"
-          (quantityChange)="onQuantityChange($event)"
-        >
+          (quantityChange)="onQuantityChange($event)">
         </app-quantity-button>
+        <span *ngIf="quantityNotselect" class="danger fw-500 mx-3">quantity not selected</span>
+
         <span *ngIf="product?.isOutOfStock" class="text-[#FFA90A] fw-500 mx-3
         ">{{ 'outOfStock' | translate }}</span>
       </div>
@@ -161,25 +155,17 @@
 
       <div class="card-footer">
         <div class="flex flex-wrap gap-5">
-          <button
-            type="button"
-            class="button button--primary md:w-[250px] w-full button--bordered button--rounded-bill"
-            (click)="storeProductInLocalStorage(product)"
-          >
-           {{"buyNow" | translate}}
+          <button type="button" class="button button--primary md:w-[250px] w-full button--bordered button--rounded-bill"
+            (click)="storeProductInLocalStorage(product)">
+            {{"buyNow" | translate}}
           </button>
 
-          <button
-            type="button"
-            class="button button--primary md:w-[250px] w-full button--rounded-bill"
-            (click)="storeProductInLocalStorageWithoutNavigate(product)"
-          >
-          {{"addtoCart" | translate}}
+          <button type="button" class="button button--primary md:w-[250px] w-full button--rounded-bill"
+            (click)="storeProductInLocalStorageWithoutNavigate(product)">
+            {{"addtoCart" | translate}}
           </button>
         </div>
-        <p
-          class="text-xs text-bluegray-900 flex gap-2 items-center mt-6 justify-center md:w-[500px]"
-        >
+        <p class="text-xs text-bluegray-900 flex gap-2 items-center mt-6 justify-center md:w-[500px]">
           <i class="fa-solid fa-dolly text-lg"></i> Delivered By Carrier
         </p>
       </div>

@@ -76,6 +76,7 @@
   "yourName" : "اسمك",
   "addName" : "أنت لم تقم بإضافة اسمك",
   "phoneAndNameMandatory" : "اسمك وهاتفك إلزاميان لمتابعة طلبك.",
+  "fieldsMandatory": "الحقول إلزامية لمتابعة طلبك.",
   "yourPhone" : "رقم التليفون",
   "phoneNumberMsg" : "لم تقم بإضافة رقم هاتفك",
   "forgotpasswordMsg" : "تم إرسال كلمة المرور المؤقتة إلى هاتفك المحمول عبر الرسائل القصيرة.",
@@ -105,6 +106,8 @@
   "addressName": "اسم العنوان",
   "enterYourpassword": "ادخل رقمك السري",
   "enterYourCity": "أدخل مدينتك",
+  "enterCitytoDestrict": "أختر المدينة لتتمكن من إختيار المنطقة",
+  "enterCitytoZone": "أختر المدينة لتتمكن من إختيار المنطقة",
   "enterYourAddress": "أدخل عنوانك",
   "city": "المدينة",
   "enterYourDestrict": "أدخل اسم منطقتك",
@@ -132,5 +135,7 @@
   "orderStatues" : "حالة الطلب:",
   "yourOrder" : "طلبك",
   "summary" : "ملخص :",
-  "order" : "طلب"
+  "order" : "طلب",
+  "logout": "تسجيل خروج"
+
 }

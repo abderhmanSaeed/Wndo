@@ -76,6 +76,7 @@
   "yourName": "Your Name",
   "addName": "You Didn't Add Your Name",
   "phoneAndNameMandatory": "Your Name And Phone Are Mandatory To Proceed Your Order.",
+  "fieldsMandatory": "Fields Are Mandatory To Proceed Your Order.",
   "yourPhone": "Phone Number",
   "phoneNumberMsg": "You Didn't Add Your Phone Number",
   "forgotpasswordMsg": "A temporary password has been sent to your mobile via SMS.",
@@ -104,6 +105,8 @@
   "addressName": "Address Name",
   "enterYourpassword": "Enter Your Password",
   "enterYourCity": "Enter your city",
+  "enterCitytoDestrict": "Choose your city to select district name",
+  "enterCitytoZone": "Choose your city to select Zone name",
   "enterYourAddress": "Enter Your Address",
   "city": "City",
   "enterYourDestrict": "Enter your district name",
@@ -131,5 +134,7 @@
   "orderStatues": "Order Status:",
   "yourOrder": "Your order",
   "summary": "Summary :",
-  "order": "Order"
+  "order": "Order",
+  "logout": "Logout"
+
 }

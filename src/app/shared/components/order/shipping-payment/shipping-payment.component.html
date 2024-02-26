@@ -25,11 +25,11 @@
       <p class="text-blue-900 text-xs p-4">
         <i
           class="fa-solid text-xs me-1 fa-info rounded-full w-5 h-5 border-2 border-blue-900 inline-flex items-center justify-center"></i>
-        {{"phoneAndNameMandatory" | translate}}
+        {{"fieldsMandatory" | translate}}
       </p>
     </section>
     <section class="bg-white rounded p-4">
-      <h6 class="text-sm text-blue-900">{{("shippingAddress"|translate)}}</h6>
+      <h6 *ngIf="addresses.length > 0" class="text-sm text-blue-900">{{("shippingAddress"|translate)}}</h6>
 
       <app-select *ngIf="addresses.length > 0" [options]="addresses" [placeholder]="('enterYourAddress' | translate)"
         [label]="('addressName' | translate)" [required]="true" name="cities" [classes]="{
@@ -58,18 +58,18 @@
             [required]="true" name="cities" [classes]="{
               label: 'peer-focus:text-base peer-focus:font-medium font-medium text-base',
               labelColor: 'peer-focus:text-purple-500'
-            }" [isFloating]="true" (valueChange)="onCityChange($event)"> <!-- This line handles the emitted value -->
+            }" [isFloating]="false" (valueChange)="onCityChange($event)"> <!-- This line handles the emitted value -->
           </app-select>
 
 
         </div>
         <div>
-          <app-select [options]="districts" [placeholder]="('enterYourDestrict' | translate)"
+          <app-select [options]="districts" [disabled]="districts.length === 0 ? true : false" [placeholder]="('enterYourDestrict' | translate)"
             [label]="('destrict' | translate)" [required]="true" name="district" [classes]="{
               label:
                 'peer-focus:text-base peer-focus:font-medium font-medium text-base',
               labelColor: 'peer-focus:text-purple-500'
-            }" [isFloating]="true" (valueChange)="onDistrictChange($event)"></app-select>
+            }" [isFloating]="false" (valueChange)="onDistrictChange($event)"></app-select>
         </div>
         <div>
           <app-input-filed [required]="true" [label]="('streetAddress' | translate)" [isFloating]="true"
@@ -88,12 +88,12 @@
         </div>
         <div>
 
-          <app-select [options]="zones" [label]="('zone' | translate)" [isFloating]="true"
+          <app-select [options]="zones" [disabled]="zones.length === 0 ? true : false" [label]="('zone' | translate)" [isFloating]="false"
             [placeholder]="('enterYourZone' | translate)" [classes]="{
           label:
            'peer-focus:text-base peer-focus:font-medium font-medium text-base',
                   labelColor: 'peer-focus:text-purple-500'
-                     }" [isFloating]="true" (valueChange)="onZoneChange($event)"></app-select>
+                     }" (valueChange)="onZoneChange($event)"></app-select>
         </div>
 
       </div>

@@ -21,7 +21,7 @@
             "
             [class.button--primary]="selectedTab === 'all-products'"
           >
-            Products ({{ sellerProducts?.items?.length }})
+            {{"products" | translate}} ({{ sellerProducts?.items?.length }})
             <svg-icon src="../../../../assets/icons/box.svg"></svg-icon>
           </button>
         </li>
@@ -37,7 +37,7 @@
             "
             [class.button--primary]="selectedTab === 'products-offers'"
           >
-            Offers ({{ sellerOffers?.items?.length }})
+            {{"offers"  | translate}} ({{ sellerOffers?.items?.length }})
             <svg-icon src="../../../../assets/icons/bill.svg"></svg-icon>
           </button>
         </li>

@@ -135,6 +135,11 @@
   "orderStatues" : "حالة الطلب:",
   "yourOrder" : "طلبك",
   "summary" : "ملخص :",
+  "products" : "منتجات",
+  "offers" : "عروض",
+  "colorNotSelected" : "لم يتم إختيار لون",
+  "sizeNotSelected" : "لم يتم إختيار مقاس",
+  "quantityNotSelected" : "لم يتم إختيار الكمية",
   "order" : "طلب",
   "logout": "تسجيل خروج"
 

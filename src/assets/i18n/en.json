@@ -134,7 +134,12 @@
   "orderStatues": "Order Status:",
   "yourOrder": "Your order",
   "summary": "Summary :",
-  "order": "Order",
+  "order": "Order" ,
+  "products" : "Products",
+  "offers" : "Offers",
+  "colorNotSelected" : "Color Not Selected",
+  "sizeNotSelected" : "Size Not Selected",
+  "quantityNotSelected" : "Quantity Not Selected",
   "logout": "Logout"
 
 }

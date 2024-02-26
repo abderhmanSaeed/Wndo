@@ -63,7 +63,7 @@
               }">
               {{ colorWithSizes?.color?.name }}
             </button>
-            <span *ngIf="colorNotselect" class="danger fw-500 mx-3">Color not selected</span>
+            <span *ngIf="colorNotselect" class="danger fw-500 mx-3">{{"colorNotSelected" | translate}}</span>
           </ul>
         </div>
 
@@ -77,7 +77,7 @@
                 (click)="logSize(size)" [ngClass]="{ 'selected !bg-primary !text-white': size?.id === selectedSize }">
                 {{ size?.name }}
               </button>
-              <span *ngIf="sizeNotselect" class="danger fw-500 mx-3">Size not selected</span>
+              <span *ngIf="sizeNotselect" class="danger fw-500 mx-3">{{"sizeNotSelected" | translate}}</span>
 
             </li>
           </ul>
@@ -144,7 +144,7 @@
           [maxQuantity]="sizeQuantities ?  sizeQuantities : product?.quantity"
           (quantityChange)="onQuantityChange($event)">
         </app-quantity-button>
-        <span *ngIf="quantityNotselect" class="danger fw-500 mx-3">quantity not selected</span>
+        <span *ngIf="quantityNotselect" class="danger fw-500 mx-3">{{"quantityNotSelected" |  translate}}</span>
 
         <span *ngIf="product?.isOutOfStock" class="text-[#FFA90A] fw-500 mx-3
         ">{{ 'outOfStock' | translate }}</span>

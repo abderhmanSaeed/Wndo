@@ -5,16 +5,15 @@
       <ul class="flex flex-wrap gap-2" role="list" aria-label="Show color and Sizes of product">
         <li role="listitem">
           <button *ngFor="let colorWithSizes of product?.colorWithSizes" type="button"
-        class="capitalize leading-0 product-color-button hover:text-white border h-6 px-3 bg-white border-gray-150 rounded-[3px] text-xxs"
-        [style.--hover-color]="'#' + colorWithSizes?.color?.hexaCode"
-        [style.--selected-color]="'#' + colorWithSizes?.color?.hexaCode"
-        (click)="logColor(colorWithSizes)"
-        [ngClass]="{
+            class="capitalize leading-0 product-color-button hover:text-white border h-6 px-3 bg-white border-gray-150 rounded-[3px] text-xxs"
+            [style.--hover-color]="'#' + colorWithSizes?.color?.hexaCode"
+            [style.--selected-color]="'#' + colorWithSizes?.color?.hexaCode" (click)="logColor(colorWithSizes)"
+            [ngClass]="{
           'product-color-button--selected text-white': productSelected.colorId === colorWithSizes?.color?.id
         }">
 
-  {{ colorWithSizes?.color?.name }}
-</button>
+            {{ colorWithSizes?.color?.name }}
+          </button>
 
         </li>
       </ul>
@@ -26,8 +25,7 @@
         <li *ngFor="let size of colorWithSizesSelected?.sizes ? colorWithSizesSelected?.sizes : product?.sizes">
           <button type="button"
             class="capitalize hover:bg-primary leading-0 hover:text-white border h-6 px-3 bg-white border-gray-150 rounded-[3px] text-xxs"
-            (click)="logSize(size)"
-            [ngClass]="{
+            (click)="logSize(size)" [ngClass]="{
               'selected !bg-primary !text-white': size?.id === productSelected.sizeId
             }">
             {{ size?.name }}
@@ -51,13 +49,11 @@
           (quantityChange)="onQuantityChange($event)"
         >
         </app-quantity-button> -->
-         <app-quantity-button [classes]="{ base: 'ms-auto' }"
-                     [productId]="product.id"
-                     [quantity]="productSelected.quantity"
-                     (quantityChangeObject)="onQuantityChange($event)"
-                     [disabledAddQuantity]="userSelectedQuantity === productSelected.sizeQuantity"
-                     [maxQuantity]="productSelected.sizeQuantity">
-</app-quantity-button>
+      <app-quantity-button [classes]="{ base: 'ms-auto' }" [productId]="product.id"
+        [quantity]="productSelected.quantity" (quantityChangeObject)="onQuantityChange($event)"
+        [disabledAddQuantity]="userSelectedQuantity === productSelected.sizeQuantity"
+        [maxQuantity]="productSelected.sizeQuantity">
+      </app-quantity-button>
 
     </div>
   </div>

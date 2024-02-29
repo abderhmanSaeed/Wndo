@@ -58,6 +58,7 @@ import { IsEmptyComponent } from './components/order/is-empty/is-empty.component
 import { ConfirmationModalComponent } from './components/modals/confirmation-modal/confirmation-modal.component';
 import { EditPRoductToCartModalComponent } from './components/modals/edit-product-to-cart-modal/edit-product-to-cart-modal.component';
 import { OrderCheckoutConfirmationComponent } from './components/order/order-checkout-confirmation/order-checkout-confirmation.component';
+import { EditPaymentComponent } from './components/modals/edit-payment/edit-payment.component';
 
 register();
 
@@ -106,7 +107,8 @@ register();
     ConfirmationModalComponent,
     EditPRoductToCartModalComponent,
     SafeUrlPipe,
-    OrderCheckoutConfirmationComponent
+    OrderCheckoutConfirmationComponent,
+    EditPaymentComponent
   ],
   imports: [
     CommonModule,

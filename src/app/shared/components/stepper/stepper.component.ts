@@ -49,6 +49,8 @@ export class StepperComponent implements AfterContentInit, OnDestroy {
     districtId: number;
     zoneId: number;
   }
+  // Object to hold error messages for each field
+  fieldErrors: { [key: string]: string } = {};
   private subscription: Subscription = new Subscription();
 
   constructor(private renderer: Renderer2, private modalService: ModalService,
@@ -156,16 +158,34 @@ export class StepperComponent implements AfterContentInit, OnDestroy {
           this.orderService.setAddressId(response.responseData?.id);
           this.fetchShippingFees();
 
-            // Use the matched address object for shippingFessService.setAddress
-            this.shippingFessService.setAddress(response.responseData);
+          // Use the matched address object for shippingFessService.setAddress
+          this.shippingFessService.setAddress(response.responseData);
+        }
+      },
+      error: (errorResponse) => {
+        console.error('Error submitting address:', errorResponse);
 
-
+        // Reset existing errors
+        this.fieldErrors = {};
+        console.log(errorResponse.error.validationErrors);
+        // Check if the error response has the expected structure
+        if (errorResponse.error && errorResponse.error.validationErrors) {
+          // Loop through validation errors and map them to fields
+          errorResponse.error.validationErrors.forEach((validationError: { message: string; members: string[] }) => {
+            validationError.members.forEach((member) => {
+              // Assuming 'members' contains the field names where the errors occurred
+              this.fieldErrors[member] = validationError.message;
+            });
+          });
         }
 
+        // Optionally, log the errors or handle them in another way
+        console.log('Validation errors', this.fieldErrors);
       },
-      error: (error) => console.error('Error submitting address:', error),
     });
   }
+
+
   submitOrder() {
     this.orderService.getOrder().subscribe(order => {
       if (order) { // Check if the order is not null

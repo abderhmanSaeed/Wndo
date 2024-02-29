@@ -1,7 +1,9 @@
 import { Component, Input, OnDestroy, OnInit } from '@angular/core';
-import { Subscription } from 'rxjs';import { ShippingFessService } from '../../../../data/service/shippeng-fees/shipping-fess.service';
+import { Subscription } from 'rxjs'; import { ShippingFessService } from '../../../../data/service/shippeng-fees/shipping-fess.service';
 import { OrderService } from '../../../../data/service/order/order.service';
 import { OrderItem } from '../../../models/order.models';
+import { ModalService } from '../../modal/modal.service';
+import { EditPaymentComponent } from '../../modals/edit-payment/edit-payment.component';
 type ClassesProps = {
   base?: string
 }
@@ -14,12 +16,12 @@ export class ConfirmationComponent implements OnInit, OnDestroy {
   @Input() haveACoupon: boolean = false;
   @Input() classes?: ClassesProps;
 
-   address: any; // To hold the current address
-   order: any;
-   orderItems: OrderItem[] = [];
+  address: any; // To hold the current address
+  order: any;
+  orderItems: OrderItem[] = [];
   private subscription = new Subscription();
 
-  constructor(private shippingFessService: ShippingFessService, private orderService: OrderService) {}
+  constructor(private shippingFessService: ShippingFessService, private orderService: OrderService, private modalService: ModalService) { }
 
   ngOnInit() {
     // Subscribe to the address observable to listen for changes
@@ -63,6 +65,23 @@ export class ConfirmationComponent implements OnInit, OnDestroy {
     }
   }
 
+  EditPaymentMethod() {
+
+    this.modalService.open(EditPaymentComponent, {
+      animations: {
+        modal: {
+          enter: 'enter-slide-down 0.8s',
+        },
+        overlay: {
+          enter: 'fade-in 0.8s',
+          leave: 'fade-out 0.3s forwards',
+        },
+      },
+      size: {
+        width: '36rem',
+      },
+    });
+  }
 
   ngOnDestroy() {
     // Unsubscribe to prevent memory leaks

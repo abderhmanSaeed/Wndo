@@ -38,7 +38,7 @@
             }" [isFloating]="true" (valueChange)="onAddressesChange($event)">
         <!-- This line handles the emitted value -->
       </app-select>
-      <button *ngIf="!showAddNewAddress" type="button" class="add-new-address" (click)="addNewAddress()">{{
+      <button *ngIf="!showAddNewAddress && !selectedAddresses" type="button" class="add-new-address" (click)="addNewAddress()">{{
         'addNewAddress' | translate }}</button>
 
       <h6 *ngIf="addresses.length === 0 || showAddNewAddress" class="text-sm text-blue-900">

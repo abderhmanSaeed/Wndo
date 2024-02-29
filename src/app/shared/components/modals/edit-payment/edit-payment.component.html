@@ -1,0 +1,24 @@
+<app-modal-content>
+
+  <div class="">
+    <div class="bg-white px-6 py-5.5">
+      <h6 class="text-purple-500 mb-6 font-normal">{{"choosePaymentMethod" | translate}}</h6>
+      <!-- <app-radio [options]="paymentMethods"> </app-radio> -->
+      <app-radio [options]="paymentMethods" (change)="onPaymentMethodChange($event)"
+        [value]="currentPaymentMethod"></app-radio>
+
+      <p class="text-orange-400 text-xs mt-2 flex items-center gap-1">
+        <svg-icon src="../../../../../assets/icons/gift.svg"> </svg-icon>
+        {{"AdditionalDiscountIfYouPayByCreditCard" | translate}}
+      </p>
+    </div>
+
+    <div class="space-y-6 mb-4">
+      <button type="button" class="button button--primary rounded-full w-full lg:w-[300px] mx-auto"
+        (click)="onCloseModal()">{{'save' | translate}}</button>
+      <button type="button" class="button button--link uppercase text-blueGray-200 hover:text-blueGray-400 mx-auto"
+        (click)="onCloseModal()">{{'discard' | translate}}</button>
+    </div>
+
+  </div>
+</app-modal-content>

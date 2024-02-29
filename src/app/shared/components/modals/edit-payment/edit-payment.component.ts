@@ -51,12 +51,17 @@ export class EditPaymentComponent implements OnInit, OnDestroy {
   onPaymentMethodChange(selectedValue: any): void {
     if (typeof selectedValue === 'number') {
       console.log('Selected payment method:', selectedValue);
-      this.orderService.setPaymentMethod(selectedValue);
+      // this.orderService.setPaymentMethod(selectedValue);
       this.currentPaymentMethod = selectedValue;
 
       // Handle the payment method change
       // Possibly convert selectedValue to the enum value if needed
     }
+  }
+  updatePaymentMethod() {
+    this.orderService.setPaymentMethod(this.currentPaymentMethod);
+    this.modalService.close()
+
   }
 
   onCloseModal() {

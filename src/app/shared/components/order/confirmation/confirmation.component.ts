@@ -43,7 +43,7 @@ export class ConfirmationComponent implements OnInit, OnDestroy {
     const productsJson = localStorage.getItem('products');
     if (productsJson) {
       const products = JSON.parse(productsJson);
-      this.orderItems = []; // Initialize or clear the array
+      this.orderItems = this.order.orderItems; // Initialize or clear the array
 
       products.forEach((product: any) => {
         // Check if an item with the same productId already exists in the orderItems array
@@ -58,7 +58,7 @@ export class ConfirmationComponent implements OnInit, OnDestroy {
             product.quantity,
           );
           // Add orderItem to the array
-          this.orderItems.push(orderItem);
+          // this.orderItems.push(orderItem);
           this.orderService.addOrderItem(orderItem);
         }
       });

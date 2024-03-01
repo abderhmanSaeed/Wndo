@@ -71,6 +71,7 @@ export class ProductDetailsComponent implements OnInit {
       this.getProductDetails(this.productId);
       this.getProductAlsoDetails(this.productId);
       this.getProductColorAndSizes(this.productId);
+      if(this.productId && productId)
       window.location.reload();
     }
     // Retrieve seller ID from route parameters

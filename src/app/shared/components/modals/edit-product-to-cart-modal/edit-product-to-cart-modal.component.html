@@ -37,7 +37,7 @@
 
 
     <div class="mb-8 flex flex-wrap gap-8 items-center">
-      <h6>Quantity:</h6>
+      <h6>{{"quantity" | translate}}</h6>
       <!-- <app-quantity-button [(quantity)]="productQuantity" [disabledAddQuantity]="productQuantity === sizeQuantities"
         [maxQuantity]="sizeQuantities" (quantityChange)="onQuantityChange($event)">
       </app-quantity-button> -->
@@ -50,7 +50,7 @@
         >
         </app-quantity-button> -->
       <app-quantity-button [classes]="{ base: 'ms-auto' }" [productId]="product.id"
-        [quantity]="productSelected.quantity" (quantityChangeObject)="onQuantityChange($event)"
+        [quantity]="userSelectedQuantity ? userSelectedQuantity : productSelected.quantity" (quantityChangeObject)="onQuantityChange($event)"
         [disabledAddQuantity]="userSelectedQuantity === productSelected.sizeQuantity"
         [maxQuantity]="productSelected.sizeQuantity">
       </app-quantity-button>

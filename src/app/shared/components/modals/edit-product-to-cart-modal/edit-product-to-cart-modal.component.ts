@@ -59,14 +59,24 @@ export class EditPRoductToCartModalComponent implements OnInit {
   onQuantityChange(event: { quantity: number; productId: string }): void {
     const { quantity, productId } = event;
     this.userSelectedQuantity = quantity;
+
     // Assuming you have a service method to handle the update
-    this.shippingFessService.updateProductQuantity(productId, quantity);
+    // this.shippingFessService.updateProductQuantity(productId, quantity);
   }
 
   logColor(colorWithSizes: any): void {
     console.log(colorWithSizes);
     this.selectedColor = colorWithSizes?.color?.id;
     this.colorWithSizesSelected = colorWithSizes;
+    this.productSelected.colorId = colorWithSizes?.color?.id;
+    this.productSelected.sizeQuantity = colorWithSizes?.color?.quantity;
+    this.sizeQuantities = colorWithSizes?.color?.quantity;
+    if (this.userSelectedQuantity > this.productSelected.sizeQuantity) {
+      // this.productSelected.quantity = this.productSelected.quantity
+      this.userSelectedQuantity = this.productSelected.sizeQuantity
+
+    }
+
   }
 
   logSize(size: any): void {

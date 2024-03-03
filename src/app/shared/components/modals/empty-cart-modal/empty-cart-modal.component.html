@@ -1,0 +1,13 @@
+<app-modal-content [classes]="{base: '!text-start'}">
+  <div class="card h-[450px] !flex items-center justify-center">
+    <div class="card-content">
+      <img width="130" class="mb-3 block" src="assets/media/modules/cart/empty.png" alt="The Cart is Empty">
+      <span class="text-[#7A8D9C] text-[1rem] fw-600">{{ 'cartEmpty' | translate }}</span>
+    </div>
+  </div>
+
+  <div class="space-y-6 mb-4">
+    <button type="button" class="button button--primary rounded-full w-full lg:w-[300px] mx-auto"
+      (click)="onCloseModal()">{{'close' | translate}}</button>
+  </div>
+</app-modal-content>

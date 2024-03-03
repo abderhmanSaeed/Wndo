@@ -115,10 +115,25 @@ export class EditPRoductToCartModalComponent implements OnInit {
       existingProducts = JSON.parse(existingProductsString);
     }
 
-    // Check if the product with the same ID and hexaCode already exists
-    const existingProductIndex = existingProducts.findIndex(existingProduct =>
-      existingProduct.id === product.id && existingProduct.hexColor === this.colorWithSizesSelected.color.hexaCode
-    );
+    let existingProductIndex = -1;
+    if (product.quantity !== -1) {
+      // Check if the product with the same ID and hexaCode already exists
+      existingProductIndex = existingProducts.findIndex(existingProduct =>
+        existingProduct.id === product.id);
+    }
+    if (product.colorWithSizes.length > 0) {
+      // Check if the product with the same ID and hexaCode already exists
+      existingProductIndex = existingProducts.findIndex(existingProduct =>
+        existingProduct.id === product.id && existingProduct.hexColor === this.colorWithSizesSelected.hexaCode
+      );
+    }
+    if (product.sizes.length > 0) {
+      // Check if the product with the same ID and hexaCode already exists
+      existingProductIndex = existingProducts.findIndex(existingProduct =>
+        existingProduct.id === product.id && existingProduct.hexColor === this.colorWithSizesSelected.color.hexaCode
+      );
+    }
+
 
     if (existingProductIndex !== -1) {
       // If the product already exists, check if quantity update is allowed
@@ -151,7 +166,7 @@ export class EditPRoductToCartModalComponent implements OnInit {
       }
     } else {
       // If the product does not exist, check if a new product can be added
-      if (this.size.quantity >= this.productQuantity) {
+      if (this.size.quantity >= this.userSelectedQuantity) {
         // Add a new product
         const newProduct = {
           id: product.id,
@@ -161,7 +176,7 @@ export class EditPRoductToCartModalComponent implements OnInit {
           size: this.size.name,
           sizeId: this.size.id,
           sizeQuantity: this.size.quantity,
-          quantity: this.productQuantity,
+          quantity: this.userSelectedQuantity,
           totalPrice: product.price.price,
           priceAfterDiscount: product.price.priceAfterOffer,
           image: (product.images && product.images.length > 0) ? product.images[0].urlPreview : (product.image ? product.image.urlPreview : null)

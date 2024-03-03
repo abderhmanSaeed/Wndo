@@ -31,6 +31,7 @@ export class ShippingPaymentComponent implements OnInit, OnDestroy {
   districtsAndZones: any[] = [];
   districts: any[] = [];
   zones: any[] = [];
+
   private subscriptions = new Subscription();
   currentLang = this.authService.getCurrentLanguage();
 
@@ -40,6 +41,10 @@ export class ShippingPaymentComponent implements OnInit, OnDestroy {
     const auth = this.authService.isAuth();
     if (!auth) {
       this.getCountryPhoneCodes();
+    }
+    const currentOrder = this.orderService.order.getValue();
+    if (currentOrder && currentOrder.addressId !== 0) {
+      this.selectedAddresses = currentOrder.addressId.toString();
     }
     // Retrieve products from localStorage
     const storedProductsString = localStorage.getItem('products');
@@ -90,7 +95,7 @@ export class ShippingPaymentComponent implements OnInit, OnDestroy {
         }
       );
   }
-  addNewAddress(){
+  addNewAddress() {
     this.showAddNewAddress = true;
   }
   getAddresses(): void {

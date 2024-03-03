@@ -140,6 +140,7 @@
   "colorNotSelected" : "Color Not Selected",
   "sizeNotSelected" : "Size Not Selected",
   "quantityNotSelected" : "Quantity Not Selected",
-  "logout": "Logout"
+  "logout": "Logout",
+  "close":"Close"
 
 }

@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output, SimpleChanges } from '@angular/core';
 
 type ClassesProps = {
   label?: string;
@@ -36,10 +36,15 @@ export class SelectComponent {
   constructor() {
     this.filteredOptions = this.options; // Initially, filteredOptions is the same as options
   }
-  ngOnChanges(): void {
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes['value'] && this.value) {
+      const selectedOption = this.options.find(option => Number(option.value) === Number(this.value));
+      if (selectedOption) {
+        this.selectOption(selectedOption, false); // Assuming you modify selectOption to optionally emit changes
+      }
+    }
     this.filteredOptions = this.options; // Update filteredOptions when inputs change
   }
-
 
   onChange(event: Event): void {
     const selectElement = event.target as HTMLSelectElement;
@@ -58,13 +63,15 @@ export class SelectComponent {
       );
     }
   }
-  selectOption(option: OptionProps): void {
+  // Modify selectOption to optionally emit valueChange
+  selectOption(option: OptionProps, emitEvent: boolean = true): void {
     this.value = option.value; // Set the selected value
-    this.valueChange.emit(this.value); // Emit the new value
+    if (emitEvent) {
+      this.valueChange.emit(this.value); // Emit the new value
+    }
     this.searchTerm = option.label; // Update the input display
     this.showOptions = false; // Hide the options list
   }
-
 
   toggleOptions(): void {
     this.showOptions = !this.showOptions; // Toggle the options list visibility

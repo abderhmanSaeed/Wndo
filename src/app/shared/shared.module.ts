@@ -59,6 +59,7 @@ import { ConfirmationModalComponent } from './components/modals/confirmation-mod
 import { EditPRoductToCartModalComponent } from './components/modals/edit-product-to-cart-modal/edit-product-to-cart-modal.component';
 import { OrderCheckoutConfirmationComponent } from './components/order/order-checkout-confirmation/order-checkout-confirmation.component';
 import { EditPaymentComponent } from './components/modals/edit-payment/edit-payment.component';
+import { EmptyCartModalComponent } from './components/modals/empty-cart-modal/empty-cart-modal.component';
 
 register();
 
@@ -108,7 +109,8 @@ register();
     EditPRoductToCartModalComponent,
     SafeUrlPipe,
     OrderCheckoutConfirmationComponent,
-    EditPaymentComponent
+    EditPaymentComponent,
+    EmptyCartModalComponent
   ],
   imports: [
     CommonModule,
@@ -167,7 +169,8 @@ register();
     RefundOrderComponent,
     CancelOrderComponent,
     IsEmptyComponent,
-    SafeUrlPipe
+    SafeUrlPipe,
+    EmptyCartModalComponent
   ],
   providers: [
     TranslationService,

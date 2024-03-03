@@ -24,6 +24,7 @@ import { OrderConfirmedModal } from '../modals/order-confirmed-modal/order-confi
 import { DomSanitizer } from '@angular/platform-browser';
 import { AddAddressService } from '../../../data/service/add-address/add-address.service';
 import { ShippingAddressService } from '../../../data/service/shipping-address/shipping-address.service';
+import { EmptyCartModalComponent } from '../modals/empty-cart-modal/empty-cart-modal.component';
 
 
 @Component({
@@ -116,9 +117,16 @@ export class StepperComponent implements AfterContentInit, OnDestroy {
       // this.currentStep++;
       // this.updateCurrentStepTemplate();
       const auth = this.authService.isAuth();
+      // Retrieve products from localStorage
+      const storedProductsString = localStorage.getItem('products');
+
       if (this.currentStep === 0 && !auth) {
         // If the current step is the "Check Out" step, call the openLoginModal method
         this.openLoginModal();
+      }
+      else if (this.currentStep === 0 && storedProductsString) {
+        // If the current step is the "Check Out" step and Cart is empty, call the openEmptyCartModal method
+        this.openEmptyCartModal();
       }
       else if (this.currentStep === 1 && this.location.path().includes('/product/productOrders')) {
         // If the current step is the "Shipping & Payment" step, call the get Shipping Fees method
@@ -275,6 +283,22 @@ export class StepperComponent implements AfterContentInit, OnDestroy {
   }
   openLoginModal() {
     this.modalService.open(LoginPhonePasswordComponent, {
+      animations: {
+        modal: {
+          enter: 'enter-slide-down 0.8s',
+        },
+        overlay: {
+          enter: 'fade-in 0.8s',
+          leave: 'fade-out 0.3s forwards',
+        },
+      },
+      size: {
+        width: '36rem',
+      },
+    });
+  }
+  openEmptyCartModal() {
+    this.modalService.open(EmptyCartModalComponent, {
       animations: {
         modal: {
           enter: 'enter-slide-down 0.8s',

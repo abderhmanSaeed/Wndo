@@ -31,13 +31,14 @@
     <section class="bg-white rounded p-4">
       <h6 *ngIf="addresses.length > 0" class="text-sm text-blue-900">{{("shippingAddress"|translate)}}</h6>
 
-      <app-select *ngIf="addresses.length > 0" [options]="addresses" [placeholder]="('enterYourAddress' | translate)"
+      <app-select *ngIf="addresses.length > 0" [options]="addresses" [value]="selectedAddresses" [placeholder]="('enterYourAddress' | translate)"
         [label]="('addressName' | translate)" [required]="true" name="cities" [classes]="{
               label: 'peer-focus:text-base peer-focus:font-medium font-medium text-base',
               labelColor: 'peer-focus:text-purple-500'
             }" [isFloating]="true" (valueChange)="onAddressesChange($event)">
         <!-- This line handles the emitted value -->
       </app-select>
+
       <button *ngIf="!showAddNewAddress && !selectedAddresses" type="button" class="add-new-address" (click)="addNewAddress()">{{
         'addNewAddress' | translate }}</button>
 

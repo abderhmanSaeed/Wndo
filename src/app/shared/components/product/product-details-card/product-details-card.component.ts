@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { SharedService } from '../../../services/shared.service';
 
 
 @Component({
@@ -89,7 +90,7 @@ export class ProductDetailsCardComponent implements OnInit {
     }
   ]
   colorWithQuantity: any;
-  constructor(private router: Router) {
+  constructor(private router: Router, private sharedService: SharedService) {
     // Your constructor logic here
   }
   ngOnInit(): void {
@@ -301,6 +302,7 @@ export class ProductDetailsCardComponent implements OnInit {
 
           // Store the updated products array in localStorage
           localStorage.setItem('products', JSON.stringify(existingProducts));
+          this.updateProducts(existingProducts);
 
           // Navigate to the 'product/productOrders' URL
           this.router.navigate(['/product/productOrders']);
@@ -462,6 +464,7 @@ export class ProductDetailsCardComponent implements OnInit {
 
         // Store the updated products array in localStorage
         localStorage.setItem('products', JSON.stringify(existingProducts));
+        this.updateProducts(existingProducts);
 
         // Navigate to the 'product/productOrders' URL
         this.router.navigate(['/product/productOrders']);
@@ -618,6 +621,8 @@ export class ProductDetailsCardComponent implements OnInit {
 
       // Store the updated products array in localStorage
       localStorage.setItem('products', JSON.stringify(existingProducts));
+      this.updateProducts(existingProducts);
+
       // Navigate to the 'product/productOrders' URL
       this.router.navigate(['/product/productOrders']);
 
@@ -793,6 +798,7 @@ export class ProductDetailsCardComponent implements OnInit {
 
           // Store the updated products array in localStorage
           localStorage.setItem('products', JSON.stringify(existingProducts));
+          this.updateProducts(existingProducts);
 
         }
 
@@ -951,6 +957,7 @@ export class ProductDetailsCardComponent implements OnInit {
 
         // Store the updated products array in localStorage
         localStorage.setItem('products', JSON.stringify(existingProducts));
+        this.updateProducts(existingProducts);
 
       }
     }
@@ -1104,11 +1111,14 @@ export class ProductDetailsCardComponent implements OnInit {
 
       // Store the updated products array in localStorage
       localStorage.setItem('products', JSON.stringify(existingProducts));
+      this.updateProducts(existingProducts);
 
     }
 
   }
-
+  updateProducts(products: any[]): void {
+    this.sharedService.updateProducts(products);
+  }
   // Method to show the notification
   showCustomNotification() {
     this.showNotification = true;

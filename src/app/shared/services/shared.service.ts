@@ -1,6 +1,6 @@
 // shared.service.ts
 import { Injectable } from '@angular/core';
-import { Subject } from 'rxjs';
+import { BehaviorSubject, Subject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -12,9 +12,22 @@ export class SharedService {
   // Observable to subscribe to login button clicks
   loginButtonClicked$ = this.loginButtonClickedSubject.asObservable();
 
+  private productsSource = new BehaviorSubject<any[]>([]);
+  products$ = this.productsSource.asObservable();
+
   // Method to notify subscribers that the LOGIN button is clicked
   notifyLoginButtonClicked() {
     this.loginButtonClickedSubject.next();
+  }
+
+  updateProducts(products: any[]): void {
+    localStorage.setItem('products', JSON.stringify(products));
+    this.productsSource.next(products);
+  }
+
+  loadProductsFromLocalStorage(): void {
+    const products = JSON.parse(localStorage.getItem('products') || '[]');
+    this.productsSource.next(products);
   }
 
 }

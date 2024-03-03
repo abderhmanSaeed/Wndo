@@ -118,13 +118,13 @@ export class StepperComponent implements AfterContentInit, OnDestroy {
       // this.updateCurrentStepTemplate();
       const auth = this.authService.isAuth();
       // Retrieve products from localStorage
-      const storedProductsString = localStorage.getItem('products');
+      const storedProductsString = JSON.parse(localStorage.getItem('products') || '[]');
 
       if (this.currentStep === 0 && !auth) {
         // If the current step is the "Check Out" step, call the openLoginModal method
         this.openLoginModal();
       }
-      else if (this.currentStep === 0 && storedProductsString) {
+      else if (this.currentStep === 0 && storedProductsString.length === 0) {
         // If the current step is the "Check Out" step and Cart is empty, call the openEmptyCartModal method
         this.openEmptyCartModal();
       }

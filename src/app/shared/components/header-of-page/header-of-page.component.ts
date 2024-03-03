@@ -175,13 +175,22 @@ export class HeaderOfPageComponent implements OnInit, AfterViewInit {
     if (sellerData.sellerId && auth && !this.seller?.cover) {
       this.fetchSellerProfile(sellerData.sellerId);
     }
-    if (!auth && (this.location.path().includes('/product/productOrders') || this.location.path().includes('/product/productOffers')) ) {
+    if (!auth && (this.location.path().includes('/product/productOrders') || this.location.path().includes('/product/productOffers'))) {
       this.sellerCover = sellerData.sellerCover;
     }
-    const productsLocalStorage = localStorage.getItem('products');
-    if (productsLocalStorage) {
-      this.products = JSON.parse(productsLocalStorage);
-    }
+    // const productsLocalStorage = localStorage.getItem('products');
+    // if (productsLocalStorage) {
+    //   this.products = JSON.parse(productsLocalStorage);
+    // }
+
+    // Explicitly load products from localStorage
+    this.sharedService.loadProductsFromLocalStorage();
+
+    this.sharedService.products$.subscribe(products => {
+      this.products = products;
+    });
+
+
 
     this.route.queryParams.subscribe((queryParams) => {
       this.isProductOffersRoute = 'sellerId' in queryParams;

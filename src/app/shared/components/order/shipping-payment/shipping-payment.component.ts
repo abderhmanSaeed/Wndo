@@ -43,8 +43,13 @@ export class ShippingPaymentComponent implements OnInit, OnDestroy {
       this.getCountryPhoneCodes();
     }
     const currentOrder = this.orderService.order.getValue();
+
     if (currentOrder && currentOrder.addressId !== 0) {
       this.selectedAddresses = currentOrder.addressId.toString();
+      const matchedAddress = this.addresses.find((address) => address.value === currentOrder.addressId);
+      if (!matchedAddress) {
+        this.getAddresses();
+      }
     }
     // Retrieve products from localStorage
     const storedProductsString = localStorage.getItem('products');
@@ -52,7 +57,11 @@ export class ShippingPaymentComponent implements OnInit, OnDestroy {
     if (storedProductsString) {
       this.products = JSON.parse(storedProductsString);
     }
-    this.getAddresses();
+
+    if (currentOrder && currentOrder.addressId === 0) {
+
+      this.getAddresses();
+    }
     this.getCities();
 
     this.subscriptions.add(
@@ -101,6 +110,10 @@ export class ShippingPaymentComponent implements OnInit, OnDestroy {
   getAddresses(): void {
     this.shippingAddressService.getAddresses().subscribe(data => {
       this.addresses = data;
+      const matchedAddress = this.addresses.find((address) => address.value === Number(this.selectedAddresses));
+      if (matchedAddress) {
+        this.selectedAddresses = matchedAddress.value
+      }
     }, error => {
       console.error('There was an error!', error);
     });

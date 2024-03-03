@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { ModalService } from '../../modal/modal.service';
 import { ModalDataService } from '../../modal/modal.data.service';
+import { SharedService } from '../../../services/shared.service';
 
 @Component({
   selector: 'app-add-product-to-card-modal',
@@ -9,7 +10,7 @@ import { ModalDataService } from '../../modal/modal.data.service';
 })
 export class AddProductToCardModalComponent implements OnInit {
 
-  constructor(private modalService: ModalService, private modalDataService: ModalDataService) { }
+  constructor(private modalService: ModalService, private modalDataService: ModalDataService, private sharedService: SharedService) { }
   product: any;
   showNotification: boolean = false;
   existingProductStore: any;
@@ -288,8 +289,13 @@ export class AddProductToCardModalComponent implements OnInit {
 
     // Store the updated products array in localStorage
     localStorage.setItem('products', JSON.stringify(existingProducts));
+    this.updateProducts(existingProducts);
+
   }
 
+  updateProducts(products: any[]): void {
+    this.sharedService.updateProducts(products);
+  }
   // Method to show the notification
   showCustomNotification() {
     this.showNotification = true;

@@ -142,5 +142,7 @@
   "quantityNotSelected": "لم يتم إختيار الكمية",
   "order": "طلب",
   "logout": "تسجيل خروج",
-  "close": "إغلاق"
+  "close": "إغلاق",
+  "EGP": "ج.م"
+
 }

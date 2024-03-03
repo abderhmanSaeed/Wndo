@@ -141,6 +141,7 @@
   "sizeNotSelected" : "Size Not Selected",
   "quantityNotSelected" : "Quantity Not Selected",
   "logout": "Logout",
-  "close":"Close"
+  "close":"Close",
+  "EGP": "EGP"
 
 }

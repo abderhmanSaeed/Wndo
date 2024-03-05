@@ -24,7 +24,7 @@
     </app-dropdown>
 
     <div class="relative w-full">
-      <input (input)="onInputChange($event)" title="{{ name }}" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" [title]="name"
+      <input type="text" (input)="onInputChange($event)" title="{{ name }}" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" [title]="name"
       type="text" [id]="name" [placeholder]="placeholder || '-456-7890'" [disabled]="!!phoneCode || !!value" [required]="required"
       [name]="name" [value]="value" class="{{
       classes?.input

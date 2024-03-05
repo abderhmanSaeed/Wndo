@@ -1,6 +1,5 @@
 <div class="bg-white h-full p-4 border-t border-e border-orange-400 border-s-8 border-b-8">
   <h6 class="text-blue-800 font-bold text-center mb-8 mt-2"> {{"orderSummary" | translate}}</h6>
-<!-- {{order | json}} -->
   <section >
     <h6 class="text-sm text-blue-800 text-center mb-4"> {{"orderItems" | translate}} ({{order?.orderItems?.length ? order?.orderItems?.length : order.length }})</h6>
     <ul *ngIf="order || order?.orderItems else noItems" class="mb-8">

@@ -229,7 +229,8 @@ export class HeaderOfPageComponent implements OnInit, AfterViewInit {
 
     // Check if the user is authenticated when the component is initialized
     this.checkAuthenticationStatus();
-    if (this.location.path().includes('/product/productDetails') || this.location.path().includes('/product/productOffers')) {
+    if (this.location.path().includes('/product/productDetails') || this.location.path().includes('/product/myOrders') ||
+    this.location.path().includes('/product/productOffers')) {
       this.ShowSeler = true
     }
 

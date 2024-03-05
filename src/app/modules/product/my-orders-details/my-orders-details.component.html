@@ -13,7 +13,6 @@
             {{"placedOn" | translate}} <span>{{orderDetails?.createdAt | date}}</span>
           </p>
           <p class="text-sm font-medium text-blueGray-200">
-            {{orderDetails?.orderState | json}}
            {{"overallStatus" | translate}}
             <span [ngClass]="getStatusGradientBgButton(orderDetails?.orderState)">{{getIOrderItemValueState(orderDetails?.orderState)}}</span>
           </p>

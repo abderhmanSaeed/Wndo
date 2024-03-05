@@ -86,7 +86,17 @@ export class InputPhoneComponent implements OnInit {
     }
   }
   onInputChange(event: Event): void {
-    const inputValue = (event.target as HTMLInputElement).value;
+    const inputElement = event.target as HTMLInputElement;
+    let inputValue = inputElement.value;
+
+    // Enforce numeric input with dashes here if needed.
+    // For example, remove any non-numeric characters except dashes:
+    inputValue = inputValue.replace(/[^0-9\-]+/g, '');
+
+    // Update the input field with the cleaned value if you're enforcing formatting
+    inputElement.value = inputValue;
+
+    // Emit the cleaned value
     this.valueChange.emit(inputValue);
   }
   // Assuming this is part of your component class

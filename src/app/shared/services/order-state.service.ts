@@ -1,3 +1,4 @@
+import { AuthService } from '../../data/service/auth/auth.service';
 import { OrderItemState, OrderState } from '../../shared/models';
 import { Injectable } from '@angular/core';
 
@@ -7,7 +8,7 @@ import { Injectable } from '@angular/core';
 })
 export class OrderStateService {
 
-  constructor() {}
+  constructor(private authService: AuthService) {}
 
   /**
    * Gets the text color class based on the order item state.
@@ -39,7 +40,24 @@ export class OrderStateService {
         return 'Unknown State';
     }
   }
-
+  getStatusGradientBgButton(status: any): string {
+    switch (status) {
+      case OrderState.OrderPlaced:
+        return 'order-placed-state--textColor';
+      case OrderState.Shipping:
+        return 'order-shipping-state--textColor';
+      case OrderState.Delivered:
+        return 'order-delivered-state--textColor';
+      case OrderState.Returned:
+        return 'order-returned-state--textColor';
+      case OrderState.Refund:
+        return 'order-refund-state--textColor';
+      case OrderState.Canceled:
+        return 'order-canceled-state--textColor';
+      default:
+        return 'Unknown State';
+    }
+  }
   /**
    * Gets the border color class based on the order item state.
    * @param item The order item.
@@ -65,6 +83,29 @@ export class OrderStateService {
           return 'Unknown State';
       }
   }
+
+  getIOrderItemValueState(item: any): string {
+  const currentLang = this.authService.getCurrentLanguage();
+
+    // Check if the status exists in orderStatistics
+    switch (item) {
+     case OrderState.OrderPlaced:
+       return currentLang === 'en' ? 'OrderPlaced' : 'تم الطلب';
+     case OrderState.Shipping:
+       return currentLang === 'en' ?'Shipping' : 'تم الشحن';
+     case OrderState.Delivered:
+       return currentLang === 'en' ?'Delivered' : 'تم الإستلام';
+     case OrderState.Canceled:
+       return currentLang === 'en' ?'Canceled' : 'تم الاسترجاع';
+     case OrderState.Refund:
+       return currentLang === 'en' ?'Refund' : 'تم الإلغاء';
+     case OrderState.Returned:
+       return currentLang === 'en' ?'Returned' : 'تم الرجوع';
+
+     default:
+       return 'Unknown State';
+   }
+}
 
   /**
    * Gets the background color class based on the order item state.

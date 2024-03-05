@@ -68,7 +68,7 @@ export class MyOrderCardComponent {
     if (!product.canBeRefunded) {
       actions = actions.filter(action => action.value !== 'refundOrder');
     }
-    if (this.orderState ===  4 || this.orderState ===  5) {
+    if ( this.orderState ===  3 || this.orderState ===  4 || this.orderState ===  5 || this.orderState ===  6) {
       actions = actions.filter(action => action.value !== 'trackingOrder');
     }
 

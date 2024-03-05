@@ -77,13 +77,14 @@
             role="tabpanel"
             [attr.aria-labelledby]="item + '-tab'"
           >
-            <div class="scroll--item" *ngFor="let order of myOrders">
-              <app-my-order-card
-                *ngIf="ordersState === order.orderState"
-                [product]="order"
-                [orderState]="order.orderState"
-              ></app-my-order-card>
-            </div>
+          <div class="scroll--item" *ngFor="let order of myOrders">
+            <app-my-order-card
+            *ngIf="(ordersState === OrderStateValue.Canceled && (order.orderState === OrderStateValue.Canceled || order.orderState === OrderStateValue.Refund)) || (ordersState !== OrderStateValue.Canceled && ordersState === order.orderState)"
+            [product]="order"
+              [orderState]="order.orderState"
+            ></app-my-order-card>
+          </div>
+
           </div>
         </div>
       </div>

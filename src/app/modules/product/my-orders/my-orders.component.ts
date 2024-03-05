@@ -28,6 +28,8 @@ export class MyOrdersComponent implements OnInit {
   orderStatisticsCount: string[] = [];
   ordersCount: number | undefined;
   ordersState: number | undefined;
+  OrderStateValue = OrderState;
+
   sellersData: any;
   selectedUserId: string | undefined;
   selectedSeller: boolean = false;

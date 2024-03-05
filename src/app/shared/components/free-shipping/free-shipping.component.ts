@@ -1,5 +1,6 @@
 import { trigger, transition, keyframes, style, animate } from '@angular/animations';
 import { Component, Input } from '@angular/core';
+import { environment } from '../../../../environments/environment';
 type ClassProps = {
   base?: string
 }
@@ -15,4 +16,6 @@ type ClassProps = {
 
 export class FreeShippingComponent {
   @Input() classes?: ClassProps;
+   // Property to hold the URL
+   mobileAppIosUrl = environment.mobileAppIosUrl;
 }

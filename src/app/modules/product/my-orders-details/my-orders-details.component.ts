@@ -8,6 +8,7 @@ import { CancelOrderComponent } from '../../../shared/components/modals/cancel-o
 import { RefundOrderComponent } from '../../../shared/components/modals/refund-order/refund-order.component';
 import { ModalService } from '../../../shared/components/modal/modal.service';
 import { ModalDataService } from '../../../shared/components/modal/modal.data.service';
+import { OrderState } from '../../../shared/models';
 
 @Component({
   selector: 'app-my-orders-details',
@@ -29,10 +30,17 @@ export class MyOrdersDetailsComponent implements OnInit {
     return this.orderStateService.getIOrderItemState(item);
   }
 
+
+  getIOrderItemValueState(item: any): string {
+    return this.orderStateService.getIOrderItemValueState(item);
+  }
+
   getBorderColorClass(item: any): string {
     return this.orderStateService.getIOrderItemBorderColorState(item);
   }
-
+  getStatusGradientBgButton(item: any): string {
+    return this.orderStateService.getStatusGradientBgButton(item);
+  }
   loadOrderDetails(orderNumber: string): void {
     this.myOrdersService.getOrderDetails(orderNumber).subscribe({
       next: (data) => {

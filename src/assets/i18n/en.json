@@ -28,6 +28,7 @@
   "cancelled": "Cancelled",
   "cancel": "Cancel",
   "refund": "Refund",
+  "refunded":"/refunded",
   "addtoCart": "Add To Cart",
   "buyNow": "BUY NOW",
   "additionalInfo": "Additional Info",
@@ -131,6 +132,8 @@
   "yourOrderNo": "Your Order No.",
   "orderDetails": "Order Details",
   "seller": "Seller:",
+  "selectASeller": "Select a Seller:",
+  "sellerPlaceholder": "Seller Name:",
   "orderStatues": "Order Status:",
   "yourOrder": "Your order",
   "summary": "Summary :",
@@ -142,6 +145,20 @@
   "quantityNotSelected" : "Quantity Not Selected",
   "logout": "Logout",
   "close":"Close",
-  "EGP": "EGP"
+  "EGP": "EGP",
+  "itemsLabel": "Items:",
+  "orderStatus": "Order Status",
+  "submit": "Submit",
+  "requestSentToAdmin": "The Request Sent To Admin",
+  "ok": "OK",
+  "reasonsOfCancelation": "Reasons of Cancelation",
+  "reasonsOfRefund": "Reasons of Refund",
+  "orderCancelled": "Your order has been cancelled"
+
+
+
+
+
+
 
 }

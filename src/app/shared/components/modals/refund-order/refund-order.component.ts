@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { MyOrdersService } from '../../../../data/service/my-orders/my-orders.service';
 import { ModalService } from '../../modal/modal.service';
 import { ModalDataService } from '../../modal/modal.data.service';
+import { AuthService } from '../../../../data/service/auth/auth.service';
 export enum RefundReason {
   ProductDeliveredToWrongAddress = 0,
   CheaperAlternativeAvailableWithLessPrice = 1,
@@ -25,38 +26,41 @@ type OptionProps = {
 
 export class RefundOrderComponent {
   defaultReasonValue: string = RefundReason.Other.toString(); // Convert the enum value to a string
+  requestAdmin: boolean = false;
+  currentLang = this.authService.getCurrentLanguage();
 
   refundReasons: OptionProps[] = [
     {
-      label: 'Product is being delivered to a wrong address.',
+      label: this.currentLang === 'en' ? 'Product is being delivered to a wrong address.' : 'يتم تسليم المنتج إلى عنوان خاطئ.',
       value: RefundReason.ProductDeliveredToWrongAddress.toString(),
       name: 'ProductDeliveredToWrongAddress',
-      desc: 'The product is not being delivered to the correct address.',
+      desc: this.currentLang === 'en' ? 'The product is not being delivered to the correct address.' : 'المنتج لا يتم تسليمه إلى العنوان الصحيح.',
     },
     {
-      label: 'Cheaper alternative available for lesser price.',
+      label: this.currentLang === 'en' ? 'Cheaper alternative available for lesser price.' : 'هناك بديل أرخص متاح بسعر أقل.',
       value: RefundReason.CheaperAlternativeAvailableWithLessPrice.toString(),
       name: 'CheaperAlternativeAvailableWithLessPrice',
-      desc: 'A similar product is available at a lower price.',
+      desc: this.currentLang === 'en' ? 'A similar product is available at a lower price.' : 'هناك منتج مشابه متاح بسعر أقل.',
     },
     {
-      label: 'Product doesn\'t match my expectation.',
+      label: this.currentLang === 'en' ? 'Product doesn\'t match my expectation.' : 'المنتج لا يتوافق مع توقعاتي.',
       value: RefundReason.ProductDoesNotMatchMyExpectation.toString(),
       name: 'ProductDoesNotMatchMyExpectation',
-      desc: 'The product does not meet the quality or functionality I expected.',
+      desc: this.currentLang === 'en' ? 'The product does not meet the quality or functionality I expected.' : 'المنتج لا يلبي الجودة أو الوظيفة التي توقعتها.',
     },
     {
-      label: 'Other.',
+      label: this.currentLang === 'en' ? 'Other.' : 'أخرى.',
       value: RefundReason.Other.toString(),
       name: 'Other',
-      desc: 'My reason for a refund is not listed above.',
+      desc: this.currentLang === 'en' ? 'My reason for a refund is not listed above.' : 'سبب طلب الاسترداد الخاص بي ليس مذكورًا أعلاه.',
     },
   ];
+
   // Add a property to store the selected reason if necessary
   selectedReason: any = RefundReason.Other.toString(); // Default to 'Other'
 
   constructor(private myOrdersService: MyOrdersService, private modalService: ModalService,
-    private modalDataService: ModalDataService) { }
+    private modalDataService: ModalDataService, private authService: AuthService) { }
 
 
   handleChange(newValue: any): void {
@@ -73,23 +77,56 @@ export class RefundOrderComponent {
     if (itemOrOrder === 'Order') {
       this.myOrdersService.refundOrder(orderNumber, refundReason)
         .subscribe({
-          next: (response) => console.log('Refund successful:', response),
-          error: (error) => console.error('Refund failed:', error)
+          next: (response: any) => {
+            // Here you check if the response object has the property indicating success
+            // You might need to adjust the 'success' property based on how your actual response object is structured
+            if (response && response.isSuccess) {
+              this.requestAdmin = true;
+
+              console.log('Refund successful:', response);
+              // Handle successful refund here, for example, by updating the UI or notifying the user
+            } else {
+              console.error('Refund was processed but did not meet success criteria:', response);
+              // Handle the case where the refund process did something unexpected
+            }
+          },
+          error: (error) => {
+            console.error('Refund failed:', error);
+            // Handle the error scenario, for example, by displaying an error message to the user
+          }
         });
+
     }
     if (itemOrOrder === 'Item') {
       this.myOrdersService.refundOrderItem(orderNumber, refundReason)
         .subscribe({
-          next: (response) => console.log('Refund successful:', response),
-          error: (error) => console.error('Refund failed:', error)
+          next: (response: any) => {
+            // Here you check if the response object has the property indicating success
+            // You might need to adjust the 'success' property based on how your actual response object is structured
+            if (response && response.isSuccess) {
+              this.requestAdmin = true;
+
+              console.log('Refund successful:', response);
+              // Handle successful refund here, for example, by updating the UI or notifying the user
+            } else {
+              console.error('Refund was processed but did not meet success criteria:', response);
+              // Handle the case where the refund process did something unexpected
+            }
+          },
+          error: (error) => {
+            console.error('Refund failed:', error);
+            // Handle the error scenario, for example, by displaying an error message to the user
+          }
         });
+
     }
 
-    this.onCloseModal();
   }
 
   onCloseModal() {
     console.log("close")
     this.modalService.close()
+    window.location.reload();
+
   }
 }

@@ -13,6 +13,7 @@ import { ModalService } from '../../modal/modal.service';
 import { RefundOrderComponent } from '../../modals/refund-order/refund-order.component';
 import { ModalDataService } from '../../modal/modal.data.service';
 import { CancelOrderComponent } from '../../modals/cancel-order/cancel-order.component';
+import { AuthService } from '../../../../data/service/auth/auth.service';
 
 
 @Component({
@@ -27,22 +28,23 @@ export class MyOrderCardComponent {
 
   @Input() product: any;
   @Input() orderState: any;
+  currentLang = this.authService.getCurrentLanguage();
 
   dropdownactions: any = [
     {
-      label: 'View Details',
+      label: this.currentLang === 'en' ? 'View Details' : 'عرض التفاصيل',
       value: 'viewDetails',
     },
     {
-      label: 'Tracking Order',
+      label: this.currentLang === 'en' ? 'Tracking Order' : 'تتبع الطلب',
       value: 'trackingOrder',
     },
     {
-      label: 'Cancel Order',
+      label: this.currentLang === 'en' ? 'Cancel Order' : 'إلغاء الطلب',
       value: 'cancelOrder',
     },
     {
-      label: 'Refund Order',
+      label: this.currentLang === 'en' ? 'Refund Order' : 'استرجاع الطلب',
       value: 'refundOrder',
     },
   ];
@@ -51,7 +53,7 @@ export class MyOrderCardComponent {
   orderNumber: any;
 
   constructor(private orderStateService: OrderStateService, private router: Router, private modalService: ModalService
-    , private modalDataService: ModalDataService) { }
+    , private modalDataService: ModalDataService, private authService: AuthService) { }
 
   getTextColorClass(item: any): string {
     return this.orderStateService.getIOrderItemState(item);
@@ -68,7 +70,7 @@ export class MyOrderCardComponent {
     if (!product.canBeRefunded) {
       actions = actions.filter(action => action.value !== 'refundOrder');
     }
-    if ( this.orderState ===  3 || this.orderState ===  4 || this.orderState ===  5 || this.orderState ===  6) {
+    if (this.orderState === 3 || this.orderState === 4 || this.orderState === 5 || this.orderState === 6) {
       actions = actions.filter(action => action.value !== 'trackingOrder');
     }
 
@@ -194,30 +196,32 @@ export class MyOrderCardComponent {
       },
     });
   }
+
   // New method to get the enum value for itemState
   getOrderItemStateLabel(item: any): string {
     switch (item.itemState) {
       case OrderItemState.OrderPlaced:
-        return 'Order Placed';
+        return this.currentLang === 'en' ? 'Order Placed' : 'تم الطلب';
       case OrderItemState.Shipping:
-        return 'Shipping';
+        return this.currentLang === 'en' ? 'Shipping' : 'الشحن';
       case OrderItemState.PickUpOnTheWay:
-        return 'Pick Up On The Way';
+        return this.currentLang === 'en' ? 'Pick Up On The Way' : 'الاستلام في الطريق';
       case OrderItemState.PickUp:
-        return 'Pick Up';
+        return this.currentLang === 'en' ? 'Pick Up' : 'استلام';
       case OrderItemState.DeliveryOnTheWay:
-        return 'Delivery On TheWay';
+        return this.currentLang === 'en' ? 'Delivery On The Way' : 'التوصيل في الطريق';
       case OrderItemState.Delivered:
-        return 'Delivered';
+        return this.currentLang === 'en' ? 'Delivered' : 'تم التوصيل';
       case OrderItemState.Canceled:
-        return 'Canceled';
+        return this.currentLang === 'en' ? 'Canceled' : 'أُلغي';
       case OrderItemState.Refund:
-        return 'Refund';
+        return this.currentLang === 'en' ? 'Refund' : 'استرداد';
       case OrderItemState.Returned:
-        return 'Returned';
+        return this.currentLang === 'en' ? 'Returned' : 'مُرتجع';
       // Add more cases for other enum values
       default:
-        return 'Unknown State';
+        return this.currentLang === 'en' ? 'Unknown State' : 'حالة غير معروفة';
     }
   }
+
 }

@@ -3,14 +3,14 @@
 
   <section class="content-page my-orders">
     <div class="flex items-center gap-4 mb-4">
-      <label for="sellerDropdown" class="font-bold">Select a Seller:</label>
+      <label for="sellerDropdown" class="font-bold">{{ 'selectASeller' | translate }}</label>
       <ng-select
         id="sellerDropdown"
         [items]="sellersData"
         bindLabel="name"
         bindValue="userId"
         [searchable]="true"
-        [placeholder]="selectedSeller ? '' : 'Seller Name:'"
+        [placeholder]="selectedSeller ? '' : ('sellerPlaceholder' | translate)"
         (change)="onSellerSelected($event)"
         class="flex items-center border py-3 px-4 text-gray-950 text-sm rounded-lg w-[400px]"
       >
@@ -62,7 +62,7 @@
                   ></svg-icon>
                 </div>
 
-                {{ item === "cancelled" ? item + "/refunded" : item }}
+                {{ item === "cancelled" ? (item | translate) + ("refunded" | translate) : (item | translate) }}
               </button>
             </li>
           </ul>

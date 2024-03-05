@@ -28,6 +28,7 @@
   "cancelled": "تم الإلغاء",
   "cancel": "الغاء",
   "refund": "استرجاع",
+  "refunded": "/مستردة",
   "addtoCart": "أضف إلى السلة",
   "buyNow": "اشتري الآن",
   "additionalInfo": "معلومات أخرى",
@@ -132,6 +133,8 @@
   "yourOrderNo": "رقم طلبك",
   "orderDetails": "تفاصيل الطلب",
   "seller": "تاجر:",
+  "selectASeller": "اختر بائعًا:",
+  "sellerPlaceholder": "اسم البائع:",
   "orderStatues": "حالة الطلب:",
   "yourOrder": "طلبك",
   "summary": "ملخص :",
@@ -143,6 +146,14 @@
   "order": "طلب",
   "logout": "تسجيل خروج",
   "close": "إغلاق",
-  "EGP": "ج.م"
+  "EGP": "ج.م",
+  "itemsLabel": "العناصر:",
+  "orderStatus": "حالة الطلب",
+  "submit": "إرسال",
+  "requestSentToAdmin": "الطلب أُرسل إلى الإدارة",
+  "ok": "موافق",
+  "reasonsOfCancelation": "أسباب الإلغاء",
+  "reasonsOfRefund": "أسباب الاسترداد",
+  "orderCancelled": "تم إلغاء طلبك"
 
 }

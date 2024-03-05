@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { MyOrdersService } from '../../../../data/service/my-orders/my-orders.service';
 import { ModalService } from '../../modal/modal.service';
 import { ModalDataService } from '../../modal/modal.data.service';
+import { AuthService } from '../../../../data/service/auth/auth.service';
 export enum CancellationReason {
   DeliveryDateChanged = 0,
   ProductNotRequiredAnymore = 1,
@@ -23,38 +24,42 @@ type OptionProps = {
 })
 export class CancelOrderComponent {
   defaultReasonValue: string = CancellationReason.Other.toString(); // Convert the enum value to a string
+  currentLang = this.authService.getCurrentLanguage();
+  requestAdmin: boolean = false;
+  requestMessage: any;
 
-  refundReasons: OptionProps[] = [
+  cancelReasons: OptionProps[] = [
     {
-      label: 'Delivery Date Changed',
+      label: this.currentLang === 'en' ? 'Delivery Date Changed' : 'تغير موعد التسليم',
       value: CancellationReason.DeliveryDateChanged.toString(),
       name: 'DeliveryDateChanged',
-      desc: 'The product is being delivered to Date Changed.',
+      desc: this.currentLang === 'en' ? 'The delivery date has been changed.' : 'تم تغيير موعد التسليم للمنتج.',
     },
     {
-      label: 'Product Not Required Anymore.',
+      label: this.currentLang === 'en' ? 'Product Not Required Anymore.' : 'المنتج لم يعد مطلوبًا.',
       value: CancellationReason.ProductNotRequiredAnymore.toString(),
       name: 'ProductNotRequiredAnymore',
-      desc: 'A similar product Not Required Anymore.',
+      desc: this.currentLang === 'en' ? 'The product is no longer required.' : 'المنتج لم يعد مطلوبًا بعد الآن.',
     },
     {
-      label: 'Bad Review From Friends.',
+      label: this.currentLang === 'en' ? 'Bad Review From Friends.' : 'تقييم سيئ من الأصدقاء.',
       value: CancellationReason.BadReviewFromFriends.toString(),
       name: 'BadReviewFromFriends',
-      desc: 'Bad Review From Friends.',
+      desc: this.currentLang === 'en' ? 'Received a bad review from friends.' : 'حصلت على تقييم سيئ من الأصدقاء.',
     },
     {
-      label: 'Other.',
+      label: this.currentLang === 'en' ? 'Other.' : 'أخرى.',
       value: CancellationReason.Other.toString(),
       name: 'Other',
-      desc: 'My reason for a refund is not listed above.',
+      desc: this.currentLang === 'en' ? 'My reason for cancellation is not listed above.' : 'سبب الإلغاء الخاص بي غير مدرج أعلاه.',
     },
   ];
+
   // Add a property to store the selected reason if necessary
   selectedReason: any = CancellationReason.Other.toString(); // Default to 'Other'
 
   constructor(private myOrdersService: MyOrdersService, private modalService: ModalService,
-    private modalDataService: ModalDataService) { }
+    private modalDataService: ModalDataService, private authService: AuthService) { }
 
 
   handleChange(newValue: any): void {
@@ -71,22 +76,58 @@ export class CancelOrderComponent {
     if (itemOrOrder === 'Order') {
       this.myOrdersService.cancelOrder(orderNumber, cancelReason)
         .subscribe({
-          next: (response) => console.log('Refund successful:', response),
-          error: (error) => console.error('Refund failed:', error)
+          next: (response: any) => {
+            // Here you check if the response object has the property indicating success
+            // You might need to adjust the 'success' property based on how your actual response object is structured
+            if (response && response.isSuccess) {
+              this.requestAdmin = true;
+
+              console.log('cancelled successful:', response);
+              // Handle successful refund here, for example, by updating the UI or notifying the user
+            } else {
+              this.requestAdmin = true;
+              this.requestMessage = response.errorMessage;
+              console.error('cancelled was processed but did not meet success criteria:', response);
+              // Handle the case where the refund process did something unexpected
+            }
+          },
+          error: (error) => {
+
+            console.error('cancelled failed:', error);
+            // Handle the error scenario, for example, by displaying an error message to the user
+          }
         });
     }
     if (itemOrOrder === 'Item') {
       this.myOrdersService.cancelOrderItem(orderNumber, cancelReason)
         .subscribe({
-          next: (response) => console.log('Refund successful:', response),
-          error: (error) => console.error('Refund failed:', error)
+          next: (response: any) => {
+            // Here you check if the response object has the property indicating success
+            // You might need to adjust the 'success' property based on how your actual response object is structured
+            if (response && response.isSuccess) {
+              this.requestAdmin = true;
+
+              console.log('cancelled successful:', response);
+              // Handle successful refund here, for example, by updating the UI or notifying the user
+            } else {
+              this.requestAdmin = true;
+              this.requestMessage = response.errorMessage;
+              console.error('cancelled was processed but did not meet success criteria:', response);
+              // Handle the case where the refund process did something unexpected
+            }
+          },
+          error: (error) => {
+            console.error('cancelled failed:', error);
+            // Handle the error scenario, for example, by displaying an error message to the user
+          }
         });
     }
-    this.onCloseModal();
   }
 
   onCloseModal() {
     console.log("close")
     this.modalService.close()
+    window.location.reload();
+
   }
 }

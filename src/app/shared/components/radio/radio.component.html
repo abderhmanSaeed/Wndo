@@ -1,8 +1,8 @@
 <div class="radio {{classes?.base}}">
   <ng-container *ngFor="let option of options">
     <div class="flex justify-between mb-6.5 {{classes?.inputContainer}} last:mb-0">
-      <div class="flex">
-        <div class="flex items-center h-5">
+      <div class="flex {{classes?.listItem}}">
+        <div class="flex items-center h-5 {{classes?.inputWrapper}}">
           <input
             title="{{ name }}"
             [id]="option.name"
@@ -14,13 +14,13 @@
             [disabled]="disabled"
             (change)="onChange(option.value)"
             [ngClass]="getRadioClassesColor(color)"
-            class="radio__input {{ classes?.input }} "
+            class="radio__input !bg-transparent {{ classes?.input }} "
           />
         </div>
-        <div class="ms-2 text-sm">
+        <div class="ms-2 text-sm {{classes?.labelWrapper}}">
           <label
             [for]="option.name"
-            class="font-medium text-sm mb-2"
+            class="font-medium text-sm mb-2 {{classes?.label}}"
             [class.text-blueGray-300]="option.value !== value"
             [class.text-blue-800]="option.value === value"
           >

@@ -2,47 +2,92 @@
   <app-header-of-page></app-header-of-page>
   <div class="content-page">
     <h5 class="text-blue-900 mb-11">
-      {{"YourOrder" | translate}} ({{orderDetails?.orderItems.length}})<span class="text-blue-100">></span>
-      <span class="text-sm text-blue-950">{{"yourOrderNoDetails" | translate}}</span>
+      {{ "YourOrder" | translate }} ({{ orderDetails?.orderItems.length }})<span
+        class="text-blue-100"
+        >></span
+      >
+      <span class="text-sm text-blue-950">{{
+        "yourOrderNoDetails" | translate
+      }}</span>
     </h5>
     <div class="grid grid-cols-1 md:grid-cols-7 justify-between gap-10">
       <div class="md:col-span-5">
-        <h6 class="text-blue-950 mb-6">{{"summary" | translate }} {{"order" | translate}} #{{orderDetails?.orderNumber}}</h6>
+        <h6 class="text-blue-950 mb-6">
+          {{ "summary" | translate }} {{ "order" | translate }} #{{
+            orderDetails?.orderNumber
+          }}
+        </h6>
         <div class="flex items-center justify-between mb-8">
           <p class="text-sm font-medium text-blueGray-200">
-            {{"placedOn" | translate}} <span>{{orderDetails?.createdAt | date}}</span>
+            {{ "placedOn" | translate }}
+            <span>{{ orderDetails?.createdAt | date }}</span>
           </p>
           <p class="text-sm font-medium text-blueGray-200">
-           {{"overallStatus" | translate}}
-            <span [ngClass]="getStatusGradientBgButton(orderDetails?.orderState)">{{getIOrderItemValueState(orderDetails?.orderState)}}</span>
+            {{ "overallStatus" | translate }}
+            <span
+              [ngClass]="getStatusGradientBgButton(orderDetails?.orderState)"
+              >{{ getIOrderItemValueState(orderDetails?.orderState) }}</span
+            >
           </p>
         </div>
         <div class="scroll">
-          <div *ngFor="let order of orderDetails?.orderItems" class="scroll__item">
+          <div
+            *ngFor="let order of orderDetails?.orderItems"
+            class="scroll__item"
+          >
             <div class="mb-6">
               <!-- [classes]="{baseBorderColor: getBorderColorClass(product.orderState)}" -->
-              <app-item-orders-details [classes]="{ base: getBorderColorClass(order.orderItemState) }"
-                [hasCustomBorderColor]="true" [order]="order" [hasQuantity]="false">
-                <div class="flex flex-wrap items-center justify-between w-full mt-4 lg:mt-0">
-                  <div (click)="navigateSeller(order.seller.id)" class="pointer-div flex gap-2 items-center flex-grow">
-                    <img [src]="order.seller.imagePath" alt="seller image" class="h-8 w-8 rounded-full object-cover" />
+              <app-item-orders-details
+                [classes]="{ base: getBorderColorClass(order.orderItemState) }"
+                [hasCustomBorderColor]="true"
+                [order]="order"
+                [hasQuantity]="false"
+              >
+                <div
+                  class="flex flex-wrap items-center justify-between w-full mt-4 lg:mt-0"
+                >
+                  <div
+                    (click)="navigateSeller(order.seller.id)"
+                    class="pointer-div flex gap-2 items-center flex-grow"
+                  >
+                    <img
+                      [src]="order.seller.imagePath"
+                      alt="seller image"
+                      class="h-8 w-8 rounded-full object-cover"
+                    />
                     <p class="text-xs capitalize text-blueGray-200">
                       {{ order.seller.name }}
                     </p>
                   </div>
 
                   <div class="space-x-3">
-                    <span class="line-through me-2 text-xs"
-                      *ngIf="order.priceAfterOffer || order.priceAfterOffer === 0">{{ order.price }} EGP</span>
-                    <span class="text-primary text-base" *ngIf="order.priceAfterOffer || order.priceAfterOffer > 0">{{
-                      order.priceAfterOffer }} EGP</span>
-                    <button *ngIf="order?.isCancel" (click)="CancelOrderItem(order.orderItemNumber)" type="button"
-                      class="border rounded py-1 px-5 border-gray-200 text-gray-200 hover:bg-gray-100 uppercase text-sm">
-                      {{"cancel" | translate}}
+                    <span
+                      class="line-through me-2 text-xs"
+                      *ngIf="
+                        order.priceAfterOffer || order.priceAfterOffer === 0
+                      "
+                      >{{ order.price }} EGP</span
+                    >
+                    <span
+                      class="text-primary text-base"
+                      *ngIf="order.priceAfterOffer || order.priceAfterOffer > 0"
+                      >{{ order.priceAfterOffer }} EGP</span
+                    >
+                    <button
+                      *ngIf="order?.isCancel"
+                      (click)="CancelOrderItem(order.orderItemNumber)"
+                      type="button"
+                      class="border rounded py-1 px-5 border-gray-200 text-gray-200 hover:bg-gray-100 uppercase text-sm"
+                    >
+                      {{ "cancel" | translate }}
                     </button>
-                    <button *ngIf="order?.canBeRefunded" (click)="refundOrderItem(order.orderItemNumber)" type="button"
-                      class="border rounded py-1 px-5 border-gray-200 text-gray-200 hover:bg-gray-100 uppercase text-sm">
-                      {{"refund" | translate}}
+                    <button
+                      *ngIf="order?.canBeRefunded"
+                      (click)="refundOrderItem(order.orderItemNumber)"
+                      type="button"
+                      class="border rounded py-1 px-5 border-gray-200 text-gray-200 hover:bg-gray-100 uppercase text-sm"
+                    >
+                      {{ "refund" | translate }}
                     </button>
                   </div>
                 </div>
@@ -58,22 +103,39 @@
           </div>
       </div> -->
 
-        <app-confirmation-details [address]="orderDetails?.address" [orderDetails]="orderDetails"
-          [classes]="{ base: '!grid-cols-1 mb-4' }"></app-confirmation-details>
+        <app-confirmation-details
+          [address]="orderDetails?.address"
+          [orderDetails]="orderDetails"
+          [classes]="{ base: '!grid-cols-1 mb-4' }"
+        ></app-confirmation-details>
 
-        <div class="flex flex-wrap gap-4 items-center lg:px-14">
-          <button *ngIf="orderDetails?.isCancel" (click)="CancelOrder(orderDetails.orderNumber)"
-          type="button"
-            class="flex-auto button rounded-full button--primary button--bordered">
-            {{"cancelAll" | translate}}
+        <div class="flex flex-wrap gap-4 justify-center items-center lg:px-14">
+          <button
+            *ngIf="orderDetails?.isCancel"
+            (click)="CancelOrder(orderDetails.orderNumber)"
+            type="button"
+            class="min-w-[300px] button rounded-full button--primary button--bordered"
+          >
+            {{ "cancelAll" | translate }}
           </button>
-          <button *ngIf="orderDetails?.canBeRefunded" (click)="refundOrder(orderDetails.orderNumber)"
-           type="button"
-            class="flex-auto button rounded-full button--primary button--bordered">
-            {{"refundAll" | translate}}
+          <button
+            *ngIf="orderDetails?.canBeRefunded"
+            (click)="refundOrder(orderDetails.orderNumber)"
+            type="button"
+            class="min-w-[300px] button rounded-full button--primary button--bordered"
+          >
+            {{ "refundAll" | translate }}
           </button>
-          <button *ngIf="orderDetails.orderState !== 4 && orderDetails.orderState !== 5" (click)="navigateTrackOrder()"type="button" class="flex-auto button rounded-full button--primary">
-            {{"trackTheOrder" | translate}}          </button>
+          <button
+            *ngIf="
+              orderDetails.orderState !== 4 && orderDetails.orderState !== 5
+            "
+            (click)="navigateTrackOrder()"
+            type="button"
+            class="min-w-[300px] button rounded-full button--primary"
+          >
+            {{ "trackTheOrder" | translate }}
+          </button>
         </div>
       </div>
       <div class="h-full md:col-span-2">
@@ -84,5 +146,5 @@
 </section>
 
 <section class="pb-12 content-page">
-  <app-free-shipping [classes]="{base: 'justify-center'}"></app-free-shipping>
+  <app-free-shipping [classes]="{ base: 'justify-center' }"></app-free-shipping>
 </section>

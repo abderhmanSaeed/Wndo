@@ -1,8 +1,8 @@
-<app-modal-content [title]='"hello" | translate ' [subtitle]='"welcomeWndo"| translate'>
-  <div class="modal__body p-6">
-  <label *ngIf="!showNotification" >{{"registerationMsg"|translate}}</label>
+<app-modal-content   [title]='"hello" | translate ' [subtitle]='"welcomeWndo"| translate'>
+  <div class="modal__body px-6">
+  <p *ngIf="!showNotification" class="text-blueGray-200 text-sm mb-5">{{"registerationMsg"|translate}}</p>
     <label *ngIf="showInvaildMassage" [ngClass]="{'danger': invalid}">{{notificationMessage}}</label>
-      <app-input-filed *ngIf="!showNotification"
+      <!-- <app-input-filed *ngIf="!showNotification"
       [required]="true"
       [label]='"yourName" | translate'
       [isFloating]="true"
@@ -13,17 +13,17 @@
         labelColor: 'peer-focus:text-purple-500'
       }"
       (nameChanged)="onNameChanged($event)"
-    ></app-input-filed>
+    ></app-input-filed> -->
 
     <app-input-phone *ngIf="!showNotification"
       [countriesCode]="countriesCode"
       [classes]="{
         base: 'mb-4',
         label: 'peer-focus:text-base text-start',
-        labelColor: 'peer-focus:text-purple-500'
+        labelColor: 'peer-focus:text-purple-500',
       }"
-      [label]='"yourPhone"| translate'
-      [placeholder]='"phoneNumberMsg" | translate'
+
+      [placeholder]='"phoneNumber" | translate'
       (selectedOption)="handleSelectedOption($event)"
       (valueChange)="handleInputValueChange($event)"
     >

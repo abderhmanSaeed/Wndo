@@ -1,136 +1,225 @@
 <div class="grid grid-cols-1 md:grid-cols-3 justify-between gap-10">
   <form class="md:col-span-2">
     <section class="mb-4">
-      <h6 class="text-sm text-blue-900 mb-3">{{"yourCarthas" | translate}} ({{products.length}}) {{"items" | translate}}
+      <h6 class="text-sm text-blue-900 mb-3">
+        {{ "yourCarthas" | translate }} ({{ products.length }})
+        {{ "items" | translate }}
       </h6>
       <div class="bg-white rounded flex flex-wrap p-4 gap-6">
         <div class="flex-auto">
-          <app-input-filed [required]="true" [label]='"yourName" | translate' [isFloating]="true" [DefaultName]="true"
-            [placeholder]='"addName" | translate' name="name" [classes]="{
-            label: 'peer-focus:text-base',
-            labelColor: 'peer-focus:text-purple-500'
-          }" (nameChanged)="onNameChanged($event)"></app-input-filed>
-
-        </div>
-        <div class="flex-auto">
-          <app-input-phone [countriesCode]="countriesCode" [classes]="{
+          <app-input-filed
+            [required]="true"
+            [label]="'yourName' | translate"
+            [isFloating]="true"
+            [DefaultName]="true"
+            [placeholder]="'addName' | translate"
+            name="name"
+            [classes]="{
               label: 'peer-focus:text-base',
               labelColor: 'peer-focus:text-purple-500'
-            }" [label]='"yourPhone" | translate' [isFloating]="true" [placeholder]='"phoneNumberMsg" | translate'
-            (selectedOption)="handleSelectedOption($event)">
+            }"
+            (nameChanged)="onNameChanged($event)"
+          ></app-input-filed>
+        </div>
+        <div class="flex-auto">
+          <app-input-phone
+            [countriesCode]="countriesCode"
+            [classes]="{
+              label: 'peer-focus:text-base',
+              labelColor: 'peer-focus:text-purple-500'
+            }"
+            [label]="'yourPhone' | translate"
+            [isFloating]="true"
+            [placeholder]="'phoneNumberMsg' | translate"
+            (selectedOption)="handleSelectedOption($event)"
+          >
           </app-input-phone>
-
         </div>
       </div>
       <p class="text-blue-900 text-xs p-4">
         <i
-          class="fa-solid text-xs me-1 fa-info rounded-full w-5 h-5 border-2 border-blue-900 inline-flex items-center justify-center"></i>
-        {{"fieldsMandatory" | translate}}
+          class="fa-solid text-xs me-1 fa-info rounded-full w-5 h-5 border-2 border-blue-900 inline-flex items-center justify-center"
+        ></i>
+        {{ "fieldsMandatory" | translate }}
       </p>
     </section>
     <section class="bg-white rounded p-4">
-      <h6 *ngIf="addresses.length > 0" class="text-sm text-blue-900">{{("shippingAddress"|translate)}}</h6>
+      <h6 *ngIf="addresses.length > 0" class="text-sm text-blue-900">
+        {{ "shippingAddress" | translate }}
+      </h6>
 
-      <app-select *ngIf="addresses.length > 0" [options]="addresses" [value]="selectedAddresses" [placeholder]="('enterYourAddress' | translate)"
-        [label]="('addressName' | translate)" [required]="true" name="cities" [classes]="{
-              label: 'peer-focus:text-base peer-focus:font-medium font-medium text-base',
-              labelColor: 'peer-focus:text-purple-500'
-            }" [isFloating]="true" (valueChange)="onAddressesChange($event)">
+      <app-select
+        *ngIf="addresses.length > 0"
+        [options]="addresses"
+        [value]="selectedAddresses"
+        [placeholder]="'enterYourAddress' | translate"
+        [label]="'addressName' | translate"
+        [required]="true"
+        name="cities"
+        [classes]="{
+          label:
+            'peer-focus:text-base peer-focus:font-medium font-medium text-base',
+          labelColor: 'peer-focus:text-purple-500'
+        }"
+        [isFloating]="true"
+        (valueChange)="onAddressesChange($event)"
+      >
         <!-- This line handles the emitted value -->
       </app-select>
 
-      <button *ngIf="!showAddNewAddress && !selectedAddresses" type="button" class="add-new-address" (click)="addNewAddress()">{{
-        'addNewAddress' | translate }}</button>
+      <button
+        *ngIf="!showAddNewAddress && !selectedAddresses"
+        type="button"
+        class="add-new-address block ms-auto"
+        (click)="addNewAddress()"
+      >
+        {{ "addNewAddress" | translate }}
+      </button>
 
-      <h6 *ngIf="addresses.length === 0 || showAddNewAddress" class="text-sm text-blue-900">
-        {{("shippingAddress"|translate)}}</h6>
-      <div *ngIf="addresses.length === 0 || showAddNewAddress" class="grid sm:grid-cols-2 p-5 gap-6">
+      <h6
+        *ngIf="addresses.length === 0 || showAddNewAddress"
+        class="text-sm text-blue-900"
+      >
+        {{ "shippingAddress" | translate }}
+      </h6>
+      <div
+        *ngIf="addresses.length === 0 || showAddNewAddress"
+        class="grid sm:grid-cols-2 p-5 gap-6"
+      >
         <div>
-          <app-input-filed [required]="true" [label]="('addressName' | translate)" [isFloating]="true"
-            [placeholder]="('enterYourAddress' | translate)" name="address" [classes]="{
+          <app-input-filed
+            [required]="true"
+            [label]="'addressName' | translate"
+            [isFloating]="true"
+            [placeholder]="'enterYourAddress' | translate"
+            name="address"
+            [classes]="{
               label: 'peer-focus:text-base peer-focus:font-medium',
               labelColor: 'peer-focus:text-purple-500'
-            }" (nameChanged)="onAdressNameChanged($event)"></app-input-filed>
-
+            }"
+            (nameChanged)="onAdressNameChanged($event)"
+          ></app-input-filed>
         </div>
         <div>
-
-          <app-select [options]="cities" [placeholder]="('enterYourCity' | translate)" [label]="('city' | translate)"
-            [required]="true" name="cities" [classes]="{
-              label: 'peer-focus:text-base peer-focus:font-medium font-medium text-base',
-              labelColor: 'peer-focus:text-purple-500'
-            }" [isFloating]="false" (valueChange)="onCityChange($event)"> <!-- This line handles the emitted value -->
-          </app-select>
-
-
-        </div>
-        <div>
-          <app-select [options]="districts" [disabled]="districts.length === 0 ? true : false" [placeholder]="('enterYourDestrict' | translate)"
-            [label]="('destrict' | translate)" [required]="true" name="district" [classes]="{
+          <app-select
+            [options]="cities"
+            [placeholder]="'enterYourCity' | translate"
+            [label]="'city' | translate"
+            [required]="true"
+            name="cities"
+            [classes]="{
               label:
                 'peer-focus:text-base peer-focus:font-medium font-medium text-base',
               labelColor: 'peer-focus:text-purple-500'
-            }" [isFloating]="false" (valueChange)="onDistrictChange($event)"></app-select>
+            }"
+            [isFloating]="false"
+            (valueChange)="onCityChange($event)"
+          >
+            <!-- This line handles the emitted value -->
+          </app-select>
         </div>
         <div>
-          <app-input-filed [required]="true" [label]="('streetAddress' | translate)" [isFloating]="true"
-            [placeholder]="('enterYourStreet' | translate)" name="adress" [classes]="{
+          <app-select
+            [options]="districts"
+            [disabled]="districts.length === 0 ? true : false"
+            [placeholder]="'enterYourDestrict' | translate"
+            [label]="'destrict' | translate"
+            [required]="true"
+            name="district"
+            [classes]="{
+              label:
+                'peer-focus:text-base peer-focus:font-medium font-medium text-base',
+              labelColor: 'peer-focus:text-purple-500'
+            }"
+            [isFloating]="false"
+            (valueChange)="onDistrictChange($event)"
+          ></app-select>
+        </div>
+        <div>
+          <app-input-filed
+            [required]="true"
+            [label]="'streetAddress' | translate"
+            [isFloating]="true"
+            [placeholder]="'enterYourStreet' | translate"
+            name="adress"
+            [classes]="{
               label: 'peer-focus:text-base',
               labelColor: 'peer-focus:text-purple-500'
-            }" (nameChanged)="onStreetAddressChanged($event)"></app-input-filed>
+            }"
+            (nameChanged)="onStreetAddressChanged($event)"
+          ></app-input-filed>
         </div>
 
         <div>
-          <app-input-filed [label]="('buildingNo' | translate)" [isFloating]="true"
-            [placeholder]="('enterYourBuilding' | translate)" name="Address" [classes]="{
+          <app-input-filed
+            [label]="'buildingNo' | translate"
+            [isFloating]="true"
+            [placeholder]="'enterYourBuilding' | translate"
+            name="Address"
+            [classes]="{
               label: 'peer-focus:text-base',
               labelColor: 'peer-focus:text-purple-500'
-            }" (nameChanged)="onBuildingChanged($event)"></app-input-filed>
+            }"
+            (nameChanged)="onBuildingChanged($event)"
+          ></app-input-filed>
         </div>
         <div>
-
-          <app-select [options]="zones" [disabled]="zones.length === 0 ? true : false" [label]="('zone' | translate)" [isFloating]="false"
-            [placeholder]="('enterYourZone' | translate)" [classes]="{
-          label:
-           'peer-focus:text-base peer-focus:font-medium font-medium text-base',
-                  labelColor: 'peer-focus:text-purple-500'
-                     }" (valueChange)="onZoneChange($event)"></app-select>
+          <app-select
+            [options]="zones"
+            [disabled]="zones.length === 0 ? true : false"
+            [label]="'zone' | translate"
+            [isFloating]="false"
+            [placeholder]="'enterYourZone' | translate"
+            [classes]="{
+              label:
+                'peer-focus:text-base peer-focus:font-medium font-medium text-base',
+              labelColor: 'peer-focus:text-purple-500'
+            }"
+            (valueChange)="onZoneChange($event)"
+          ></app-select>
         </div>
-
       </div>
     </section>
   </form>
 
   <div class="">
     <div class="bg-white px-6 py-5.5">
-      <h6 class="text-purple-500 mb-6 font-normal">{{"choosePaymentMethod" | translate}}</h6>
+      <h6 class="text-purple-500 mb-6 font-normal">
+        {{ "choosePaymentMethod" | translate }}
+      </h6>
       <!-- <app-radio [options]="paymentMethods"> </app-radio> -->
-      <app-radio [options]="paymentMethods" (change)="onPaymentMethodChange($event)"
-        [value]="currentPaymentMethod"></app-radio>
+      <app-radio
+        [options]="paymentMethods"
+        (change)="onPaymentMethodChange($event)"
+        [value]="currentPaymentMethod"
+      ></app-radio>
 
       <p class="text-orange-400 text-xs mt-2 flex items-center gap-1">
         <svg-icon src="../../../../../assets/icons/gift.svg"> </svg-icon>
-        {{"AdditionalDiscountIfYouPayByCreditCard" | translate}}
+        {{ "AdditionalDiscountIfYouPayByCreditCard" | translate }}
       </p>
     </div>
 
     <p class="text-xs font-semibold text-blue-900 px-6 py-5.5">
       <i
-        class="fa-solid text-xs me-1 fa-info rounded-full w-5 h-5 border-2 border-blue-900 inline-flex items-center justify-center"></i>
-      {{"YouWillBeAbleToAddAVoucherInTheNextStep" | translate}}
+        class="fa-solid text-xs me-1 fa-info rounded-full w-5 h-5 border-2 border-blue-900 inline-flex items-center justify-center"
+      ></i>
+      {{ "YouWillBeAbleToAddAVoucherInTheNextStep" | translate }}
     </p>
 
     <div class="bg-white px-6 py-5.5">
-      <h6 class="text-purple-500 mb-6 font-normal">{{"ChooseShippingTime" | translate}}</h6>
+      <h6 class="text-purple-500 mb-6 font-normal">
+        {{ "ChooseShippingTime" | translate }}
+      </h6>
       <!-- <app-radio [options]="shippingTimes"> </app-radio> -->
-      <app-radio [options]="shippingTimes" (change)="onShippingTimeChange($event)"
-        [value]="currentShippingTime"></app-radio>
-
-
+      <app-radio
+        [options]="shippingTimes"
+        (change)="onShippingTimeChange($event)"
+        [value]="currentShippingTime"
+      ></app-radio>
     </div>
   </div>
 </div>
-
 
 <!-- temporaryPasswordModal -->
 <!-- <section class="content-page" aria-label="you may also like">

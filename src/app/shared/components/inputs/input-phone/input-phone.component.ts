@@ -17,7 +17,7 @@ type ClassesProps = {
   styleUrl: './input-phone.component.scss',
 })
 export class InputPhoneComponent implements OnInit {
-  @Input() placeholder: string = '';
+  @Input() placeholder: string = '-456-7890';
   @Input() label: string = '';
   @Input() disabled: boolean = false;
   @Input() required: boolean = false;

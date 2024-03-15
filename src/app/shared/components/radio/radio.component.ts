@@ -17,6 +17,9 @@ type ClassesProps = {
   input?: string,
   labelColor?: string
   inputContainer?: string
+  listItem?: string
+  inputWrapper?: string
+  labelWrapper?: string
 }
 
 @Component({

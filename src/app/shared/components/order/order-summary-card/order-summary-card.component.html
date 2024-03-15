@@ -4,12 +4,12 @@
     <h6 class="text-sm text-blue-800 text-center mb-4"> {{"orderItems" | translate}} ({{order?.orderItems?.length ? order?.orderItems?.length : order.length }})</h6>
     <ul *ngIf="order || order?.orderItems else noItems" class="mb-8">
       <li class="text-xs flex justify-between mb-2">
-      <li class="text-xs flex justify-betw#0D1863een mb-2">
-      <li *ngFor="let item of order?.orderItems"class="text-xs flex justify-betw#0D1863een mb-2">
+      <li class="text-xs flex justify-between #0D1863een mb-2">
+      <li *ngFor="let item of order?.orderItems"class="text-xs flex justify-between #0D1863een mb-2">
         <span> {{ item?.name }}</span>
         <span>({{ item?.quantity }})</span>
       </li>
-      <li *ngFor="let item of order"class="text-xs flex justify-betw#0D1863een mb-2">
+      <li *ngFor="let item of order"class="text-xs flex justify-between #0D1863een mb-2">
         <span> {{ item?.name }}</span>
         <span>({{ item?.quantity }})</span>
       </li>

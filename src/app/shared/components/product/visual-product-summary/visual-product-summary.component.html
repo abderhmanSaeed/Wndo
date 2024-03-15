@@ -2,12 +2,25 @@
     classes?.base
   }} " [ngClass]="{'border-orange-400': !hasCustomBorderColor}">
   <img [src]="product.image" class="w-36 h-36 object-cover rounded" alt="{{ product.name }}" />
-  <div class="flex flex-col flex-grow items-baseline justify-between">
-    <h6>{{ product.name }}</h6>
+  <div class="flex flex-col flex-grow items-start justify-between">
+    <div class="flex justify-between items-center w-full">
+      <h6>{{ product.name }}</h6>
+      <app-dropdown *ngIf="!editOrdelete" [id]="'actionDropdown' + product.id" [showSelectedValue]="false"
+      [options]="getDropdownActions(product)" dropdownIcon="fa-ellipsis-vertical" [classes]="{
+      label: 'bg-primary-100',
+      toggleBtn: 'outline-none w-8 h-8 rounded-full hover:bg-gray-200',
+      list: 'w-[220px] lg:w-auto shadow px-4 space-y-3',
+      base: '!h-auto',
+      listItem: 'bg-primary-100',
+      dropdownMenu:'lg:!w-[220px] before:!-end-3 lg:before:!end-2 ',
+      menuBtn:'bg-primary-100'
+    }" (valueChanged)="onDropdownChange($event, product.id)">
+    </app-dropdown>
+    </div>
     <p class="text-base text-purple-300 my-3" *ngIf="showDesc && product.description">
       {{ product.description }}
     </p>
-    <div class="bg-gray-100 inline-flex text-gray-350 text-xs rounded divide-x p-2 gap-2 items-center">
+    <div class="bg-gray-100 inline-flex text-gray-350 text-xs rounded divide-x rtl:divide-x-reverse p-2 gap-2 items-center">
       <span class="px-2" *ngIf="product.hexColor">{{"color" | translate}}:
         <i class="fa-solid fa-circle text-xxs" [style]="{ color: '#' + product.hexColor }"></i></span>
       <span *ngIf="product.size" class="px-2">{{"size" | translate}}: {{ product.size }}</span>
@@ -30,22 +43,12 @@
         [maxQuantity]="product.sizeQuantity">
       </app-quantity-button>
     </div>
-    <div class="flex lg:flex-col justify-between">
+    <!-- <div class="flex lg:flex-col justify-between">
       <section class="flex-grow self-end">
-        <app-dropdown *ngIf="!editOrdelete" [id]="'actionDropdown' + product.id" [showSelectedValue]="false"
-          [options]="getDropdownActions(product)" dropdownIcon="fa-ellipsis-vertical" [classes]="{
-          label: 'bg-primary-100',
-          toggleBtn: 'outline-none w-8 h-8 rounded-full hover:bg-gray-200',
-          list: 'w-[220px] lg:w-auto shadow px-4 space-y-3',
-          base: '!h-auto',
-          listItem: 'bg-primary-100',
-          dropdownMenu:'lg:!w-[220px] before:!-end-3 lg:before:!end-2 ',
-          menuBtn:'bg-primary-100'
-        }" (valueChanged)="onDropdownChange($event, product.id)">
-        </app-dropdown>
+
 
       </section>
-    </div>
+    </div> -->
 
     <ng-content></ng-content>
   </div>

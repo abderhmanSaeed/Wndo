@@ -1,0 +1,57 @@
+<div class="home-banner">
+  <swiper-container
+  init="false"
+  class="swiper-container1 swiper2 mb-4"
+  appSwiper
+  #swiper
+  [config]="swiperConfig"
+>
+  <swiper-slide class="h-[306px] w-full rounded">
+    <img
+      class="h-full object-cover w-full rounded"
+      src="../../../../../assets/images/beauty-store.jpg"
+      alt=""
+    />
+  </swiper-slide>
+
+  <swiper-slide class="h-[306px] w-full rounded">
+    <img
+      class="h-full object-cover w-full rounded"
+      src="../../../../../assets/images/checkout-cover.svg"
+      alt=""
+    />
+  </swiper-slide>
+
+  <swiper-slide class="h-[306px] w-full rounded">
+    <img
+      class="h-full object-cover w-full rounded"
+      src="../../../../../assets/images/beauty-store.jpg"
+      alt=""
+    />
+  </swiper-slide>
+</swiper-container>
+
+<section class="flex">
+  <div
+    id="containerForBullets"
+    class="flex-grow flex gap-2 justify-center"
+  ></div>
+
+  <div class="flex items-center gap-2">
+    <button
+      type="button"
+      class="items-center justify-center z-30 cursor-pointer shadow-lg slider__prev hidden w-6 h-6 rounded-full md:flex text-blue-1000 bg-white text-sm"
+    >
+      <span class="sr-only">{{ "Prev" | translate }}</span>
+      <i class="fa-solid fa-chevron-left rtl:rotate-180"></i>
+    </button>
+    <button
+      type="button"
+      class="items-center justify-center z-30 shadow-lg slider__next disabled:opacity-40 cursor-none text-sm hidden w-6 h-6 rounded-full md:flex text-blue-1000 bg-white"
+    >
+      <i class="fa-solid fa-chevron-right rtl:rotate-180 "></i>
+      <span class="sr-only">{{ "Next" | translate }}</span>
+    </button>
+  </div>
+</section>
+</div>

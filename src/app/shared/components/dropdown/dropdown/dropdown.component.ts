@@ -35,6 +35,9 @@ export class DropdownComponent {
   @Output() valueChanged = new EventEmitter<any>();
   isOpen: boolean = false;
 
+  @Input() iconTemplate?: TemplateRef<any>;
+
+
   toggleDropdown() {
     this.isOpen = !this.isOpen;
   }

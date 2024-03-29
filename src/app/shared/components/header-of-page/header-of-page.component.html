@@ -1,100 +1,244 @@
 <!-- <section class="header-page mb-24" [class.mb-40]="isShowDetails" [ngClass]="{ flex: isProductOffersRoute }"> -->
-  <section class="header-page mb-24"
-  [class.mb-40]="isShowDetails"
-  [ngClass]="{ 'flex': isProductOffersRoute }"
-  [ngStyle]="{'background-image': 'url(' + (seller?.cover ? seller?.cover : (sellerProfile?.cover ? sellerProfile?.cover : sellerCover)) + ')',
-              'background-repeat': 'no-repeat',
-              'background-size': 'cover',
-              'height': '125px',
-              'background-position': 'center'}">
+<section class="bg-blue-1000 py-4 px-10 flex items-center justify-between">
+  <div class="flex items-center gap-4">
+    <button type="button">
+      <img
+        width="34"
+        height="34"
+        src="https://img.icons8.com/color/48/saudi-arabia-circular.png"
+        alt="saudi-arabia-circular"
+      />
 
-  <div class="content-page">
-    <section class="flex justify-between items-center">
-      <div class="flex items-end w-32 h-32 mt-12">
-        <img class="rounded-full h-full w-full" [src]="seller?.imagePath ?seller?.imagePath :sellerProfile?.photo " alt="{{ seller?.id }}"
-          [class.cursor-pointer]="!isProductOffersRoute" (click)="logSellerId()"
-          *ngIf="ShowSeler" />
-          <!-- (!isProductOffersRoute && this.seller) || sellerProfile -->
-      </div>
+      <!-- USA FLAG -->
+      <!-- <img
+          width="34"
+          height="34"
+          src="https://img.icons8.com/color/48/usa-circular.png"
+          alt="usa-circular"
+        /> -->
+    </button>
 
-      <ul class="flex gap-5">
-        <li>
-          <app-switch-language></app-switch-language>
-        </li>
-        <li>
-          <button type="button"
-            class="inline-flex button button--white border border-blueGray-50 rounded-full h-8 py-0 px-2"
-            [routerLink]="['/product/productOrders']">
-            <svg-icon src="../../../../assets/icons/cart.svg"
-              [svgStyle]="{ 'width.px': 22, fill: '#4E4E78' }"></svg-icon>
-            <span *ngIf="products.length > 0 "
-              class="inline-flex items-center justify-center w-4 h-4 text-xxs text-white bg-primary rounded-full -mt-2">
-              {{  products.length  }}
-            </span>
-          </button>
+    <div class="relative flex gap-2 items-center">
+      <svg-icon
+        src="../../../../assets/icons/search.svg"
+        class="absolute start-3"
+        [svgStyle]="{
+            'width.px': 18,
+            'height.px': 18,
+          }"
+      ></svg-icon>
 
-        </li>
-      </ul>
-    </section>
-
-    <section class="flex items-baseline justify-between gap-y-3 ms-32 -mt-10 flex-wrap">
-      <div *ngIf="isShowDetails">
-        <h5 class="text-lg text-blue-700 font-medium mb-3">{{sellerProfile?.name}}</h5>
-        <p class="text-sm font-normal text-blueGray-400 mb-2">
-          {{sellerProfile?.bio}}
-        </p>
-        <ul class="flex gap-2">
-          <!-- <li *ngFor="let item of socialMedia">
-            <a [href]="item.href" class="hover:opacity-80">
-              <svg-icon [src]="'../../../../assets/icons/' + item.icon + '.svg'"
-                [svgStyle]="{ 'width.px': 20 }"></svg-icon>
-              <span class="sr-only">social meida</span>
-            </a>
-          </li> -->
-        </ul>
-      </div>
-      <div class="ms-auto">
-        <app-dropdown [id]="'userDropdown'" [label]="isAuthenticated ? userName || ('guest' | translate) : ('guest' | translate)" [classes]="{
-            label: '!text-red-400 !font-bold !text-base',
-            toggleBtn:
-              'text-blue-1000 font-bold text-base px-4 h-[34px] border border-blueGray-30 rounded-full flex items-center gap-2 bg-white',
-            menuBtn:
-              'text-nowrap',
-            list: 'space-y-4 px-2.5',
-            listItem: 'border border-gray-10 rounded text-blue-800 text-sm',
-            dropdownMenu: '!w-[220px]'
-          }" [options]="isAuthenticated ? authUserDropdown : guestUserDropdown" [selectedValue]="selectedValue"
-          (valueChanged)="onValueChanged($event)">
-          <div class="border-t border-blue-800 mt-3 text-center pt-3 pb-3 mx-3" *ngIf="isAuthenticated">
-            <button type="button" class="text-primary text-base font-medium hover:underline" (click)="logout()">
-              <i class="fa-solid fa-arrow-right-from-bracket ltr:rotate-180 text-lg me-2"></i>
-              {{"Logout" | translate}}
-            </button>
-          </div>
-        </app-dropdown>
-
-        <ng-template #myOrdersIcon>
-          <svg-icon src="../../../../assets/icons/box-order.svg"
-            [svgStyle]="{ 'width.px': 16, fill: '#0D1863' }"></svg-icon>
-        </ng-template>
-
-        <ng-template #trackingOrdersIcon>
-          <svg-icon src="../../../../assets/icons/tracking-car.svg"
-            [svgStyle]="{ 'width.px': 16, fill: '#0D1863' }"></svg-icon>
-        </ng-template>
-
-        <ng-template #loginIcon>
-          <svg-icon src="../../../../assets/icons/user-login.svg"
-            [svgStyle]="{ 'width.px': 16, fill: '#0D1863' }"></svg-icon>
-        </ng-template>
-
-        <ng-template #logoutIcon>
-          <svg-icon src="../../../../assets/icons/user-signup.svg"
-            [svgStyle]="{ 'width.px': 16, fill: '#0D1863' }"></svg-icon>
-        </ng-template>
-      </div>
-    </section>
+      <input
+        type="text"
+        placeholder="Search"
+        class="ps-9 border min-w-[341p] max-w-[341px] border-white rounded-sm bg-white/45 placeholder:text-white text-sm"
+      />
+    </div>
   </div>
+
+  <ul class="flex items-center gap-3">
+    <li *ngFor="let item of socialMedia">
+      <a [href]="item.href" class="hover:opacity-80">
+        <svg-icon
+          [src]="'../../../../assets/icons/' + item.icon + '.svg'"
+          [svgStyle]="{ 'width.px': 27 }"
+        ></svg-icon>
+        <span class="sr-only">social meida</span>
+      </a>
+    </li>
+  </ul>
+</section>
+<!-- <section
+    class="header-page mb-24"
+    [class.mb-40]="isShowDetails"
+    [ngClass]="{ flex: isProductOffersRoute }"
+    [ngStyle]="{
+      'background-image':
+        'url(' +
+        (seller?.cover
+          ? seller?.cover
+          : sellerProfile?.cover
+          ? sellerProfile?.cover
+          : sellerCover) +
+        ')',
+      'background-repeat': 'no-repeat',
+      'background-size': 'cover',
+      height: '125px',
+      'background-position': 'center'
+    }"
+  > -->
+<!-- [class.mb-40]="isShowDetails" -->
+<!-- [ngClass]="{ flex: isProductOffersRoute }" -->
+<section
+  class="bg-white mb-10 content-page flex justify-between items-center py-5"
+>
+  <div class="flex items-end w-16 h-16">
+    <!-- Logo -->
+    <img
+      class="rounded-full h-full w-full"
+      [src]="seller?.imagePath ? seller?.imagePath : sellerProfile?.photo"
+      alt="{{ seller?.id }}"
+      [class.cursor-pointer]="!isProductOffersRoute"
+      (click)="logSellerId()"
+      *ngIf="ShowSeler"
+    />
+    <!-- (!isProductOffersRoute && this.seller) || sellerProfile -->
+  </div>
+
+  <ul class="flex items-center gap-8">
+    <li>
+      <a
+        routerLink="/home"
+        routerLinkActive="active"
+        class="text-lg text-purple-600 font-medium"
+        >Home</a
+      >
+    </li>
+
+    <li>
+      <a
+        routerLink="/store"
+        routerLinkActive="active"
+        href="/store"
+        class="text-lg text-purple-600 font-medium"
+        >Store</a
+      >
+    </li>
+    <li>
+      <a
+        routerLink="/contact-us"
+        routerLinkActive="active"
+        class="text-lg text-purple-600 font-medium"
+        >Contact Us</a
+      >
+    </li>
+  </ul>
+
+  <div class="flex items-center gap-4">
+    <ul class="flex gap-5">
+      <!-- <li>
+        <app-switch-language></app-switch-language>
+      </li> -->
+      <li>
+        <button
+          type="button"
+          class="hover:!bg-white hover:shadow-lg relative h-[60px] flex items-center justify-center w-[60px] rounded-full bg-gray-60"
+        >
+          <svg-icon
+            src="../../../../assets/icons/heart.svg"
+            [svgStyle]="{ 'width.px': 60, fill: '#4E4E78' }"
+          >
+          </svg-icon>
+          <span class="sr-only">fav</span>
+        </button>
+      </li>
+      <li>
+        <button
+          type="button"
+          class="hover:!bg-white hover:shadow-lg relative h-[60px] flex items-center justify-center w-[60px] rounded-full bg-gray-60"
+          [routerLink]="['/product/productOrders']"
+        >
+          <svg-icon
+            src="../../../../assets/icons/cart.svg"
+            [svgStyle]="{ 'width.px': 30, fill: '#4E4E78' }"
+          >
+          </svg-icon>
+          <span
+            *ngIf="products.length > 0"
+            class="inline-flex items-center justify-center w-4 h-4 text-xxs text-primary border border-purple-500 rounded-full -mt-2 absolute bottom-[11px] end-[12px] bg-gray-60"
+          >
+            {{ products.length }}
+          </span>
+        </button>
+      </li>
+    </ul>
+    <!-- [label]="
+        isAuthenticated
+          ? userName || ('guest' | translate)
+          : ('guest' | translate)
+      " -->
+    <app-dropdown
+      [id]="'userDropdown'"
+      [iconTemplate]="myCustomIconTemplate"
+      [classes]="{
+        label: '!text-red-400 !font-bold !text-base',
+        toggleBtn:
+          'hover:!bg-white hover:shadow-lg h-[60px] flex items-center justify-center w-[60px] rounded-full bg-gray-60',
+        menuBtn: 'text-nowrap',
+        list: 'space-y-4 px-2.5',
+        listItem: 'border border-gray-10 rounded text-blue-800 text-sm',
+        dropdownMenu: '!w-[220px]'
+      }"
+      [options]="isAuthenticated ? authUserDropdown : guestUserDropdown"
+      [selectedValue]="selectedValue"
+      (valueChanged)="onValueChanged($event)"
+    >
+      <div
+        class="border-t border-blue-800 mt-3 text-center pt-3 pb-3 mx-3"
+        *ngIf="isAuthenticated"
+      >
+        <button
+          type="button"
+          class="text-primary text-base font-medium hover:underline"
+          (click)="logout()"
+        >
+          <i
+            class="fa-solid fa-arrow-right-from-bracket ltr:rotate-180 text-lg me-2"
+          ></i>
+          {{ "Logout" | translate }}
+        </button>
+      </div>
+    </app-dropdown>
+
+    <ng-template #myCustomIconTemplate>
+      <svg-icon src="../.././../../assets/icons/user.svg"></svg-icon>
+    </ng-template>
+
+    <ng-template #myOrdersIcon>
+      <svg-icon
+        src="../../../../assets/icons/box-order.svg"
+        [svgStyle]="{ 'width.px': 16, fill: '#0D1863' }"
+      ></svg-icon>
+    </ng-template>
+
+    <ng-template #trackingOrdersIcon>
+      <svg-icon
+        src="../../../../assets/icons/tracking-car.svg"
+        [svgStyle]="{ 'width.px': 16, fill: '#0D1863' }"
+      ></svg-icon>
+    </ng-template>
+
+    <ng-template #loginIcon>
+      <svg-icon
+        src="../../../../assets/icons/user-login.svg"
+        [svgStyle]="{ 'width.px': 16, fill: '#0D1863' }"
+      ></svg-icon>
+    </ng-template>
+
+    <ng-template #logoutIcon>
+      <svg-icon
+        src="../../../../assets/icons/user-signup.svg"
+        [svgStyle]="{ 'width.px': 16, fill: '#0D1863' }"
+      ></svg-icon>
+    </ng-template>
+  </div>
+
+  <!-- <section
+      class="flex items-baseline justify-between gap-y-3 ms-32 -mt-10 flex-wrap"
+    >
+      <div *ngIf="isShowDetails">
+          <h5 class="text-lg text-blue-700 font-medium mb-3">
+            {{ sellerProfile?.name }}
+          </h5>
+          <p class="text-sm font-normal text-blueGray-400 mb-2">
+            {{ sellerProfile?.bio }}
+          </p>
+
+        </div>
+    </section> -->
+
   <!-- {{successfullyMessage}} -->
-  <div *ngIf="showLoginMessage" class="successfully-message">{{successfullyMessage}} {{userName}}</div>
+  <div *ngIf="showLoginMessage" class="successfully-message">
+    {{ successfullyMessage }} {{ userName }}
+  </div>
 </section>

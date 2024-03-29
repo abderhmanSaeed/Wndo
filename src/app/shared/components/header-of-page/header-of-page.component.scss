@@ -16,3 +16,6 @@
   // display: none; /* Initially hide the message */
 }
 
+.active {
+  @apply text-primary font-bold;
+}

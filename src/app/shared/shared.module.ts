@@ -1,10 +1,15 @@
+import { HomeProductCardComponent } from './components/home/home-product-card/home-product-card.component';
 import { SafeUrlPipe } from './pipes/safeUrl.pipe';
 import { AuthInterceptorService } from './../core/interceptors/response-interceptor/auth-interceptor.service';
 import { LoaderInterceptor } from './../core/interceptors/loader-interceptor/loader.interceptor';
 import { FilterByPipe } from './pipes/filter-by.pipe';
 import { TokenInterceptor } from '../core/interceptors/auth-interceptor/token.interceptor';
 import { CoreModule } from './../core/core.module';
-import { HTTP_INTERCEPTORS, HttpClient, HttpClientModule } from '@angular/common/http';
+import {
+  HTTP_INTERCEPTORS,
+  HttpClient,
+  HttpClientModule,
+} from '@angular/common/http';
 import { OrderConfirmedModal } from './components/modals/order-confirmed-modal/order-confirmed-modall.component';
 import { ModalComponent } from './components/modal/modal.component';
 import { SelectComponent } from './components/inputs/Select/select.component';
@@ -60,6 +65,8 @@ import { EditPRoductToCartModalComponent } from './components/modals/edit-produc
 import { OrderCheckoutConfirmationComponent } from './components/order/order-checkout-confirmation/order-checkout-confirmation.component';
 import { EditPaymentComponent } from './components/modals/edit-payment/edit-payment.component';
 import { EmptyCartModalComponent } from './components/modals/empty-cart-modal/empty-cart-modal.component';
+import { HomeBannerComponent } from './components/home/home-banner/home-banner.component';
+import { BeautyStoreComponent } from './components/home/beauty-store/beauty-store.component';
 
 register();
 
@@ -110,7 +117,10 @@ register();
     SafeUrlPipe,
     OrderCheckoutConfirmationComponent,
     EditPaymentComponent,
-    EmptyCartModalComponent
+    EmptyCartModalComponent,
+    HomeBannerComponent,
+    HomeProductCardComponent,
+    BeautyStoreComponent
   ],
   imports: [
     CommonModule,
@@ -122,7 +132,7 @@ register();
     HttpClientModule,
     AngularSvgIconModule.forRoot(),
     TranslateModule,
-    NgSelectModule
+    NgSelectModule,
   ],
 
   exports: [
@@ -170,19 +180,25 @@ register();
     CancelOrderComponent,
     IsEmptyComponent,
     SafeUrlPipe,
-    EmptyCartModalComponent
+    EmptyCartModalComponent,
+    HomeBannerComponent,
+    HomeProductCardComponent,
+    BeautyStoreComponent
   ],
   providers: [
     TranslationService,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: TokenInterceptor,
-      multi: true
+      multi: true,
     },
     { provide: HTTP_INTERCEPTORS, useClass: LoaderInterceptor, multi: true },
-    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptorService, multi: true },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptorService,
+      multi: true,
+    },
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
-export class SharedModule {
-}
+export class SharedModule {}

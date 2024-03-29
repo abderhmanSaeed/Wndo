@@ -1,1 +1,161 @@
-<p>dashboard works!</p>
+<app-header-of-page></app-header-of-page>
+
+<div class="content-page space-y-16">
+  <section>
+    <app-home-banner></app-home-banner>
+  </section>
+
+  <section class="space-y-4">
+    <div class="flex items-center space-x-2 py-2 mb-6">
+      <div class="w-13 h-[1px] bg-blue-950 opacity-50"></div>
+      <span class="px-4 text-xl font-bold text-blue-900 capitalize"
+        >New Arrivals</span
+      >
+      <div class="flex-1 h-[1px] bg-blue-950 opacity-50"></div>
+    </div>
+
+    <app-home-product-card></app-home-product-card>
+  </section>
+
+  <section class="space-y-4">
+    <div class="flex items-center space-x-2 py-2 mb-6">
+      <div class="w-13 h-[1px] bg-blue-950 opacity-50"></div>
+      <span class="px-4 text-xl font-bold text-blue-900 capitalize"
+        >Beauty Store Sections</span
+      >
+      <div class="flex-1 h-[1px] bg-blue-950 opacity-50"></div>
+    </div>
+
+    <app-beauty-store></app-beauty-store>
+  </section>
+
+  <section class="space-y-4">
+    <div class="flex items-center space-x-2 py-2 mb-6">
+      <div class="w-13 h-[1px] bg-blue-950 opacity-50"></div>
+      <span class="px-4 text-xl font-bold text-blue-900 capitalize"
+        >Specials Offers</span
+      >
+      <div class="flex-1 h-[1px] bg-blue-950 opacity-50"></div>
+    </div>
+
+    <img src="../../../../assets/images/WhatsApp.jpg" alt="" />
+
+    <p
+      class="text-purple-500 text-lg border border-[#4E4E7880] flex gap-2 items-center px-8 py-4"
+    >
+      Click on
+      <svg-icon
+        [svgStyle]="{
+        'width.px': 24,
+        'height.px': 24,
+      }"
+        src="../../../../assets/icons/svgexport-21.svg"
+      ></svg-icon>
+      the banner to see more products that contain a 50% discount
+    </p>
+  </section>
+
+  <section class="space-y-4">
+    <div class="flex items-center space-x-2 py-2 mb-6">
+      <div class="w-13 h-[1px] bg-blue-950 opacity-50"></div>
+      <span class="px-4 text-xl font-bold text-blue-900 capitalize"
+        >Our sections</span
+      >
+      <div class="flex-1 h-[1px] bg-blue-950 opacity-50"></div>
+    </div>
+
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+      <ul class="divide-y divide-[#D5D9DD] bg-white p-2">
+        <ng-container *ngFor="let category of categories; let i = index">
+          <li
+            class="flex flex-col p-2  cursor-pointer"
+            (click)="toggleSubmenu(i)"
+          >
+            <div class="flex items-center justify-between">
+              <span
+                class="w-8 h-8 me-2 p-2 rounded-full shadow-md inline-flex justify-center items-center"
+              >
+                <img
+                  alt=""
+                  width="25"
+                  height="25"
+                  class="object-contain"
+                  src="../../../../assets/icons/{{ category.icon }}.svg"
+                />
+              </span>
+              <span
+                [class.!text-primary]="category.isOpen"
+                class="flex-1 hover:underline text-[#001D7DB3] text-base font-medium"
+                >{{ category.name }}</span
+              >
+              <i
+                [class.!text-primary]="category.isOpen"
+                class="fa-solid text-[#4C60A4] {{
+                  category.isOpen
+                    ? 'fa-chevron-down'
+                    : 'fa-chevron-right rtl:rotate-180'
+                }} "
+              ></i>
+            </div>
+            <ul
+              @toggleSubmenu
+              *ngIf="category.isOpen && category.subMenus.length > 0"
+              class="ps-10 mt-2 divide-y divide-[#D5D9DD]"
+            >
+              <!-- Replace with actual submenu items -->
+              <li
+                *ngFor="let item of category.subMenus"
+                class="py-2 flex-1 text-[#001D7DB3] text-base font-medium hover:underline"
+              >
+                {{ item.name }}
+              </li>
+
+              <!-- ...more submenu items -->
+            </ul>
+          </li>
+        </ng-container>
+      </ul>
+      <div class="col-span-2">
+        <app-home-product-card></app-home-product-card>
+      </div>
+    </div>
+  </section>
+
+  <section class="space-y-4">
+    <div class="flex items-center space-x-2 py-2 mb-6">
+      <div class="w-13 h-[1px] bg-blue-950 opacity-50"></div>
+      <span class="px-4 text-xl font-bold text-blue-900 capitalize"
+        >Our Offers</span
+      >
+      <div class="flex-1 h-[1px] bg-blue-950 opacity-50"></div>
+    </div>
+
+    <app-home-product-card></app-home-product-card>
+  </section>
+
+  <section class="space-y-4">
+    <div class="flex items-center space-x-2 py-2 mb-6">
+      <div class="flex-1 h-[1px] bg-blue-950 opacity-50"></div>
+      <span class="px-4 text-xl font-bold text-blue-900 capitalize"
+        >Follow Us</span
+      >
+      <div class="flex-1 h-[1px] bg-blue-950 opacity-50"></div>
+    </div>
+
+    <ul class="flex items-center justify-center gap-3">
+      <li *ngFor="let item of socialMedia">
+        <a
+          [href]="item.href"
+          class="hover:shadow-sm rounded-full w-13 h-13 bg-black inline-flex items-center justify-center"
+        >
+          <i class="fa-brands text-white text-2xl {{ item.icon }}"></i>
+          <span class="sr-only">social meida</span>
+        </a>
+      </li>
+    </ul>
+  </section>
+
+  <section>
+    <app-free-shipping></app-free-shipping>
+  </section>
+</div>

@@ -43,8 +43,10 @@
         label: 'text-sm text-purple-500',
         input: 'placeholder: !text-xs !px-2 placeholder:!text-gray-250'
       }"
+       (nameChanged)="onNameChanged($event)"
     ></app-input-filed>
-    <button type="button" class="ms-auto button text-xs button--primary button--bordered">
+    <button type="button" class="ms-auto button text-xs button--primary button--bordered"
+    (click)="validateVoucher()">
       {{"addVoucher" | translate}}
     </button>
 

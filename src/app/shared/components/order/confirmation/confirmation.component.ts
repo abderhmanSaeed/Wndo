@@ -20,6 +20,7 @@ export class ConfirmationComponent implements OnInit, OnDestroy {
   order: any;
   orderItems: OrderItem[] = [];
   private subscription = new Subscription();
+  code: any;
 
   constructor(private shippingFessService: ShippingFessService, private orderService: OrderService, private modalService: ModalService) { }
 
@@ -63,6 +64,23 @@ export class ConfirmationComponent implements OnInit, OnDestroy {
         }
       });
     }
+  }
+  onNameChanged(code: string) {
+    this.code = code;
+  }
+
+  validateVoucher(): void {
+    this.orderService.validateVoucher(this.code, this.order.totalOrderPrice - this.order.shippingFees, this.order.shippingFees)
+      .subscribe(
+        response => {
+          // Handle successful response here
+          console.log('Voucher validated:', response);
+        },
+        error => {
+          // Handle error response here
+          console.error('Error validating voucher:', error);
+        }
+      );
   }
 
   EditPaymentMethod() {

@@ -2,7 +2,7 @@ import { environment } from './../../../../environments/environment';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Order, OrderItem } from '../../../shared/models/order.models';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -30,6 +30,17 @@ export class OrderService {
 
     // Use the httpOptions in the POST request
     return this.http.post(url, orderData, httpOptions);
+  }
+
+  validateVoucher(code: string, priceWithoutShippingFees: number, shippingFees: number): Observable<any> {
+    const url = `${this.apiEndPoint}/voucher/validate-voucher-for-web?version=2`;
+    const requestBody = {
+      code: code,
+      priceWithoutShippingFees: priceWithoutShippingFees,
+      shippingFees: shippingFees
+    };
+
+    return this.http.post<any>(url, requestBody);
   }
 
   getOrder() {

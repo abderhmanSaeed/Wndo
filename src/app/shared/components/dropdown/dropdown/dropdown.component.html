@@ -1,60 +1,78 @@
-
-  <div class="app-dropdown {{classes?.base}}">
-    <button
-      [attr.aria-expanded]="isOpen"
-      (click)="toggleDropdown()"
-      [attr.data-dropdown-toggle]="id"
-      [class]="classes?.toggleBtn || 'dropdown__btn'"
-      aria-haspopup="true"
-      type="button"
-    >
-      <ng-container *ngTemplateOutlet="startContentTemplate"></ng-container>
+<div class="app-dropdown {{ classes?.base }}">
+  <button
+    [attr.aria-expanded]="isOpen"
+    (click)="toggleDropdown()"
+    [attr.data-dropdown-toggle]="id"
+    [class]="classes?.toggleBtn || 'dropdown__btn'"
+    aria-haspopup="true"
+    type="button"
+  >
+    <!-- <ng-container *ngTemplateOutlet="startContentTemplate"></ng-container>
       <span *ngIf="showSelectedValue && selectedValue; else labelTemplate">
         {{ selectedValue }}
       </span>
       <ng-container *ngIf="dropdownIcon; else defaultDropdownIcon">
         <i
-          class="fa-solid {{ dropdownIcon }}"
-          class="text-sm text-blueGray-30"
+          class="fa-solid {{ dropdownIcon }} text-sm text-blueGray-30"
         ></i>
       </ng-container>
       <ng-template #defaultDropdownIcon>
         <i class="fa-solid fa-caret-down"></i>
-      </ng-template>
-    </button>
+      </ng-template> -->
+    <ng-container *ngTemplateOutlet="startContentTemplate"></ng-container>
+    <span *ngIf="showSelectedValue && selectedValue; else labelTemplate">
+      {{ selectedValue }}
+    </span>
+    <ng-container *ngIf="iconTemplate; else fontAwesomeIcon">
+      <ng-container *ngTemplateOutlet="iconTemplate"></ng-container>
+    </ng-container>
 
-    <div
-      *ngIf="isOpen"
-      (clickOutside)="closeDropdown()"
-      [attr.id]="id"
-      class="dropdown-menu {{classes?.dropdownMenu}}"
-      [class.show]="isOpen"
+    <ng-template #fontAwesomeIcon>
+      <ng-container *ngIf="dropdownIcon; else defaultIconTemplate">
+        <i class="fa-solid {{ dropdownIcon }} text-sm text-blueGray-30"></i>
+      </ng-container>
+    </ng-template>
+
+    <ng-template #defaultIconTemplate>
+      <!-- Default icon implementation, can still use Font Awesome here or anything you prefer -->
+      <i class="fa-solid fa-caret-down"></i>
+    </ng-template>
+  </button>
+
+  <div
+    *ngIf="isOpen"
+    (clickOutside)="closeDropdown()"
+    [attr.id]="id"
+    class="dropdown-menu {{ classes?.dropdownMenu }}"
+    [class.show]="isOpen"
+  >
+    <ul
+      class="dropdown-list py-2 text-sm text-gray-700 {{ classes?.list }}"
+      aria-labelledby="dropdownButton"
     >
-      <ul
-        class="dropdown-list py-2 text-sm text-gray-700 {{classes?.list}}"
-        aria-labelledby="dropdownButton"
+      <li
+        *ngFor="let option of options; trackBy: trackByFn"
+        class="dropdown-item text-start {{ classes?.listItem }}"
       >
-        <li
-          *ngFor="let option of options; trackBy: trackByFn"
-          class="dropdown-item text-start {{classes?.listItem}}"
+        <button
+          type="button"
+          class="w-full px-4 py-2 hover:bg-gray-100 text-xxs flex items-center gap-2"
+          [id]="option.value"
+          (click)="onSelectValue(option)"
         >
-          <button
-            type="button"
-            class="w-full px-4 py-2 hover:bg-gray-100 text-xxs flex items-center gap-2"
-            [id]="option.value"
-            (click)="onSelectValue(option)"
-          >
-            <ng-container
-              *ngTemplateOutlet="option.startContentMenu"
-            ></ng-container>
-            <span> {{ option.label }} </span>
-            <ng-container *ngTemplateOutlet="option.endContentMenu"></ng-container>
-          </button>
-        </li>
-      </ul>
-      <ng-content></ng-content>
-    </div>
+          <ng-container
+            *ngTemplateOutlet="option.startContentMenu"
+          ></ng-container>
+          <span> {{ option.label }} </span>
+          <ng-container
+            *ngTemplateOutlet="option.endContentMenu"
+          ></ng-container>
+        </button>
+      </li>
+    </ul>
+    <ng-content></ng-content>
   </div>
+</div>
 
 <ng-template #labelTemplate>
   <span class="inline-flex">{{ label }}</span>

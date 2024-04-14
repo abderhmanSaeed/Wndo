@@ -1,0 +1,115 @@
+<div class="home-new">
+  <swiper-container
+    init="false"
+    class="swiper-container1 swiper2 mb-4"
+    appSwiper
+    #swiperProductCard
+    [config]="swiperProductCardConfig"
+    controller-control=".swiperThumbs"
+  >
+    <swiper-slide
+      class="h-full w-full rounded"
+      *ngFor="let product of products"
+    >
+      <div
+        class="bg-white border border-purple-500/20 rounded p-4 cursor-pointer-on-hover"
+      >
+        <div class="relative">
+          <div class="absolute end-0">
+            <button
+              type="button"
+              class="border-gray-200 rounded-full w-8 h-8 button button--bordered p-0"
+              title="share"
+            >
+              <i class="fa-solid fa-share-nodes text-black"></i>
+            </button>
+
+            <!-- Display the copied message -->
+            <div *ngIf="showCopiedMessage" class="copied-message">
+              {{ "linkCopied" | translate }}
+            </div>
+          </div>
+
+          <span
+            *ngIf="product.offerPercentage > 0"
+            class="sale-img absolute start-0 flex-col"
+          >
+            <span class="text-lg font-bold text-white"
+              >{{ product?.offerPercentage }}%</span
+            >
+            <span class="text-center text-black text-sm">Off</span>
+          </span>
+          <div
+            class="bg-white mb-4 rounded-lg p-4 h-[129px] flex items-center justify-center gap-4"
+          >
+            <img
+              class="h-full object-contain w-32"
+              [src]="product?.image?.urlPreview"
+              alt="{{ product?.name }}"
+            />
+          </div>
+        </div>
+
+        <p class="text-xs text-blue-950 font-semibold mb-2">
+          {{ product?.name }}
+        </p>
+
+        <ul class="flex gap-1 mb-2">
+          <li
+            class="text-yellow-800"
+            *ngFor="let number of getArray(product.rate)"
+          >
+            <i class="fa-solid fa-star"></i>
+          </li>
+        </ul>
+
+        <div class="flex items-center gap-2 mb-2">
+          <h4 *ngIf="product?.offerPercentage > 0" class="text-primary">
+            $ {{ product?.priceAfterOffer }}
+          </h4>
+          <h6
+            class="line-through text-gray-900"
+            [class.line-through]="product.offerPercentage > 0"
+          >
+            ${{ product.price }}
+          </h6>
+        </div>
+
+        <div class="flex items-center gap-3 justify-between">
+          <button
+            type="button"
+            class="h-8 button py-0 px-4 text-xs button--primary rounded-lg"
+          >
+            {{ "addtoCart" | translate }}
+          </button>
+
+          <button type="button" class="text-2.5xl text-purple-500">
+            <span class="sr-only">fav</span>
+            <i class="fa-solid fa-heart"></i>
+            <!-- If not Click show this -->
+            <!-- <i class="fa-regular fa-heart"></i> -->
+          </button>
+        </div>
+      </div>
+    </swiper-slide>
+  </swiper-container>
+
+  <section class="flex justify-end">
+    <div class="flex items-center gap-2">
+      <button
+        type="button"
+        class="items-center justify-center z-30 cursor-pointer shadow-lg slider__prev hidden w-6 h-6 rounded-full md:flex text-blue-1000 bg-white text-sm"
+      >
+        <span class="sr-only">{{ "Prev" | translate }}</span>
+        <i class="fa-solid fa-chevron-left rtl:rotate-180"></i>
+      </button>
+      <button
+        type="button"
+        class="items-center justify-center z-30 shadow-lg slider__next disabled:opacity-40 cursor-none text-sm hidden w-6 h-6 rounded-full md:flex text-blue-1000 bg-white"
+      >
+        <i class="fa-solid fa-chevron-right rtl:rotate-180 "></i>
+        <span class="sr-only">{{ "Next" | translate }}</span>
+      </button>
+    </div>
+  </section>
+</div>

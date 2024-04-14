@@ -54,6 +54,8 @@ export class HeaderOfPageComponent implements OnInit, AfterViewInit {
   ShowSeler: boolean = false;
   sellerCover: any;
 
+  isActivePath = true
+
   constructor(private modalService: ModalService,
     private route: ActivatedRoute,
     private router: Router,
@@ -149,19 +151,19 @@ export class HeaderOfPageComponent implements OnInit, AfterViewInit {
   socialMedia: any = [
     {
       href: 'tiktok.com',
-      icon: 'tiktok-coloring',
-    },
-    {
-      href: 'facebook.com',
-      icon: 'facebook-coloring',
-    },
-    {
-      href: 'twitter.com',
-      icon: 'twitter-coloring',
+      icon: 'ticktok',
     },
     {
       href: 'instagram.com',
-      icon: 'instagram-coloring',
+      icon: 'instagram',
+    },
+    {
+      href: 'twitter.com',
+      icon: 'twitter',
+    },
+    {
+      href: 'facebook.com',
+      icon: 'facebook',
     },
   ];
 

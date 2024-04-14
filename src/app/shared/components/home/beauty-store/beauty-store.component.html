@@ -1,0 +1,61 @@
+<swiper-container
+  init="false"
+  class="swiper-container1 swiper2 mb-4"
+  appSwiper
+  #swiperBeautyStore
+  [config]="swiperBeautyStoreConfig"
+  controller-control=".swiperThumbs"
+>
+  <swiper-slide class="cursor-pointer hover:underline h-full rounded flex flex-col items-center gap-3" *ngFor="let store of stores">
+    <div class="hover:shadow-lg cursor-pointer w-[120px] h-[120px] bg-white rounded-full flex items-center justify-center">
+      <img
+        src="../../../../../assets/icons/{{ store.icon }}.svg"
+        alt="{{store.name}}"
+        width="60"
+        height="60"
+        class="object-contain "
+      />
+    </div>
+    <span class="text-base font-medium text-blue-950 hover:underline cursor-pointer">{{ store.name }}</span>
+  </swiper-slide>
+</swiper-container>
+
+
+
+
+
+<!-- <svg-icon
+  [svgStyle]="{
+                    'width.px': 34,
+                    'height.px': 34,
+                  }"
+  src="../../../../../assets/icons/devices-coloring.svg"
+></svg-icon>
+<svg-icon
+  [svgStyle]="{
+                    'width.px': 34,
+                    'height.px': 34,
+                  }"
+  src="../../../../../assets/icons/contact-lens.svg"
+></svg-icon>
+<svg-icon
+  [svgStyle]="{
+                    'width.px': 34,
+                    'height.px': 34,
+                  }"
+  src="../../../../../assets/icons/cosmetics.svg"
+></svg-icon>
+<svg-icon
+  [svgStyle]="{
+                    'width.px': 34,
+                    'height.px': 34,
+                  }"
+  src="../../../../../assets/icons/devices-coloring.svg"
+></svg-icon>
+<svg-icon
+  [svgStyle]="{
+                    'width.px': 34,
+                    'height.px': 34,
+                  }"
+  src="../../../../../assets/icons/devices-coloring.svg"
+></svg-icon> -->

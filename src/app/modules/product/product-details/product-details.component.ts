@@ -65,8 +65,6 @@ export class ProductDetailsComponent implements OnInit {
 
   }
   init(productId: any): void {
-
-
     if (this.productId !== productId) {
       this.getProductDetails(this.productId);
       this.getProductAlsoDetails(this.productId);
